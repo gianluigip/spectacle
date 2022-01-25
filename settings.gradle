@@ -1,0 +1,3 @@
+rootProject.name = 'spectacle'
+
+include "spectacle-dsl"
