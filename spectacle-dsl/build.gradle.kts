@@ -3,8 +3,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "com.gianluigip"
-version = "1.0.0"
+group = "io.github.gianluigip"
+version = "0.0.1"
 
 repositories {
     mavenCentral()
