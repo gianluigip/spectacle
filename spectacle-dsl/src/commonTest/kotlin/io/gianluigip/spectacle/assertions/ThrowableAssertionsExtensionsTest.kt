@@ -1,6 +1,6 @@
-package com.gianluigip.spectacle.assertions
+package io.gianluigip.spectacle.assertions
 
-import com.gianluigip.spectacle.bdd.executeAndCatch
+import io.gianluigip.spectacle.bdd.executeAndCatch
 import java.lang.RuntimeException
 import kotlin.test.Test
 

@@ -14,6 +14,13 @@ documentation of the system, so it provides a DSL for writing readable tests whi
 transformed into BDD statements that can be published into a central repository to allows anyone to
 review.
 
+## Spectacle DSL
+
+Gradle:
+```
+implementation("io.github.gianluigip:spectacle-dsl:0.0.3")
+```
+
 ### Future Improvements
 
 * A DSL for defining all the input and output dependencies that a spec has. 

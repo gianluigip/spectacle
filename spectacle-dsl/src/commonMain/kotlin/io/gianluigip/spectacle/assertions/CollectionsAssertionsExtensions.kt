@@ -1,4 +1,4 @@
-package com.gianluigip.spectacle.assertions
+package io.gianluigip.spectacle.assertions
 
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue

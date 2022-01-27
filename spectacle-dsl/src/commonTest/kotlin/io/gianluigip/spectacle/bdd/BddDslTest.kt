@@ -1,6 +1,6 @@
-package com.gianluigip.spectacle.bdd
+package io.gianluigip.spectacle.bdd
 
-import com.gianluigip.spectacle.assertions.shouldBe
+import io.gianluigip.spectacle.assertions.shouldBe
 import kotlin.test.Test
 
 class BddDslTest {

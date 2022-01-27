@@ -1,4 +1,4 @@
-package com.gianluigip.spectacle.bdd
+package io.gianluigip.spectacle.bdd
 
 import kotlin.test.fail
 
