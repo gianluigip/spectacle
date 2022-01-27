@@ -1,3 +1,4 @@
 rootProject.name = 'spectacle'
 
+includeBuild("convention-plugins")
 include "spectacle-dsl"
