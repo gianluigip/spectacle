@@ -21,7 +21,7 @@ jobs:
         # Builds the release artifacts of the library
 
       - name: Release build
-        run: ./gradlew spectacle-dsl:assembleRelease
+        run: ./gradlew spectacle-dsl:build
 
         # Runs upload, and then closes & releases the repository
       - name: Publish to MavenCentral
