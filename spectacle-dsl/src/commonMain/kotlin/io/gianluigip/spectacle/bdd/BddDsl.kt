@@ -12,15 +12,16 @@ fun aSpec(
     featureDescription: String? = null,
     team: String? = null,
     status: SpecStatus? = null,
-    tags: List<String> = mutableListOf(),
+    tags: Set<String> = mutableSetOf(),
 ): SpecificationBddWriter<Unit> {
-    //TODO register spec
-    return SpecificationBddWriter(
+    val specWriter = SpecificationBddWriter(
         specBuilder = SpecificationBuilder(
-            specName, featureName, featureDescription, team, status, tags.toMutableList()
+            specName, featureName, featureDescription, team, status, tags.toMutableSet()
         ),
         stepLastValue = Unit
     )
+    TestContext.setCurrentSpec(specWriter.specBuilder)
+    return specWriter
 }
 
 /**

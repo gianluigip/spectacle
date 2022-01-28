@@ -17,7 +17,7 @@ class SpecificationBuilderTest {
             featureDescription = "Short Description"
             team = "Spectacle Team"
             status = SpecStatus.PARTIALLY_IMPLEMENTED
-            tags = mutableListOf("Tag1", "Tag2")
+            tags = mutableSetOf("Tag1", "Tag2")
 
             addStep(GIVEN, "First step")
             addStep(WHENEVER, "Second step")

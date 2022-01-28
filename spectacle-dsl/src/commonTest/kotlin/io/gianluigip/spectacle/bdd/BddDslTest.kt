@@ -24,7 +24,7 @@ class BddDslTest {
         featureName = "BDD DSL",
         featureDescription = "The DSL allow to write complex tests in a readable way",
         team = "Spectacle Team", status = SpecStatus.IMPLEMENTED,
-        tags = mutableListOf()
+        tags = mutableSetOf()
     ) given "some conditions" run {
     } andGiven "" run {
     } whenever "something happen" run {

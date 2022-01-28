@@ -32,7 +32,11 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-        val jvmMain by getting
+        val jvmMain by getting {
+            dependencies {
+                implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+            }
+        }
         val jvmTest by getting {
             dependencies {
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
