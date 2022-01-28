@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.assertions
 
-import io.gianluigip.spectacle.bdd.executeAndCatch
 import kotlin.test.Test
 
 class CollectionsAssertionsExtensionsTest {
@@ -12,7 +11,7 @@ class CollectionsAssertionsExtensionsTest {
 
     @Test
     fun `shouldHasSize should fail if the size is different`() =
-        executeAndCatch {
+        runAndCatch {
             listOf(1, 2) shouldHasSize 3
         }.message shouldStartWith "Expected '[1, 2]' to has size 3"
 
@@ -23,7 +22,7 @@ class CollectionsAssertionsExtensionsTest {
 
     @Test
     fun `shouldBeEmpty should fail if it is not empty`() =
-        executeAndCatch {
+        runAndCatch {
             listOf(1, 2).shouldBeEmpty()
         }.message shouldStartWith "Expected '[1, 2]' to be empty"
 
@@ -34,7 +33,7 @@ class CollectionsAssertionsExtensionsTest {
 
     @Test
     fun `shouldNotBeEmpty should fail if it is empty`() =
-        executeAndCatch {
+        runAndCatch {
             listOf<Int>().shouldNotBeEmpty()
         }.message shouldStartWith "Expected '[]' to not be empty"
 
@@ -45,7 +44,7 @@ class CollectionsAssertionsExtensionsTest {
 
     @Test
     fun `shouldContainsAll should fail if it not contains all elements`() =
-        executeAndCatch {
+        runAndCatch {
             listOf(1, 2) shouldContainsAll listOf(1, 2, 3)
         }.message shouldStartWith "Expected '[1, 2]' to contains all elements in '[1, 2, 3]'"
 
@@ -56,7 +55,7 @@ class CollectionsAssertionsExtensionsTest {
 
     @Test
     fun `shouldContains should fail if it not contains an element`() =
-        executeAndCatch {
+        runAndCatch {
             listOf(1, 2) shouldContains 3
         }.message shouldStartWith "Expected '[1, 2]' to contains '3'"
 
@@ -67,7 +66,7 @@ class CollectionsAssertionsExtensionsTest {
 
     @Test
     fun `shouldNotContains should fail if it contains an element`() =
-        executeAndCatch {
+        runAndCatch {
             listOf(1, 2) shouldNotContains 1
         }.message shouldStartWith "Expected '[1, 2]' to not contains '1'"
 }

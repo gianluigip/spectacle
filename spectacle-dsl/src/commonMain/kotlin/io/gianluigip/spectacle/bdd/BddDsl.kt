@@ -1,56 +1,38 @@
 package io.gianluigip.spectacle.bdd
 
-import kotlin.test.fail
+import io.gianluigip.spectacle.specification.SpecStatus
+import io.gianluigip.spectacle.specification.SpecificationBuilder
 
-fun <T, R> T.given(description: String, block: (T) -> R): R {
-    return block.invoke(this)
+/**
+ * Convenient way to start writing a spec if you don't want to use annotations or the Junit plugin.
+ */
+fun aSpec(
+    specName: String? = null,
+    featureName: String? = null,
+    featureDescription: String? = null,
+    team: String? = null,
+    status: SpecStatus? = null,
+    tags: List<String> = mutableListOf(),
+): SpecificationBddWriter<Unit> {
+    //TODO register spec
+    return SpecificationBddWriter(
+        specBuilder = SpecificationBuilder(
+            specName, featureName, featureDescription, team, status, tags.toMutableList()
+        ),
+        stepLastValue = Unit
+    )
 }
 
-infix fun <T> T.given(description: String): T {
-    return this
+/**
+ * Quick way to start writing a spec, works better when using annotations and the Junit plugin to collect the metadata.
+ */
+fun <R> given(description: String, block: (Unit) -> R): SpecificationBddWriter<R> {
+    return aSpec().given(description).run(block)
 }
 
-infix fun <T> T.andGiven(description: String): T {
-    return this
-}
-
-inline fun <T, R> T.whenever(description: String, block: (T) -> R): R {
-    return block.invoke(this)
-}
-
-infix fun <T> T.whenever(description: String): T {
-    return this
-}
-
-infix fun <T> T.andWhenever(description: String): T {
-    return this
-}
-
-infix fun <T> T.then(description: String): T {
-    return this
-}
-
-infix fun <T> T.andThen(description: String): T {
-    return this
-}
-
-infix fun <T> T.and(description: String): T {
-    return this
-}
-
-infix fun <T> T.validate(block: (T) -> Unit) {
-    block.invoke(this)
-}
-
-infix fun <T, R> T.execute(block: (T) -> R): R {
-    return block.invoke(this)
-}
-
-fun executeAndCatch(block: () -> Unit): Throwable {
-    try {
-        block.invoke()
-        fail("Expected to catch an exception")
-    } catch (throwable: Throwable) {
-        return throwable
-    }
+/**
+ * Quick way to start writing a spec, works better when using annotations and the Junit plugin to collect the metadata.
+ */
+fun <R> whenever(description: String, block: (Unit) -> R): SpecificationBddWriter<R> {
+    return aSpec().whenever(description).run(block)
 }

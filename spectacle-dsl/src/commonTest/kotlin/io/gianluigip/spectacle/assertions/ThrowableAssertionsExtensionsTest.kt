@@ -1,7 +1,5 @@
 package io.gianluigip.spectacle.assertions
 
-import io.gianluigip.spectacle.bdd.executeAndCatch
-import java.lang.RuntimeException
 import kotlin.test.Test
 
 class ThrowableAssertionsExtensionsTest {
@@ -13,7 +11,7 @@ class ThrowableAssertionsExtensionsTest {
 
     @Test
     fun `shouldBeCausedBy should fail if the cause is not as expected`() =
-        executeAndCatch {
+        runAndCatch {
             RuntimeException(IllegalArgumentException()) shouldBeCausedBy IllegalStateException::class
         }.message shouldStartWith "Expected 'RuntimeException' to be caused by IllegalStateException"
 

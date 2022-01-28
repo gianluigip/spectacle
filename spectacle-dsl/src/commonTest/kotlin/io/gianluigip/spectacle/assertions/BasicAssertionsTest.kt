@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.assertions
 
-import io.gianluigip.spectacle.bdd.executeAndCatch
 import kotlin.test.Test
 
 class BasicAssertionsTest {
@@ -20,7 +19,7 @@ class BasicAssertionsTest {
 
     @Test
     fun `shouldBe should fail when not equal`() =
-        executeAndCatch {
+        runAndCatch {
             "Test" shouldBe "Test2"
         }.message shouldStartWith "Expected 'Test' to be equal to 'Test2'"
 
@@ -31,7 +30,7 @@ class BasicAssertionsTest {
 
     @Test
     fun `shouldNotBe should fail when equal`() =
-        executeAndCatch {
+        runAndCatch {
             "Test" shouldNotBe "Test"
         }.message shouldStartWith "Expected 'Test' to be not equal to 'Test'"
 
@@ -43,7 +42,7 @@ class BasicAssertionsTest {
 
     @Test
     fun `shouldBeNull should fail when not null`() =
-        executeAndCatch {
+        runAndCatch {
             "Test".shouldBeNull()
         }.message shouldStartWith "Expected 'Test' to be null"
 
@@ -55,7 +54,7 @@ class BasicAssertionsTest {
 
     @Test
     fun `shouldBeNotNull should fail when null`() =
-        executeAndCatch {
+        runAndCatch {
             val result: String? = null
             result.shouldBeNotNull()
         }.message shouldStartWith "Expected 'null' to be not null"
@@ -67,7 +66,7 @@ class BasicAssertionsTest {
 
     @Test
     fun `shouldBeInstanceOf should fail when the instance type is unexpected`() =
-        executeAndCatch {
+        runAndCatch {
             "Test" shouldBeInstanceOf Unit::class
         }.message shouldStartWith "Expected 'Test' to be instance of kotlin.Unit"
 }

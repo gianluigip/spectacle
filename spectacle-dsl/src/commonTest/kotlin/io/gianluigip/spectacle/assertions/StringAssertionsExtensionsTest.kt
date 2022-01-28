@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.assertions
 
-import io.gianluigip.spectacle.bdd.executeAndCatch
 import kotlin.test.Test
 
 class StringAssertionsExtensionsTest {
@@ -12,7 +11,7 @@ class StringAssertionsExtensionsTest {
 
     @Test
     fun `shouldStartWith should fail if it doesn't start with the right text`() =
-        executeAndCatch {
+        runAndCatch {
             "Hello world" shouldStartWith "Helo"
         }.message shouldStartWith "Expected 'Hello world' to start with 'Helo'"
 
@@ -23,7 +22,7 @@ class StringAssertionsExtensionsTest {
 
     @Test
     fun `shouldEndWith should fail if it doesn't end with the right text`() =
-        executeAndCatch {
+        runAndCatch {
             "Hello world" shouldEndWith "world!!"
         }.message shouldStartWith "Expected 'Hello world' to end with 'world!!'"
 
@@ -34,7 +33,7 @@ class StringAssertionsExtensionsTest {
 
     @Test
     fun `shouldContains should fail if it doesn't contains the right text`() =
-        executeAndCatch {
+        runAndCatch {
             "Hello world" shouldContains "abc"
         }.message shouldStartWith "Expected 'Hello world' to contains 'abc'"
 
@@ -45,7 +44,7 @@ class StringAssertionsExtensionsTest {
 
     @Test
     fun `shouldNotBeEmpty should fail if it's empty'`() =
-        executeAndCatch {
+        runAndCatch {
             "".shouldNotBeEmpty()
         }.message shouldStartWith "Expected '' to be not empty"
 
@@ -56,7 +55,7 @@ class StringAssertionsExtensionsTest {
 
     @Test
     fun `shouldBeEmpty should fail if it's not empty'`() =
-        executeAndCatch {
+        runAndCatch {
             "Hello world".shouldBeEmpty()
         }.message shouldStartWith "Expected 'Hello world' to be empty"
 }
