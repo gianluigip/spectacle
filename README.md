@@ -11,7 +11,7 @@ It has two main components:
 
 Spectacle follows the philosophy that only the code and by extension the tests provide accurate
 documentation of the system, so it provides a DSL for writing readable tests that can be published
-into a central repository to allows anyone to review.
+into a central repository to allows everyone to review.
 
 ## [Spectacle DSL](./spectacle-dsl/README.md)
 

@@ -1,4 +1,4 @@
-## Spectacle DSL
+# Spectacle DSL
 
 A Kotlin multiplatform library for writing readable tests as specifications, it includes an
 Assertion DSL and a BDD DSL, optionally you can publish your specs into the specs
@@ -7,6 +7,7 @@ repository `Spectacle Central`.
 Platforms supported:
 
 * `Java`
+* `JS` coming soon.
 
 ## Getting Started
 
@@ -46,7 +47,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 
 @Team("Spectacle Team") //It can be set globally using a config file
 @Feature("Publisher Plugin", description = "Description defining the feature.")
-@Tags(Tag("Tag1")) // It supports Junit tags, beware it Junit tags doesn't support whitespaces
+@Tags(Tag("Tag1")) // It supports Junit tags, beware Junit tags doesn't support whitespaces
 @SpecTags("Tag2") // It supports whitespaces in the tag name 
 @ExtendWith(JUnitSpecificationReporter::class) // It registers your specifications for publishing 
 class JunitExampleTest {
@@ -64,7 +65,8 @@ class JunitExampleTest {
 }
 ```
 
-If you are testing Spectacle with the default publisher `terminal` you will see:
+If you are testing Spectacle with the default publisher `terminal` when your tests are executed you
+will see:
 
 ```
 Publishing Specifications:
@@ -104,7 +106,7 @@ source.
 
 ## Assertion DSL
 
-To improve even further the readability `Spectacle` also include an Assertion DSL that can be used
+To improve even further the readability Spectacle also include an Assertion DSL that can be used
 to validate your tests more easily.
 
 ```kotlin
@@ -118,7 +120,7 @@ fun `validate user`() {
     // All assertions are extension functions starting with `should`
     user.shouldBeNull()
     // assertThat is a convenient method for doing multiple validations on the same instance
-    // Work similar to `run` but with infix syntax
+    // It works similar to `run` but with infix syntax
     user assertThat {
         // Most assertions support infix syntax so the validations reads as normal sentences 
         name shouldStartWith "John"
