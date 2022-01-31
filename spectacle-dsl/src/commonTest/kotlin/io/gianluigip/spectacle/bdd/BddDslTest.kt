@@ -14,7 +14,7 @@ class BddDslTest {
             2
         } whenever "adding both number" run {
             2 + 2
-        } then "the result is 4" run { result ->
+        } then "the result is 4" runAndFinish { result ->
             result shouldBe 4
         }
 
@@ -30,7 +30,7 @@ class BddDslTest {
     } whenever "something happen" run {
     } andWhenever "" run {
     } then "the result is as expected" run {
-    } andThen "" run {
+    } andThen "" runAndFinish {
     }
 
 }

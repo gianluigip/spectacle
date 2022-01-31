@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.bdd.annotations.Feature
 import io.gianluigip.spectacle.bdd.annotations.NotImplemented
+import io.gianluigip.spectacle.bdd.annotations.PartiallyImplemented
 import io.gianluigip.spectacle.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.bdd.annotations.Team
 import io.gianluigip.spectacle.report.config.FileReportConfiguration
@@ -11,9 +12,9 @@ import java.lang.reflect.Method
 
 private const val DEFAULT_FEATURE = "Other"
 
-object ContextGenerator {
+object MetadataExtractor {
 
-    fun extractMetaData(testMethod: Method, externalTags: Set<String> = emptySet()): SpecificationMetadata? {
+    fun extract(testMethod: Method, externalTags: Set<String> = emptySet()): SpecificationMetadata? {
         if (isNotAnAcceptanceTest(testMethod)) {
             return null
         }
@@ -50,10 +51,15 @@ object ContextGenerator {
     private fun Array<Annotation>.isNotImplemented(): Boolean =
         (this.find { it is NotImplemented } as NotImplemented?)?.let { true } ?: false
 
+    private fun Array<Annotation>.isPartiallyImplemented(): Boolean =
+        (this.find { it is PartiallyImplemented } as PartiallyImplemented?)?.let { true } ?: false
+
     private fun getSpecStatus(methodAnnotations: Array<Annotation>): SpecStatus {
-        return if (methodAnnotations.isNotImplemented()) {
-            SpecStatus.NOT_IMPLEMENTED
-        } else SpecStatus.IMPLEMENTED
+        return when {
+            methodAnnotations.isNotImplemented() -> SpecStatus.NOT_IMPLEMENTED
+            methodAnnotations.isPartiallyImplemented() -> SpecStatus.PARTIALLY_IMPLEMENTED
+            else -> SpecStatus.IMPLEMENTED
+        }
     }
 
     private fun String.removeStartingSpace(): String = this.lines().map { it.trim() }.joinToString("\n")

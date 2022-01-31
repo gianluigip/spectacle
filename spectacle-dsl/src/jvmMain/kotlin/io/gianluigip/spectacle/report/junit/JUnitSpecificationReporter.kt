@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.report.junit
 
 import io.gianluigip.spectacle.bdd.TestContext
-import io.gianluigip.spectacle.report.ContextGenerator
+import io.gianluigip.spectacle.report.MetadataExtractor
 import io.gianluigip.spectacle.report.SpecificationReporter
 import org.junit.jupiter.api.extension.AfterEachCallback
 import org.junit.jupiter.api.extension.ExtensionContext
@@ -19,7 +19,7 @@ class JUnitSpecificationReporter : AfterEachCallback {
             return
         }
 
-        val specMetadata = ContextGenerator.extractMetaData(context.testMethod.get(), context.tags)
+        val specMetadata = MetadataExtractor.extract(context.testMethod.get(), context.tags)
         val specBuilder = TestContext.getCurrentSpec()
         val specName = context.testMethod.get().name
         if (specMetadata == null || specBuilder == null) {

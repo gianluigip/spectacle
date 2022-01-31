@@ -36,4 +36,11 @@ class SpecificationBddWriter<T>(
             stepLastValue = block.invoke(stepLastValue)
         )
     }
+
+    /**
+     * Finish operation that returns Unit so test libs like Junit can work as expected.
+     */
+    infix fun runAndFinish(block: (T) -> Unit) {
+        block.invoke(stepLastValue)
+    }
 }
