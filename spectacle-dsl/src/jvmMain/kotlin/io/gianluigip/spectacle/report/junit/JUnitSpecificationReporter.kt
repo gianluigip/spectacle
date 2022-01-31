@@ -1,6 +1,6 @@
 package io.gianluigip.spectacle.report.junit
 
-import io.gianluigip.spectacle.bdd.TestContext
+import io.gianluigip.spectacle.dsl.bdd.TestContext
 import io.gianluigip.spectacle.report.MetadataExtractor
 import io.gianluigip.spectacle.report.SpecificationReporter
 import org.junit.jupiter.api.extension.AfterEachCallback

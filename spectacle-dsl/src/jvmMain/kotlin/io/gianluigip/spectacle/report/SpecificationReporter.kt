@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.report
 
-import io.gianluigip.spectacle.report.config.FileReportConfiguration
-import io.gianluigip.spectacle.report.publisher.TerminalPublisher
+import io.gianluigip.spectacle.report.config.ConfigLoader.CONFIG
+import io.gianluigip.spectacle.report.publisher.Publishers
 import io.gianluigip.spectacle.specification.Specification
 
 actual object SpecificationReporter {
@@ -12,19 +12,15 @@ actual object SpecificationReporter {
     actual fun initReport() {
         if (isReportedInitialized) return
         registerShutdownHook()
-        loadPublishers()
+        Publishers.loadPublishers()
         isReportedInitialized = true
     }
 
     private fun registerShutdownHook() = Runtime.getRuntime().addShutdownHook(Thread { publishSpecs() })
 
-    private fun loadPublishers() {
-        TerminalPublisher
-    }
-
     actual fun publishSpecs() {
-        FileReportConfiguration.publishers.forEach {
-            it.publishReport(ReportState.registeredSpecs(), FileReportConfiguration)
+        CONFIG.publishers.forEach {
+            it.publishReport(ReportState.registeredSpecs(), CONFIG)
         }
     }
 

@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.specification
 
-import io.gianluigip.spectacle.assertions.assertThat
-import io.gianluigip.spectacle.assertions.shouldBe
+import io.gianluigip.spectacle.dsl.assertions.assertThat
+import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.specification.StepType.GIVEN
 import io.gianluigip.spectacle.specification.StepType.THEN
 import io.gianluigip.spectacle.specification.StepType.WHENEVER

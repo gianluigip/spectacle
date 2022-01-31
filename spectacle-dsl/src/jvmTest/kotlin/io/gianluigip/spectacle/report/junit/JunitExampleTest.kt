@@ -1,18 +1,19 @@
 package io.gianluigip.spectacle.report.junit
 
-import io.gianluigip.spectacle.bdd.annotations.Feature
-import io.gianluigip.spectacle.bdd.annotations.NotImplemented
-import io.gianluigip.spectacle.bdd.annotations.PartiallyImplemented
-import io.gianluigip.spectacle.bdd.annotations.SpecTags
-import io.gianluigip.spectacle.bdd.annotations.Specification
-import io.gianluigip.spectacle.bdd.annotations.Team
-import io.gianluigip.spectacle.bdd.given
+import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
+import io.gianluigip.spectacle.dsl.bdd.annotations.NotImplemented
+import io.gianluigip.spectacle.dsl.bdd.annotations.PartiallyImplemented
+import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
+import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
+import io.gianluigip.spectacle.dsl.bdd.annotations.Team
+import io.gianluigip.spectacle.dsl.bdd.given
+import io.gianluigip.spectacle.dsl.bdd.whenever
 import org.junit.jupiter.api.Tag
 import org.junit.jupiter.api.Tags
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
-@Team("Matching")
+@Team("Spectacle Team")
 @Feature(
     "First Feature", description = """
     Description defining the first feature.
@@ -29,7 +30,7 @@ class JunitExampleTest {
     @Tags(Tag("Tag6"))
     @SpecTags("Tag5")
     @PartiallyImplemented
-    fun `First test to execute`() =
+    fun `First feature first spec to execute`() =
         given("a test with multiple steps") {
         } whenever "it executes" run {
         } then "it should register all the BDD steps" runAndFinish {
@@ -38,9 +39,8 @@ class JunitExampleTest {
     @Test
     @Specification
     @NotImplemented
-    fun `First feature second case to execute`() =
-        given("a test with multiple steps") {
-        } whenever "it executes" run {
+    fun `First feature second spec to execute`() =
+        whenever("it executes") {
         } then "it should register all the BDD steps" runAndFinish {
         }
 

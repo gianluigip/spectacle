@@ -1,18 +1,19 @@
 package io.gianluigip.spectacle.report
 
-import io.gianluigip.spectacle.bdd.annotations.Feature
-import io.gianluigip.spectacle.bdd.annotations.NotImplemented
-import io.gianluigip.spectacle.bdd.annotations.PartiallyImplemented
-import io.gianluigip.spectacle.bdd.annotations.SpecTags
-import io.gianluigip.spectacle.bdd.annotations.Team
-import io.gianluigip.spectacle.report.config.FileReportConfiguration
+import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
+import io.gianluigip.spectacle.dsl.bdd.annotations.NotImplemented
+import io.gianluigip.spectacle.dsl.bdd.annotations.PartiallyImplemented
+import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
+import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
+import io.gianluigip.spectacle.dsl.bdd.annotations.Team
+import io.gianluigip.spectacle.report.config.ConfigLoader.CONFIG
 import io.gianluigip.spectacle.specification.SpecStatus
 import io.gianluigip.spectacle.specification.SpecificationMetadata
 import java.lang.reflect.Method
 
-private const val DEFAULT_FEATURE = "Other"
-
 object MetadataExtractor {
+
+    private const val DEFAULT_FEATURE = "Other"
 
     fun extract(testMethod: Method, externalTags: Set<String> = emptySet()): SpecificationMetadata? {
         if (isNotAnAcceptanceTest(testMethod)) {
@@ -34,7 +35,7 @@ object MetadataExtractor {
     }
 
     private fun isNotAnAcceptanceTest(testMethod: Method): Boolean =
-        testMethod.annotations.find { it is io.gianluigip.spectacle.bdd.annotations.Specification } == null
+        testMethod.annotations.find { it is Specification } == null
 
     private fun Array<Annotation>.getFeature(): String =
         (this.find { it is Feature } as Feature?)?.name ?: DEFAULT_FEATURE
@@ -46,7 +47,7 @@ object MetadataExtractor {
         (this.find { it is Feature } as Feature?)?.description ?: ""
 
     private fun Array<Annotation>.getTeam(): String =
-        (this.find { it is Team } as Team?)?.name ?: FileReportConfiguration.team
+        (this.find { it is Team } as Team?)?.name ?: CONFIG.team
 
     private fun Array<Annotation>.isNotImplemented(): Boolean =
         (this.find { it is NotImplemented } as NotImplemented?)?.let { true } ?: false

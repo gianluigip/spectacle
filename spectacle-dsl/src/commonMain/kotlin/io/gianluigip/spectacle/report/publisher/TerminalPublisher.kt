@@ -12,27 +12,29 @@ object TerminalPublisher : SpecificationPublisher {
     }
 
     override fun publishReport(specifications: List<Specification>, config: ReportConfiguration) {
-        println("Publishing specification:")
-        val specificationsByFeature = specifications.groupBy { it.metadata.featureName }.toSortedMap(Comparator.comparing { it ?: "" })
+        println(generateReportContent(specifications))
+    }
+
+    internal fun generateReportContent(specifications: List<Specification>): String {
+        var report = "\nPublishing Specifications:\n"
+        val specificationsByFeature = specifications.groupBy { it.metadata.featureName }.entries.sortedBy { it.key }
         specificationsByFeature.forEach { (features, specificationsInFeature) ->
-            println(" ")
-            println("Feature: $features")
-            specificationsInFeature.forEach { specification ->
-                println(" ")
-                println("\t${specification.name}${specification.implementedText()}")
-                specification.steps.forEach { step ->
-                    println("\t\t${format(step)}")
+            report += "\nFeature: $features\n"
+            specificationsInFeature.sortedBy { it.name }.forEach { specification ->
+                report += "\n\t${specification.name}${specification.implementedText()}\n"
+                specification.steps.sortedBy { it.index }.forEach { step ->
+                    report += "\t\t${format(step)}\n"
                 }
             }
-            println(" ")
+            report += "\n"
         }
-        println(" ")
+        return report
     }
 
     private fun Specification.implementedText(): String {
         return when (metadata.status) {
             SpecStatus.NOT_IMPLEMENTED -> {
-                return " (Not Implemented)";
+                return " (Not Implemented)"
             }
             SpecStatus.PARTIALLY_IMPLEMENTED -> {
                 return " (Partially Implemented)"
