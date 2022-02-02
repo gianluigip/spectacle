@@ -21,9 +21,6 @@ repositories {
 
 kotlin {
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "11"
-        }
         withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
@@ -63,7 +60,7 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation("io.ktor:ktor-server-test-host:${ktorVersion}")
-                implementation(project(":spectacle-dsl"))
+                implementation("io.github.gianluigip:spectacle-dsl:0.1.0")
             }
         }
 
@@ -83,6 +80,15 @@ kotlin {
 application {
     mainClass.set("io.gianluigip.spectacle.ApplicationKt")
 }
+
+tasks {
+    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
+    }
+}
+
 
 // include JS artifacts in any JAR we generate
 tasks.getByName<Jar>("jvmJar") {
