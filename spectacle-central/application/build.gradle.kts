@@ -29,6 +29,14 @@ kotlin {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
+        val jvmJar by tasks.getting(org.gradle.jvm.tasks.Jar::class) {
+            doFirst {
+                manifest {
+                    attributes["Main-Class"] = "io.gianluigip.spectacle.ApplicationKt"
+                }
+                from(configurations.getByName("runtimeClasspath").map { if (it.isDirectory) it else zipTree(it) })
+            }
+        }
     }
     js {
         browser {
@@ -109,6 +117,10 @@ tasks.withType<Tar> {
 }
 
 tasks.withType<Zip> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType<Sync> {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 

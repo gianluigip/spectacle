@@ -1,0 +1,5 @@
+{
+  "name": "Spectacle Central",
+  "description": "Repository of specifications and living documentation",
+  "image": "heroku/gradle"
+}
