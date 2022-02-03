@@ -1,4 +1,5 @@
-import io.gianluigip.shopping.ShoppingListItem
+package io.gianluigip.shopping
+
 import io.ktor.http.*
 import io.ktor.client.*
 import io.ktor.client.request.*

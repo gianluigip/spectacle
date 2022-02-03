@@ -3,8 +3,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 val serializationVersion = "1.3.1"
 val ktorVersion = "1.6.7"
 val logbackVersion = "1.2.3"
-//val reactVersion = "17.0.2-pre.293-kotlin-1.6.10"
-val reactVersion = "17.0.2-pre.265-kotlin-1.5.31"
+val reactVersion = "17.0.2-pre.293-kotlin-1.6.10"
 val kmongoVersion = "4.3.0"
 
 plugins {
@@ -34,6 +33,9 @@ kotlin {
     js {
         browser {
             binaries.executable()
+            commonWebpackConfig {
+                cssSupport.enabled = true
+            }
         }
     }
     sourceSets {
@@ -77,7 +79,7 @@ kotlin {
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactVersion")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactVersion")
-//                implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.2")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-styled-next:1.0-pre.293-kotlin-1.6.10")
             }
         }
     }
@@ -101,6 +103,13 @@ tasks.getByName<Jar>("jvmJar") {
     from(File(webpackTask.destinationDirectory, webpackTask.outputFileName)) // bring output file along into the JAR
 }
 
+tasks.withType<Tar> {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+tasks.withType<Zip>{
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
 
 distributions {
     main {

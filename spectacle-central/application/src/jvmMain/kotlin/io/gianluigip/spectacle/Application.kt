@@ -2,7 +2,6 @@ package io.gianluigip.spectacle
 
 import freemarker.cache.ClassTemplateLoader
 import freemarker.core.HTMLOutputFormat
-import io.gianluigip.journal.journalTutorialRoutes
 import io.gianluigip.shopping.shoppingTutorialRoutes
 import io.ktor.application.Application
 import io.ktor.application.call
@@ -51,10 +50,6 @@ fun Application.module() {
         static("/") {
             resources("")
         }
-//        static("/static") {
-//            resources("files")
-//        }
     }
-    journalTutorialRoutes()
     shoppingTutorialRoutes()
 }
