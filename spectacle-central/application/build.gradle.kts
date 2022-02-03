@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
 val serializationVersion = "1.3.1"
-val ktorVersion = "1.6.7"
+val ktorVersion = "2.0.0-beta-1"
 val logbackVersion = "1.2.3"
 val reactVersion = "17.0.2-pre.293-kotlin-1.6.10"
 val kmongoVersion = "4.3.0"
@@ -42,7 +42,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-core:1.6.7")
             }
         }
         val commonTest by getting {
@@ -54,11 +54,12 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-serialization:$ktorVersion")
                 implementation("io.ktor:ktor-server-core:$ktorVersion")
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
-                implementation("io.ktor:ktor-html-builder:${ktorVersion}")
-                implementation("io.ktor:ktor-freemarker:${ktorVersion}")
+                implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-server-compression:$ktorVersion")
+                implementation("io.ktor:ktor-server-cors:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
                 implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kmongoVersion")
             }
@@ -73,9 +74,9 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-js:$ktorVersion")
-                implementation("io.ktor:ktor-client-json:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
+                implementation("io.ktor:ktor-client-js:1.6.7")
+                implementation("io.ktor:ktor-client-json:1.6.7")
+                implementation("io.ktor:ktor-client-serialization:1.6.7")
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactVersion")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactVersion")
@@ -107,7 +108,7 @@ tasks.withType<Tar> {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
-tasks.withType<Zip>{
+tasks.withType<Zip> {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 

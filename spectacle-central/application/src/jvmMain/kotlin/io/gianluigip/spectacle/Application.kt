@@ -1,24 +1,21 @@
 package io.gianluigip.spectacle
 
-import freemarker.cache.ClassTemplateLoader
-import freemarker.core.HTMLOutputFormat
 import io.gianluigip.shopping.shoppingTutorialRoutes
-import io.ktor.application.Application
-import io.ktor.application.call
-import io.ktor.application.install
-import io.ktor.features.CORS
-import io.ktor.features.Compression
-import io.ktor.features.ContentNegotiation
-import io.ktor.features.gzip
-import io.ktor.freemarker.FreeMarker
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
-import io.ktor.http.content.resources
-import io.ktor.http.content.static
-import io.ktor.response.respondText
-import io.ktor.routing.get
-import io.ktor.routing.routing
-import io.ktor.serialization.json
+import io.ktor.serialization.kotlinx.json.json
+import io.ktor.server.application.Application
+import io.ktor.server.application.call
+import io.ktor.server.application.install
+import io.ktor.server.http.content.resources
+import io.ktor.server.http.content.static
+import io.ktor.server.plugins.CORS
+import io.ktor.server.plugins.Compression
+import io.ktor.server.plugins.ContentNegotiation
+import io.ktor.server.plugins.gzip
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.routing
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -35,10 +32,6 @@ fun Application.module() {
     }
     install(Compression) {
         gzip()
-    }
-    install(FreeMarker) {
-        templateLoader = ClassTemplateLoader(this::class.java.classLoader, "templates")
-        outputFormat = HTMLOutputFormat.INSTANCE
     }
     routing {
         get("/") {

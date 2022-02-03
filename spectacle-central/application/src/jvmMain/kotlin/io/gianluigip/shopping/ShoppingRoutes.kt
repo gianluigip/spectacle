@@ -1,16 +1,16 @@
 package io.gianluigip.shopping
 
-import io.ktor.application.Application
-import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.response.respond
-import io.ktor.response.respondText
-import io.ktor.routing.delete
-import io.ktor.routing.get
-import io.ktor.routing.post
-import io.ktor.routing.route
-import io.ktor.routing.routing
+import io.ktor.server.application.Application
+import io.ktor.server.application.call
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.delete
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
 
 val shoppingList = mutableListOf(
     ShoppingListItem("Cucumbers 🥒", 1),
@@ -19,7 +19,7 @@ val shoppingList = mutableListOf(
 )
 
 fun Application.shoppingTutorialRoutes() {
-    routing() {
+    routing {
         route("/shopping") {
             get("/hello") {
                 call.respondText("Hello, API!")
