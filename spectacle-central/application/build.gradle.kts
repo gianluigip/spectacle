@@ -1,8 +1,9 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val serializationVersion = "1.3.0"
+val serializationVersion = "1.3.1"
 val ktorVersion = "1.6.7"
 val logbackVersion = "1.2.3"
+//val reactVersion = "17.0.2-pre.293-kotlin-1.6.10"
 val reactVersion = "17.0.2-pre.265-kotlin-1.5.31"
 val kmongoVersion = "4.3.0"
 
@@ -17,10 +18,14 @@ version = rootProject.version
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }
 }
 
 kotlin {
     jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = "11"
+        }
         withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
@@ -72,6 +77,7 @@ kotlin {
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactVersion")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactVersion")
+//                implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.2")
             }
         }
     }
@@ -80,15 +86,6 @@ kotlin {
 application {
     mainClass.set("io.gianluigip.spectacle.ApplicationKt")
 }
-
-tasks {
-    withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = "11"
-        }
-    }
-}
-
 
 // include JS artifacts in any JAR we generate
 tasks.getByName<Jar>("jvmJar") {
