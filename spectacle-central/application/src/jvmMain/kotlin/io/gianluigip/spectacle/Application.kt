@@ -2,6 +2,7 @@ package io.gianluigip.spectacle
 
 import io.gianluigip.shopping.shoppingTutorialRoutes
 import io.ktor.http.ContentType
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
@@ -28,6 +29,7 @@ fun Application.module() {
         method(HttpMethod.Put)
         method(HttpMethod.Post)
         method(HttpMethod.Delete)
+        header(HttpHeaders.ContentType)
         anyHost()
     }
     install(Compression) {
