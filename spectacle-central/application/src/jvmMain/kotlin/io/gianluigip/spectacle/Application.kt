@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle
 
 import io.gianluigip.shopping.shoppingTutorialRoutes
+import io.gianluigip.spectacle.common.repository.initFlyway
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
@@ -37,6 +38,7 @@ fun Application.module() {
     install(Compression) {
         gzip()
     }
+    initFlyway()
     routing {
         get("/") {
             call.respondText(
@@ -44,8 +46,14 @@ fun Application.module() {
                 ContentType.Text.Html
             )
         }
+        get("/application.js") {
+            call.respondText(
+                this::class.java.classLoader.getResource("application.js")!!.readText(),
+                ContentType.Text.Html
+            )
+        }
         static("/") {
-            resources("")
+            resources("web")
         }
         route("/api") {
             specificationsRoutes()
