@@ -62,6 +62,7 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
+                implementation(project(":spectacle-central:domain"))
                 implementation("io.ktor:ktor-server-core:$ktorVersion")
                 implementation("io.ktor:ktor-server-netty:$ktorVersion")
                 implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
