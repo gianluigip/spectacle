@@ -1,5 +1,8 @@
 package io.gianluigip.spectacle.specification.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class SpecificationStep(
     val type: StepType,
     val description: String,

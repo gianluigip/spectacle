@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle
 
 import io.gianluigip.shopping.shoppingTutorialRoutes
+import io.gianluigip.spectacle.specification.api.specificationsRoutes
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
@@ -16,6 +17,7 @@ import io.ktor.server.plugins.ContentNegotiation
 import io.ktor.server.plugins.gzip
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
+import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -44,6 +46,9 @@ fun Application.module() {
         }
         static("/") {
             resources("")
+        }
+        route("/api") {
+            specificationsRoutes()
         }
     }
     shoppingTutorialRoutes()

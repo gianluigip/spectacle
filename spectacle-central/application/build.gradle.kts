@@ -65,6 +65,8 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation(project(":spectacle-central:domain"))
+                implementation(kotlin("stdlib-jdk8"))
+                // KTOR
                 implementation("io.ktor:ktor-server-core:$ktorServerVersion")
                 implementation("io.ktor:ktor-server-netty:$ktorServerVersion")
                 implementation("io.ktor:ktor-server-content-negotiation:$ktorServerVersion")
@@ -72,7 +74,11 @@ kotlin {
                 implementation("io.ktor:ktor-server-cors:$ktorServerVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorServerVersion")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
-                implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kmongoVersion")
+                // DATA
+                implementation("org.jetbrains.exposed:exposed-core:0.37.3")
+                implementation("org.jetbrains.exposed:exposed-java-time:0.37.3")
+                implementation("com.zaxxer:HikariCP:5.0.1")
+                implementation("org.flywaydb:flyway-core:8.4.4")
             }
         }
 
