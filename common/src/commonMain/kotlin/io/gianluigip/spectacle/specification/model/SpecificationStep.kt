@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.specification
+package io.gianluigip.spectacle.specification.model
 
 data class SpecificationStep(
     val type: StepType,

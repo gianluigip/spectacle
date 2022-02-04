@@ -1,13 +1,13 @@
 package io.gianluigip.spectacle.report.publisher
 
-import io.gianluigip.spectacle.specification.SpecificationStep
-import io.gianluigip.spectacle.specification.StepType.AND
-import io.gianluigip.spectacle.specification.StepType.AND_GIVEN
-import io.gianluigip.spectacle.specification.StepType.AND_THEN
-import io.gianluigip.spectacle.specification.StepType.AND_WHENEVER
-import io.gianluigip.spectacle.specification.StepType.GIVEN
-import io.gianluigip.spectacle.specification.StepType.THEN
-import io.gianluigip.spectacle.specification.StepType.WHENEVER
+import io.gianluigip.spectacle.specification.model.SpecificationStep
+import io.gianluigip.spectacle.specification.model.StepType.AND
+import io.gianluigip.spectacle.specification.model.StepType.AND_GIVEN
+import io.gianluigip.spectacle.specification.model.StepType.AND_THEN
+import io.gianluigip.spectacle.specification.model.StepType.AND_WHENEVER
+import io.gianluigip.spectacle.specification.model.StepType.GIVEN
+import io.gianluigip.spectacle.specification.model.StepType.THEN
+import io.gianluigip.spectacle.specification.model.StepType.WHENEVER
 
 object SpecificationStepFormatter {
 

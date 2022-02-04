@@ -1,14 +1,14 @@
 package io.gianluigip.spectacle.report.publisher
 
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
-import io.gianluigip.spectacle.specification.SpecStatus
 import io.gianluigip.spectacle.specification.Specification
 import io.gianluigip.spectacle.specification.SpecificationMetadata
-import io.gianluigip.spectacle.specification.StepType.GIVEN
-import io.gianluigip.spectacle.specification.StepType.THEN
-import io.gianluigip.spectacle.specification.StepType.WHENEVER
+import io.gianluigip.spectacle.specification.model.SpecStatus
+import io.gianluigip.spectacle.specification.model.StepType.GIVEN
+import io.gianluigip.spectacle.specification.model.StepType.THEN
+import io.gianluigip.spectacle.specification.model.StepType.WHENEVER
 import kotlin.test.Test
-import io.gianluigip.spectacle.specification.SpecificationStep as Step
+import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
 
 class TerminalPublisherTest {
 

@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.dsl.bdd
 
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
-import io.gianluigip.spectacle.specification.SpecStatus
+import io.gianluigip.spectacle.specification.model.SpecStatus
 import kotlin.test.Test
 
 class BddDslTest {

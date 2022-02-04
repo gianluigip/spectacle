@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.6.10"
+    kotlin("jvm")
 }
 
 group = "io.github.gianluigip"
@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation(project(":common"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 

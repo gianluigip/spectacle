@@ -1,5 +1,9 @@
 package io.gianluigip.spectacle.specification
 
+import io.gianluigip.spectacle.specification.model.SpecStatus
+import io.gianluigip.spectacle.specification.model.SpecificationStep
+import io.gianluigip.spectacle.specification.model.StepType
+
 /**
  * Helper class to provide a mutable representation of a specification while the lib is still collecting the data.
  */

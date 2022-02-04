@@ -1,5 +1,5 @@
 plugins {
-    kotlin("multiplatform") version "1.6.10"
+    kotlin("multiplatform")
     id("convention.publication")
 }
 
@@ -24,6 +24,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":common"))
                 implementation(kotlin("test"))
             }
         }

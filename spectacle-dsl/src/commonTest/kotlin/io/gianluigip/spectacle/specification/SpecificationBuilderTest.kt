@@ -2,9 +2,11 @@ package io.gianluigip.spectacle.specification
 
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
-import io.gianluigip.spectacle.specification.StepType.GIVEN
-import io.gianluigip.spectacle.specification.StepType.THEN
-import io.gianluigip.spectacle.specification.StepType.WHENEVER
+import io.gianluigip.spectacle.specification.model.SpecStatus
+import io.gianluigip.spectacle.specification.model.SpecificationStep
+import io.gianluigip.spectacle.specification.model.StepType.GIVEN
+import io.gianluigip.spectacle.specification.model.StepType.THEN
+import io.gianluigip.spectacle.specification.model.StepType.WHENEVER
 import kotlin.test.Test
 
 class SpecificationBuilderTest {

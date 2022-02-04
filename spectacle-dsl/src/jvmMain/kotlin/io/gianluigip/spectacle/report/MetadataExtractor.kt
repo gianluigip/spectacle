@@ -7,8 +7,8 @@ import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.annotations.Team
 import io.gianluigip.spectacle.report.config.ConfigLoader.CONFIG
-import io.gianluigip.spectacle.specification.SpecStatus
 import io.gianluigip.spectacle.specification.SpecificationMetadata
+import io.gianluigip.spectacle.specification.model.SpecStatus
 import java.lang.reflect.Method
 
 object MetadataExtractor {

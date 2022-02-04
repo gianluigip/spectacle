@@ -2,11 +2,6 @@ package io.gianluigip.spectacle.specification.model
 
 import java.time.ZonedDateTime
 
-@JvmInline
-value class FeatureName(val value: String)
-
-fun String.toFeature() = FeatureName(this)
-
 data class Feature(
     val name: FeatureName,
     val description: String,

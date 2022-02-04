@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.dsl.bdd
 
 import io.gianluigip.spectacle.specification.SpecificationBuilder
-import io.gianluigip.spectacle.specification.StepType
+import io.gianluigip.spectacle.specification.model.StepType
 
 /**
  * Provide a DSL for writing specifications as readable as possible.
