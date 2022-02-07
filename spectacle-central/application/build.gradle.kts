@@ -115,6 +115,7 @@ application {
 tasks.getByName<Jar>("jvmJar") {
     val taskName = if (project.hasProperty("isProduction")
         || project.gradle.startParameter.taskNames.contains("installDist")
+        || project.gradle.startParameter.taskNames.contains("stage")
     ) {
         "jsBrowserProductionWebpack"
     } else {
