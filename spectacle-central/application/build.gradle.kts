@@ -74,6 +74,7 @@ kotlin {
                 implementation("io.ktor:ktor-server-cors:$ktorServerVersion")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorServerVersion")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
+                implementation("io.ktor:ktor-server-call-logging:$ktorServerVersion")
                 // DI
                 implementation("org.kodein.di:kodein-di:7.10.0")
                 // DATA
@@ -89,7 +90,14 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":spectacle-dsl"))
+                implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+                implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
                 implementation("io.ktor:ktor-server-test-host:${ktorServerVersion}")
+                implementation("io.ktor:ktor-client-content-negotiation:${ktorServerVersion}")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorServerVersion")
+                implementation("org.testcontainers:testcontainers:1.16.3")
+                implementation("org.testcontainers:junit-jupiter:1.16.3")
+                implementation("org.testcontainers:postgresql:1.16.3")
             }
         }
 

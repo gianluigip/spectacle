@@ -13,12 +13,14 @@ import io.ktor.server.http.content.resource
 import io.ktor.server.http.content.resources
 import io.ktor.server.http.content.static
 import io.ktor.server.plugins.CORS
+import io.ktor.server.plugins.CallLogging
 import io.ktor.server.plugins.Compression
 import io.ktor.server.plugins.ContentNegotiation
 import io.ktor.server.plugins.gzip
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 import org.kodein.di.DI
+import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -36,6 +38,7 @@ fun Application.module() {
         anyHost()
     }
     install(Compression) { gzip() }
+    install(CallLogging) { level = Level.INFO }
     initDb()
     _di = DI { registerAllBeans() }
     routing {

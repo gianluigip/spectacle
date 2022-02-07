@@ -4,6 +4,7 @@ import io.gianluigip.spectacle.di
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.SpecificationProcessor
 import io.gianluigip.spectacle.specification.api.model.SpecificationsToUpdateRequest
+import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.call
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
@@ -24,7 +25,9 @@ fun Route.specificationsRoutes() {
 
         put {
             val request = call.receive<SpecificationsToUpdateRequest>()
+            LOG.info("Updating specs for source ${request.source}")
             specProcessor.updateSpecifications(request.toModel())
+            call.respond(HttpStatusCode.Created)
         }
 
         get {
