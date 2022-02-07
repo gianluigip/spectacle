@@ -1,32 +1,32 @@
 package io.gianluigip.spectacle
 
 import io.gianluigip.shopping.shoppingTutorialRoutes
-import io.gianluigip.spectacle.common.repository.initFlyway
+import io.gianluigip.spectacle.common.beans.registerAllBeans
+import io.gianluigip.spectacle.common.repository.initDb
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
-import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
-import io.ktor.server.application.call
 import io.ktor.server.application.install
+import io.ktor.server.http.content.resource
 import io.ktor.server.http.content.resources
 import io.ktor.server.http.content.static
 import io.ktor.server.plugins.CORS
 import io.ktor.server.plugins.Compression
 import io.ktor.server.plugins.ContentNegotiation
 import io.ktor.server.plugins.gzip
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.get
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
+import org.kodein.di.DI
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
+private lateinit var _di: DI
+val di: DI by lazy { _di }
+
 fun Application.module() {
-    install(ContentNegotiation) {
-        json()
-    }
+    install(ContentNegotiation) { json() }
     install(CORS) {
         method(HttpMethod.Get)
         method(HttpMethod.Put)
@@ -35,24 +35,13 @@ fun Application.module() {
         header(HttpHeaders.ContentType)
         anyHost()
     }
-    install(Compression) {
-        gzip()
-    }
-    initFlyway()
+    install(Compression) { gzip() }
+    initDb()
+    _di = DI { registerAllBeans() }
     routing {
-        get("/") {
-            call.respondText(
-                this::class.java.classLoader.getResource("index.html")!!.readText(),
-                ContentType.Text.Html
-            )
-        }
-        get("/application.js") {
-            call.respondText(
-                this::class.java.classLoader.getResource("application.js")!!.readText(),
-                ContentType.Text.Html
-            )
-        }
         static("/") {
+            resource("/", "index.html")
+            resource("/application.js", "application.js")
             resources("web")
         }
         route("/api") {
