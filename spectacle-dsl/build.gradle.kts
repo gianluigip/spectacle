@@ -1,4 +1,4 @@
-val ktorClientVersion = "1.6.7"
+val ktorVersion = "2.0.0-beta-1"
 
 plugins {
     kotlin("multiplatform")
@@ -30,9 +30,9 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
                 // HTTP CLIENT
-                implementation("io.ktor:ktor-client-core:$ktorClientVersion")
-                implementation("io.ktor:ktor-client-json:$ktorClientVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorClientVersion")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
             }
         }
         val commonTest by getting {
@@ -42,7 +42,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-cio:$ktorClientVersion")
+                implementation("io.ktor:ktor-client-cio:$ktorVersion")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
             }
         }

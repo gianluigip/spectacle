@@ -8,11 +8,13 @@ import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationsToUpdateRequest
 import io.ktor.client.HttpClient
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.plugins.ContentNegotiation
 import io.ktor.client.request.put
+import io.ktor.client.request.setBody
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
+import io.ktor.serialization.kotlinx.json.json
 
 object CentralPublisher : SpecificationPublisher {
 
@@ -55,18 +57,18 @@ object CentralPublisher : SpecificationPublisher {
     private suspend fun postSpecs(requestBody: SpecificationsToUpdateRequest, config: ReportConfiguration) {
 
         val httpClient = HttpClient {
-            install(JsonFeature) { serializer = KotlinxSerializer() }
+            install(ContentNegotiation) { json() }
         }
 
-        val centralUrl = "${config.centralHost}/api/specification"
+        val centralUrl = "${config.centralHost}api/specification"
         println("Publishing the specs to $centralUrl")
 
         try {
-            httpClient.put<Unit>(centralUrl) {
+            val response = httpClient.put(centralUrl) {
                 contentType(ContentType.Application.Json)
-                body = requestBody
+                setBody(requestBody)
             }
-            println("Publishing to Central finished")
+            println("Publishing to Central finished with status ${response.status} and response ${response.bodyAsText()}")
 
         } catch (exception: Exception) {
             println("Central Publisher failed trying to communicate with the server: ${exception.message}")
