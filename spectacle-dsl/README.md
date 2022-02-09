@@ -97,6 +97,12 @@ specification.source=spectacle-dsl
 specification.component=Spectacle DSL
 # List separated by comma of publishers that you want to use
 specification.publisher=terminal
+# Central is the main publisher that allow to centralize all the specs in one place
+# These properties can be also defined as env vars, so it's easier to use in CI
+# Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_ENABLED
+specification.publisher.central.enabled=false
+# Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_HOST
+specification.publisher.central.host=https://central.spectacle.com
 ```
 
 Spectacle use the `source` to identify what specs are new and what specs were removed, so if you
@@ -106,8 +112,8 @@ source.
 
 ## Assertion DSL
 
-To improve even further the readability Spectacle also include an Assertion DSL that can be used
-to validate your tests more easily.
+To improve even further the readability Spectacle also include an Assertion DSL that can be used to
+validate your tests more easily.
 
 ```kotlin
 import io.gianluigip.spectacle.dsl.assertions.*

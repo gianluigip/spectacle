@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.report
 import io.gianluigip.spectacle.report.config.ConfigLoader.CONFIG
 import io.gianluigip.spectacle.report.publisher.Publishers
 import io.gianluigip.spectacle.specification.Specification
+import kotlinx.coroutines.runBlocking
 
 actual object SpecificationReporter {
 
@@ -18,7 +19,7 @@ actual object SpecificationReporter {
 
     private fun registerShutdownHook() = Runtime.getRuntime().addShutdownHook(Thread { publishSpecs() })
 
-    actual fun publishSpecs() {
+    actual fun publishSpecs() = runBlocking {
         CONFIG.publishers.forEach {
             it.publishReport(ReportState.registeredSpecs(), CONFIG)
         }

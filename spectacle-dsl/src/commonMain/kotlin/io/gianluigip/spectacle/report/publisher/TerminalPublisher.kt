@@ -11,7 +11,7 @@ object TerminalPublisher : SpecificationPublisher {
         SpecificationPublisher.registerPublisher("terminal", this)
     }
 
-    override fun publishReport(specifications: List<Specification>, config: ReportConfiguration) {
+    override suspend fun publishReport(specifications: List<Specification>, config: ReportConfiguration) {
         println(generateReportContent(specifications))
     }
 

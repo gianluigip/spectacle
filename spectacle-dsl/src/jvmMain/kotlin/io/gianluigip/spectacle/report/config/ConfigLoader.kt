@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.report.config
 import io.gianluigip.spectacle.report.publisher.Publishers
 import io.gianluigip.spectacle.report.publisher.SpecificationPublisher
 import io.gianluigip.spectacle.report.publisher.TerminalPublisher
+import io.ktor.http.Url
 import java.io.FileInputStream
 import java.net.URL
 import java.util.Properties
@@ -22,6 +23,8 @@ actual object ConfigLoader {
                 source = properties.getSource(),
                 component = properties.getComponent(),
                 publishers = properties.getPublishers(),
+                centralEnabled = properties.getCentralEnabled(),
+                centralHost = properties.getCentralHost(),
             )
         } else {
             CONFIG = ReportConfiguration(
@@ -29,6 +32,8 @@ actual object ConfigLoader {
                 source = "Other",
                 component = "Other",
                 publishers = listOf(TerminalPublisher),
+                centralEnabled = false,
+                centralHost = null,
             )
             println("If you want to customize the behavior of Spectacle Reports create a file $PROPERTIES_FILE_NAME in the test resource folder")
         }
@@ -55,4 +60,21 @@ actual object ConfigLoader {
             publisher
         }.filterNotNull()
     }
+
+    private fun Properties.getCentralEnabled(): Boolean {
+        val envValue: String? = System.getenv(CENTRAL_ENABLE_ENV_VARIABLE)
+        if (envValue != null) {
+            return envValue.toBoolean()
+        }
+        return getProperty("specification.publisher.central.enabled")?.toBoolean() ?: false
+    }
+
+    private fun Properties.getCentralHost(): Url? {
+        val envValue: String? = System.getenv(CENTRAL_HOST_ENV_VARIABLE)
+        if (envValue != null) {
+            return Url(envValue)
+        }
+        return getProperty("specification.publisher.central.host")?.let { Url(it) }
+    }
+
 }
