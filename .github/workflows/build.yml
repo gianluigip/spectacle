@@ -3,7 +3,7 @@ name: Build CI
 on: [ push ]
 
 env:
-  SPECIFICATION_PUBLISHER_CENTRAL_ENABLED: ${{ github.ref_name == 'master' && 'true' || 'false' }}
+  SPECIFICATION_PUBLISHER_CENTRAL_ENABLED: ${{ github.ref_name == 'register-specs' && 'true' || 'false' }}
   SPECIFICATION_PUBLISHER_CENTRAL_HOST: ${{ secrets.SPECIFICATION_PUBLISHER_CENTRAL_HOST }}
 
 jobs:
