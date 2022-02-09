@@ -27,7 +27,6 @@ fun setEnv(newenv: Map<String, String>?) {
                 field.setAccessible(true)
                 val obj: Any = field.get(env)
                 val map = obj as MutableMap<String, String>
-                map.clear()
                 map.putAll(newenv!!)
             }
         }
