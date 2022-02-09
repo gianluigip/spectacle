@@ -64,6 +64,7 @@ class ExposedTeamRepository(
             it[updateTime] = clock.toUtcLocalDateTime()
             it[name] = team.name.value
             it[teamSource] = team.source.value
+            it[component] = team.component.value
         }
     }
 
@@ -72,6 +73,7 @@ class ExposedTeamRepository(
             it[updateTime] = clock.toUtcLocalDateTime()
             it[name] = team.name.value
             it[teamSource] = team.source.value
+            it[component] = team.component.value
         }
     }
 

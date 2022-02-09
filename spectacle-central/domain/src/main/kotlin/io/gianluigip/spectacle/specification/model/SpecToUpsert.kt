@@ -5,6 +5,7 @@ data class SpecToUpsert(
     val feature: FeatureName,
     val team: TeamName,
     val source: Source,
+    val component: Component,
     val status: SpecStatus,
     val tags: List<TagName>,
     val steps: List<SpecificationStep>,
@@ -13,5 +14,5 @@ data class SpecToUpsert(
 
     infix fun isEquals(spec: Specification) =
         name == spec.name && feature == spec.feature && team == spec.team && source == spec.source
-                && status == spec.status && steps == spec.steps
+                && component == spec.component && status == spec.status && steps == spec.steps
 }

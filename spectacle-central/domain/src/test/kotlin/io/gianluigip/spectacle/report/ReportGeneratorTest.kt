@@ -11,6 +11,7 @@ import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.report.model.SpecsReport
 import io.gianluigip.spectacle.specification.SpecificationFinder
+import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecName
@@ -32,6 +33,8 @@ private val TEAM_1 = TeamName("Team1")
 private val TEAM_2 = TeamName("Team2")
 private val SOURCE_1 = Source("Source1")
 private val SOURCE_2 = Source("Source2")
+private val COMPONENT_1 = Component("Component1")
+private val COMPONENT_2 = Component("Component2")
 private val TAG_1 = TagName("Tag1")
 private val TAG_2 = TagName("Tag2")
 
@@ -51,11 +54,11 @@ class ReportGeneratorTest {
             every {
                 specFinder.findBy()
             } returns listOf(
-                Spec(SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec2"), FEATURE_1, TEAM_2, SOURCE_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec4"), FEATURE_2, TEAM_2, SOURCE_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec5"), FEATURE_3, TEAM_1, SOURCE_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
+                Spec(SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
+                Spec(SpecName("Spec2"), FEATURE_1, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
+                Spec(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
+                Spec(SpecName("Spec4"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
+                Spec(SpecName("Spec5"), FEATURE_3, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
             )
         } whenever "generate a specification report" run {
             report = reportGenerator.generateReport()
@@ -98,6 +101,7 @@ class ReportGeneratorTest {
             report.filters assertThat {
                 features shouldBe setOf(FEATURE_1, FEATURE_2, FEATURE_3)
                 sources shouldBe setOf(SOURCE_1, SOURCE_2)
+                components shouldBe setOf(COMPONENT_1, COMPONENT_2)
                 tags shouldBe setOf(TAG_1, TAG_2)
                 teams shouldBe setOf(TEAM_1, TEAM_2)
                 statuses shouldBe setOf(IMPLEMENTED)

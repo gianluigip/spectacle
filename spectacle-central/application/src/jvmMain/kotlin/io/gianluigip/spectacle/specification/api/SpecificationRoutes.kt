@@ -25,7 +25,7 @@ fun Route.specificationsRoutes() {
 
         put {
             val request = call.receive<SpecificationsToUpdateRequest>()
-            LOG.info("Updating specs for source ${request.source}")
+            LOG.info("Updating specs for source ${request.source} and component ${request.component}")
             specProcessor.updateSpecifications(request.toModel())
             call.respond(HttpStatusCode.Created)
         }

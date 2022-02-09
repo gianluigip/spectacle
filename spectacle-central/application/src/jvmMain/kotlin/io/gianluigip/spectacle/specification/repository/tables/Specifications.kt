@@ -18,6 +18,7 @@ object Specifications : StringIdTable(name = "specifications") {
     val feature = varchar("feature", 1000)
     val team = varchar("team", 255)
     val specSource = varchar("source", 255)
+    val component = varchar("component", 255)
     val status = varchar("status", 255)
     override val primaryKey = PrimaryKey(id)
 }

@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.report.model
 
+import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecName
@@ -24,6 +25,7 @@ data class SpecReport(
     val name: SpecName,
     val team: TeamName,
     val source: Source,
+    val component: Component,
     val status: SpecStatus,
     val creationTime: ZonedDateTime,
     val updateTime: ZonedDateTime,
@@ -34,6 +36,7 @@ data class SpecReport(
 data class ReportFilters(
     val features: Set<FeatureName>,
     val sources: Set<Source>,
+    val components: Set<Component>,
     val tags: Set<TagName>,
     val teams: Set<TeamName>,
     val statuses: Set<SpecStatus>,

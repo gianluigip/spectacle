@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class SpecificationsToUpdateRequest(
     val source: String,
+    val component: String,
     val features: List<FeatureToUpdateRequest>,
 )
 

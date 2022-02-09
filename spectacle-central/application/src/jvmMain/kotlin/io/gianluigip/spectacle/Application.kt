@@ -1,7 +1,8 @@
 package io.gianluigip.spectacle
 
 import io.gianluigip.shopping.shoppingTutorialRoutes
-import io.gianluigip.spectacle.common.beans.registerAllBeans
+import io.gianluigip.spectacle.common.beans.productionDependencies
+import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
 import io.ktor.http.HttpHeaders
@@ -40,7 +41,10 @@ fun Application.module() {
     install(Compression) { gzip() }
     install(CallLogging) { level = Level.INFO }
     initDb()
-    _di = DI { registerAllBeans() }
+    _di = DI {
+        import(productionDependencies())
+        import(testDependencies, allowOverride = true)
+    }
     routing {
         static("/") {
             resource("/", "index.html")

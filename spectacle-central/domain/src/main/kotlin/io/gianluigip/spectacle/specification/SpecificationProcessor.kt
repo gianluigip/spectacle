@@ -24,16 +24,24 @@ class SpecificationProcessor(
 
     fun updateSpecifications(specificationsToUpdate: SpecificationsToUpdate) = transaction.execute {
         val source = specificationsToUpdate.source
+        val component = specificationsToUpdate.component
         val specs = mutableMapOf<SpecName, SpecToUpsert>()
         val features = mutableListOf<FeatureToUpsert>()
         val teams = mutableMapOf<TeamName, TeamToUpsert>()
         specificationsToUpdate.features.forEach { featureFromSource ->
-            val feature = FeatureToUpsert(name = featureFromSource.name, description = featureFromSource.description, source = source)
+            val feature = FeatureToUpsert(
+                name = featureFromSource.name, description = featureFromSource.description, source = source, component = component
+            )
             features.add(feature)
+
             featureFromSource.specs.forEach { specificationFromSource ->
-                val spec = specificationFromSource.run { SpecToUpsert(SpecName(name), feature.name, team, source, status, tags, steps) }
+                val spec = specificationFromSource.run {
+                    SpecToUpsert(
+                        SpecName(name), feature.name, team, source, component, status, tags, steps
+                    )
+                }
                 specs[spec.name] = spec
-                teams[specificationFromSource.team] = TeamToUpsert(specificationFromSource.team, source)
+                teams[specificationFromSource.team] = TeamToUpsert(specificationFromSource.team, source, component)
             }
         }
         mergeSpecs(specs, source)

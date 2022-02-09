@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.common.fixtures
 
+import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.Team
 import io.gianluigip.spectacle.specification.model.TeamName
@@ -12,6 +13,7 @@ object TeamConstants {
 fun aTeam(
     name: TeamName = TeamConstants.TEAM_NAME,
     sources: List<Source> = FixtureConstants.SOURCES,
+    components: List<Component> = FixtureConstants.COMPONENTS,
     creationTime: ZonedDateTime = FixtureConstants.CREATION_TIME,
     updateTime: ZonedDateTime = FixtureConstants.UPDATE_TIME,
-) = Team(name, sources, creationTime, updateTime)
+) = Team(name, sources, components, creationTime, updateTime)

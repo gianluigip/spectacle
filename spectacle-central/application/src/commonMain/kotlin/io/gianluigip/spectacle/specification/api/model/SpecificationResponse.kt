@@ -10,6 +10,7 @@ data class SpecificationResponse(
     val feature: String,
     val team: String,
     val source: String,
+    val component: String,
     val status: SpecStatus,
     val tags: List<String>,
     val steps: List<SpecificationStep>,

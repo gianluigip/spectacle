@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.specification
 import io.gianluigip.spectacle.common.DummyTransactionExecutor
 import io.gianluigip.spectacle.common.Features
 import io.gianluigip.spectacle.common.TransactionExecutor
+import io.gianluigip.spectacle.common.fixtures.FixtureConstants.COMPONENT
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.SOURCE
 import io.gianluigip.spectacle.common.fixtures.aFeature
 import io.gianluigip.spectacle.common.fixtures.aSpec
@@ -85,6 +86,7 @@ class SpecificationProcessorTest {
         } and "specifications update with same spec 1, changed spec 2 and new spec 3" run {
             SpecificationsToUpdate(
                 source = SOURCE,
+                component = COMPONENT,
                 features = listOf(
                     FeatureToUpdate(
                         name = FEATURE_1, description = "Description 1", specs = listOf(
@@ -125,11 +127,11 @@ class SpecificationProcessorTest {
                 specRepo.upsert(
                     listOf(
                         SpecToUpsert(
-                            SPEC_2, FEATURE_1, TEAM_2, SOURCE, PARTIALLY_IMPLEMENTED, listOf("Tag2".toTag()),
+                            SPEC_2, FEATURE_1, TEAM_2, SOURCE, COMPONENT, PARTIALLY_IMPLEMENTED, listOf("Tag2".toTag()),
                             steps = listOf(Step(type = GIVEN, "step2", index = 0))
                         ),
                         SpecToUpsert(
-                            SPEC_3, FEATURE_2, TEAM_1, SOURCE, IMPLEMENTED, listOf(),
+                            SPEC_3, FEATURE_2, TEAM_1, SOURCE, COMPONENT, IMPLEMENTED, listOf(),
                             steps = listOf(Step(type = GIVEN, "step3", index = 0))
                         )
                     )
@@ -138,11 +140,11 @@ class SpecificationProcessorTest {
         } and "spec 4 was deleted" run {
             verify { specRepo.delete(listOf(aSpec(name = SPEC_4))) }
         } and "feature 2 was upserted" run {
-            verify { featureRepo.upsert(listOf(FeatureToUpsert(FEATURE_2, "Description 2", SOURCE))) }
+            verify { featureRepo.upsert(listOf(FeatureToUpsert(FEATURE_2, "Description 2", SOURCE, COMPONENT))) }
         } and "feature 3 was deleted" run {
             verify { featureRepo.delete(listOf(FeatureToDelete(FEATURE_3, SOURCE))) }
         } and "team 2 was upserted" run {
-            verify { teamRepo.upsert(listOf(TeamToUpsert(TEAM_2, SOURCE))) }
+            verify { teamRepo.upsert(listOf(TeamToUpsert(TEAM_2, SOURCE, COMPONENT))) }
         } and "team 3 was deleted" runAndFinish {
             verify { teamRepo.delete(listOf(TeamToDelete(TEAM_3, SOURCE))) }
         }

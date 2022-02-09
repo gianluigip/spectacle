@@ -1,5 +1,7 @@
 package io.gianluigip.spectacle.specification.repository
 
+import io.gianluigip.spectacle.common.utils.fromUtc
+import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecName
@@ -34,11 +36,12 @@ fun ResultRow.toSpec(clock: Clock, tags: List<TagName>, steps: List<Specificatio
     feature = FeatureName(get(Specifications.feature)),
     team = TeamName(get(Specifications.team)),
     source = Source(get(Specifications.specSource)),
+    component = Component(get(Specifications.component)),
     status = getOrNull(Specifications.status).toSpecStatus(),
     tags = tags,
     steps = steps,
-    creationTime = get(Specifications.creationTime).atZone(clock.zone),
-    updateTime = get(Specifications.updateTime).atZone(clock.zone),
+    creationTime = get(Specifications.creationTime).fromUtc(clock),
+    updateTime = get(Specifications.updateTime).fromUtc(clock),
 )
 
 private fun String?.toSpecStatus(): SpecStatus =

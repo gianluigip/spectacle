@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.specification.repository
 
 import io.gianluigip.spectacle.common.utils.toUtcLocalDateTime
 import io.gianluigip.spectacle.specification.SpecificationRepository
+import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecStatus
@@ -40,6 +41,7 @@ class ExposedSpecificationRepository(
     override fun findBy(
         feature: FeatureName?,
         source: Source?,
+        component: Component?,
         tag: TagName?,
         team: TeamName?,
         status: SpecStatus?,
@@ -50,6 +52,7 @@ class ExposedSpecificationRepository(
             .selectAll()
         if (feature != null) query.andWhere { Specs.feature eq feature.value }
         if (source != null) query.andWhere { specSource eq source.value }
+        if (component != null) query.andWhere { Specs.component eq component.value }
         if (team != null) query.andWhere { Specs.team eq team.value }
         if (status != null) query.andWhere { Specs.status eq status.name }
         if (tag != null) query.andWhere { Tags.name eq tag.value }
@@ -97,6 +100,7 @@ class ExposedSpecificationRepository(
             it[feature] = spec.feature.value
             it[team] = spec.team.value
             it[specSource] = spec.source.value
+            it[component] = spec.component.value
             it[status] = spec.status.name
         }
         insertSteps(spec.steps, specId)
@@ -126,6 +130,7 @@ class ExposedSpecificationRepository(
             this[Tags.name] = it.value
             this[Tags.teamName] = spec.team.value
             this[Tags.tagSource] = spec.source.value
+            this[Tags.component] = spec.component.value
         }
     }
 
@@ -136,6 +141,7 @@ class ExposedSpecificationRepository(
             it[feature] = spec.feature.value
             it[team] = spec.team.value
             it[specSource] = spec.source.value
+            it[component] = spec.component.value
             it[status] = spec.status.name
         }
         deleteSteps(specId)

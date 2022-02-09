@@ -15,8 +15,13 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.kodein.di.instance
 import org.testcontainers.containers.PostgreSQLContainer
-import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+
+private val postgres = PostgreSQLContainer<Nothing>("postgres:14.1").apply {
+    withUsername("spectacle")
+    withPassword("spectacle")
+    withDatabaseName("spectacle")
+}
 
 @Testcontainers
 @ExtendWith(JUnitSpecificationReporter::class)
@@ -32,16 +37,12 @@ abstract class BaseIntegrationTest {
     val featureRepo by lazy { val instance by di.instance<ExposedFeatureRepository>(); instance }
     val teamRepo by lazy { val instance by di.instance<ExposedTeamRepository>();instance }
 
-    @Container
-    private val postgres = PostgreSQLContainer<Nothing>("postgres:14.1").apply {
-        withUsername("spectacle")
-        withPassword("spectacle")
-        withDatabaseName("spectacle")
-    }
-
     @BeforeEach
     fun initEnv() {
-        EmbeddedEnvironments.start { setupDataBaseEnvVars() }
+        EmbeddedEnvironments.start {
+            postgres.start()
+            setupDataBaseEnvVars()
+        }
         cleanDb()
     }
 

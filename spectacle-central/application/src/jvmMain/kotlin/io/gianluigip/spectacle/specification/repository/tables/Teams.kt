@@ -15,4 +15,5 @@ object Teams : StringIdTable(name = "teams") {
     val updateTime = datetime("update_time")
     val name = varchar("name", 255)
     val teamSource = varchar("source", 255)
+    val component = varchar("component", 255)
 }

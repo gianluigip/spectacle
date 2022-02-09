@@ -11,4 +11,5 @@ object Tags : StringIdTable(name = "tags") {
     val name = varchar("name", 255)
     val teamName = varchar("team_name", 255)
     val tagSource = varchar("source", 255)
+    val component = varchar("component", 255)
 }

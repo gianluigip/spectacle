@@ -16,4 +16,5 @@ object Features : StringIdTable(name = "features") {
     val name = varchar("name", 1000)
     val description = text("description")
     val featureSource = varchar("source", 255)
+    val component = varchar("component", 255)
 }

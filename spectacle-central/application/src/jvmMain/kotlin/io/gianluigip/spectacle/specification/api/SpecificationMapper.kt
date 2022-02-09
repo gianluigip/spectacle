@@ -4,6 +4,7 @@ import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationResponse
 import io.gianluigip.spectacle.specification.api.model.SpecificationToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationsToUpdateRequest
+import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.FeatureToUpdate
 import io.gianluigip.spectacle.specification.model.Source
@@ -16,6 +17,7 @@ import io.gianluigip.spectacle.specification.model.TeamName
 fun SpecificationsToUpdateRequest.toModel() =
     SpecificationsToUpdate(
         source = Source(source),
+        component = Component(component),
         features = features.map { it.toModel() },
     )
 
@@ -40,6 +42,7 @@ fun Specification.toResponse() = SpecificationResponse(
     feature = feature.value,
     team = team.value,
     source = source.value,
+    component = component.value,
     status = status,
     tags = tags.map { it.value },
     steps = steps,

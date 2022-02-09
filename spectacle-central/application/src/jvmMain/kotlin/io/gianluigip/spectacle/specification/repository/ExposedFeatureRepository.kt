@@ -65,6 +65,7 @@ class ExposedFeatureRepository(
             it[name] = feature.name.value
             it[description] = feature.description
             it[featureSource] = feature.source.value
+            it[component] = feature.component.value
         }
     }
 
@@ -74,6 +75,7 @@ class ExposedFeatureRepository(
             it[name] = feature.name.value
             it[description] = feature.description
             it[featureSource] = feature.source.value
+            it[component] = feature.component.value
         }
     }
 

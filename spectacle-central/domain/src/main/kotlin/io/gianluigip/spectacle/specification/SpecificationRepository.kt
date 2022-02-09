@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.specification
 
+import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecStatus
@@ -15,6 +16,7 @@ interface SpecificationRepository {
     fun findBy(
         feature: FeatureName? = null,
         source: Source? = null,
+        component: Component? = null,
         tag: TagName? = null,
         team: TeamName? = null,
         status: SpecStatus? = null,

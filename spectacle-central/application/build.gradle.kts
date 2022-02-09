@@ -90,6 +90,7 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":spectacle-dsl"))
+                implementation(project(":spectacle-central:domain", "testClasses"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
                 implementation("io.ktor:ktor-server-test-host:${ktorServerVersion}")

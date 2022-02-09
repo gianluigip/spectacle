@@ -18,6 +18,12 @@ data class Source(val value: String) {
 
 fun String.toSource() = Source(this)
 
+data class Component(val value: String) {
+    override fun toString(): String = value
+}
+
+fun String.toComponent() = Component(this)
+
 data class SpecName(val value: String) {
     override fun toString(): String = value
 }

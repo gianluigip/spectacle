@@ -29,3 +29,17 @@ kotlin {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+/**
+ * Generate test classes for the application module
+ */
+configurations {
+    register("testClasses") {
+        extendsFrom(testImplementation.get())
+    }
+}
+val testJar = tasks.register<Jar>("testJar") {
+    archiveBaseName.set("domain-tests")
+    from(project.the<SourceSetContainer>()["test"].output)
+}
+artifacts.add("testClasses", testJar)

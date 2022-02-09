@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.specification.model
 
 data class SpecificationsToUpdate(
     val source: Source,
+    val component: Component,
     val features: List<FeatureToUpdate>,
 )
 

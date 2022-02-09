@@ -13,8 +13,8 @@ import org.kodein.di.bindSingleton
 import org.kodein.di.instance
 import java.time.Clock
 
-fun DI.MainBuilder.registerAllBeans() {
-    bindSingleton { Clock.systemDefaultZone() }
+fun productionDependencies() = DI.Module("ProductionDependencies") {
+    bindSingleton<Clock> { Clock.systemDefaultZone() }
     bindSingleton<TransactionExecutor> { ExposedTransactionExecutor() }
 
     bindSingleton { ExposedSpecificationRepository(instance()) }
@@ -24,4 +24,7 @@ fun DI.MainBuilder.registerAllBeans() {
     bindSingleton { SpecificationProcessor(instance(), instance(), instance(), instance()) }
     bindSingleton { SpecificationFinder(instance(), instance()) }
     bindSingleton { ReportGenerator(instance(), instance()) }
+}
+
+var testDependencies = DI.Module("TestDependencies") {
 }

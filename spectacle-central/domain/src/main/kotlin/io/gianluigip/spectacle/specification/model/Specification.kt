@@ -7,6 +7,7 @@ data class Specification(
     val feature: FeatureName,
     val team: TeamName,
     val source: Source,
+    val component: Component,
     val status: SpecStatus,
     val tags: List<TagName>,
     val steps: List<SpecificationStep>,
