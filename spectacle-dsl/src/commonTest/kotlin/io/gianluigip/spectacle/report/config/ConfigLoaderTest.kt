@@ -17,8 +17,6 @@ class ConfigLoaderTest {
             source shouldBe "spectacle-dsl"
             component shouldBe "Spectacle DSL"
             publishers shouldBe listOf(TerminalPublisher, CentralPublisher)
-            centralEnabled shouldBe false
-            centralHost shouldBe Url("https://central.spectacle.com")
         }
     }
 }
