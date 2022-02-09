@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.dsl.bdd
 
-import io.gianluigip.spectacle.specification.SpecStatus
 import io.gianluigip.spectacle.specification.SpecificationBuilder
+import io.gianluigip.spectacle.specification.model.SpecStatus
 
 /**
  * Convenient way to start writing a spec if you don't want to use annotations or the Junit plugin.

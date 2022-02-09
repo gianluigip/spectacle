@@ -1,9 +1,12 @@
 plugins {
+    kotlin("multiplatform") version "1.6.10" apply false
+    kotlin("plugin.serialization") version "1.6.10" apply false
+    kotlin("jvm") version "1.6.10" apply false
     id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
 }
 
 group = "io.github.gianluigip"
-version = "0.1.0"
+version = "0.2.0"
 
 repositories {
     mavenCentral()

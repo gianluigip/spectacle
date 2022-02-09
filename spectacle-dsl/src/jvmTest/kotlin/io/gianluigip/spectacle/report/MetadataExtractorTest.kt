@@ -9,13 +9,11 @@ import io.gianluigip.spectacle.dsl.bdd.annotations.PartiallyImplemented
 import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.annotations.Team
-import io.gianluigip.spectacle.specification.SpecStatus
+import io.gianluigip.spectacle.specification.model.SpecStatus
 import org.junit.jupiter.api.Test
 
 @Team("Team 1")
-@Feature(
-    "Feature 1", description = "Short Description"
-)
+@Feature("Feature 1", description = "Short Description")
 @SpecTags("Tag3", "Tag4")
 class MetadataExtractorTest {
 

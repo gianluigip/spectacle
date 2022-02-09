@@ -1,14 +1,15 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
 val serializationVersion = "1.3.1"
-val ktorVersion = "2.0.0-beta-1"
+val ktorServerVersion = "2.0.0-beta-1"
+val ktorClientVersion = "1.6.7"
 val logbackVersion = "1.2.3"
 val reactVersion = "17.0.2-pre.293-kotlin-1.6.10"
 val kmongoVersion = "4.3.0"
 
 plugins {
-    kotlin("multiplatform") version "1.6.10"
-    kotlin("plugin.serialization") version "1.6.10"
+    kotlin("multiplatform")
+    kotlin("plugin.serialization")
     application
 }
 
@@ -49,8 +50,9 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation(project(":common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-                implementation("io.ktor:ktor-client-core:1.6.7")
+                implementation("io.ktor:ktor-client-core:$ktorClientVersion")
             }
         }
         val commonTest by getting {
@@ -62,29 +64,49 @@ kotlin {
 
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-core:$ktorVersion")
-                implementation("io.ktor:ktor-server-netty:$ktorVersion")
-                implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
-                implementation("io.ktor:ktor-server-compression:$ktorVersion")
-                implementation("io.ktor:ktor-server-cors:$ktorVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation(project(":spectacle-central:domain"))
+                implementation(kotlin("stdlib-jdk8"))
+                // KTOR
+                implementation("io.ktor:ktor-server-core:$ktorServerVersion")
+                implementation("io.ktor:ktor-server-netty:$ktorServerVersion")
+                implementation("io.ktor:ktor-server-content-negotiation:$ktorServerVersion")
+                implementation("io.ktor:ktor-server-compression:$ktorServerVersion")
+                implementation("io.ktor:ktor-server-cors:$ktorServerVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorServerVersion")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
-                implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kmongoVersion")
+                implementation("io.ktor:ktor-server-call-logging:$ktorServerVersion")
+                // DI
+                implementation("org.kodein.di:kodein-di:7.10.0")
+                // DATA
+                implementation("org.jetbrains.exposed:exposed-core:0.37.3")
+                implementation("org.jetbrains.exposed:exposed-jdbc:0.37.3")
+                implementation("org.jetbrains.exposed:exposed-java-time:0.37.3")
+                implementation("com.zaxxer:HikariCP:5.0.1")
+                implementation("org.postgresql:postgresql:42.3.2")
+                implementation("org.flywaydb:flyway-core:8.4.4")
             }
         }
 
         val jvmTest by getting {
             dependencies {
-                implementation("io.ktor:ktor-server-test-host:${ktorVersion}")
-                implementation("io.github.gianluigip:spectacle-dsl:0.1.0")
+                implementation(project(":spectacle-dsl"))
+                implementation(project(":spectacle-central:domain", "testClasses"))
+                implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+                implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+                implementation("io.ktor:ktor-server-test-host:${ktorServerVersion}")
+                implementation("io.ktor:ktor-client-content-negotiation:${ktorServerVersion}")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorServerVersion")
+                implementation("org.testcontainers:testcontainers:1.16.3")
+                implementation("org.testcontainers:junit-jupiter:1.16.3")
+                implementation("org.testcontainers:postgresql:1.16.3")
             }
         }
 
         val jsMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-js:1.6.7")
-                implementation("io.ktor:ktor-client-json:1.6.7")
-                implementation("io.ktor:ktor-client-serialization:1.6.7")
+                implementation("io.ktor:ktor-client-js:$ktorClientVersion")
+                implementation("io.ktor:ktor-client-json:$ktorClientVersion")
+                implementation("io.ktor:ktor-client-serialization:$ktorClientVersion")
 
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactVersion")
                 implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactVersion")
@@ -102,6 +124,7 @@ application {
 tasks.getByName<Jar>("jvmJar") {
     val taskName = if (project.hasProperty("isProduction")
         || project.gradle.startParameter.taskNames.contains("installDist")
+        || project.gradle.startParameter.taskNames.contains("stage")
     ) {
         "jsBrowserProductionWebpack"
     } else {

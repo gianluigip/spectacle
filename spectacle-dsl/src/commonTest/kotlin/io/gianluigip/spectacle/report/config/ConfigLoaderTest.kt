@@ -3,6 +3,8 @@ package io.gianluigip.spectacle.report.config
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.report.publisher.TerminalPublisher
+import io.gianluigip.spectacle.report.publisher.central.CentralPublisher
+import io.ktor.http.Url
 import kotlin.test.Test
 
 class ConfigLoaderTest {
@@ -14,7 +16,7 @@ class ConfigLoaderTest {
             team shouldBe "Spectacle"
             source shouldBe "spectacle-dsl"
             component shouldBe "Spectacle DSL"
-            publishers shouldBe listOf(TerminalPublisher)
+            publishers shouldBe listOf(TerminalPublisher, CentralPublisher)
         }
     }
 }

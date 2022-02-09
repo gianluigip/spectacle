@@ -3,7 +3,8 @@ name: Build CI
 on: [ push ]
 
 env:
-  ORG_GRADLE_PROJECT_isProduction: true
+  SPECIFICATION_PUBLISHER_CENTRAL_ENABLED: ${{ fromJSON('["false", "true"]')[github.ref_name == 'master'] }}
+  SPECIFICATION_PUBLISHER_CENTRAL_HOST: ${{ secrets.SPECIFICATION_PUBLISHER_CENTRAL_HOST }}
 
 jobs:
   build:

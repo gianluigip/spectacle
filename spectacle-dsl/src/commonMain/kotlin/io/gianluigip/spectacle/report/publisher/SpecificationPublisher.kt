@@ -14,5 +14,5 @@ interface SpecificationPublisher {
         fun findPublisher(name: String) = publishers[name.uppercase()]
     }
 
-    fun publishReport(specifications: List<Specification>, config: ReportConfiguration)
+    suspend fun publishReport(specifications: List<Specification>, config: ReportConfiguration)
 }

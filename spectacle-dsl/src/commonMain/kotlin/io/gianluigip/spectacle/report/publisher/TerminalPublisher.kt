@@ -2,8 +2,8 @@ package io.gianluigip.spectacle.report.publisher
 
 import io.gianluigip.spectacle.report.config.ReportConfiguration
 import io.gianluigip.spectacle.report.publisher.SpecificationStepFormatter.format
-import io.gianluigip.spectacle.specification.SpecStatus
 import io.gianluigip.spectacle.specification.Specification
+import io.gianluigip.spectacle.specification.model.SpecStatus
 
 object TerminalPublisher : SpecificationPublisher {
 
@@ -11,7 +11,7 @@ object TerminalPublisher : SpecificationPublisher {
         SpecificationPublisher.registerPublisher("terminal", this)
     }
 
-    override fun publishReport(specifications: List<Specification>, config: ReportConfiguration) {
+    override suspend fun publishReport(specifications: List<Specification>, config: ReportConfiguration) {
         println(generateReportContent(specifications))
     }
 
