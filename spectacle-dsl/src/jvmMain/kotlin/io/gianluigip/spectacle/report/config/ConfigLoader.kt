@@ -37,7 +37,6 @@ actual object ConfigLoader {
             )
             println("If you want to customize the behavior of Spectacle Reports create a file $PROPERTIES_FILE_NAME in the test resource folder")
         }
-        println("Using Spectacle config:\n\t$CONFIG")
     }
 
     private fun loadProperties(propertiesUrl: URL): Properties {
