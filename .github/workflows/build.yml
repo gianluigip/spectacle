@@ -3,7 +3,7 @@ name: Build CI
 on: [ push ]
 
 env:
-  ORG_GRADLE_PROJECT_isProduction: true
+  SPECIFICATION_PUBLISHER_CENTRAL_ENABLED: true
 
 jobs:
   build:
