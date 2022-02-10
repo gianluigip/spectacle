@@ -2,7 +2,6 @@ package io.gianluigip.spectacle.specification
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
 import io.gianluigip.spectacle.common.Features.CENTRAL_REPOSITORY
-import io.gianluigip.spectacle.common.fixtures.FixtureConstants
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.COMPONENT
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.COMPONENTS
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.SOURCE
@@ -51,7 +50,7 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
         given("the source ServiceTest") {
         } whenever "ServiceTest publish all its specs" run {
             val specsToUpdate = SpecificationsToUpdateRequest(
-                source = FixtureConstants.SOURCE.value,
+                source = SOURCE.value,
                 component = COMPONENT.value,
                 features = listOf(
                     FeatureToUpdateRequest(

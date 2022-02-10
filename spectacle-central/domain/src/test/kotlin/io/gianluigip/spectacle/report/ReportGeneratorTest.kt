@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.common.DummyTransactionExecutor
-import io.gianluigip.spectacle.common.Features.CENTRAL_REPOSITORY
+import io.gianluigip.spectacle.common.Features.SPECIFICATIONS_REPORT
 import io.gianluigip.spectacle.common.fixtures.aFeature
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
@@ -40,7 +40,7 @@ private val COMPONENT_2 = Component("Component2")
 private val TAG_1 = TagName("Tag1")
 private val TAG_2 = TagName("Tag2")
 
-@Feature(name = CENTRAL_REPOSITORY)
+@Feature(name = SPECIFICATIONS_REPORT)
 @ExtendWith(JUnitSpecificationReporter::class)
 class ReportGeneratorTest {
 
