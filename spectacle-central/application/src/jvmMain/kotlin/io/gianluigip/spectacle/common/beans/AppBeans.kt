@@ -23,7 +23,7 @@ fun productionDependencies() = DI.Module("ProductionDependencies") {
 
     bindSingleton { SpecificationProcessor(instance(), instance(), instance(), instance()) }
     bindSingleton { SpecificationFinder(instance(), instance()) }
-    bindSingleton { ReportGenerator(instance(), instance()) }
+    bindSingleton { ReportGenerator(instance(), instance(), instance()) }
 }
 
 var testDependencies = DI.Module("TestDependencies") {

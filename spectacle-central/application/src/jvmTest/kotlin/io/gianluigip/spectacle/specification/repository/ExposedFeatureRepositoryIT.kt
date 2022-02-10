@@ -120,5 +120,22 @@ class ExposedFeatureRepositoryIT : BaseIntegrationTest() {
         }
     }
 
+    @Test
+    fun `findByNames should filter by name`() = transaction {
+        featureRepo.upsert(
+            listOf(
+                FeatureToUpsert(FEATURE_1, "Desc1", SOURCE_1, COMPONENT_1),
+                FeatureToUpsert(FEATURE_2, "Desc2", SOURCE_2, COMPONENT_2),
+                FeatureToUpsert(FEATURE_3, "Desc3", SOURCE_2, COMPONENT_2),
+            )
+        )
+
+        featureRepo.findByNames(FEATURE_1, FEATURE_3) assertThat {
+            shouldHasSize(2)
+            first().name shouldBe FEATURE_1
+            last().name shouldBe FEATURE_3
+        }
+    }
+
     private fun List<Feature>.get(featureName: FeatureName) = first { it.name.value == featureName.value }
 }

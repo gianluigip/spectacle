@@ -17,7 +17,7 @@ data class SpecsReport(
 
 data class FeatureReport(
     val name: FeatureName,
-//    val description:String TODO
+    val description: String,
     val specs: List<SpecReport>
 )
 

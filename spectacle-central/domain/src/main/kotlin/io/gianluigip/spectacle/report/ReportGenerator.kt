@@ -5,16 +5,20 @@ import io.gianluigip.spectacle.report.model.FeatureReport
 import io.gianluigip.spectacle.report.model.ReportFilters
 import io.gianluigip.spectacle.report.model.SpecReport
 import io.gianluigip.spectacle.report.model.SpecsReport
+import io.gianluigip.spectacle.specification.FeatureRepository
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.model.Component
+import io.gianluigip.spectacle.specification.model.Feature
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecStatus
+import io.gianluigip.spectacle.specification.model.Specification
 import io.gianluigip.spectacle.specification.model.TagName
 import io.gianluigip.spectacle.specification.model.TeamName
 
 class ReportGenerator(
     private val specFinder: SpecificationFinder,
+    private val featureRepo: FeatureRepository,
     private val transaction: TransactionExecutor,
 ) {
 
@@ -29,8 +33,9 @@ class ReportGenerator(
 
         val specs = specFinder.findBy(feature, source, component, tag, team, status)
             .sortedWith(compareBy({ it.feature.value }, { it.name.value }))
+        val features = findFeatures(specs)
 
-        val features = mutableListOf<FeatureReport>()
+        val featuresReport = mutableListOf<FeatureReport>()
         specs.groupBy { it.feature }.forEach { (feature, featureSpecs) ->
             val specsReport = mutableListOf<SpecReport>()
             featureSpecs.forEach { it ->
@@ -40,9 +45,9 @@ class ReportGenerator(
                 )
                 specsReport.add(specReport)
             }
-            features.add(FeatureReport(name = feature, specs = specsReport))
+            featuresReport.add(FeatureReport(name = feature, description = features[feature]?.description ?: "", specs = specsReport))
         }
-        return@execute SpecsReport(features = features, generateFilters(features))
+        return@execute SpecsReport(features = featuresReport, generateFilters(featuresReport))
     }
 
     private fun generateFilters(features: List<FeatureReport>): ReportFilters =
@@ -54,4 +59,9 @@ class ReportGenerator(
             teams = features.asSequence().flatMap { it.specs }.map { it.team }.toSet(),
             statuses = features.asSequence().flatMap { it.specs }.map { it.status }.toSet(),
         )
+
+    private fun findFeatures(specs: List<Specification>): Map<FeatureName, Feature> {
+        val featureNames = specs.map { it.feature }.distinct().toTypedArray()
+        return featureRepo.findByNames(*featureNames).associateBy { it.name }
+    }
 }

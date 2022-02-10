@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.common.DummyTransactionExecutor
 import io.gianluigip.spectacle.common.Features.CENTRAL_REPOSITORY
+import io.gianluigip.spectacle.common.fixtures.aFeature
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
@@ -10,6 +11,7 @@ import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.report.model.SpecsReport
+import io.gianluigip.spectacle.specification.FeatureRepository
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
@@ -43,7 +45,8 @@ private val TAG_2 = TagName("Tag2")
 class ReportGeneratorTest {
 
     private val specFinder: SpecificationFinder = mockk()
-    private val reportGenerator = ReportGenerator(specFinder, DummyTransactionExecutor())
+    private val featureRepo: FeatureRepository = mockk()
+    private val reportGenerator = ReportGenerator(specFinder, featureRepo, DummyTransactionExecutor())
 
     private lateinit var report: SpecsReport
 
@@ -60,6 +63,10 @@ class ReportGeneratorTest {
                 Spec(SpecName("Spec4"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
                 Spec(SpecName("Spec5"), FEATURE_3, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
             )
+            every { featureRepo.findByNames(FEATURE_1, FEATURE_2, FEATURE_3) } returns listOf(
+                aFeature(FEATURE_1, description = "Description Feature 1"),
+                aFeature(FEATURE_2, description = "Description Feature 2"),
+            )
         } whenever "generate a specification report" run {
             report = reportGenerator.generateReport()
 
@@ -68,6 +75,7 @@ class ReportGeneratorTest {
                 shouldHasSize(3)
                 get(0) assertThat {
                     name shouldBe FEATURE_1
+                    description shouldBe "Description Feature 1"
                     specs assertThat {
                         shouldHasSize(2)
                         get(0) assertThat {
@@ -83,6 +91,7 @@ class ReportGeneratorTest {
                 }
                 get(1) assertThat {
                     name shouldBe FEATURE_2
+                    description shouldBe "Description Feature 2"
                     specs assertThat {
                         shouldHasSize(2)
                         get(0).name shouldBe SpecName("Spec3")
@@ -91,6 +100,7 @@ class ReportGeneratorTest {
                 }
                 get(2) assertThat {
                     name shouldBe FEATURE_3
+                    description shouldBe ""
                     specs assertThat {
                         shouldHasSize(1)
                         get(0).name shouldBe SpecName("Spec5")

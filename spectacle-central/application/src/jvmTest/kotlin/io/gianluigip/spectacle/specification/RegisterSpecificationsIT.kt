@@ -17,6 +17,7 @@ import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
 import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
+import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
@@ -35,7 +36,13 @@ import io.gianluigip.spectacle.specification.model.StepType.WHENEVER
 import io.gianluigip.spectacle.specification.model.TeamName
 import org.junit.jupiter.api.Test
 
-@Feature(name = CENTRAL_REPOSITORY)
+@Feature(
+    name = CENTRAL_REPOSITORY, description = """
+    Store and retrieve the documentation distributed across many services and teams, so it is accessible for the organization as a whole rather than 
+    hidden inside individual teams. 
+"""
+)
+@SpecTags("Update Specs")
 class RegisterSpecificationsIT : BaseIntegrationTest() {
 
     @Test
