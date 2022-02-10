@@ -61,7 +61,7 @@ class ReportGenerator(
         )
 
     private fun findFeatures(specs: List<Specification>): Map<FeatureName, Feature> {
-        val featureNames = specs.map { it.feature }.distinct().toTypedArray()
-        return featureRepo.findByNames(*featureNames).associateBy { it.name }
+        val featureNames = specs.asSequence().map { it.feature }.toSet()
+        return featureRepo.findByNames(featureNames).associateBy { it.name }
     }
 }

@@ -130,7 +130,7 @@ class ExposedFeatureRepositoryIT : BaseIntegrationTest() {
             )
         )
 
-        featureRepo.findByNames(FEATURE_1, FEATURE_3) assertThat {
+        featureRepo.findByNames(listOf(FEATURE_1, FEATURE_3)) assertThat {
             shouldHasSize(2)
             first().name shouldBe FEATURE_1
             last().name shouldBe FEATURE_3

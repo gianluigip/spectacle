@@ -37,7 +37,7 @@ class ExposedFeatureRepository(
     override fun findBySource(source: Source): List<Feature> =
         Features.select { featureSource eq source.value }.toFeatures()
 
-    override fun findByNames(vararg names: FeatureName): List<Feature> =
+    override fun findByNames(names: Collection<FeatureName>): List<Feature> =
         Features.select { name inList names.map { it.value } }.toFeatures()
 
     private fun Query.toFeatures() = orderBy(name to SortOrder.ASC)

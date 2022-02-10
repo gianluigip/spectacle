@@ -12,7 +12,7 @@ interface FeatureRepository {
 
     fun findBySource(source: Source): List<Feature>
 
-    fun findByNames(vararg names: FeatureName): List<Feature>
+    fun findByNames(names: Collection<FeatureName>): List<Feature>
 
     fun upsert(features: List<FeatureToUpsert>)
 

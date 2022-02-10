@@ -63,7 +63,7 @@ class ReportGeneratorTest {
                 Spec(SpecName("Spec4"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
                 Spec(SpecName("Spec5"), FEATURE_3, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
             )
-            every { featureRepo.findByNames(FEATURE_1, FEATURE_2, FEATURE_3) } returns listOf(
+            every { featureRepo.findByNames(setOf(FEATURE_1, FEATURE_2, FEATURE_3)) } returns listOf(
                 aFeature(FEATURE_1, description = "Description Feature 1"),
                 aFeature(FEATURE_2, description = "Description Feature 2"),
             )
