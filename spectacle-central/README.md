@@ -15,8 +15,14 @@ Environment Variables:
 
 ## Build and Run
 
-Run:
+Run Server:
 
 ```
 ./gradlew spectacle-central:application:run
+```
+
+Run Web UI only:
+
+```
+./gradlew jsBrowserRun --continuous
 ```

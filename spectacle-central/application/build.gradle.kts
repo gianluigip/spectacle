@@ -4,8 +4,6 @@ val serializationVersion = "1.3.1"
 val ktorServerVersion = "2.0.0-beta-1"
 val ktorClientVersion = "1.6.7"
 val logbackVersion = "1.2.3"
-val reactVersion = "17.0.2-pre.293-kotlin-1.6.10"
-val kmongoVersion = "4.3.0"
 
 plugins {
     kotlin("multiplatform")
@@ -18,7 +16,7 @@ version = rootProject.version
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }
+    maven("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven")
 }
 
 kotlin {
@@ -39,7 +37,7 @@ kotlin {
             }
         }
     }
-    js {
+    js(IR) {
         browser {
             binaries.executable()
             commonWebpackConfig {
@@ -104,13 +102,20 @@ kotlin {
 
         val jsMain by getting {
             dependencies {
+                // KTOR
                 implementation("io.ktor:ktor-client-js:$ktorClientVersion")
                 implementation("io.ktor:ktor-client-json:$ktorClientVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorClientVersion")
-
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:$reactVersion")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:$reactVersion")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-styled-next:1.0-pre.293-kotlin-1.6.10")
+                // REACT
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.294-kotlin-1.6.10")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.294-kotlin-1.6.10")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-styled-next:1.0-pre.294-kotlin-1.6.10")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-mui:5.4.0-pre.294-kotlin-1.6.10")
+            }
+        }
+        val jsTest by getting {
+            dependencies {
+                implementation(kotlin("test-js"))
             }
         }
     }
