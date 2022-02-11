@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
+val jsWrapperVersion = "pre.297-kotlin-1.6.10"
 val serializationVersion = "1.3.1"
 val ktorServerVersion = "2.0.0-beta-1"
 val ktorClientVersion = "1.6.7"
@@ -8,6 +9,7 @@ val logbackVersion = "1.2.3"
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
+    id("io.github.turansky.kfc.webpack") version "5.0.0"
     application
 }
 
@@ -108,10 +110,14 @@ kotlin {
                 implementation("io.ktor:ktor-client-json:$ktorClientVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorClientVersion")
                 // REACT
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-pre.294-kotlin-1.6.10")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-pre.294-kotlin-1.6.10")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-styled-next:1.0-pre.294-kotlin-1.6.10")
-                implementation("org.jetbrains.kotlin-wrappers:kotlin-mui:5.4.0-pre.294-kotlin-1.6.10")
+                implementation(kotlinw("react:17.0.2"))
+                implementation(kotlinw("react-dom:17.0.2"))
+                implementation(kotlinw("react-css:17.0.2"))
+                implementation(kotlinw("react-router-dom:6.2.1"))
+                implementation(kotlinw("mui:5.4.1"))
+                implementation(kotlinw("mui-icons:5.4.1"))
+                implementation(npm("@emotion/react", "11.7.1"))
+                implementation(npm("@emotion/styled", "11.6.0"))
             }
         }
         val jsTest by getting {
@@ -121,6 +127,11 @@ kotlin {
         }
     }
 }
+
+/**
+ * Kotlin JS Wrappers
+ */
+fun kotlinw(target: String): String = "org.jetbrains.kotlin-wrappers:kotlin-$target-$jsWrapperVersion"
 
 application {
     mainClass.set("io.gianluigip.spectacle.ApplicationKt")

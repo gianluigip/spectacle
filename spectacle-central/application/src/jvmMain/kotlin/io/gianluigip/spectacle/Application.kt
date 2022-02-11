@@ -49,6 +49,8 @@ fun Application.module() {
     routing {
         static("/") {
             resource("/", "index.html")
+            resource("/index.css", "index.css")
+            resource("/favicon.ico", "favicon.ico")
             resource("/application.js", "application.js")
             resources("web")
         }
