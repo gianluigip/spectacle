@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.common.utils
 
 import java.time.Clock
+import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
@@ -13,3 +14,5 @@ fun Clock.toZonedDateTime(): ZonedDateTime {
 }
 
 fun LocalDateTime.fromUtc(clock: Clock): ZonedDateTime = atZone(ZoneId.of("UTC")).withZoneSameInstant(clock.zone)
+
+fun ZonedDateTime.toUtcInstant(): Instant = withZoneSameInstant(ZoneOffset.UTC).toInstant()

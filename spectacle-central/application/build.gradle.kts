@@ -50,7 +50,7 @@ kotlin {
             dependencies {
                 implementation(project(":common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-                implementation("io.ktor:ktor-client-core:$ktorClientVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
             }
         }
         val commonTest by getting {
@@ -103,6 +103,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 // KTOR
+                implementation("io.ktor:ktor-client-core:$ktorClientVersion")
                 implementation("io.ktor:ktor-client-js:$ktorClientVersion")
                 implementation("io.ktor:ktor-client-json:$ktorClientVersion")
                 implementation("io.ktor:ktor-client-serialization:$ktorClientVersion")

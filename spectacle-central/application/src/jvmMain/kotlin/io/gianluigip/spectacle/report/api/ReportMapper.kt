@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.report.api
 
+import io.gianluigip.spectacle.common.utils.toKotlinInstant
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.report.api.model.SpecReportResponse
@@ -28,6 +29,8 @@ fun SpecReport.toResponse() = SpecReportResponse(
     status = status,
     tags = tags.map { it.value },
     steps = steps,
+    creationTime = creationTime.toKotlinInstant(),
+    updateTime = updateTime.toKotlinInstant(),
 )
 
 fun ReportFilters.toResponse() = ReportFiltersResponse(

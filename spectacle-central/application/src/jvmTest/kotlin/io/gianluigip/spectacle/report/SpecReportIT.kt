@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
 import io.gianluigip.spectacle.common.Features.SPECIFICATIONS_REPORT
+import io.gianluigip.spectacle.common.utils.CLOCK
 import io.gianluigip.spectacle.common.utils.api.getReport
 import io.gianluigip.spectacle.common.utils.api.putSpecs
 import io.gianluigip.spectacle.dsl.assertions.assertThat
@@ -80,6 +81,8 @@ class SpecReportIT : BaseIntegrationTest() {
                             status shouldBe IMPLEMENTED
                             tags shouldBe listOf(TAG_1)
                             steps shouldBe listOf(Step(GIVEN, "Description 1", 0))
+                            creationTime.toEpochMilliseconds() shouldBe CLOCK.millis()
+                            updateTime.toEpochMilliseconds() shouldBe CLOCK.millis()
                         }
                     }
                     last() assertThat {
@@ -93,6 +96,8 @@ class SpecReportIT : BaseIntegrationTest() {
                             status shouldBe NOT_IMPLEMENTED
                             tags shouldBe listOf(TAG_2)
                             steps shouldBe listOf()
+                            creationTime.toEpochMilliseconds() shouldBe CLOCK.millis()
+                            updateTime.toEpochMilliseconds() shouldBe CLOCK.millis()
                         }
                     }
                 }

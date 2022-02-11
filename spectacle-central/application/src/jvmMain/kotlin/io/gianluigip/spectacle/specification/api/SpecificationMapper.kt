@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.specification.api
 
+import io.gianluigip.spectacle.common.utils.toKotlinInstant
 import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationResponse
 import io.gianluigip.spectacle.specification.api.model.SpecificationToUpdateRequest
@@ -46,4 +47,6 @@ fun Specification.toResponse() = SpecificationResponse(
     status = status,
     tags = tags.map { it.value },
     steps = steps,
+    creationTime = creationTime.toKotlinInstant(),
+    updateTime = updateTime.toKotlinInstant(),
 )
