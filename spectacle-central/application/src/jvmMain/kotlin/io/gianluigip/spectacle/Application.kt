@@ -1,9 +1,9 @@
 package io.gianluigip.spectacle
 
-import io.gianluigip.shopping.shoppingTutorialRoutes
 import io.gianluigip.spectacle.common.beans.productionDependencies
 import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
+import io.gianluigip.spectacle.report.api.specReportRoutes
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
@@ -48,12 +48,14 @@ fun Application.module() {
     routing {
         static("/") {
             resource("/", "index.html")
+            resource("/index.css", "index.css")
+            resource("/favicon.ico", "favicon.ico")
             resource("/application.js", "application.js")
             resources("web")
         }
         route("/api") {
             specificationsRoutes()
+            specReportRoutes()
         }
     }
-    shoppingTutorialRoutes()
 }

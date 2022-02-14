@@ -5,6 +5,7 @@ import java.util.Collections
 /**
  * Hack from https://stackoverflow.com/questions/318239/how-do-i-set-environment-variables-from-java
  */
+@SuppressWarnings
 fun setEnv(newenv: Map<String, String>?) {
     try {
         val processEnvironmentClass = Class.forName("java.lang.ProcessEnvironment")

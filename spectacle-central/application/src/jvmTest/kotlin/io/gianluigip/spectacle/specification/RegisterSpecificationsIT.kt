@@ -2,7 +2,6 @@ package io.gianluigip.spectacle.specification
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
 import io.gianluigip.spectacle.common.Features.CENTRAL_REPOSITORY
-import io.gianluigip.spectacle.common.fixtures.FixtureConstants
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.COMPONENT
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.COMPONENTS
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.SOURCE
@@ -17,6 +16,7 @@ import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
 import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
+import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
@@ -35,7 +35,13 @@ import io.gianluigip.spectacle.specification.model.StepType.WHENEVER
 import io.gianluigip.spectacle.specification.model.TeamName
 import org.junit.jupiter.api.Test
 
-@Feature(name = CENTRAL_REPOSITORY)
+@Feature(
+    name = CENTRAL_REPOSITORY, description = """
+    Store and retrieve the documentation distributed across many services and teams, so it is accessible for the organization as a whole rather than 
+    hidden inside individual teams. 
+"""
+)
+@SpecTags("Update Specs")
 class RegisterSpecificationsIT : BaseIntegrationTest() {
 
     @Test
@@ -44,7 +50,7 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
         given("the source ServiceTest") {
         } whenever "ServiceTest publish all its specs" run {
             val specsToUpdate = SpecificationsToUpdateRequest(
-                source = FixtureConstants.SOURCE.value,
+                source = SOURCE.value,
                 component = COMPONENT.value,
                 features = listOf(
                     FeatureToUpdateRequest(

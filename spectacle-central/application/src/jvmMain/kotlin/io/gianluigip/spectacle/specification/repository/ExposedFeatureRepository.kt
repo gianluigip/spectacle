@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.specification.repository
 import io.gianluigip.spectacle.common.utils.toUtcLocalDateTime
 import io.gianluigip.spectacle.specification.FeatureRepository
 import io.gianluigip.spectacle.specification.model.Feature
+import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.FeatureToDelete
 import io.gianluigip.spectacle.specification.model.FeatureToUpsert
 import io.gianluigip.spectacle.specification.model.Source
@@ -35,6 +36,9 @@ class ExposedFeatureRepository(
 
     override fun findBySource(source: Source): List<Feature> =
         Features.select { featureSource eq source.value }.toFeatures()
+
+    override fun findByNames(names: Collection<FeatureName>): List<Feature> =
+        Features.select { name inList names.map { it.value } }.toFeatures()
 
     private fun Query.toFeatures() = orderBy(name to SortOrder.ASC)
         .groupBy { it[name] }.values.map { it.sortedBy { it[featureSource] }.toFeature(clock) }

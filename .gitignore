@@ -148,3 +148,6 @@ dist
 # Maven Central
 local.properties
 *.gpg
+
+# Webpack
+webpack.config.d/
