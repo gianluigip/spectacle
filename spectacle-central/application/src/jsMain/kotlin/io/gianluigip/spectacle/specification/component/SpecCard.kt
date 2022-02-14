@@ -67,7 +67,7 @@ val SpecCard = FC<SpecCardProps> {
                     Grid {
                         item = true
                         Typography {
-                            sx = jso { color = Color(theme.palette.primary.main) }
+                            sx = jso { color = Color(theme.palette.info.main) }
                             +step.type.toDisplay()
                         }
                     }
