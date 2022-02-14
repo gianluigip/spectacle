@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.common.theme
+package io.gianluigip.spectacle.home
 
 import mui.material.styles.Theme
 import mui.material.styles.ThemeProvider

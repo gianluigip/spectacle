@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.common.theme
+package io.gianluigip.spectacle.home
 
 import kotlinext.js.jso
 import mui.material.styles.createTheme

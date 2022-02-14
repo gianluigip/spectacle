@@ -1,9 +1,9 @@
 package io.gianluigip.spectacle.report.publisher
 
 import io.gianluigip.spectacle.report.config.ReportConfiguration
-import io.gianluigip.spectacle.report.publisher.SpecificationStepFormatter.format
 import io.gianluigip.spectacle.specification.Specification
 import io.gianluigip.spectacle.specification.model.SpecStatus
+import io.gianluigip.spectacle.specification.toDisplay
 
 object TerminalPublisher : SpecificationPublisher {
 
@@ -23,7 +23,7 @@ object TerminalPublisher : SpecificationPublisher {
             specificationsInFeature.sortedBy { it.name }.forEach { specification ->
                 report += "\n\t${specification.name}${specification.implementedText()}\n"
                 specification.steps.sortedBy { it.index }.forEach { step ->
-                    report += "\t\t${format(step)}\n"
+                    report += "\t\t${step.toDisplay()}\n"
                 }
             }
             report += "\n"

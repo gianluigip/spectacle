@@ -2,8 +2,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
 val jsWrapperVersion = "pre.297-kotlin-1.6.10"
 val serializationVersion = "1.3.1"
-val ktorServerVersion = "2.0.0-beta-1"
-val ktorClientVersion = "1.6.7"
+val ktorVersion = "2.0.0-beta-1"
 val logbackVersion = "1.2.3"
 
 plugins {
@@ -51,8 +50,11 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
+                // KTOR
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
             }
         }
         val commonTest by getting {
@@ -67,14 +69,13 @@ kotlin {
                 implementation(project(":spectacle-central:domain"))
                 implementation(kotlin("stdlib-jdk8"))
                 // KTOR
-                implementation("io.ktor:ktor-server-core:$ktorServerVersion")
-                implementation("io.ktor:ktor-server-netty:$ktorServerVersion")
-                implementation("io.ktor:ktor-server-content-negotiation:$ktorServerVersion")
-                implementation("io.ktor:ktor-server-compression:$ktorServerVersion")
-                implementation("io.ktor:ktor-server-cors:$ktorServerVersion")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorServerVersion")
+                implementation("io.ktor:ktor-server-core:$ktorVersion")
+                implementation("io.ktor:ktor-server-netty:$ktorVersion")
+                implementation("io.ktor:ktor-server-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-server-compression:$ktorVersion")
+                implementation("io.ktor:ktor-server-cors:$ktorVersion")
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
-                implementation("io.ktor:ktor-server-call-logging:$ktorServerVersion")
+                implementation("io.ktor:ktor-server-call-logging:$ktorVersion")
                 // DI
                 implementation("org.kodein.di:kodein-di:7.10.0")
                 // DATA
@@ -93,9 +94,7 @@ kotlin {
                 implementation(project(":spectacle-central:domain", "testClasses"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-                implementation("io.ktor:ktor-server-test-host:${ktorServerVersion}")
-                implementation("io.ktor:ktor-client-content-negotiation:${ktorServerVersion}")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorServerVersion")
+                implementation("io.ktor:ktor-server-test-host:${ktorVersion}")
                 implementation("org.testcontainers:testcontainers:1.16.3")
                 implementation("org.testcontainers:junit-jupiter:1.16.3")
                 implementation("org.testcontainers:postgresql:1.16.3")
@@ -105,10 +104,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 // KTOR
-                implementation("io.ktor:ktor-client-core:$ktorClientVersion")
-                implementation("io.ktor:ktor-client-js:$ktorClientVersion")
-                implementation("io.ktor:ktor-client-json:$ktorClientVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorClientVersion")
+                implementation("io.ktor:ktor-client-js:$ktorVersion")
                 // REACT
                 implementation(kotlinw("react:17.0.2"))
                 implementation(kotlinw("react-dom:17.0.2"))

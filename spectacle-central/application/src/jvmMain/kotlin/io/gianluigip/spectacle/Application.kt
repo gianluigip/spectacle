@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle
 
-import io.gianluigip.shopping.shoppingTutorialRoutes
 import io.gianluigip.spectacle.common.beans.productionDependencies
 import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
@@ -59,5 +58,4 @@ fun Application.module() {
             specReportRoutes()
         }
     }
-    shoppingTutorialRoutes()
 }

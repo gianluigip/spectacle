@@ -1,10 +1,9 @@
-package io.gianluigip.spectacle.components
+package io.gianluigip.spectacle.home
 
 import csstype.GridArea
 import csstype.px
-import io.gianluigip.spectacle.common.component.GridAreas
-import io.gianluigip.spectacle.components.specification.SpecificationsReport
-import io.gianluigip.spectacle.components.specification.specificationsReportPath
+import io.gianluigip.spectacle.specification.component.SpecificationsReport
+import io.gianluigip.spectacle.specification.component.specificationsReportPath
 import kotlinext.js.jso
 import mui.material.Paper
 import mui.material.PaperVariant
@@ -56,7 +55,7 @@ val Content = FC<Props> {
             Route {
                 path = "*"
                 element = Typography.create {
-                    variant = "h2"
+                    variant = "h3"
                     +"404 Page Not Found"
                 }
             }

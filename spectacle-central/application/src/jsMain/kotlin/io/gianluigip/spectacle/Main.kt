@@ -6,11 +6,11 @@ import csstype.GridTemplateAreas
 import csstype.GridTemplateColumns
 import csstype.GridTemplateRows
 import csstype.Length
-import io.gianluigip.spectacle.common.component.GridAreas
-import io.gianluigip.spectacle.common.component.Sizes
-import io.gianluigip.spectacle.common.theme.ThemeModule
-import io.gianluigip.spectacle.components.Content
-import io.gianluigip.spectacle.components.Header
+import io.gianluigip.spectacle.home.GridAreas
+import io.gianluigip.spectacle.home.Sizes
+import io.gianluigip.spectacle.home.ThemeModule
+import io.gianluigip.spectacle.home.Content
+import io.gianluigip.spectacle.navigation.Header
 import kotlinext.js.jso
 import kotlinx.browser.document
 import mui.system.Box

@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.common.component
+package io.gianluigip.spectacle.home
 
 object GridAreas {
     val Header = "header"

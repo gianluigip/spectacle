@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.components
+package io.gianluigip.spectacle.home
 
 import mui.material.Typography
 import react.FC
