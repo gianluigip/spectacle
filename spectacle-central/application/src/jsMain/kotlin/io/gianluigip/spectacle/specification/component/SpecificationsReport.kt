@@ -55,7 +55,7 @@ val SpecificationsReport = FC<Props> {
 
     Grid {
         container = true
-        spacing = ResponsiveStyleValue(10.px)
+        spacing = ResponsiveStyleValue(20.px)
         direction = ResponsiveStyleValue(row)
         Grid {
             item = true; xs = 2
