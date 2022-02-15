@@ -34,8 +34,8 @@ val SpecCard = FC<SpecCardProps> {
         AccordionSummary {
             sx = jso {
                 sx = jso { flexGrow = FlexGrow(1.0) }
-                color = Color(theme.palette.primary.contrastText)
-                backgroundColor = Color(theme.palette.primary.main).lighter(65)
+                color = Color(theme.palette.info.contrastText)
+                backgroundColor = Color(theme.palette.info.main)
             }
             Typography { +spec.name }
         }

@@ -12,5 +12,5 @@ external interface SpecMetaDataChipProps : Props {
 }
 
 val SpecMetaDataChip = FC<SpecMetaDataChipProps> {
-    Chip { variant = ChipVariant.outlined; color = ChipColor.primary; label = it.label.toNode() }
+    Chip { variant = ChipVariant.outlined; color = ChipColor.info; label = it.label.toNode() }
 }
