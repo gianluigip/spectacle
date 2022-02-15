@@ -17,11 +17,11 @@ suspend fun getSpecReport(
     status: SpecStatus? = null,
 ): SpecsReportResponse {
     return API_CLIENT.get("$ENDPOINT/api/report") {
-        feature?.let { parameter("feature", feature) }
-        source?.let { parameter("source", source) }
-        component?.let { parameter("component", component) }
-        tag?.let { parameter("tag", tag) }
-        team?.let { parameter("team", team) }
-        status?.let { parameter("status", status) }
+        feature?.let { parameter("features", feature) }
+        source?.let { parameter("sources", source) }
+        component?.let { parameter("components", component) }
+        tag?.let { parameter("tags", tag) }
+        team?.let { parameter("teams", team) }
+        status?.let { parameter("statuses", status) }
     }.body()
 }

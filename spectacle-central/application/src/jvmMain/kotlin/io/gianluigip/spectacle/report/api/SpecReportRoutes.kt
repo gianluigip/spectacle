@@ -23,14 +23,16 @@ fun Route.specReportRoutes() {
         get {
             val parameters: Parameters = call.request.queryParameters
             val report = reportGenerator.generateReport(
-                feature = parameters["feature"]?.toFeature(),
-                source = parameters["source"]?.toSource(),
-                component = parameters["component"]?.toComponent(),
-                tag = parameters["tag"]?.toTag(),
-                team = parameters["team"]?.toTeam(),
-                status = parameters["status"]?.toSpecStatus(),
+                features = parameters["features"].splitAndMap { it.toFeature() },
+                sources = parameters["sources"].splitAndMap { it.toSource() },
+                components = parameters["components"].splitAndMap { it.toComponent() },
+                tags = parameters["tags"].splitAndMap { it.toTag() },
+                teams = parameters["teams"].splitAndMap { it.toTeam() },
+                statuses = parameters["statuses"].splitAndMap { it.toSpecStatus() },
             ).toResponse()
             call.respond(report)
         }
     }
 }
+
+private fun <R> String?.splitAndMap(map: (String) -> R): Set<R>? = this?.split(",")?.map { map.invoke(it.trim()) }?.toSet()

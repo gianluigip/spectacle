@@ -39,23 +39,23 @@ class ExposedSpecificationRepository(
     override fun findAll(): List<Specification> = findBy(null)
 
     override fun findBy(
-        feature: FeatureName?,
-        source: Source?,
-        component: Component?,
-        tag: TagName?,
-        team: TeamName?,
-        status: SpecStatus?,
+        features: Set<FeatureName>?,
+        sources: Set<Source>?,
+        components: Set<Component>?,
+        tags: Set<TagName>?,
+        teams: Set<TeamName>?,
+        statuses: Set<SpecStatus>?,
     ): List<Specification> {
         val query = Specs
             .join(Steps, JoinType.LEFT, additionalConstraint = { Specs.id eq Steps.specId })
             .join(Tags, JoinType.LEFT, additionalConstraint = { Specs.id eq Tags.specId })
             .selectAll()
-        if (feature != null) query.andWhere { Specs.feature eq feature.value }
-        if (source != null) query.andWhere { specSource eq source.value }
-        if (component != null) query.andWhere { Specs.component eq component.value }
-        if (team != null) query.andWhere { Specs.team eq team.value }
-        if (status != null) query.andWhere { Specs.status eq status.name }
-        if (tag != null) query.andWhere { Tags.name eq tag.value }
+        if (features?.isNotEmpty() == true) query.andWhere { Specs.feature inList features.map { it.value } }
+        if (sources?.isNotEmpty() == true) query.andWhere { specSource inList sources.map { it.value } }
+        if (components?.isNotEmpty() == true) query.andWhere { Specs.component inList components.map { it.value } }
+        if (teams?.isNotEmpty() == true) query.andWhere { Specs.team inList teams.map { it.value } }
+        if (statuses?.isNotEmpty() == true) query.andWhere { Specs.status inList statuses.map { it.name } }
+        if (tags?.isNotEmpty() == true) query.andWhere { Tags.name inList tags.map { it.value } }
         return query.toSpecsWithRelations()
     }
 
