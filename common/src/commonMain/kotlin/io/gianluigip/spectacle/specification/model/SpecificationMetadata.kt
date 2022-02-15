@@ -6,8 +6,12 @@ data class FeatureName(val value: String) {
 
 fun String.toFeature() = FeatureName(this)
 
-enum class SpecStatus {
-    IMPLEMENTED, PARTIALLY_IMPLEMENTED, NOT_IMPLEMENTED
+enum class SpecStatus(val display: String) {
+    IMPLEMENTED("Implemented"), PARTIALLY_IMPLEMENTED("Partially Implemented"), NOT_IMPLEMENTED("Not Implemented");
+
+    companion object {
+        fun fromDisplay(value: String): SpecStatus? = values().firstOrNull { it.display == value }
+    }
 }
 
 fun String.toSpecStatus() = SpecStatus.valueOf(this)
