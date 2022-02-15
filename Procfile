@@ -1,1 +1,1 @@
-web: java -jar spectacle-central/application/build/libs/application-jvm-0.2.0.jar
+web: java -jar spectacle-central/application/build/libs/application-jvm-0.9.0.jar
