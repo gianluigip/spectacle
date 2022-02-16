@@ -1,9 +1,6 @@
 name: Publish Central to Docker Hub
 
-on:
-  push
-  release:
-    types: [ published ]
+on: push
 
 jobs:
   push_to_registry:
