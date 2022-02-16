@@ -23,6 +23,16 @@ Environment Variables:
 * `DATABASE_USERNAME`
 * `DATABASE_PASSWORD`
 
+## Run On-Premise
+
+The Recommended way to install `Spectacle Central` in your organization is using the public Docker
+Image in Docker Hub:
+
+```
+export DATABASE_URL=[YOUR_URL] 
+docker run -p 8080:8080 -e DATABASE_URL --name spectacle-central gianluigipp/spectacle-central
+```
+
 ## Build and Run
 
 Run Server with UI:
