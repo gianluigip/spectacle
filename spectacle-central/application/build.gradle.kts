@@ -29,14 +29,6 @@ kotlin {
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
-        val jvmJar by tasks.getting(org.gradle.jvm.tasks.Jar::class) {
-            doFirst {
-                manifest {
-                    attributes["Main-Class"] = "io.gianluigip.spectacle.ApplicationKt"
-                }
-                from(configurations.getByName("runtimeClasspath").map { if (it.isDirectory) it else zipTree(it) })
-            }
-        }
     }
     js(IR) {
         browser {
@@ -164,7 +156,7 @@ distributions {
     main {
         contents {
             from("$buildDir/libs") {
-                rename("${rootProject.name}-jvm", rootProject.name)
+                rename("${project.name}-jvm", project.name)
                 into("lib")
             }
         }

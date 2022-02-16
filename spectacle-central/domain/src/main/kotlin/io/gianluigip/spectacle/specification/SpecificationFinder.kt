@@ -14,12 +14,12 @@ class SpecificationFinder(
 ) {
 
     fun findBy(
-        feature: FeatureName? = null,
-        source: Source? = null,
-        component: Component? = null,
-        tag: TagName? = null,
-        team: TeamName? = null,
-        status: SpecStatus? = null,
+        feature: Set<FeatureName>? = null,
+        source: Set<Source>? = null,
+        component: Set<Component>? = null,
+        tag: Set<TagName>? = null,
+        team: Set<TeamName>? = null,
+        status: Set<SpecStatus>? = null,
     ) = transaction.execute { specRepo.findBy(feature, source, component, tag, team, status) }
 
     fun findAll() = transaction.execute { specRepo.findAll() }

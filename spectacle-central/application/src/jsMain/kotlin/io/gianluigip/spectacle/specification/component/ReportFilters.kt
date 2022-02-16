@@ -48,20 +48,20 @@ val ReportFilters = FC<ReportFilersProps> {
         }
         ReportFilter {
             label = "Statuses"
-            value = selected.status?.name
-            options = filters.statuses.map { it.name }
+            value = selected.status?.display
+            options = filters.statuses.map { it.display }
             onFilterChanged = { newValue ->
-                it.onFilterChanged.invoke(selected.copy(status = newValue?.let { status -> SpecStatus.valueOf(status) }))
+                it.onFilterChanged.invoke(selected.copy(status = newValue?.let { status -> SpecStatus.fromDisplay(status) }))
             }
         }
         ReportFilter {
-            label = "Component"
+            label = "Components"
             value = selected.component
             options = filters.components
             onFilterChanged = { newValue -> it.onFilterChanged.invoke(selected.copy(component = newValue)) }
         }
         ReportFilter {
-            label = "Source"
+            label = "Sources"
             value = selected.source
             options = filters.sources
             onFilterChanged = { newValue -> it.onFilterChanged.invoke(selected.copy(source = newValue)) }

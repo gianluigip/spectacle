@@ -21,7 +21,7 @@ import react.FC
 import react.Props
 import react.router.useLocation
 import react.router.useNavigate
-import react.useEffectOnce
+import react.useEffect
 import react.useState
 
 const val specificationsReportPath = "/specifications"
@@ -30,8 +30,9 @@ val SpecificationsReport = FC<Props> {
 
     var featuresResponse by useState<List<FeatureReportResponse>>()
     var filtersResponse by useState<ReportFiltersResponse>()
+    var currentFilters by useState<FiltersSelected>()
     val queryParams = useLocation().search.parseParams()
-    val currentFilters = FiltersSelected(
+    val queryFilters = FiltersSelected(
         feature = queryParams["feature"],
         source = queryParams["source"],
         component = queryParams["component"],
@@ -46,19 +47,22 @@ val SpecificationsReport = FC<Props> {
         filtersResponse = response.filters
     }
 
-    fun refreshSearch(filters: FiltersSelected) {
-        navigate.invoke(buildReportWithParameters(filters))
-        loadSpecReport(filters)
-    }
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportWithParameters(filters))
 
-    useEffectOnce { loadSpecReport(currentFilters) }
+    useEffect {
+        if (currentFilters != queryFilters) {
+            currentFilters = queryFilters
+            loadSpecReport(queryFilters)
+        }
+    }
 
     Grid {
         container = true
         spacing = ResponsiveStyleValue(20.px)
         direction = ResponsiveStyleValue(row)
         Grid {
-            item = true; xs = 2
+            item = true;
+            xs = 4; md = 3; xl = 2
             Typography { variant = "h5"; +"Filters" }
             Spacer { height = 10.px }
             if (featuresResponse == null) {
@@ -66,14 +70,15 @@ val SpecificationsReport = FC<Props> {
             }
             filtersResponse?.let {
                 ReportFilters {
-                    filtersSelected = currentFilters
+                    filtersSelected = currentFilters ?: FiltersSelected()
                     filters = it
                     onFilterChanged = { filters -> refreshSearch(filters) }
                 }
             }
         }
         Grid {
-            item = true; xs = 10
+            item = true;
+            xs = 8; md = 9; xl = 10
             Typography { variant = "h5"; +"List of Features" }
             Spacer { height = 10.px }
             if (featuresResponse == null) {
@@ -88,6 +93,7 @@ val SpecificationsReport = FC<Props> {
 private fun buildReportWithParameters(filters: FiltersSelected): String {
     val params = mutableListOf<String>()
     if (filters.feature != null) params.add("feature=${filters.feature.escapeSpaces()}")
+    if (filters.tag != null) params.add("tag=${filters.tag.escapeSpaces()}")
     if (filters.source != null) params.add("source=${filters.source.escapeSpaces()}")
     if (filters.component != null) params.add("component=${filters.component.escapeSpaces()}")
     if (filters.team != null) params.add("team=${filters.team.escapeSpaces()}")

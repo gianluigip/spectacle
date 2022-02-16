@@ -170,7 +170,7 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                 )
             )
         } whenever "search by feature 1" run {
-            specRepo.findBy(FEATURE_2)
+            specRepo.findBy(setOf(FEATURE_2))
         } then "it should return spec 2 and 3" run { specs ->
             specs assertThat {
                 shouldHasSize(2)
@@ -178,21 +178,21 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                 get("Spec3", SOURCE_2) shouldNotBe null
             }
         } andWhenever "search by source 1" run {
-            specRepo.findBy(source = SOURCE_1)
+            specRepo.findBy(sources = setOf(SOURCE_1))
         } then "it should return spec 1" run { specs ->
             specs assertThat {
                 shouldHasSize(1)
                 get("Spec1", SOURCE_1) shouldNotBe null
             }
         } andWhenever "search by component 1" run {
-            specRepo.findBy(component = COMPONENT_1)
+            specRepo.findBy(components = setOf(COMPONENT_1))
         } then "it should return spec 1" run { specs ->
             specs assertThat {
                 shouldHasSize(1)
                 get("Spec1", SOURCE_1) shouldNotBe null
             }
         } andWhenever "search by team 2" run {
-            specRepo.findBy(team = TEAM_2)
+            specRepo.findBy(teams = setOf(TEAM_2))
         } then "it should return spec 2 and 3" run { specs ->
             specs assertThat {
                 shouldHasSize(2)
@@ -200,14 +200,14 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                 get("Spec3", SOURCE_2) shouldNotBe null
             }
         } andWhenever "search by status NOT_IMPLEMENTED" run {
-            specRepo.findBy(status = NOT_IMPLEMENTED)
+            specRepo.findBy(statuses = setOf(NOT_IMPLEMENTED))
         } then "it should return spec 1" run { specs ->
             specs assertThat {
                 shouldHasSize(1)
                 get("Spec1", SOURCE_1) shouldNotBe null
             }
         } andWhenever "search by tag 2" run {
-            specRepo.findBy(tag = TAG_2)
+            specRepo.findBy(tags = setOf(TAG_2))
         } then "it should return spec 2" runAndFinish { specs ->
             specs assertThat {
                 shouldHasSize(1)

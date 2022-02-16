@@ -23,15 +23,15 @@ class ReportGenerator(
 ) {
 
     fun generateReport(
-        feature: FeatureName? = null,
-        source: Source? = null,
-        component: Component? = null,
-        tag: TagName? = null,
-        team: TeamName? = null,
-        status: SpecStatus? = null,
+        features: Set<FeatureName>? = null,
+        sources: Set<Source>? = null,
+        components: Set<Component>? = null,
+        tags: Set<TagName>? = null,
+        teams: Set<TeamName>? = null,
+        statuses: Set<SpecStatus>? = null,
     ): SpecsReport = transaction.execute {
 
-        val specs = specFinder.findBy(feature, source, component, tag, team, status)
+        val specs = specFinder.findBy(features, sources, components, tags, teams, statuses)
             .sortedWith(compareBy({ it.feature.value }, { it.name.value }))
         val features = findFeatures(specs)
 

@@ -78,7 +78,8 @@ Feature: Publisher Plugin
 ```
 
 `terminal` is just a basic publisher for testing before deciding to publish your specs
-to `Spectacle Central`.
+to `Spectacle Central`, you can use the config in the next section to enable the `central` publisher
+and store your specs.
 
 #### Configure DSL
 
@@ -96,7 +97,7 @@ specification.source=spectacle-dsl
 # Multiple sources (modules) are common for one service
 specification.component=Spectacle DSL
 # List separated by comma of publishers that you want to use
-specification.publisher=terminal
+specification.publisher=terminal,central
 # Central is the main publisher that allow to centralize all the specs in one place
 # These properties can be also defined as env vars, so it's easier to use in CI
 # Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_ENABLED

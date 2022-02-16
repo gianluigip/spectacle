@@ -29,8 +29,8 @@ val FeaturesReport = FC<FeaturesReportProps> {
         Accordion {
             AccordionSummary {
                 sx = jso {
-                    color = Color(theme.palette.primary.contrastText)
-                    backgroundColor = Color(theme.palette.primary.main).lighter(80)
+                    color = Color(theme.palette.info.contrastText)
+                    backgroundColor = Color(theme.palette.info.main)
                 }
                 expandIcon = ExpandMore.create()
                 Typography { variant = "subtitle1"; +feature.name }

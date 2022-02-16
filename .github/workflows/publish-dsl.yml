@@ -1,4 +1,4 @@
-name: Publish DSL
+name: Publish DSL to Maven Central
 
 on:
   release:

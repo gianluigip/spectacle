@@ -34,8 +34,8 @@ val SpecCard = FC<SpecCardProps> {
         AccordionSummary {
             sx = jso {
                 sx = jso { flexGrow = FlexGrow(1.0) }
-                color = Color(theme.palette.primary.contrastText)
-                backgroundColor = Color(theme.palette.primary.main).lighter(65)
+                color = Color(theme.palette.info.contrastText)
+                backgroundColor = Color(theme.palette.info.main)
             }
             Typography { +spec.name }
         }
@@ -45,17 +45,15 @@ val SpecCard = FC<SpecCardProps> {
                 spacing = ResponsiveStyleValue(1)
                 direction = ResponsiveStyleValue(row)
 
-                Grid { item = true; SpecMetaDataChip { label = "Status: ${spec.status}" } }
-
-
                 if (spec.tags.isNotEmpty()) {
-                    Grid { item = true; SpecMetaDataChip { label = "Tags: ${spec.tags.joinToString { ", " }}" } }
+                    Grid { item = true; SpecMetaDataChip { label = "Tags: ${spec.tags.sorted().joinToString(",")}" } }
                 }
+                Grid { item = true; SpecMetaDataChip { label = "Status: ${spec.status.display}" } }
                 Grid { item = true; SpecMetaDataChip { label = "Team: ${spec.team}" } }
                 Grid { item = true; SpecMetaDataChip { label = "Component: ${spec.component}" } }
-                Grid { item = true; SpecMetaDataChip { label = "Source: ${spec.source}" } }
                 Grid { item = true; SpecMetaDataChip { label = "Created: ${spec.creationTime.toDisplay()}" } }
                 Grid { item = true; SpecMetaDataChip { label = "Updated: ${spec.updateTime.toDisplay()}" } }
+                Grid { item = true; SpecMetaDataChip { label = "Source: ${spec.source}" } }
             }
             Spacer { height = 5.px }
             spec.steps.sortedBy { step -> step.index }.forEach { step ->
