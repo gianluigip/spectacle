@@ -9,6 +9,9 @@ increase the value for the organization as a whole.
 
 ## Config
 
+The service requires a `PostgreSql` database with a user with write permissions, it uses Flyway to
+setup the schema and update it when upgrading to a newer version.
+
 Environment Variables:
 
 * `DATABASE_URL`: one variable holding all the connection detail using the
@@ -25,6 +28,7 @@ Environment Variables:
 Run Server with UI:
 
 ```
+export DATABASE_URL=[YOUR_URL] 
 ./gradlew run
 ```
 
@@ -32,4 +36,12 @@ Run Web UI only:
 
 ```
 ./gradlew jsBrowserRun --continuous
+```
+
+Build and Run in Docker:
+
+```
+export DATABASE_URL=[YOUR_URL] 
+docker build -t spectacle-central . 
+docker run -p 8080:8080 -e DATABASE_URL --name spectacle-central spectacle-central
 ```

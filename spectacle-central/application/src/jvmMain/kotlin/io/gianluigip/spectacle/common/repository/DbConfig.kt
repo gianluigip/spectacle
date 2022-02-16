@@ -41,13 +41,18 @@ private fun buildDataSourceWithEnv(): DataSource {
         database = hostSegments.last()
     }
     return buildDataSource(
-        dbHost = envs["DATABASE_HOST"] ?: dbHost,
-        port = envs["DATABASE_PORT"]?.toInt() ?: port,
-        database = envs["DATABASE_NAME"] ?: database,
-        username = envs["DATABASE_USERNAME"] ?: username,
-        password = envs["DATABASE_PASSWORD"] ?: password
+        dbHost = envs.getEnv("DATABASE_HOST") ?: dbHost,
+        port = envs.getEnv("DATABASE_PORT")?.toInt() ?: port,
+        database = envs.getEnv("DATABASE_NAME") ?: database,
+        username = envs.getEnv("DATABASE_USERNAME") ?: username,
+        password = envs.getEnv("DATABASE_PASSWORD") ?: password
     )
 }
+
+private fun Map<String, String>.getEnv(value: String) =
+    if (get(value)?.isNotEmpty() == true) {
+        get(value)
+    } else null
 
 private fun initFlyway() {
     LOG.info("Executing Flyway")
