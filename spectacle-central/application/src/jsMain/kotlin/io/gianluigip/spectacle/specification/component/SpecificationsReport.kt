@@ -61,7 +61,8 @@ val SpecificationsReport = FC<Props> {
         spacing = ResponsiveStyleValue(20.px)
         direction = ResponsiveStyleValue(row)
         Grid {
-            item = true; xs = 2
+            item = true;
+            xs = 4; md = 3; xl = 2
             Typography { variant = "h5"; +"Filters" }
             Spacer { height = 10.px }
             if (featuresResponse == null) {
@@ -76,7 +77,8 @@ val SpecificationsReport = FC<Props> {
             }
         }
         Grid {
-            item = true; xs = 10
+            item = true;
+            xs = 8; md = 9; xl = 10
             Typography { variant = "h5"; +"List of Features" }
             Spacer { height = 10.px }
             if (featuresResponse == null) {
