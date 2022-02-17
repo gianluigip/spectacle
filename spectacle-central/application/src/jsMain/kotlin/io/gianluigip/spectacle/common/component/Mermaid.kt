@@ -1,22 +1,10 @@
-@file:JsModule("react-mermaid2")
+@file:JsModule("mermaid")
 @file:JsNonModule
 
 package io.gianluigip.spectacle.common.component
 
-import react.Props
+@JsName("mermaidAPI")
+external val mermaidAPI: dynamic
 
-/**
- * https://mermaid-js.github.io/mermaid/#/README
- */
-@JsName("default")
-external val Mermaid: react.FC<MermaidProps>
-
-external interface MermaidConfig {
-    var theme: String
-}
-
-external interface MermaidProps : Props {
-    var chart: String
-    var name: String
-    var config: MermaidConfig
-}
+@JsName("init")
+external fun mermaidInit()
