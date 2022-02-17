@@ -1,3 +1,5 @@
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.gianluigip/spectacle-dsl?label=Maven%20Central)](https://search.maven.org/artifact/io.github.gianluigip/spectacle-dsl)
+
 # Spectacle DSL
 
 A Kotlin multiplatform library for writing readable tests as specifications, it includes an

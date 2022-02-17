@@ -9,6 +9,7 @@ import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
+import io.gianluigip.spectacle.diagram.systemDiagramPath
 import io.gianluigip.spectacle.specification.component.specificationsReportPath
 import kotlinext.js.jso
 import kotlinx.browser.window
@@ -54,10 +55,15 @@ val Header = FC<Props> {
             }
 
             Spacer { width = 10.px }
-
             NavMenuItem {
                 toPath = specificationsReportPath
                 label = "Specifications"
+            }
+
+            Spacer { width = 10.px }
+            NavMenuItem {
+                toPath = systemDiagramPath
+                label = "System Diagram"
             }
 
             Box { sx = jso { flexGrow = FlexGrow(1.0) } }

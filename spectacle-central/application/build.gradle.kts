@@ -106,6 +106,7 @@ kotlin {
                 implementation(kotlinw("mui-icons:5.4.1"))
                 implementation(npm("@emotion/react", "11.7.1"))
                 implementation(npm("@emotion/styled", "11.6.0"))
+                implementation(npm("react-mermaid2", "0.1.4"))
             }
         }
         val jsTest by getting {
