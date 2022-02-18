@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.specification.component
 import csstype.FlexGrow
 import csstype.px
 import io.gianluigip.spectacle.common.component.Spacer
+import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
 import io.gianluigip.spectacle.common.utils.escapeSpaces
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
@@ -47,7 +48,7 @@ val SpecificationsReport = FC<Props> {
         filtersResponse = response.filters
     }
 
-    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportWithParameters(filters))
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportUrlWithParameters(specificationsReportPath, filters))
 
     useEffect {
         if (currentFilters != queryFilters) {
@@ -88,19 +89,4 @@ val SpecificationsReport = FC<Props> {
         }
     }
 
-}
-
-private fun buildReportWithParameters(filters: FiltersSelected): String {
-    val params = mutableListOf<String>()
-    if (filters.feature != null) params.add("feature=${filters.feature.escapeSpaces()}")
-    if (filters.tag != null) params.add("tag=${filters.tag.escapeSpaces()}")
-    if (filters.source != null) params.add("source=${filters.source.escapeSpaces()}")
-    if (filters.component != null) params.add("component=${filters.component.escapeSpaces()}")
-    if (filters.team != null) params.add("team=${filters.team.escapeSpaces()}")
-    if (filters.status != null) params.add("status=${filters.status.name}")
-
-    val searchSegment = if (params.isNotEmpty()) {
-        "?${params.joinToString("&")}"
-    } else ""
-    return "$specificationsReportPath$searchSegment"
 }

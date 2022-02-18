@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.diagram.api
 
 import io.gianluigip.spectacle.common.api.API_CLIENT
 import io.gianluigip.spectacle.common.api.ENDPOINT
+import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
 import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -13,7 +14,7 @@ suspend fun getInteractionsReport(
     component: String? = null,
     tag: String? = null,
     team: String? = null,
-): SpecsReportResponse {
+): InteractionsReportResponse {
     return API_CLIENT.get("$ENDPOINT/api/report/interactions") {
         feature?.let { parameter("features", feature) }
         source?.let { parameter("sources", source) }

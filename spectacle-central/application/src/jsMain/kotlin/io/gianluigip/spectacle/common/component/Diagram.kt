@@ -25,6 +25,9 @@ val Diagram = FC<DiagramProps> {
         mermaidInit()
     }
 
+    println("Mermaid Content:")
+    println(it.content)
+
     Box {
         id = diagramId
         className = "mermaid"
