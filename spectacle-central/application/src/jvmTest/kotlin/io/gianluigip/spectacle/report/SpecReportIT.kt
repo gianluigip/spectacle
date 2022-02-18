@@ -3,7 +3,7 @@ package io.gianluigip.spectacle.report
 import io.gianluigip.spectacle.common.BaseIntegrationTest
 import io.gianluigip.spectacle.common.Features.SPECIFICATIONS_REPORT
 import io.gianluigip.spectacle.common.utils.CLOCK
-import io.gianluigip.spectacle.common.utils.api.getReport
+import io.gianluigip.spectacle.common.utils.api.getSpecReport
 import io.gianluigip.spectacle.common.utils.api.putSpecs
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
@@ -65,7 +65,7 @@ class SpecReportIT : BaseIntegrationTest() {
             putSpecs(source1)
             putSpecs(source2)
         } whenever "request a report for all specs" run {
-            getReport()
+            getSpecReport()
         } then "the report should contain all the specs from all the sources" run { report ->
             report assertThat {
                 features assertThat {
@@ -111,42 +111,42 @@ class SpecReportIT : BaseIntegrationTest() {
                 }
             }
         } andWhenever "request a report for a specific source" run {
-            getReport(source = SOURCE_1)
+            getSpecReport(source = SOURCE_1)
         } then "it should contain only specs from that source" run { report ->
             report.features assertThat {
                 shouldHasSize(1)
                 first().specs.first().name shouldBe SPEC_1
             }
         } andWhenever "request a report for a specific feature" run {
-            getReport(feature = FEATURE_2)
+            getSpecReport(feature = FEATURE_2)
         } then "it should contain only specs from that feature" run { report ->
             report.features assertThat {
                 shouldHasSize(1)
                 first().specs.first().name shouldBe SPEC_2
             }
         } andWhenever "request a report for a specific component" run {
-            getReport(component = COMPONENT_1)
+            getSpecReport(component = COMPONENT_1)
         } then "it should contain only specs from that component" run { report ->
             report.features assertThat {
                 shouldHasSize(1)
                 first().specs.first().name shouldBe SPEC_1
             }
         } andWhenever "request a report for a specific tag" run {
-            getReport(tag = TAG_2)
+            getSpecReport(tag = TAG_2)
         } then "it should contain only specs with that tag" run { report ->
             report.features assertThat {
                 shouldHasSize(1)
                 first().specs.first().name shouldBe SPEC_2
             }
         } andWhenever "request a report for a specific team" run {
-            getReport(team = TEAM_1)
+            getSpecReport(team = TEAM_1)
         } then "it should contain only specs from that team" run { report ->
             report.features assertThat {
                 shouldHasSize(1)
                 first().specs.first().name shouldBe SPEC_1
             }
         } andWhenever "request a report for a specific status" run {
-            getReport(status = NOT_IMPLEMENTED)
+            getSpecReport(status = NOT_IMPLEMENTED)
         } then "it should contain only specs with that status" runAndFinish { report ->
             report.features assertThat {
                 shouldHasSize(1)

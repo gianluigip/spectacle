@@ -26,7 +26,6 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import io.gianluigip.spectacle.specification.model.Specification as Spec
 import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
 
 private val FEATURE_1 = FeatureName("Feature1")
@@ -43,11 +42,11 @@ private val TAG_2 = TagName("Tag2")
 
 @Feature(name = SPECIFICATIONS_REPORT)
 @ExtendWith(JUnitSpecificationReporter::class)
-class ReportGeneratorTest {
+class SpecReportGeneratorTest {
 
     private val specFinder: SpecificationFinder = mockk()
     private val featureRepo: FeatureRepository = mockk()
-    private val reportGenerator = ReportGenerator(specFinder, featureRepo, DummyTransactionExecutor())
+    private val reportGenerator = SpecReportGenerator(specFinder, featureRepo, DummyTransactionExecutor())
 
     private lateinit var report: SpecsReport
 

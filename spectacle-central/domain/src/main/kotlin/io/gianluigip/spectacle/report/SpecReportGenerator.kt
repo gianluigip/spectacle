@@ -16,7 +16,7 @@ import io.gianluigip.spectacle.specification.model.Specification
 import io.gianluigip.spectacle.specification.model.TagName
 import io.gianluigip.spectacle.specification.model.TeamName
 
-class ReportGenerator(
+class SpecReportGenerator(
     private val specFinder: SpecificationFinder,
     private val featureRepo: FeatureRepository,
     private val transaction: TransactionExecutor,
