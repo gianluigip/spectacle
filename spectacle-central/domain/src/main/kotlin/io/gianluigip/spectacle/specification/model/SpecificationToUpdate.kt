@@ -17,5 +17,6 @@ data class SpecificationToUpdate(
     val name: String,
     val status: SpecStatus,
     val tags: List<TagName> = listOf(),
-    val steps: List<SpecificationStep>
+    val steps: List<SpecificationStep>,
+    val interactions: List<SpecInteraction>,
 )

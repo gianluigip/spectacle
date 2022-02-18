@@ -10,6 +10,11 @@ import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.dsl.bdd.whenever
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
+import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
+import io.gianluigip.spectacle.specification.model.InteractionDirection.OUTBOUND
+import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
+import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
+import io.gianluigip.spectacle.specification.model.InteractionType.PERSISTENCE
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.SpecStatus.IMPLEMENTED
@@ -27,6 +32,7 @@ import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.Test
 import java.util.UUID
+import io.gianluigip.spectacle.specification.model.SpecInteraction as Interaction
 import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
 import io.gianluigip.spectacle.specification.repository.tables.SpecificationSteps as Steps
 
@@ -51,10 +57,11 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                     SpecToUpsert(
                         SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, NOT_IMPLEMENTED, listOf(TAG_1), listOf(
                             Step(GIVEN, "Desc1", 0), Step(WHENEVER, "Desc2", 1)
-                        )
+                        ), interactions = listOf(Interaction(INBOUND, HTTP, "interaction1", mapOf("m1" to "v1")))
                     ),
                     SpecToUpsert(
-                        SpecName("Spec2"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(GIVEN, "Desc1", 0))
+                        SpecName("Spec2"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(GIVEN, "Desc1", 0)),
+                        interactions = listOf(Interaction(OUTBOUND, EVENT, "interaction2", mapOf("m2" to "v2")))
                     )
                 )
             )
@@ -68,6 +75,7 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                     status shouldBe NOT_IMPLEMENTED
                     tags shouldBe listOf(TAG_1)
                     steps shouldBe listOf(Step(GIVEN, "Desc1", 0), Step(WHENEVER, "Desc2", 1))
+                    interactions shouldBe listOf(Interaction(INBOUND, HTTP, "interaction1", mapOf("m1" to "v1")))
                 }
                 get("Spec2", SOURCE_2) assertThat {
                     component shouldBe COMPONENT_2
@@ -76,6 +84,7 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                     status shouldBe IMPLEMENTED
                     tags shouldBe listOf(TAG_2)
                     steps shouldBe listOf(Step(GIVEN, "Desc1", 0))
+                    interactions shouldBe listOf(Interaction(OUTBOUND, EVENT, "interaction2", mapOf("m2" to "v2")))
                 }
             }
         } andWhenever "searching the specs for source 1" run {
@@ -91,14 +100,17 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
             specRepo.upsert(
                 listOf(
                     SpecToUpsert(
-                        SpecName("Spec1"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(AND, "DescChanged", 0))
+                        SpecName("Spec1"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(AND, "DescChanged", 0)),
+                        interactions = listOf(Interaction(OUTBOUND, PERSISTENCE, "interaction1-2", mapOf("m1-2" to "v1-2")))
                     ),
                     SpecToUpsert(
-                        SpecName("Spec2"), FEATURE_1, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(), listOf(Step(THEN, "DescChanged", 0))
+                        SpecName("Spec2"), FEATURE_1, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(), listOf(Step(THEN, "DescChanged", 0)),
+                        interactions = listOf(Interaction(OUTBOUND, EVENT, "interaction2-2", mapOf("m2-2" to "v2-2")))
                     ),
                     SpecToUpsert(
                         SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_1, TAG_2),
-                        listOf(Step(GIVEN, "Desc3", 0))
+                        listOf(Step(GIVEN, "Desc3", 0)),
+                        interactions = listOf(Interaction(OUTBOUND, EVENT, "interaction3", mapOf("m3" to "v3")))
                     ),
                 )
             )
@@ -112,6 +124,7 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                     status shouldBe NOT_IMPLEMENTED
                     tags shouldBe listOf(TAG_1)
                     steps shouldBe listOf(Step(GIVEN, "Desc1", 0), Step(WHENEVER, "Desc2", 1))
+                    interactions shouldBe listOf(Interaction(INBOUND, HTTP, "interaction1", mapOf("m1" to "v1")))
                 }
                 get("Spec1", SOURCE_2) assertThat {
                     component shouldBe COMPONENT_2
@@ -120,6 +133,7 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                     status shouldBe IMPLEMENTED
                     tags shouldBe listOf(TAG_2)
                     steps shouldBe listOf(Step(AND, "DescChanged", 0))
+                    interactions shouldBe listOf(Interaction(OUTBOUND, PERSISTENCE, "interaction1-2", mapOf("m1-2" to "v1-2")))
                 }
                 get("Spec2", SOURCE_2) assertThat {
                     component shouldBe COMPONENT_2
@@ -128,6 +142,7 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                     status shouldBe IMPLEMENTED
                     tags shouldBe listOf()
                     steps shouldBe listOf(Step(THEN, "DescChanged", 0))
+                    interactions shouldBe listOf(Interaction(OUTBOUND, EVENT, "interaction2-2", mapOf("m2-2" to "v2-2")))
                 }
                 get("Spec3", SOURCE_2) assertThat {
                     component shouldBe COMPONENT_2
@@ -136,14 +151,15 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                     status shouldBe IMPLEMENTED
                     tags shouldBe listOf(TAG_1, TAG_2)
                     steps shouldBe listOf(Step(GIVEN, "Desc3", 0))
+                    interactions shouldBe listOf(Interaction(OUTBOUND, EVENT, "interaction3", mapOf("m3" to "v3")))
                 }
             }
         } andWhenever "delete spec 1 source 1 and spec 2" run {
             specRepo.delete(
                 listOf(
-                    Specification(SpecName("Spec1"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(), listOf()),
-                    Specification(SpecName("Spec2"), FEATURE_1, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(), listOf()),
-                    Specification(SpecName("Spec3"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(), listOf()),
+                    Specification(SpecName("Spec1"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(), listOf(), listOf()),
+                    Specification(SpecName("Spec2"), FEATURE_1, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(), listOf(), listOf()),
+                    Specification(SpecName("Spec3"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(), listOf(), listOf()),
                 )
             )
         } then "spec 1 source 2 and spec 3 should still exist" runAndFinish {
@@ -161,12 +177,14 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
             specRepo.upsert(
                 listOf(
                     SpecToUpsert(
-                        SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, NOT_IMPLEMENTED, listOf(TAG_1), listOf(Step(GIVEN, "Desc1", 0))
+                        SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, NOT_IMPLEMENTED, listOf(TAG_1), listOf(Step(GIVEN, "Desc1", 0)),
+                        interactions = emptyList()
                     ),
                     SpecToUpsert(
-                        SpecName("Spec2"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(GIVEN, "Desc2", 0))
+                        SpecName("Spec2"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(GIVEN, "Desc2", 0)),
+                        interactions = emptyList()
                     ),
-                    SpecToUpsert(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_1), listOf()),
+                    SpecToUpsert(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_1), listOf(), emptyList()),
                 )
             )
         } whenever "search by feature 1" run {

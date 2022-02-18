@@ -2,7 +2,10 @@ package io.gianluigip.spectacle.common.fixtures
 
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
+import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
+import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
 import io.gianluigip.spectacle.specification.model.Source
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.Specification
@@ -26,6 +29,7 @@ fun aSpec(
     status: SpecStatus = SpecConstants.STATUS,
     tags: List<TagName> = emptyList(),
     steps: List<SpecificationStep> = listOf(SpecificationStep(GIVEN, "Step1", 0)),
+    interactions: List<SpecInteraction> = listOf(SpecInteraction(INBOUND, EVENT, "TestEvent", mapOf("meta1" to "value1"))),
     creationTime: ZonedDateTime = FixtureConstants.CREATION_TIME,
     updateTime: ZonedDateTime = FixtureConstants.UPDATE_TIME,
-) = Specification(name, feature, team, source, component, status, tags, steps, creationTime, updateTime)
+) = Specification(name, feature, team, source, component, status, tags, steps, interactions, creationTime, updateTime)

@@ -16,6 +16,9 @@ import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.FeatureToDelete
 import io.gianluigip.spectacle.specification.model.FeatureToUpdate
 import io.gianluigip.spectacle.specification.model.FeatureToUpsert
+import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
+import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.SpecStatus.IMPLEMENTED
 import io.gianluigip.spectacle.specification.model.SpecStatus.PARTIALLY_IMPLEMENTED
@@ -45,6 +48,8 @@ private val SPEC_2 = SpecName("SPEC2")
 private val SPEC_3 = SpecName("SPEC3")
 private val SPEC_4 = SpecName("SPEC4")
 
+private val INTERACTION_1 = SpecInteraction(INBOUND, EVENT, "TestEvent", mapOf("meta1" to "value1"))
+
 @Feature(name = Features.CENTRAL_REPOSITORY)
 @ExtendWith(JUnitSpecificationReporter::class)
 class SpecificationProcessorTest {
@@ -59,7 +64,7 @@ class SpecificationProcessorTest {
     @Specification
     fun `Detect differences when updating specs and insert, update or delete specs accordingly`() =
         given("existing specs 1, 2 and 4") {
-            every { specRepo.findBySource(SOURCE) } returns listOf(
+            every { specRepo.findBy(sources = setOf(SOURCE)) } returns listOf(
                 aSpec( // Spec that didn't change
                     name = SPEC_1,
                     feature = FEATURE_1,
@@ -95,14 +100,16 @@ class SpecificationProcessorTest {
                                 name = SPEC_1.value,
                                 status = IMPLEMENTED,
                                 tags = listOf("Tag1".toTag()),
-                                steps = listOf(Step(type = GIVEN, "step1", index = 0))
+                                steps = listOf(Step(type = GIVEN, "step1", index = 0)),
+                                interactions = listOf(INTERACTION_1),
                             ),
                             SpecificationToUpdate(
                                 team = TEAM_2,
                                 name = SPEC_2.value,
                                 status = PARTIALLY_IMPLEMENTED,
                                 tags = listOf("Tag2".toTag()),
-                                steps = listOf(Step(type = GIVEN, "step2", index = 0))
+                                steps = listOf(Step(type = GIVEN, "step2", index = 0)),
+                                interactions = listOf(INTERACTION_1),
                             )
                         )
                     ),
@@ -113,7 +120,8 @@ class SpecificationProcessorTest {
                                 name = SPEC_3.value,
                                 status = IMPLEMENTED,
                                 tags = listOf(),
-                                steps = listOf(Step(type = GIVEN, "step3", index = 0))
+                                steps = listOf(Step(type = GIVEN, "step3", index = 0)),
+                                interactions = listOf(INTERACTION_1),
                             ),
                         )
                     )
@@ -128,11 +136,13 @@ class SpecificationProcessorTest {
                     listOf(
                         SpecToUpsert(
                             SPEC_2, FEATURE_1, TEAM_2, SOURCE, COMPONENT, PARTIALLY_IMPLEMENTED, listOf("Tag2".toTag()),
-                            steps = listOf(Step(type = GIVEN, "step2", index = 0))
+                            steps = listOf(Step(type = GIVEN, "step2", index = 0)),
+                            interactions = listOf(INTERACTION_1),
                         ),
                         SpecToUpsert(
                             SPEC_3, FEATURE_2, TEAM_1, SOURCE, COMPONENT, IMPLEMENTED, listOf(),
-                            steps = listOf(Step(type = GIVEN, "step3", index = 0))
+                            steps = listOf(Step(type = GIVEN, "step3", index = 0)),
+                            interactions = listOf(INTERACTION_1),
                         )
                     )
                 )

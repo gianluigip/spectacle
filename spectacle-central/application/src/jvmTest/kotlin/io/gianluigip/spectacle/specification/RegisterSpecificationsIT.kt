@@ -23,6 +23,9 @@ import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationsToUpdateRequest
 import io.gianluigip.spectacle.specification.model.FeatureName
+import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
+import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.SpecStatus.IMPLEMENTED
 import io.gianluigip.spectacle.specification.model.SpecStatus.NOT_IMPLEMENTED
@@ -60,13 +63,16 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                                     SpecificationStep(GIVEN, description = "Description 1", index = 0),
                                     SpecificationStep(WHENEVER, description = "Description 2", index = 1),
                                     SpecificationStep(THEN, description = "Description 3", index = 2),
-                                )
+                                ), interactions = listOf(SpecInteraction(INBOUND, HTTP, "Int1", mapOf("m1" to "v1")))
                             ),
                             SpecificationToUpdateRequest(
                                 "SecondTeam", name = "Spec 2", status = NOT_IMPLEMENTED, steps = listOf(
                                     SpecificationStep(GIVEN, description = "Description 4", index = 0),
                                     SpecificationStep(StepType.AND, description = "Description 5", index = 1),
                                     SpecificationStep(WHENEVER, description = "Description 6", index = 2),
+                                ), interactions = listOf(
+                                    SpecInteraction(INBOUND, HTTP, "Int2-1", mapOf("m2-1" to "v2-1")),
+                                    SpecInteraction(INBOUND, HTTP, "Int2-2", mapOf("m2-2" to "v2-2")),
                                 )
                             )
                         )
@@ -77,7 +83,7 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                                 TEAM_NAME.value, name = "Spec 3", status = PARTIALLY_IMPLEMENTED, steps = listOf(
                                     SpecificationStep(GIVEN, description = "Description 7", index = 0),
                                     SpecificationStep(WHENEVER, description = "Description 8", index = 1),
-                                )
+                                ), interactions = listOf(SpecInteraction(INBOUND, HTTP, "Int3"))
                             ),
                         )
                     )
@@ -99,6 +105,7 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                         SpecificationStep(WHENEVER, description = "Description 2", index = 1),
                         SpecificationStep(THEN, description = "Description 3", index = 2),
                     )
+                    interactions shouldBe listOf(SpecInteraction(INBOUND, HTTP, "Int1", mapOf("m1" to "v1")))
                 }
                 get(1) assertThat {
                     name shouldBe SpecName("Spec 2")
@@ -112,6 +119,10 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                         SpecificationStep(StepType.AND, description = "Description 5", index = 1),
                         SpecificationStep(WHENEVER, description = "Description 6", index = 2),
                     )
+                    interactions shouldBe listOf(
+                        SpecInteraction(INBOUND, HTTP, "Int2-1", mapOf("m2-1" to "v2-1")),
+                        SpecInteraction(INBOUND, HTTP, "Int2-2", mapOf("m2-2" to "v2-2")),
+                    )
                 }
                 get(2) assertThat {
                     name shouldBe SpecName("Spec 3")
@@ -124,6 +135,7 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                         SpecificationStep(GIVEN, description = "Description 7", index = 0),
                         SpecificationStep(WHENEVER, description = "Description 8", index = 1),
                     )
+                    interactions shouldBe listOf(SpecInteraction(INBOUND, HTTP, "Int3"))
                 }
             }
         } and "the features were stored" run {
@@ -173,6 +185,7 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                         SpecificationStep(WHENEVER, description = "Description 2", index = 1),
                         SpecificationStep(THEN, description = "Description 3", index = 2),
                     )
+                    interactions shouldBe listOf(SpecInteraction(INBOUND, HTTP, "Int1", mapOf("m1" to "v1")))
                 }
                 get(1) assertThat {
                     name shouldBe "Spec 2"
@@ -186,6 +199,10 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                         SpecificationStep(StepType.AND, description = "Description 5", index = 1),
                         SpecificationStep(WHENEVER, description = "Description 6", index = 2),
                     )
+                    interactions shouldBe listOf(
+                        SpecInteraction(INBOUND, HTTP, "Int2-1", mapOf("m2-1" to "v2-1")),
+                        SpecInteraction(INBOUND, HTTP, "Int2-2", mapOf("m2-2" to "v2-2")),
+                    )
                 }
                 get(2) assertThat {
                     name shouldBe "Spec 3"
@@ -198,6 +215,7 @@ class RegisterSpecificationsIT : BaseIntegrationTest() {
                         SpecificationStep(GIVEN, description = "Description 7", index = 0),
                         SpecificationStep(WHENEVER, description = "Description 8", index = 1),
                     )
+                    interactions shouldBe listOf(SpecInteraction(INBOUND, HTTP, "Int3"))
                 }
             }
         }

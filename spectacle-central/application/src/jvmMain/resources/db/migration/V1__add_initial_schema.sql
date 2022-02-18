@@ -17,7 +17,7 @@ CREATE INDEX index_specifications_feature ON specifications (feature);
 CREATE INDEX index_specifications_name ON specifications (name);
 CREATE INDEX index_specifications_source ON specifications (source);
 CREATE INDEX index_specifications_component ON specifications (component);
-CREATE INDEX index_specifications_status ON specifications (name);
+CREATE INDEX index_specifications_status ON specifications (status);
 CREATE INDEX index_specifications_team ON specifications (team);
 
 /**
@@ -25,13 +25,13 @@ CREATE INDEX index_specifications_team ON specifications (team);
  */
 CREATE TABLE IF NOT EXISTS specification_steps
 (
-    id            VARCHAR(100)  NOT NULL PRIMARY KEY,
-    creation_time TIMESTAMP     NULL,
-    update_time   TIMESTAMP     NULL,
-    spec_id       VARCHAR(100)  NOT NULL,
-    type          VARCHAR(255)  NOT NULL,
-    description   VARCHAR(1000) NOT NULL,
-    spec_index    int           NOT NULL,
+    id            VARCHAR(100) NOT NULL PRIMARY KEY,
+    creation_time TIMESTAMP    NULL,
+    update_time   TIMESTAMP    NULL,
+    spec_id       VARCHAR(100) NOT NULL,
+    type          VARCHAR(255) NOT NULL,
+    description   TEXT         NOT NULL,
+    spec_index    int          NOT NULL,
     constraint fk_specification_steps_spec_id foreign key (spec_id) references specifications (id)
 );
 

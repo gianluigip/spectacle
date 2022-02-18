@@ -11,6 +11,7 @@ data class Specification(
     val status: SpecStatus,
     val tags: List<TagName>,
     val steps: List<SpecificationStep>,
+    val interactions: List<SpecInteraction>,
     val creationTime: ZonedDateTime = ZonedDateTime.now(),
     val updateTime: ZonedDateTime = ZonedDateTime.now(),
 )

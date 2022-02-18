@@ -37,7 +37,7 @@ class SpecificationProcessor(
             featureFromSource.specs.forEach { specificationFromSource ->
                 val spec = specificationFromSource.run {
                     SpecToUpsert(
-                        SpecName(name), feature.name, team, source, component, status, tags, steps
+                        SpecName(name), feature.name, team, source, component, status, tags, steps, interactions
                     )
                 }
                 specs[spec.name] = spec
@@ -54,7 +54,7 @@ class SpecificationProcessor(
         val specsToUpsert = mutableListOf<SpecToUpsert>()
 
         val existingSpecs = mutableMapOf<SpecName, Specification>()
-        specRepo.findBySource(source).forEach { spec ->
+        specRepo.findBy(sources = setOf(source)).forEach { spec ->
             if (!specsToMerge.containsKey(spec.name)) {
                 specsToDelete.add(spec)
             } else {

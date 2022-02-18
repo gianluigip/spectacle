@@ -36,6 +36,7 @@ fun SpecificationToUpdateRequest.toModel() =
         status = status,
         tags = tags.map { TagName(it) },
         steps = steps,
+        interactions = interactions,
     )
 
 fun Specification.toResponse() = SpecificationResponse(
@@ -47,6 +48,7 @@ fun Specification.toResponse() = SpecificationResponse(
     status = status,
     tags = tags.map { it.value },
     steps = steps,
+    interactions = interactions,
     creationTime = creationTime.toKotlinInstant(),
     updateTime = updateTime.toKotlinInstant(),
 )
