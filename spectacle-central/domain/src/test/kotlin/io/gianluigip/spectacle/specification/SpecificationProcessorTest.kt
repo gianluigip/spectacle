@@ -16,9 +16,6 @@ import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.FeatureToDelete
 import io.gianluigip.spectacle.specification.model.FeatureToUpdate
 import io.gianluigip.spectacle.specification.model.FeatureToUpsert
-import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
-import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
-import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.SpecStatus.IMPLEMENTED
 import io.gianluigip.spectacle.specification.model.SpecStatus.PARTIALLY_IMPLEMENTED
@@ -48,7 +45,7 @@ private val SPEC_2 = SpecName("SPEC2")
 private val SPEC_3 = SpecName("SPEC3")
 private val SPEC_4 = SpecName("SPEC4")
 
-private val INTERACTION_1 = SpecInteraction(INBOUND, EVENT, "TestEvent", mapOf("meta1" to "value1"))
+private val INTERACTIONS = aSpec().interactions
 
 @Feature(name = Features.CENTRAL_REPOSITORY)
 @ExtendWith(JUnitSpecificationReporter::class)
@@ -99,9 +96,9 @@ class SpecificationProcessorTest {
                                 team = TEAM_1,
                                 name = SPEC_1.value,
                                 status = IMPLEMENTED,
-                                tags = listOf("Tag1".toTag()),
+                                tags = emptyList(),
                                 steps = listOf(Step(type = GIVEN, "step1", index = 0)),
-                                interactions = listOf(INTERACTION_1),
+                                interactions = INTERACTIONS,
                             ),
                             SpecificationToUpdate(
                                 team = TEAM_2,
@@ -109,7 +106,7 @@ class SpecificationProcessorTest {
                                 status = PARTIALLY_IMPLEMENTED,
                                 tags = listOf("Tag2".toTag()),
                                 steps = listOf(Step(type = GIVEN, "step2", index = 0)),
-                                interactions = listOf(INTERACTION_1),
+                                interactions = INTERACTIONS,
                             )
                         )
                     ),
@@ -121,7 +118,7 @@ class SpecificationProcessorTest {
                                 status = IMPLEMENTED,
                                 tags = listOf(),
                                 steps = listOf(Step(type = GIVEN, "step3", index = 0)),
-                                interactions = listOf(INTERACTION_1),
+                                interactions = INTERACTIONS,
                             ),
                         )
                     )
@@ -137,12 +134,12 @@ class SpecificationProcessorTest {
                         SpecToUpsert(
                             SPEC_2, FEATURE_1, TEAM_2, SOURCE, COMPONENT, PARTIALLY_IMPLEMENTED, listOf("Tag2".toTag()),
                             steps = listOf(Step(type = GIVEN, "step2", index = 0)),
-                            interactions = listOf(INTERACTION_1),
+                            interactions = INTERACTIONS,
                         ),
                         SpecToUpsert(
                             SPEC_3, FEATURE_2, TEAM_1, SOURCE, COMPONENT, IMPLEMENTED, listOf(),
                             steps = listOf(Step(type = GIVEN, "step3", index = 0)),
-                            interactions = listOf(INTERACTION_1),
+                            interactions = INTERACTIONS,
                         )
                     )
                 )
