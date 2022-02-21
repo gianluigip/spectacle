@@ -75,14 +75,16 @@ class SpectacleReportIT : BaseIntegrationTest() {
                                             "name": "Spec1",
                                             "status": "IMPLEMENTED",
                                             "tags": [ "Tag1-1", "Tag1-2" ],
-                                            "steps": [ { "type": "WHENEVER", "description": "Step1", "index": 0 } ]
+                                            "steps": [ { "type": "WHENEVER", "description": "Step1", "index": 0 } ],
+                                            "interactions" : [ ]
                                         },
                                         {
                                             "team": "Matching",
                                             "name": "Spec2",
                                             "status": "NOT_IMPLEMENTED",
                                             "tags": [ "Tag2" ],
-                                            "steps": [ { "type": "GIVEN", "description": "Step2", "index": 0 } ]
+                                            "steps": [ { "type": "GIVEN", "description": "Step2", "index": 0 } ],
+                                            "interactions" : [ ]
                                         }
                                     ]
                                 }

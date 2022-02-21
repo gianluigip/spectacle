@@ -1,11 +1,10 @@
 package io.gianluigip.spectacle.report.api
 
 import io.gianluigip.spectacle.di
-import io.gianluigip.spectacle.report.SpecReportGenerator
+import io.gianluigip.spectacle.report.InteractionsReportGenerator
 import io.gianluigip.spectacle.specification.model.toComponent
 import io.gianluigip.spectacle.specification.model.toFeature
 import io.gianluigip.spectacle.specification.model.toSource
-import io.gianluigip.spectacle.specification.model.toSpecStatus
 import io.gianluigip.spectacle.specification.model.toTag
 import io.gianluigip.spectacle.specification.model.toTeam
 import io.ktor.http.Parameters
@@ -16,10 +15,10 @@ import io.ktor.server.routing.get
 import io.ktor.server.routing.route
 import org.kodein.di.instance
 
-fun Route.specReportRoutes() {
-    val reportGenerator by di.instance<SpecReportGenerator>()
+fun Route.interactionReportRoutes() {
+    val reportGenerator by di.instance<InteractionsReportGenerator>()
 
-    route("/report/specs") {
+    route("/report/interactions") {
         get {
             val parameters: Parameters = call.request.queryParameters
             val report = reportGenerator.generateReport(
@@ -28,7 +27,6 @@ fun Route.specReportRoutes() {
                 components = parameters["components"].splitAndMap { it.toComponent() },
                 tags = parameters["tags"].splitAndMap { it.toTag() },
                 teams = parameters["teams"].splitAndMap { it.toTeam() },
-                statuses = parameters["statuses"].splitAndMap { it.toSpecStatus() },
             ).toResponse()
             call.respond(report)
         }

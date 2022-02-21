@@ -15,6 +15,8 @@ import io.gianluigip.spectacle.specification.repository.tables.Specifications.na
 import io.gianluigip.spectacle.specification.repository.tables.Specifications.specSource
 import io.gianluigip.spectacle.specification.repository.tables.Tags
 import io.gianluigip.spectacle.specification.repository.tables.searchExpression
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.JoinType
 import org.jetbrains.exposed.sql.Query
 import org.jetbrains.exposed.sql.SortOrder
@@ -31,6 +33,7 @@ import java.time.Clock
 import java.util.UUID
 import io.gianluigip.spectacle.specification.repository.tables.SpecificationSteps as Steps
 import io.gianluigip.spectacle.specification.repository.tables.Specifications as Specs
+import io.gianluigip.spectacle.specification.repository.tables.SpecificationInteractions as Interactions
 
 class ExposedSpecificationRepository(
     private val clock: Clock,
@@ -49,6 +52,7 @@ class ExposedSpecificationRepository(
         val query = Specs
             .join(Steps, JoinType.LEFT, additionalConstraint = { Specs.id eq Steps.specId })
             .join(Tags, JoinType.LEFT, additionalConstraint = { Specs.id eq Tags.specId })
+            .join(Interactions, JoinType.LEFT, additionalConstraint = { Specs.id eq Interactions.specId })
             .selectAll()
         if (features?.isNotEmpty() == true) query.andWhere { Specs.feature inList features.map { it.value } }
         if (sources?.isNotEmpty() == true) query.andWhere { specSource inList sources.map { it.value } }
@@ -60,7 +64,7 @@ class ExposedSpecificationRepository(
     }
 
     /**
-     * Find all the specs for a given source without loading the steps and tags.
+     * Find all the specs for a given source without loading the steps, tags and interactions.
      */
     override fun findBySource(source: Source): List<Specification> =
         Specs.select { specSource eq source.value }.orderBy(name to SortOrder.ASC).map { it.toSpec(clock, listOf()) }
@@ -105,6 +109,7 @@ class ExposedSpecificationRepository(
         }
         insertSteps(spec.steps, specId)
         insertTags(spec, specId)
+        insertInteractions(spec, specId)
     }
 
     private fun insertSteps(steps: List<SpecificationStep>, specId: String) {
@@ -134,6 +139,22 @@ class ExposedSpecificationRepository(
         }
     }
 
+    private fun insertInteractions(spec: SpecToUpsert, specId: String) {
+        Interactions.batchInsert(spec.interactions, shouldReturnGeneratedValues = false) {
+            val interactionId = UUID.randomUUID().toString()
+            this[Interactions.id] = interactionId
+            this[Interactions.creationTime] = clock.toUtcLocalDateTime()
+            this[Interactions.updateTime] = clock.toUtcLocalDateTime()
+            this[Interactions.specId] = specId
+            this[Interactions.interactionSource] = spec.source.value
+            this[Interactions.component] = spec.source.value
+            this[Interactions.direction] = it.direction.name
+            this[Interactions.type] = it.type.name
+            this[Interactions.name] = it.name
+            this[Interactions.metadata] = Json.encodeToString(it.metadata)
+        }
+    }
+
     private fun updateSpec(spec: SpecToUpsert, specId: String) {
         Specs.update({ Specs.id eq specId }) {
             it[updateTime] = clock.toUtcLocalDateTime()
@@ -146,13 +167,16 @@ class ExposedSpecificationRepository(
         }
         deleteSteps(specId)
         deleteTags(specId)
+        deleteInteractions(specId)
         insertSteps(spec.steps, specId)
         insertTags(spec, specId)
+        insertInteractions(spec, specId)
     }
 
     override fun delete(specs: List<Specification>) {
         if (specs.isEmpty()) return
         val ids = findSpecIds(specs)
+        Interactions.deleteWhere { Interactions.specId inList ids }
         Steps.deleteWhere { Steps.specId inList ids }
         Tags.deleteWhere { Tags.specId inList ids }
         Specs.deleteWhere { Specs.id inList ids }
@@ -162,7 +186,10 @@ class ExposedSpecificationRepository(
 
     private fun deleteTags(specId: String) = Tags.deleteWhere { Tags.specId eq specId }
 
+    private fun deleteInteractions(specId: String) = Interactions.deleteWhere { Interactions.specId eq specId }
+
     fun deleteAll() {
+        Interactions.deleteAll()
         Steps.deleteAll()
         Tags.deleteAll()
         Specs.deleteAll()

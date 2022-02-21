@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.report
 import io.gianluigip.spectacle.common.DummyTransactionExecutor
 import io.gianluigip.spectacle.common.Features.SPECIFICATIONS_REPORT
 import io.gianluigip.spectacle.common.fixtures.aFeature
+import io.gianluigip.spectacle.common.fixtures.aSpec
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
@@ -25,7 +26,6 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
-import io.gianluigip.spectacle.specification.model.Specification as Spec
 import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
 
 private val FEATURE_1 = FeatureName("Feature1")
@@ -42,11 +42,11 @@ private val TAG_2 = TagName("Tag2")
 
 @Feature(name = SPECIFICATIONS_REPORT)
 @ExtendWith(JUnitSpecificationReporter::class)
-class ReportGeneratorTest {
+class SpecReportGeneratorTest {
 
     private val specFinder: SpecificationFinder = mockk()
     private val featureRepo: FeatureRepository = mockk()
-    private val reportGenerator = ReportGenerator(specFinder, featureRepo, DummyTransactionExecutor())
+    private val reportGenerator = SpecReportGenerator(specFinder, featureRepo, DummyTransactionExecutor())
 
     private lateinit var report: SpecsReport
 
@@ -57,11 +57,11 @@ class ReportGeneratorTest {
             every {
                 specFinder.findBy()
             } returns listOf(
-                Spec(SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec2"), FEATURE_1, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec4"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
-                Spec(SpecName("Spec5"), FEATURE_3, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
+                aSpec(SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
+                aSpec(SpecName("Spec2"), FEATURE_1, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
+                aSpec(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
+                aSpec(SpecName("Spec4"), FEATURE_2, TEAM_2, SOURCE_1, COMPONENT_1, IMPLEMENTED, listOf(TAG_1), steps = listOf(Step(GIVEN, "", 0))),
+                aSpec(SpecName("Spec5"), FEATURE_3, TEAM_1, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), steps = listOf(Step(GIVEN, "", 0))),
             )
             every { featureRepo.findByNames(setOf(FEATURE_1, FEATURE_2, FEATURE_3)) } returns listOf(
                 aFeature(FEATURE_1, description = "Description Feature 1"),

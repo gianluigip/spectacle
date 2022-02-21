@@ -96,6 +96,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 // KTOR
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.6.0")
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
                 // REACT
                 implementation(kotlinw("react:17.0.2"))
@@ -106,6 +107,7 @@ kotlin {
                 implementation(kotlinw("mui-icons:5.4.1"))
                 implementation(npm("@emotion/react", "11.7.1"))
                 implementation(npm("@emotion/styled", "11.6.0"))
+                implementation(npm("mermaid", "8.14.0"))
             }
         }
         val jsTest by getting {

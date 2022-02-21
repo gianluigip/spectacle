@@ -5,7 +5,7 @@ import csstype.Color
 /**
  * Change the saturation of a Hex color
  */
-fun Color.lighter(percentage: Int): Color {
+fun String.lighter(percentage: Int): Color {
     if (percentage > 100 || percentage < 0) throw IllegalArgumentException("The percentage has to be between 0 and 100 rather it was $percentage")
     if (!this.toString().startsWith("#")) throw IllegalArgumentException("The color has to be an hex number but it was $this")
 

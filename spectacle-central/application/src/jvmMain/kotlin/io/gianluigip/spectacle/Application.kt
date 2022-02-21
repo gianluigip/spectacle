@@ -3,6 +3,7 @@ package io.gianluigip.spectacle
 import io.gianluigip.spectacle.common.beans.productionDependencies
 import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
+import io.gianluigip.spectacle.report.api.interactionReportRoutes
 import io.gianluigip.spectacle.report.api.specReportRoutes
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
 import io.ktor.http.HttpHeaders
@@ -56,6 +57,7 @@ fun Application.module() {
         route("/api") {
             specificationsRoutes()
             specReportRoutes()
+            interactionReportRoutes()
         }
     }
 }

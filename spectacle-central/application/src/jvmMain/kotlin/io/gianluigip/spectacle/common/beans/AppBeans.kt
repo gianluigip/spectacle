@@ -2,7 +2,8 @@ package io.gianluigip.spectacle.common.beans
 
 import io.gianluigip.spectacle.common.ExposedTransactionExecutor
 import io.gianluigip.spectacle.common.TransactionExecutor
-import io.gianluigip.spectacle.report.ReportGenerator
+import io.gianluigip.spectacle.report.SpecReportGenerator
+import io.gianluigip.spectacle.report.InteractionsReportGenerator
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.SpecificationProcessor
 import io.gianluigip.spectacle.specification.repository.ExposedFeatureRepository
@@ -23,7 +24,8 @@ fun productionDependencies() = DI.Module("ProductionDependencies") {
 
     bindSingleton { SpecificationProcessor(instance(), instance(), instance(), instance()) }
     bindSingleton { SpecificationFinder(instance(), instance()) }
-    bindSingleton { ReportGenerator(instance(), instance(), instance()) }
+    bindSingleton { SpecReportGenerator(instance(), instance(), instance()) }
+    bindSingleton { InteractionsReportGenerator(instance(), instance()) }
 }
 
 var testDependencies = DI.Module("TestDependencies") {

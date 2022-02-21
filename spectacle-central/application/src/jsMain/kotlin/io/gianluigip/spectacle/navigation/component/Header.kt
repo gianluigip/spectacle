@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.navigation
+package io.gianluigip.spectacle.navigation.component
 
 import csstype.FlexGrow
 import csstype.GridArea
@@ -9,6 +9,7 @@ import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
+import io.gianluigip.spectacle.diagram.components.systemDiagramPath
 import io.gianluigip.spectacle.specification.component.specificationsReportPath
 import kotlinext.js.jso
 import kotlinx.browser.window
@@ -54,10 +55,15 @@ val Header = FC<Props> {
             }
 
             Spacer { width = 10.px }
-
             NavMenuItem {
                 toPath = specificationsReportPath
                 label = "Specifications"
+            }
+
+            Spacer { width = 10.px }
+            NavMenuItem {
+                toPath = systemDiagramPath
+                label = "System"
             }
 
             Box { sx = jso { flexGrow = FlexGrow(1.0) } }

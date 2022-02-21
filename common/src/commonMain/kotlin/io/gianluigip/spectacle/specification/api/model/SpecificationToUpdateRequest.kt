@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.specification.api.model
 
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.SpecificationStep
 import kotlinx.serialization.Serializable
@@ -25,4 +26,5 @@ data class SpecificationToUpdateRequest(
     val status: SpecStatus,
     val tags: List<String> = listOf(),
     val steps: List<SpecificationStep>,
+    val interactions: List<SpecInteraction> = emptyList(),
 )
