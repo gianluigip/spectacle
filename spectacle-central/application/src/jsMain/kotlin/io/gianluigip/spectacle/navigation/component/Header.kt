@@ -63,7 +63,7 @@ val Header = FC<Props> {
             Spacer { width = 10.px }
             NavMenuItem {
                 toPath = systemDiagramPath
-                label = "System Diagram"
+                label = "System"
             }
 
             Box { sx = jso { flexGrow = FlexGrow(1.0) } }

@@ -9,6 +9,12 @@ increase the value for the organization as a whole.
 
 ![Specifications Page](./docs/images/SpecificationsPage.png)
 
+## Features
+
+* [Specifications Report](./docs/SpecificationsReport.md): Search and bookmark any specification
+  published.
+* [System Diagram](./docs/SystemDiagram.md): Visually show all the interactions in the system.
+
 ## Config
 
 The service requires a `PostgreSql` database with a user with write permissions, it uses Flyway to
