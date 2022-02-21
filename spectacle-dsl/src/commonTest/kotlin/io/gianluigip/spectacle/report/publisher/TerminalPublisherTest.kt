@@ -23,21 +23,24 @@ class TerminalPublisherTest {
             steps = mutableListOf(
                 Step(THEN, "Step2", 1),
                 Step(WHENEVER, "Step1", 0)
-            )
+            ),
+            interactions = emptyList(),
         )
         val spec2 = Specification(
             name = "Spec2",
             metadata = SpecificationMetadata(
                 featureName = "Feature1", featureDescription = "", team = "Team1", status = SpecStatus.NOT_IMPLEMENTED, tags = listOf()
             ),
-            steps = mutableListOf(Step(GIVEN, "Step2", 0))
+            steps = mutableListOf(Step(GIVEN, "Step2", 0)),
+            interactions = emptyList(),
         )
         val spec3 = Specification(
             name = "Spec3",
             metadata = SpecificationMetadata(
                 featureName = "Feature2", featureDescription = "", team = "Team1", status = SpecStatus.PARTIALLY_IMPLEMENTED, tags = listOf()
             ),
-            steps = mutableListOf(Step(GIVEN, "Step3", 0))
+            steps = mutableListOf(Step(GIVEN, "Step3", 0)),
+            interactions = emptyList(),
         )
         val specs = listOf(spec2, spec1, spec3)
 

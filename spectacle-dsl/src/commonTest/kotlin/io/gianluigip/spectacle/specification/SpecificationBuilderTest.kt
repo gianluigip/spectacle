@@ -2,6 +2,11 @@ package io.gianluigip.spectacle.specification
 
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
+import io.gianluigip.spectacle.specification.model.InteractionDirection
+import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
+import io.gianluigip.spectacle.specification.model.InteractionType
+import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.SpecificationStep
 import io.gianluigip.spectacle.specification.model.StepType.GIVEN
@@ -24,6 +29,8 @@ class SpecificationBuilderTest {
             addStep(GIVEN, "First step")
             addStep(WHENEVER, "Second step")
             addStep(THEN, "Third step")
+            addInteraction(SpecInteraction(INBOUND, EVENT, "Int1", mutableMapOf("m1" to "v1")))
+            addInteraction(SpecInteraction(InteractionDirection.OUTBOUND, InteractionType.HTTP, "Int2", emptyMap()))
         }
 
         specBuilder.build() assertThat {
@@ -40,6 +47,10 @@ class SpecificationBuilderTest {
                 SpecificationStep(WHENEVER, "Second step", 2),
                 SpecificationStep(THEN, "Third step", 3)
             )
+            interactions shouldBe listOf(
+                SpecInteraction(INBOUND, EVENT, "Int1", mutableMapOf("m1" to "v1")),
+                SpecInteraction(InteractionDirection.OUTBOUND, InteractionType.HTTP, "Int2", emptyMap())
+            )
         }
     }
 
@@ -55,6 +66,7 @@ class SpecificationBuilderTest {
                 tags shouldBe listOf()
             }
             steps shouldBe listOf()
+            interactions shouldBe listOf()
         }
     }
 }

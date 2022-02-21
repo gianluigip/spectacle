@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.specification
 
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.SpecificationStep
 import io.gianluigip.spectacle.specification.model.StepType
@@ -14,12 +15,18 @@ class SpecificationBuilder(
     var team: String? = null,
     var status: SpecStatus? = null,
     var tags: MutableSet<String> = mutableSetOf(),
+    var interactions: MutableSet<SpecInteraction> = mutableSetOf()
 ) {
     private val stepsRegistered: MutableList<SpecificationStep> = mutableListOf()
     val steps: List<SpecificationStep> get() = stepsRegistered
 
     internal fun addStep(type: StepType, description: String): SpecificationBuilder {
         stepsRegistered.add(SpecificationStep(type, description, index = steps.size + 1))
+        return this
+    }
+
+    internal fun addInteraction(interaction: SpecInteraction): SpecificationBuilder {
+        interactions += interaction
         return this
     }
 
@@ -42,6 +49,7 @@ class SpecificationBuilder(
             tags = tags.toList().sortedBy { it },
         ),
         name = specName ?: "Unknown",
-        steps = stepsRegistered.toList()
+        steps = stepsRegistered.toList(),
+        interactions = interactions.toList(),
     )
 }

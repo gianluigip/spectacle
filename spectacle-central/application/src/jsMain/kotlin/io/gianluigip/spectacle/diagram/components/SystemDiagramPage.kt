@@ -18,6 +18,7 @@ import mui.material.Typography
 import mui.system.ResponsiveStyleValue
 import react.FC
 import react.Props
+import react.css.css
 import react.router.useLocation
 import react.router.useNavigate
 import react.useEffect
@@ -60,6 +61,7 @@ val SystemDiagramPage = FC<Props> {
         direction = ResponsiveStyleValue(GridDirection.row)
         Grid {
             item = true
+            css { maxWidth = 300.px }
             xs = 4; md = 3; xl = 2
             Typography { variant = "h5"; +"Filters" }
             Spacer { height = 10.px }
@@ -79,7 +81,12 @@ val SystemDiagramPage = FC<Props> {
             Typography { variant = "h5"; +"System Diagram" }
             Spacer { height = 10.px }
             LoadingBar { isLoading = currentFilters != queryFilters }
-            interactions?.let { SystemDiagram { this.interactions = it } }
+            interactions?.let {
+                SystemDiagram {
+                    this.interactions = it
+                    this.components = filters?.components ?: emptySet()
+                }
+            }
         }
     }
 }

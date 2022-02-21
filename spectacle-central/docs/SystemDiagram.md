@@ -10,4 +10,4 @@ The full system diagram tends to be big, so you can filter the interactions in t
 only a subset of it, it is very useful to visualize more concrete data like all the dependencies for
 a team or a service.
 
-![System Diagram Page](./images/SystemDiagramPage.png)
+![System Diagram Page](https://github.com/gianluigip/spectacle/raw/master/spectacle-central/docs/images/SystemDiagramPage.png)

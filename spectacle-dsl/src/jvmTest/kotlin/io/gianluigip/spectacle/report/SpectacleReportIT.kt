@@ -2,18 +2,23 @@ package io.gianluigip.spectacle.report
 
 import com.github.tomakehurst.wiremock.client.WireMock.equalToJson
 import com.github.tomakehurst.wiremock.client.WireMock.exactly
-import com.github.tomakehurst.wiremock.client.WireMock.noContent
-import com.github.tomakehurst.wiremock.client.WireMock.put
 import com.github.tomakehurst.wiremock.client.WireMock.putRequestedFor
-import com.github.tomakehurst.wiremock.client.WireMock.stubFor
 import com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo
 import com.github.tomakehurst.wiremock.client.WireMock.verify
 import io.gianluigip.spectacle.BaseIntegrationTest
+import io.gianluigip.spectacle.common.Tags.SPECIFICATIONS
+import io.gianluigip.spectacle.common.utils.api.stubPutSpecs
 import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
+import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.report.publisher.central.CentralPublisher
 import io.gianluigip.spectacle.specification.SpecificationMetadata
+import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
+import io.gianluigip.spectacle.specification.model.InteractionDirection.OUTBOUND
+import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
+import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.StepType.GIVEN
 import io.gianluigip.spectacle.specification.model.StepType.WHENEVER
@@ -26,6 +31,7 @@ import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
     "Publish Specifications",
     description = "Spectacle can publish the specs into a central repository so it can be review it by any stakeholder."
 )
+@SpecTags(SPECIFICATIONS)
 class SpectacleReportIT : BaseIntegrationTest() {
 
     private lateinit var specs: List<Spec>
@@ -43,10 +49,12 @@ class SpectacleReportIT : BaseIntegrationTest() {
                 tags = listOf("Tag2")
             )
             val spec1 = Spec(
-                metadata = spec1Metadata, name = "Spec1", steps = mutableListOf(Step(WHENEVER, "Step1", 0))
+                metadata = spec1Metadata, name = "Spec1", steps = mutableListOf(Step(WHENEVER, "Step1", 0)),
+                interactions = listOf(SpecInteraction(INBOUND, EVENT, "Int1", mutableMapOf("m1" to "v1")))
             )
             val spec2 = Spec(
-                metadata = spec2Metadata, name = "Spec2", steps = mutableListOf(Step(GIVEN, "Step2", 0))
+                metadata = spec2Metadata, name = "Spec2", steps = mutableListOf(Step(GIVEN, "Step2", 0)),
+                interactions = listOf(SpecInteraction(OUTBOUND, HTTP, "Int2", emptyMap()))
             )
             specs = listOf(spec1, spec2)
 
@@ -76,7 +84,16 @@ class SpectacleReportIT : BaseIntegrationTest() {
                                             "status": "IMPLEMENTED",
                                             "tags": [ "Tag1-1", "Tag1-2" ],
                                             "steps": [ { "type": "WHENEVER", "description": "Step1", "index": 0 } ],
-                                            "interactions" : [ ]
+                                            "interactions" : [
+                                                {
+                                                    "direction": "INBOUND",
+                                                    "type": "EVENT",
+                                                    "name": "Int1",
+                                                    "metadata": {
+                                                        "m1": "v1"
+                                                    }
+                                                }
+                                            ]
                                         },
                                         {
                                             "team": "Matching",
@@ -84,7 +101,14 @@ class SpectacleReportIT : BaseIntegrationTest() {
                                             "status": "NOT_IMPLEMENTED",
                                             "tags": [ "Tag2" ],
                                             "steps": [ { "type": "GIVEN", "description": "Step2", "index": 0 } ],
-                                            "interactions" : [ ]
+                                            "interactions" : [
+                                                {
+                                                    "direction": "OUTBOUND",
+                                                    "type": "HTTP",
+                                                    "name": "Int2",
+                                                    "metadata": {}
+                                                }
+                                            ]
                                         }
                                     ]
                                 }
@@ -94,10 +118,4 @@ class SpectacleReportIT : BaseIntegrationTest() {
                     )
             )
         }
-
-    private fun stubPutSpecs() {
-        stubFor(
-            put("/api/specification").willReturn(noContent())
-        )
-    }
 }
