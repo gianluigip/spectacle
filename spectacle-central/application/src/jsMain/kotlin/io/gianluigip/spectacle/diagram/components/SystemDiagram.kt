@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.diagram.components
 
 import io.gianluigip.spectacle.common.component.Diagram
+import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.navigation.generateSpecificationReportExternalLink
 import io.gianluigip.spectacle.report.api.model.SystemInteractionResponse
 import io.gianluigip.spectacle.specification.component.FiltersSelected
@@ -10,24 +11,48 @@ import io.gianluigip.spectacle.specification.model.InteractionType
 import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
 import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
 import io.gianluigip.spectacle.specification.model.InteractionType.PERSISTENCE
+import mui.material.FormControlLabel
+import mui.material.FormGroup
+import mui.material.Switch
 import react.FC
 import react.Props
+import react.create
+import react.useState
 
 external interface SystemDiagramProps : Props {
     var interactions: List<SystemInteractionResponse>
+    var components: Set<String>
 }
 
 val SystemDiagram = FC<SystemDiagramProps> {
 
+    var expandDiagram by useState(false)
+    FormGroup {
+        FormControlLabel {
+            label = "Expand Diagram".toNode()
+            control = Switch.create {
+                checked = expandDiagram
+                onChange = { _, newValue -> expandDiagram = newValue }
+            }
+        }
+    }
+
     Diagram {
         content = """
             graph LR
+            ${generateComponents(it.components)} 
             ${generateComponents(it.interactions)} 
             ${generateDiagramInteractions(it.interactions)}
             ${generateComponentsLink(it.interactions)}
         """.trimIndent()
+        this.expandDiagram = expandDiagram
     }
 }
+
+private fun generateComponents(components: Set<String>): String =
+    components.joinToString("\n") { component ->
+        generateElementShape(component, HTTP)
+    }
 
 private fun generateComponents(interactions: List<SystemInteractionResponse>): String {
     val components = mutableSetOf<String>()

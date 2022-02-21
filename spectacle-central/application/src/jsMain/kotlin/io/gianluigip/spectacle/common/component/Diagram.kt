@@ -14,6 +14,7 @@ import kotlin.random.Random
 
 external interface DiagramProps : Props {
     var content: String
+    var expandDiagram: Boolean?
 }
 
 val Diagram = FC<DiagramProps> {
@@ -33,13 +34,13 @@ val Diagram = FC<DiagramProps> {
         id = diagramId
         className = "mermaid"
         +"""
-            ${generateMermaidTheme(theme)}
+            ${generateMermaidConfig(theme, it.expandDiagram ?: false)}
             ${it.content}
         """.trimIndent()
     }
 }
 
-private fun generateMermaidTheme(theme: Theme): String = """
+private fun generateMermaidConfig(theme: Theme, expandDiagram: Boolean): String = """
     %%{init: {
         'theme': 'base',
         'themeVariables': {
@@ -48,7 +49,7 @@ private fun generateMermaidTheme(theme: Theme): String = """
             'fontFamily': 'Roboto'
             },
         'flowchart': {
-            'useMaxWidth': false
+            'useMaxWidth': ${!expandDiagram}
             }            
         }
     }%%
