@@ -2,8 +2,8 @@ package io.gianluigip.spectacle.home
 
 import csstype.GridArea
 import csstype.px
-import io.gianluigip.spectacle.diagram.SystemDiagram
-import io.gianluigip.spectacle.diagram.systemDiagramPath
+import io.gianluigip.spectacle.diagram.components.SystemDiagramPage
+import io.gianluigip.spectacle.diagram.components.systemDiagramPath
 import io.gianluigip.spectacle.specification.component.SpecificationsReport
 import io.gianluigip.spectacle.specification.component.specificationsReportPath
 import kotlinext.js.jso
@@ -56,7 +56,7 @@ val Content = FC<Props> {
 
             Route {
                 path = systemDiagramPath
-                element = SystemDiagram.create()
+                element = SystemDiagramPage.create()
             }
 
             Route {

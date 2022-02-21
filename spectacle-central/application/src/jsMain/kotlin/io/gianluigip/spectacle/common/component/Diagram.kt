@@ -21,12 +21,13 @@ val Diagram = FC<DiagramProps> {
     val diagramId by useState("diagram-${Random.nextInt()}")
 
     useEffect {
-        document.getElementById(diagramId)?.removeAttribute("data-processed")
-        mermaidInit()
+        document.getElementById(diagramId)?.let { mermaidDiv ->
+            if (!mermaidDiv.innerHTML.trim().startsWith("<svg")) {
+                mermaidDiv.removeAttribute("data-processed")
+                mermaidInit()
+            }
+        }
     }
-
-    println("Mermaid Content:")
-    println(it.content)
 
     Box {
         id = diagramId

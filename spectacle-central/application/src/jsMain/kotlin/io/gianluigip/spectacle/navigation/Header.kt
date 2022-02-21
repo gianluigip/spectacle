@@ -9,7 +9,7 @@ import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
-import io.gianluigip.spectacle.diagram.systemDiagramPath
+import io.gianluigip.spectacle.diagram.components.systemDiagramPath
 import io.gianluigip.spectacle.specification.component.specificationsReportPath
 import kotlinext.js.jso
 import kotlinx.browser.window
