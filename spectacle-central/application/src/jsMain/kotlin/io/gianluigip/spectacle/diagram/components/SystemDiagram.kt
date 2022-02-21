@@ -57,7 +57,7 @@ private fun generateComponentsLink(interactions: List<SystemInteractionResponse>
 }
 
 private fun generateComponentLink(component: String): String =
-    """click ${component.toDiagramId()} "${generateSpecificationReportExternalLink(FiltersSelected(component = component))}" "Test Tooltip" _blank"""
+    """click ${component.toDiagramId()} "${generateSpecificationReportExternalLink(FiltersSelected(component = component))}" _blank"""
 
 private fun generateDiagramInteractions(interactions: List<SystemInteractionResponse>): String {
     val mermaidInteractions = mutableSetOf<String>()

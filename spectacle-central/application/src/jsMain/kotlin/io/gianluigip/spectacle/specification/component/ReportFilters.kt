@@ -19,6 +19,7 @@ data class FiltersSelected(
 external interface ReportFilersProps : Props {
     var filters: ReportFiltersResponse
     var filtersSelected: FiltersSelected
+    var hideStatusFilter: Boolean?
     var onFilterChanged: (FiltersSelected) -> Unit
 }
 
@@ -46,12 +47,14 @@ val ReportFilters = FC<ReportFilersProps> {
             options = filters.teams
             onFilterChanged = { newValue -> it.onFilterChanged.invoke(selected.copy(team = newValue)) }
         }
-        ReportFilter {
-            label = "Statuses"
-            value = selected.status?.display
-            options = filters.statuses.map { it.display }
-            onFilterChanged = { newValue ->
-                it.onFilterChanged.invoke(selected.copy(status = newValue?.let { status -> SpecStatus.fromDisplay(status) }))
+        if (it.hideStatusFilter != true) {
+            ReportFilter {
+                label = "Statuses"
+                value = selected.status?.display
+                options = filters.statuses.map { it.display }
+                onFilterChanged = { newValue ->
+                    it.onFilterChanged.invoke(selected.copy(status = newValue?.let { status -> SpecStatus.fromDisplay(status) }))
+                }
             }
         }
         ReportFilter {

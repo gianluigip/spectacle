@@ -1,21 +1,18 @@
 package io.gianluigip.spectacle.specification.component
 
-import csstype.FlexGrow
 import csstype.px
+import io.gianluigip.spectacle.common.component.LoadingBar
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
-import io.gianluigip.spectacle.common.utils.escapeSpaces
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.api.getSpecReport
 import io.gianluigip.spectacle.specification.model.SpecStatus
-import kotlinext.js.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import mui.material.Grid
 import mui.material.GridDirection.row
-import mui.material.LinearProgress
 import mui.material.Typography
 import mui.system.ResponsiveStyleValue
 import react.FC
@@ -46,15 +43,13 @@ val SpecificationsReport = FC<Props> {
         val response = getSpecReport(filters.feature, filters.source, filters.component, filters.tag, filters.team, filters.status)
         featuresResponse = response.features
         filtersResponse = response.filters
+        currentFilters = queryFilters
     }
 
     fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportUrlWithParameters(specificationsReportPath, filters))
 
     useEffect {
-        if (currentFilters != queryFilters) {
-            currentFilters = queryFilters
-            loadSpecReport(queryFilters)
-        }
+        if (currentFilters != queryFilters) loadSpecReport(queryFilters)
     }
 
     Grid {
@@ -62,13 +57,12 @@ val SpecificationsReport = FC<Props> {
         spacing = ResponsiveStyleValue(20.px)
         direction = ResponsiveStyleValue(row)
         Grid {
-            item = true;
+            item = true
             xs = 4; md = 3; xl = 2
             Typography { variant = "h5"; +"Filters" }
             Spacer { height = 10.px }
-            if (featuresResponse == null) {
-                LinearProgress { sx = jso { FlexGrow(1.0) } }
-            }
+
+            LoadingBar { isLoading = currentFilters != queryFilters }
             filtersResponse?.let {
                 ReportFilters {
                     filtersSelected = currentFilters ?: FiltersSelected()
@@ -82,9 +76,7 @@ val SpecificationsReport = FC<Props> {
             xs = 8; md = 9; xl = 10
             Typography { variant = "h5"; +"List of Features" }
             Spacer { height = 10.px }
-            if (featuresResponse == null) {
-                LinearProgress { sx = jso { FlexGrow(1.0) } }
-            }
+            LoadingBar { isLoading = currentFilters != queryFilters }
             featuresResponse?.let { FeaturesReport { features = it } }
         }
     }
