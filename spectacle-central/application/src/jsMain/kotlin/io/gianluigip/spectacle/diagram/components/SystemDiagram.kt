@@ -1,8 +1,11 @@
 package io.gianluigip.spectacle.diagram.components
 
 import io.gianluigip.spectacle.common.component.Diagram
+import io.gianluigip.spectacle.navigation.generateSpecificationReportExternalLink
 import io.gianluigip.spectacle.report.api.model.SystemInteractionResponse
-import io.gianluigip.spectacle.specification.model.InteractionDirection
+import io.gianluigip.spectacle.specification.component.FiltersSelected
+import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
+import io.gianluigip.spectacle.specification.model.InteractionDirection.OUTBOUND
 import io.gianluigip.spectacle.specification.model.InteractionType
 import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
 import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
@@ -21,6 +24,7 @@ val SystemDiagram = FC<SystemDiagramProps> {
             graph LR
             ${generateComponents(it.interactions)} 
             ${generateDiagramInteractions(it.interactions)}
+            ${generateComponentsLink(it.interactions)}
         """.trimIndent()
     }
 }
@@ -44,17 +48,42 @@ private fun generateElementShape(name: String, type: InteractionType): String {
     }
 }
 
+private fun generateComponentsLink(interactions: List<SystemInteractionResponse>): String {
+    val links = mutableSetOf<String>()
+    interactions.forEach { interaction ->
+        links += generateComponentLink(interaction.component)
+    }
+    return links.joinToString("\n")
+}
+
+private fun generateComponentLink(component: String): String =
+    """click ${component.toDiagramId()} "${generateSpecificationReportExternalLink(FiltersSelected(component = component))}" "Test Tooltip" _blank"""
+
 private fun generateDiagramInteractions(interactions: List<SystemInteractionResponse>): String {
     val mermaidInteractions = mutableSetOf<String>()
     interactions.forEach {
+        val componentId = it.component.toDiagramId()
+        val interactionId = it.interactionName.toDiagramId()
         val mermaidInteraction = when (it.direction) {
-            InteractionDirection.INBOUND -> "${it.interactionName.toDiagramId()} --> ${it.component.toDiagramId()}"
-            InteractionDirection.OUTBOUND -> "${it.component.toDiagramId()} --> ${it.interactionName.toDiagramId()}"
+            INBOUND -> generateInboundInteractions(componentId, interactionId, it.type)
+            OUTBOUND -> generateOutboundInteractions(componentId, interactionId, it.type)
             else -> ""
         }
         mermaidInteractions += mermaidInteraction
     }
     return mermaidInteractions.joinToString("\n")
+}
+
+private fun generateInboundInteractions(componentId: String, interactionId: String, type: InteractionType): String = when (type) {
+    EVENT -> "$interactionId -- Consume --> $componentId"
+    HTTP -> "$interactionId -- Request --> $componentId"
+    else -> "$interactionId --> $componentId"
+}
+
+private fun generateOutboundInteractions(componentId: String, interactionId: String, type: InteractionType): String = when (type) {
+    EVENT -> "$componentId -- Produce --> $interactionId"
+    HTTP -> "$componentId -- Request --> $interactionId"
+    else -> "$componentId -- Connect --> $interactionId"
 }
 
 private fun String.toDiagramId() = replace(" ", "")

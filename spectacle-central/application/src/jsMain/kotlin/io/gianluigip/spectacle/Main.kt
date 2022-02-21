@@ -10,7 +10,7 @@ import io.gianluigip.spectacle.home.GridAreas
 import io.gianluigip.spectacle.home.Sizes
 import io.gianluigip.spectacle.home.ThemeModule
 import io.gianluigip.spectacle.home.Content
-import io.gianluigip.spectacle.navigation.Header
+import io.gianluigip.spectacle.navigation.component.Header
 import kotlinext.js.jso
 import kotlinx.browser.document
 import mui.system.Box

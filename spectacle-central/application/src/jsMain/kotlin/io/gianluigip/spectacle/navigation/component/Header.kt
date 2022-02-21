@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.navigation
+package io.gianluigip.spectacle.navigation.component
 
 import csstype.FlexGrow
 import csstype.GridArea

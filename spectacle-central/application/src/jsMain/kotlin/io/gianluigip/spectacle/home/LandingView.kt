@@ -6,7 +6,7 @@ import csstype.JustifyContent
 import csstype.TextAlign.Companion.justify
 import csstype.pct
 import csstype.px
-import io.gianluigip.spectacle.navigation.GITHUB_URL
+import io.gianluigip.spectacle.navigation.component.GITHUB_URL
 import io.gianluigip.spectacle.specification.component.specificationsReportPath
 import kotlinext.js.jso
 import mui.material.Box
