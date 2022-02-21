@@ -46,7 +46,10 @@ private fun generateMermaidTheme(theme: Theme): String = """
             'darkMode': ${theme.palette.mode == "dark"},
             'primaryColor': '${theme.palette.info.main.lighter(80)}',
             'fontFamily': 'Roboto'
-            }
+            },
+        'flowchart': {
+            'useMaxWidth': false
+            }            
         }
     }%%
 """.trimIndent()
