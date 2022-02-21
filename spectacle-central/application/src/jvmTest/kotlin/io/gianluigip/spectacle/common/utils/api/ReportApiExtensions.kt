@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.common.utils.api
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
+import io.gianluigip.spectacle.dsl.interactions.receivesRequestFrom
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
 import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
 import io.gianluigip.spectacle.specification.model.SpecStatus
@@ -17,6 +18,7 @@ fun BaseIntegrationTest.getSpecReport(
     team: String? = null,
     status: SpecStatus? = null,
 ): SpecsReportResponse = runBlocking {
+    receivesRequestFromUI()
     httpClient.get("$httpHost/api/report/specs") {
         feature?.let { parameter("features", feature) }
         source?.let { parameter("sources", source) }
@@ -34,6 +36,7 @@ fun BaseIntegrationTest.getInteractionReport(
     tag: String? = null,
     team: String? = null,
 ): InteractionsReportResponse = runBlocking {
+    receivesRequestFromUI()
     httpClient.get("$httpHost/api/report/interactions") {
         feature?.let { parameter("features", feature) }
         source?.let { parameter("sources", source) }
@@ -42,3 +45,5 @@ fun BaseIntegrationTest.getInteractionReport(
         team?.let { parameter("teams", team) }
     }.body()
 }
+
+fun receivesRequestFromUI() = receivesRequestFrom("Web UI")

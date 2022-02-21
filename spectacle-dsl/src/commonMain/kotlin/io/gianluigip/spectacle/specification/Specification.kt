@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.specification
 
+import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.SpecificationStep
 
@@ -7,6 +8,7 @@ data class Specification(
     val metadata: SpecificationMetadata,
     val name: String,
     val steps: List<SpecificationStep>,
+    val interactions: List<SpecInteraction>,
 )
 
 data class SpecificationMetadata(

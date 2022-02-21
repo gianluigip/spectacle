@@ -12,10 +12,12 @@ import io.ktor.http.contentType
 import kotlinx.coroutines.runBlocking
 
 fun BaseIntegrationTest.getSpecs(): List<SpecificationResponse> = runBlocking {
+    receivesRequestFromUI()
     httpClient.get("$httpHost/api/specification").body()
 }
 
 fun BaseIntegrationTest.putSpecs(specs: SpecificationsToUpdateRequest) = runBlocking {
+    receivesRequestFromUI()
     httpClient.put("$httpHost/api/specification") {
         contentType(ContentType.Application.Json)
         setBody(specs)

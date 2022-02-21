@@ -40,7 +40,8 @@ object CentralPublisher : SpecificationPublisher {
             specsInFeature.forEach { spec ->
                 val specMetadata = spec.metadata
                 val specToUpdate = SpecificationToUpdateRequest(
-                    name = spec.name, team = specMetadata.team, status = spec.metadata.status, tags = specMetadata.tags, steps = spec.steps
+                    name = spec.name, team = specMetadata.team, status = spec.metadata.status, tags = specMetadata.tags,
+                    steps = spec.steps, interactions = spec.interactions,
                 )
                 specs.add(specToUpdate)
             }

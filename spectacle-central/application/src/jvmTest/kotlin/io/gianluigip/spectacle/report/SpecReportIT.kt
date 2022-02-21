@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
 import io.gianluigip.spectacle.common.Features.SPECIFICATIONS_REPORT
+import io.gianluigip.spectacle.common.Tags.SPECIFICATIONS
 import io.gianluigip.spectacle.common.utils.CLOCK
 import io.gianluigip.spectacle.common.utils.api.getSpecReport
 import io.gianluigip.spectacle.common.utils.api.putSpecs
@@ -9,6 +10,7 @@ import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
 import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
+import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
@@ -34,6 +36,7 @@ private const val TAG_1 = "Tag1"
 private const val TAG_2 = "Tag2"
 
 @Feature(name = SPECIFICATIONS_REPORT, description = "Search and aggregate all the specs")
+@SpecTags(SPECIFICATIONS)
 class SpecReportIT : BaseIntegrationTest() {
 
     @Test
