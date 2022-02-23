@@ -39,7 +39,7 @@ class ExposedWikiPageRepository(
     override fun findById(id: WikiId): WikiPage? =
         WikiPages
             .join(WikiPageFeatures, JoinType.LEFT, additionalConstraint = { WikiPages.id eq WikiPageFeatures.wikiId })
-            .join(WikiPageTags, JoinType.LEFT, additionalConstraint = { WikiPageFeatures.id eq WikiPageTags.wikiId })
+            .join(WikiPageTags, JoinType.LEFT, additionalConstraint = { WikiPages.id eq WikiPageTags.wikiId })
             .select { WikiPages.id eq id.value }
             .toList().toWikiPage(clock)
 
@@ -52,7 +52,7 @@ class ExposedWikiPageRepository(
     ): List<WikiPageMetadata> {
         val query = WikiPages
             .join(WikiPageFeatures, JoinType.LEFT, additionalConstraint = { WikiPages.id eq WikiPageFeatures.wikiId })
-            .join(WikiPageTags, JoinType.LEFT, additionalConstraint = { WikiPageFeatures.id eq WikiPageTags.wikiId })
+            .join(WikiPageTags, JoinType.LEFT, additionalConstraint = { WikiPages.id eq WikiPageTags.wikiId })
             .slice(
                 WikiPages.id, title, WikiPages.path, WikiPages.checksum, WikiPages.team, WikiPageFeatures.id,
                 WikiPageFeatures.name, WikiPageTags.id, WikiPageTags.name, WikiPages.pageSource, WikiPages.component,
