@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val jsWrapperVersion = "pre.297-kotlin-1.6.10"
+val jsWrapperVersion = "pre.304-kotlin-1.6.10"
 val serializationVersion = "1.3.1"
 val ktorVersion = "2.0.0-beta-1"
 val logbackVersion = "1.2.3"
@@ -103,11 +103,16 @@ kotlin {
                 implementation(kotlinw("react-dom:17.0.2"))
                 implementation(kotlinw("react-css:17.0.2"))
                 implementation(kotlinw("react-router-dom:6.2.1"))
-                implementation(kotlinw("mui:5.4.1"))
-                implementation(kotlinw("mui-icons:5.4.1"))
+                implementation(kotlinw("mui:5.4.3"))
+                implementation(kotlinw("mui-icons:5.4.2"))
                 implementation(npm("@emotion/react", "11.7.1"))
                 implementation(npm("@emotion/styled", "11.6.0"))
+                // Mermaid Diagrams
                 implementation(npm("mermaid", "8.14.0"))
+                // Markdown
+                implementation(npm("react-markdown", "8.0.0"))
+                implementation(npm("remark-gfm", "3.0.1"))
+                implementation(npm("rehype-highlight", "5.0.2"))
             }
         }
         val jsTest by getting {

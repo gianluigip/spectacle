@@ -150,4 +150,4 @@ local.properties
 *.gpg
 
 # Webpack
-webpack.config.d/
+**/webpack.config.d/patch.js

@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.common.component
 
 import csstype.FlexGrow
-import kotlinext.js.jso
+import kotlinx.js.jso
 import mui.material.LinearProgress
 import react.FC
 import react.Props

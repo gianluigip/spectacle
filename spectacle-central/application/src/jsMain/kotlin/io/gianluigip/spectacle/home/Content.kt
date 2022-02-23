@@ -6,7 +6,9 @@ import io.gianluigip.spectacle.diagram.components.SystemDiagramPage
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
 import io.gianluigip.spectacle.specification.component.SpecificationsReport
 import io.gianluigip.spectacle.specification.component.specificationsReportPath
-import kotlinext.js.jso
+import io.gianluigip.spectacle.wiki.component.WikiBrowser
+import io.gianluigip.spectacle.wiki.component.wikiPath
+import kotlinx.js.jso
 import mui.material.Paper
 import mui.material.PaperVariant
 import mui.material.Typography
@@ -48,15 +50,17 @@ val Content = FC<Props> {
                 index = true
                 element = LandingView.create()
             }
-
             Route {
                 path = specificationsReportPath
                 element = SpecificationsReport.create()
             }
-
             Route {
                 path = systemDiagramPath
                 element = SystemDiagramPage.create()
+            }
+            Route {
+                path = wikiPath
+                element = WikiBrowser.create()
             }
 
             Route {

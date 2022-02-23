@@ -1,6 +1,6 @@
 package io.gianluigip.spectacle.home
 
-import kotlinext.js.jso
+import kotlinx.js.jso
 import mui.material.styles.createTheme
 
 object Themes {

@@ -9,7 +9,7 @@ import io.gianluigip.spectacle.common.utils.toDisplay
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.SpecReportResponse
 import io.gianluigip.spectacle.specification.toDisplay
-import kotlinext.js.jso
+import kotlinx.js.jso
 import mui.material.Accordion
 import mui.material.AccordionDetails
 import mui.material.AccordionSummary
