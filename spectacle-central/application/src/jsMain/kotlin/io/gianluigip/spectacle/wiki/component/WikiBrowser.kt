@@ -1,5 +1,7 @@
 package io.gianluigip.spectacle.wiki.component
 
+import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
+import kotlinx.datetime.Clock
 import mui.material.Typography
 import react.FC
 import react.Props
@@ -9,7 +11,18 @@ val WikiBrowser = FC<Props> {
 
     Typography { variant = "h5"; +"Wiki" }
 
-    WikiPage {
+    val wiki = WikiPageResponse(
+        id = "fake",
+        title = "Test Wiki",
+        path = "/",
+        checksum = "fake1234",
+        team = "Spectacle",
+        tags = emptyList(),
+        features = emptyList(),
+        source = "hardcoded",
+        component = "Hardcoded",
+        creationTime = Clock.System.now(),
+        updateTime = Clock.System.now(),
         content = """
             # Test Wiki
             ## TODO         
@@ -45,7 +58,7 @@ val WikiBrowser = FC<Props> {
             graph LR
                 Start --> Stop
             ```                        
-            
         """.trimIndent()
-    }
+    )
+    WikiPageViewer { this.wiki = wiki }
 }

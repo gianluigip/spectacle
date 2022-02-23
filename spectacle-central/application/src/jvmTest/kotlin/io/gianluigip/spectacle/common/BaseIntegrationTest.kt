@@ -6,6 +6,7 @@ import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.specification.repository.ExposedFeatureRepository
 import io.gianluigip.spectacle.specification.repository.ExposedSpecificationRepository
 import io.gianluigip.spectacle.specification.repository.ExposedTeamRepository
+import io.gianluigip.spectacle.wiki.repository.ExposedWikiPageRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.ContentNegotiation
@@ -36,6 +37,7 @@ abstract class BaseIntegrationTest {
     val specRepo by lazy { val instance by di.instance<ExposedSpecificationRepository>(); instance }
     val featureRepo by lazy { val instance by di.instance<ExposedFeatureRepository>(); instance }
     val teamRepo by lazy { val instance by di.instance<ExposedTeamRepository>();instance }
+    val wikiPageRepo by lazy { val instance by di.instance<ExposedWikiPageRepository>();instance }
 
     @BeforeEach
     fun initEnv() {
@@ -50,6 +52,7 @@ abstract class BaseIntegrationTest {
         specRepo.deleteAll()
         featureRepo.deleteAll()
         teamRepo.deleteAll()
+        wikiPageRepo.deleteAll()
     }
 
     private fun setupDataBaseEnvVars() {

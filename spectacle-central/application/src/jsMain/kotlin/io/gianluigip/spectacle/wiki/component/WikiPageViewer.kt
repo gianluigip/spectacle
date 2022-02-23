@@ -4,6 +4,7 @@ import csstype.px
 import io.gianluigip.spectacle.common.component.mermaidInit
 import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
+import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 import io.gianluigip.spectacle.wiki.markdown_plugins.rehypeHighlight
 import io.gianluigip.spectacle.wiki.markdown_plugins.remarkGfm
 import kotlinx.browser.document
@@ -19,12 +20,12 @@ import react.useContext
 import react.useEffect
 
 external interface WikiPageProps : Props {
-    var content: String
+    var wiki: WikiPageResponse
 }
 
-val WikiPage = FC<WikiPageProps> {
+val WikiPageViewer = FC<WikiPageProps> {
     val theme by useContext(ThemeContext)
-    val content = it.content
+    val content = it.wiki.content
 
     useEffect {
         renderMermaidDiagrams(theme)
