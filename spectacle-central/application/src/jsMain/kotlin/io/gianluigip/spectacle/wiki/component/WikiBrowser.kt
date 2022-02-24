@@ -28,6 +28,7 @@ val WikiBrowser = FC<Props> {
 
     val queryParams = useLocation().search.parseParams()
     val wikiId = queryParams["id"]
+    var currentWikiId by useState("")
     var wikiPage by useState<WikiPageResponse>()
     var isLoading by useState(wikiId != null)
 
@@ -35,11 +36,12 @@ val WikiBrowser = FC<Props> {
         isLoading = true
         MainScope().launch {
             wikiPage = getWikiPage(wikiId)
+            currentWikiId = wikiId
             isLoading = false
         }
     }
 
-    useEffect { if (wikiId != null && wikiId != wikiPage?.id) loadPage(wikiId) }
+    useEffect { if (wikiId != null && currentWikiId != wikiId) loadPage(wikiId) }
 
     Grid {
         container = true
@@ -70,10 +72,10 @@ val WikiBrowser = FC<Props> {
                 sx = jso { padding = 20.px; height = 100.pct }
                 elevation = 2
 
-                LoadingBar { isLoading = wikiId != null && wikiId != wikiPage?.id }
+                LoadingBar { this.isLoading = isLoading }
                 when {
                     wikiId == null -> MarkdownViewer { content = landingContent() }
-                    !isLoading && wikiPage == null -> MarkdownViewer { content = NotFounContent() }
+                    !isLoading && wikiPage == null -> MarkdownViewer { content = notFoundContent() }
                     wikiPage != null -> wikiPage?.let { WikiPageViewer { wiki = it } }
                 }
             }
@@ -87,7 +89,7 @@ private fun landingContent(): String = """
             Select any page to start.
         """.trimIndent()
 
-private fun NotFounContent(): String = """
+private fun notFoundContent(): String = """
             # Page Not Found
             Select any page to start.
         """.trimIndent()

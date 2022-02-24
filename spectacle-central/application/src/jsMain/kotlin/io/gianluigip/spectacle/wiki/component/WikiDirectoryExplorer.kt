@@ -18,6 +18,7 @@ import kotlinx.js.jso
 import mui.icons.material.ChevronRight
 import mui.icons.material.ExpandMore
 import mui.lab.TreeItem
+import mui.material.styles.Theme
 import react.FC
 import react.Props
 import react.ReactNode
@@ -59,11 +60,6 @@ val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
     LoadingBar { isLoading = componentWikis == null }
 
     componentWikis?.let { compWikis ->
-
-        val topFolderCss = emotion.css.css(jso {
-            color = Color(theme.palette.info.contrastText)
-            backgroundColor = Color(theme.palette.info.main)
-        })
         TreeViewSingleSelect {
             defaultCollapseIcon = ExpandMore.create()
             defaultExpandIcon = ChevronRight.create()
@@ -74,34 +70,31 @@ val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
             onNodeToggle = { _, nodes -> directoriesExpanded = nodes }
 
             compWikis.forEach { componentWiki ->
-                +directorySection(componentWiki.rootDir, isTopFolder = true, topFolderCss = topFolderCss)
+                +directorySection(componentWiki.rootDir, isTopFolder = true, theme = theme)
             }
         }
     }
 }
 
-private fun directorySection(dir: WikiDirectory, isTopFolder: Boolean = false, topFolderCss: String? = null): ReactNode {
+private fun directorySection(dir: WikiDirectory, isTopFolder: Boolean = false, theme: Theme): ReactNode {
 
     return TreeItem.create {
         nodeId = dir.path
         label = dir.name.toNode()
-        if (isTopFolder && topFolderCss != null) {
 
-//            val topLevelItemCss = emotion.css.css(jso {
-//                color = Color(theme.palette.info.contrastText)
-//                backgroundColor = Color(theme.palette.info.main)
-//            })
-//            css("TopLevelItem") {
-//                color = Color(theme.palette.info.contrastText)
-//                backgroundColor = Color(theme.palette.info.main)
-//            }
-            classes?.let {
-                it.content = "${it.content} $topFolderCss"
+        ContentProps = jso {
+            style = jso {
+                if (isTopFolder) {
+                    color = Color(theme.palette.info.contrastText)
+                    backgroundColor = Color(theme.palette.info.main)
+                } else {
+                    color = Color(theme.palette.info.main)
+                }
             }
         }
 
         dir.directories.forEach { nestedDir ->
-            +directorySection(nestedDir)
+            +directorySection(nestedDir, isTopFolder = false, theme)
         }
 
         dir.pages.forEach { page ->
