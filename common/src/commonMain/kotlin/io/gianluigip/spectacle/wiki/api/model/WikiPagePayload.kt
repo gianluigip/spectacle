@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 data class WikiPageRequest(
     val title: String,
     val path: String,
+    val fileName:String,
     val content: String,
     val checksum: String,
     val team: String,
@@ -21,6 +22,7 @@ data class WikiPageMetadataResponse(
     val id: String,
     val title: String,
     val path: String,
+    val fileName:String,
     val checksum: String,
     val team: String,
     val tags: List<String>,
@@ -36,6 +38,7 @@ data class WikiPageResponse(
     val id: String,
     val title: String,
     val path: String,
+    val fileName:String,
     val content: String,
     val checksum: String,
     val team: String,

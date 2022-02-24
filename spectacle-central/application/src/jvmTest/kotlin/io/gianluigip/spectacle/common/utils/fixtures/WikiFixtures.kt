@@ -7,6 +7,7 @@ import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 fun aWikiPageRequest(
     title: String = "Test Wiki",
     path: String = "/test",
+    fileName: String = "test.md",
     content: String = "# Test Wiki\n**Content**",
     checksum: String = "12345",
     team: String = TeamConstants.TEAM_NAME.value,
@@ -15,5 +16,5 @@ fun aWikiPageRequest(
     source: String = FixtureConstants.SOURCE.value,
     component: String = FixtureConstants.COMPONENT.value,
 ) = WikiPageRequest(
-    title, path, content, checksum, team, tags, features, source, component
+    title, path, fileName, content, checksum, team, tags, features, source, component
 )

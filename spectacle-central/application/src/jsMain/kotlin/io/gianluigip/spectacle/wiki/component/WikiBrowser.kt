@@ -15,6 +15,7 @@ val WikiBrowser = FC<Props> {
         id = "fake",
         title = "Test Wiki",
         path = "/",
+        fileName = "test.md",
         checksum = "fake1234",
         team = "Spectacle",
         tags = emptyList(),

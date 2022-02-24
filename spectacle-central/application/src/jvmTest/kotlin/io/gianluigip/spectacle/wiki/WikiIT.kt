@@ -44,6 +44,7 @@ class WikiIT : BaseIntegrationTest() {
                 id shouldBe wikiId
                 title shouldBe expectedData.title
                 path shouldBe expectedData.path
+                fileName shouldBe expectedData.fileName
                 content shouldBe expectedData.content
                 checksum shouldBe expectedData.checksum
                 team shouldBe expectedData.team
@@ -59,6 +60,7 @@ class WikiIT : BaseIntegrationTest() {
             val pageToUpdate = aWikiPageRequest(
                 title = "Test Wiki 2",
                 path = "/test2",
+                fileName = "test2.md",
                 content = "contentChanged",
                 checksum = "4321",
                 team = "NewTeam",
@@ -74,6 +76,7 @@ class WikiIT : BaseIntegrationTest() {
                 id shouldBe wikiId
                 title shouldBe expectedData.title
                 path shouldBe expectedData.path
+                fileName shouldBe expectedData.fileName
                 content shouldBe expectedData.content
                 checksum shouldBe expectedData.checksum
                 team shouldBe expectedData.team

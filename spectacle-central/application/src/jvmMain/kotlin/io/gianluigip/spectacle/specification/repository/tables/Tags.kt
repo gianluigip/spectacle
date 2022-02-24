@@ -8,8 +8,8 @@ object Tags : StringIdTable(name = "tags") {
     val creationTime = datetime("creation_time")
     val updateTime = datetime("update_time")
     val specId = varchar("spec_id", 100).references(Specs.id)
-    val name = varchar("name", 255)
-    val teamName = varchar("team_name", 255)
-    val tagSource = varchar("source", 255)
-    val component = varchar("component", 255)
+    val name = varchar("name", 1000)
+    val teamName = varchar("team_name", 500)
+    val tagSource = varchar("source", 500)
+    val component = varchar("component", 500)
 }

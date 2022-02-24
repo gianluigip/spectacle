@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS specifications
     creation_time TIMESTAMP     NULL,
     update_time   TIMESTAMP     NULL,
     feature       VARCHAR(1000) NOT NULL,
-    team          VARCHAR(255)  NOT NULL,
-    source        VARCHAR(255)  NOT NULL,
-    component     VARCHAR(255)  NOT NULL,
+    team          VARCHAR(500)  NOT NULL,
+    source        VARCHAR(500)  NOT NULL,
+    component     VARCHAR(500)  NOT NULL,
     name          VARCHAR(1000) NOT NULL,
     status        VARCHAR(255)  NOT NULL
 );
@@ -40,14 +40,14 @@ CREATE TABLE IF NOT EXISTS specification_steps
  */
 create table tags
 (
-    id            VARCHAR(100) NOT NULL PRIMARY KEY,
-    creation_time TIMESTAMP    NULL,
-    update_time   TIMESTAMP    NULL,
-    spec_id       VARCHAR(100) NOT NULL,
-    name          VARCHAR(255) NOT NULL,
-    team_name     VARCHAR(255) NOT NULL,
-    source        VARCHAR(255) NOT NULL,
-    component     VARCHAR(255) NOT NULL,
+    id            VARCHAR(100)  NOT NULL PRIMARY KEY,
+    creation_time TIMESTAMP     NULL,
+    update_time   TIMESTAMP     NULL,
+    spec_id       VARCHAR(100)  NOT NULL,
+    name          VARCHAR(1000) NOT NULL,
+    team_name     VARCHAR(500)  NOT NULL,
+    source        VARCHAR(500)  NOT NULL,
+    component     VARCHAR(500)  NOT NULL,
     constraint fk_tags_spec_id foreign key (spec_id) references specifications (id)
 );
 CREATE INDEX index_tags_name ON tags (name);
@@ -65,8 +65,8 @@ CREATE TABLE IF NOT EXISTS features
     update_time   TIMESTAMP     NULL,
     name          VARCHAR(1000) NOT NULL,
     description   TEXT          NOT NULL,
-    source        VARCHAR(255)  NOT NULL,
-    component     VARCHAR(255)  NOT NULL
+    source        VARCHAR(500)  NOT NULL,
+    component     VARCHAR(500)  NOT NULL
 );
 CREATE INDEX index_features_name ON features (name);
 CREATE INDEX index_features_source ON features (source);
@@ -80,9 +80,9 @@ CREATE TABLE IF NOT EXISTS teams
     id            VARCHAR(100) NOT NULL PRIMARY KEY,
     creation_time TIMESTAMP    NULL,
     update_time   TIMESTAMP    NULL,
-    name          VARCHAR(255) NOT NULL,
-    source        VARCHAR(255) NOT NULL,
-    component     VARCHAR(255) NOT NULL
+    name          VARCHAR(500) NOT NULL,
+    source        VARCHAR(500) NOT NULL,
+    component     VARCHAR(500) NOT NULL
 );
 CREATE INDEX index_teams_name ON teams (name);
 CREATE INDEX index_teams_source ON teams (source);

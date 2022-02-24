@@ -8,16 +8,17 @@ CREATE TABLE IF NOT EXISTS wiki_pages
     update_time   TIMESTAMP     NULL,
     title         VARCHAR(1000) NOT NULL,
     path          VARCHAR(1000) NOT NULL,
+    file_name     VARCHAR(1000) NOT NULL,
     content       TEXT          NOT NULL,
     checksum      VARCHAR(1000) NOT NULL,
-    team          VARCHAR(255)  NOT NULL,
-    source        VARCHAR(255)  NOT NULL,
-    component     VARCHAR(255)  NOT NULL
+    team          VARCHAR(500)  NOT NULL,
+    source        VARCHAR(500)  NOT NULL,
+    component     VARCHAR(500)  NOT NULL
 );
 CREATE INDEX index_wiki_title ON wiki_pages (title);
 CREATE INDEX index_wiki_source ON wiki_pages (source);
 CREATE INDEX index_wiki_component ON wiki_pages (component);
-CREATE INDEX index_wiki_team ON wiki_pages (team);
+CREATE INDEX index_wiki_full_path ON wiki_pages (path, file_name);
 
 /**
   Wiki Features

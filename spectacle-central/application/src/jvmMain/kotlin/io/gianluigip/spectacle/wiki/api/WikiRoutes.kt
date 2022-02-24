@@ -62,7 +62,7 @@ fun Route.wikiRoutes() {
 
         post {
             val request = call.receive<WikiPageRequest>().toModel()
-            LOG.info("Saving wiki page ${request.title} with checksum ${request.checksum}")
+            LOG.info("Saving wiki page '${request.title}' with checksum ${request.checksum}")
             val pageMetadata = wikiProcessor.save(request).toResponse()
             call.respond(HttpStatusCode.Created, pageMetadata)
         }
@@ -74,7 +74,8 @@ fun Route.wikiRoutes() {
                 return@put
             }
             val request = call.receive<WikiPageRequest>().toModel()
-            val pageMetadata = wikiProcessor.update(wikiId!!.toWikiId(), request).toResponse()
+            LOG.info("Updating wiki page '${request.title}' with checksum ${request.checksum}")
+            val pageMetadata = wikiProcessor.update(wikiId.toWikiId(), request).toResponse()
             call.respond(pageMetadata)
         }
 
@@ -84,7 +85,8 @@ fun Route.wikiRoutes() {
                 call.respond(HttpStatusCode.NotFound)
                 return@delete
             }
-            wikiProcessor.delete(wikiId!!.toWikiId())
+            LOG.info("Updating wiki page '${wikiId}'")
+            wikiProcessor.delete(wikiId.toWikiId())
             call.respond(HttpStatusCode.OK)
         }
 

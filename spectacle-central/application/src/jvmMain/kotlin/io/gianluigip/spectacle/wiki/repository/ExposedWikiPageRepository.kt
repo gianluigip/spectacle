@@ -54,7 +54,7 @@ class ExposedWikiPageRepository(
             .join(WikiPageFeatures, JoinType.LEFT, additionalConstraint = { WikiPages.id eq WikiPageFeatures.wikiId })
             .join(WikiPageTags, JoinType.LEFT, additionalConstraint = { WikiPages.id eq WikiPageTags.wikiId })
             .slice(
-                WikiPages.id, title, WikiPages.path, WikiPages.checksum, WikiPages.team, WikiPageFeatures.id,
+                WikiPages.id, title, WikiPages.path, WikiPages.fileName, WikiPages.checksum, WikiPages.team, WikiPageFeatures.id,
                 WikiPageFeatures.name, WikiPageTags.id, WikiPageTags.name, WikiPages.pageSource, WikiPages.component,
                 WikiPages.creationTime, WikiPages.updateTime
             ).selectAll()
@@ -79,6 +79,7 @@ class ExposedWikiPageRepository(
             it[title] = wiki.title
             it[content] = wiki.content
             it[path] = wiki.path
+            it[fileName] = wiki.fileName
             it[checksum] = wiki.checksum
             it[team] = wiki.team.value
             it[pageSource] = wiki.source.value
@@ -99,6 +100,7 @@ class ExposedWikiPageRepository(
             it[title] = wiki.title
             it[content] = wiki.content
             it[path] = wiki.path
+            it[fileName] = wiki.fileName
             it[checksum] = wiki.checksum
             it[team] = wiki.team.value
             it[pageSource] = wiki.source.value

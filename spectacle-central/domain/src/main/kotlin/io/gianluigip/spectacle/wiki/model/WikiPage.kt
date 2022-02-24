@@ -17,6 +17,7 @@ fun String.toWikiId() = WikiId(this)
 data class WikiPageToUpsert(
     val title: String,
     val path: String,
+    val fileName:String,
     val content: String,
     val checksum: String,
     val team: TeamName,
@@ -30,6 +31,7 @@ data class WikiPageMetadata(
     val id: WikiId,
     val title: String,
     val path: String,
+    val fileName:String,
     val checksum: String,
     val team: TeamName,
     val tags: List<TagName>,
@@ -44,6 +46,7 @@ data class WikiPage(
     val id: WikiId,
     val title: String,
     val path: String,
+    val fileName:String,
     val content: String,
     val checksum: String,
     val team: TeamName,

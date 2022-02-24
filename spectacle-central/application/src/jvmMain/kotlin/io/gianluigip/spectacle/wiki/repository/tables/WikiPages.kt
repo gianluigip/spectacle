@@ -8,11 +8,12 @@ object WikiPages : StringIdTable(name = "wiki_pages") {
     val updateTime = datetime("update_time")
     val title = varchar("title", 1000)
     val path = varchar("path", 1000)
+    val fileName = varchar("file_name", 1000)
     val content = text("content")
     val checksum = varchar("checksum", 1000)
-    val team = varchar("team", 255)
-    val pageSource = varchar("source", 255)
-    val component = varchar("component", 255)
+    val team = varchar("team", 500)
+    val pageSource = varchar("source", 500)
+    val component = varchar("component", 500)
 }
 
 object WikiPageFeatures : StringIdTable(name = "wiki_page_features") {

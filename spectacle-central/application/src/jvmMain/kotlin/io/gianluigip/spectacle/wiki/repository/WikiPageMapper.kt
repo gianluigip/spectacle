@@ -49,6 +49,7 @@ private fun ResultRow.toWikiPage(
     title = get(WikiPages.title),
     content = get(WikiPages.content),
     path = get(WikiPages.path),
+    fileName = get(WikiPages.fileName),
     checksum = get(WikiPages.checksum),
     team = get(WikiPages.team).toTeam(),
     tags = tags,
@@ -67,6 +68,7 @@ private fun ResultRow.toWikiPageMetaData(
     id = get(WikiPages.id).value.toWikiId(),
     title = get(WikiPages.title),
     path = get(WikiPages.path),
+    fileName = get(WikiPages.fileName),
     checksum = get(WikiPages.checksum),
     team = get(WikiPages.team).toTeam(),
     tags = tags,
@@ -82,5 +84,5 @@ fun WikiPageToUpsert.toMetadata(
     creationTime: ZonedDateTime,
     updateTime: ZonedDateTime,
 ) = WikiPageMetadata(
-    id, title, path, checksum, team, tags, features, source, component, creationTime, updateTime
+    id, title, path, fileName, checksum, team, tags, features, source, component, creationTime, updateTime
 )
