@@ -14,6 +14,8 @@ actual object ConfigLoader {
                 publishers = listOf(TerminalPublisher),
                 centralEnabled = false,
                 centralHost = null,
+                centralWikiEnabled = false,
+                localWikiLocation = null,
             )
         }
 

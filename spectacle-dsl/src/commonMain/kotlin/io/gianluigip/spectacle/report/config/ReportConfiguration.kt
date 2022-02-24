@@ -10,4 +10,6 @@ data class ReportConfiguration(
     val publishers: List<SpecificationPublisher>,
     val centralEnabled: Boolean,
     val centralHost: Url?,
+    val centralWikiEnabled: Boolean,
+    val localWikiLocation: String?,
 )

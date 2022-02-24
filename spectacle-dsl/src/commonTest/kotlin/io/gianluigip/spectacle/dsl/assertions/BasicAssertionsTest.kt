@@ -61,12 +61,12 @@ class BasicAssertionsTest {
 
     @Test
     fun `shouldBeInstanceOf_should_assert_the_instancetype`() {
-        "Test" shouldBeInstanceOf CharSequence::class
+        "Test" shouldBeInstanceOf String::class
     }
 
     @Test
     fun `shouldBeInstanceOf_should_fail_when_the_instance_type_is_unexpected`() =
         runAndCatch {
             "Test" shouldBeInstanceOf Unit::class
-        }.message shouldStartWith "Expected 'Test' to be instance of class kotlin.Unit"
+        }.message shouldStartWith "Expected 'Test' to be instance of class "
 }

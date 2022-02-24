@@ -27,53 +27,7 @@ object CentralPublisher : SpecificationPublisher {
             println("Skipping Central publisher because it is disable.")
             return
         }
-        val requestBody = generateRequestBody(specifications, config)
-        postSpecs(requestBody, config)
-    }
-
-    private fun generateRequestBody(specifications: List<Specification>, config: ReportConfiguration): SpecificationsToUpdateRequest {
-        val features = mutableListOf<FeatureToUpdateRequest>()
-        val specificationsByFeature = specifications.groupBy { it.metadata.featureName }.entries.sortedBy { it.key }
-        specificationsByFeature.forEach { (_, specsInFeature) ->
-            val featureMetadata = specsInFeature.first().metadata
-            val specs = mutableListOf<SpecificationToUpdateRequest>()
-            specsInFeature.forEach { spec ->
-                val specMetadata = spec.metadata
-                val specToUpdate = SpecificationToUpdateRequest(
-                    name = spec.name, team = specMetadata.team, status = spec.metadata.status, tags = specMetadata.tags,
-                    steps = spec.steps, interactions = spec.interactions,
-                )
-                specs.add(specToUpdate)
-            }
-            val featureToUpdate = FeatureToUpdateRequest(
-                name = featureMetadata.featureName,
-                description = featureMetadata.featureDescription.removeStartAndEndSpacesOnEachLine(),
-                specs = specs
-            )
-            features.add(featureToUpdate)
-        }
-        return SpecificationsToUpdateRequest(source = config.source, component = config.component, features = features)
-    }
-
-    private suspend fun postSpecs(requestBody: SpecificationsToUpdateRequest, config: ReportConfiguration) {
-
-        val httpClient = HttpClient {
-            install(ContentNegotiation) { json() }
-        }
-
-        val centralUrl = "${config.centralHost}api/specification"
-        println("Publishing the specs to $centralUrl")
-
-        try {
-            val response = httpClient.put(centralUrl) {
-                contentType(ContentType.Application.Json)
-                setBody(requestBody)
-            }
-            println("Publishing to Central finished with status ${response.status} and response ${response.bodyAsText()}")
-
-        } catch (exception: Exception) {
-            println("Central Publisher failed trying to communicate with the server: ${exception.message}")
-            exception.printStackTrace()
-        }
+        CentralSpecPublisher.publishSpecs(specifications, config)
+        CentralWikiPublisher.publishWiki(config)
     }
 }
