@@ -5,12 +5,12 @@ import kotlin.test.Test
 class ThrowableAssertionsExtensionsTest {
 
     @Test
-    fun `shouldBeCausedBy should assert the cause of a throwable`() {
+    fun `shouldBeCausedBy_should_assert_the_cause_of_a_throwable`() {
         RuntimeException(IllegalArgumentException()) shouldBeCausedBy IllegalArgumentException::class
     }
 
     @Test
-    fun `shouldBeCausedBy should fail if the cause is not as expected`() =
+    fun `shouldBeCausedBy_should_fail_if_the_cause_is_not_as_expected`() =
         runAndCatch {
             RuntimeException(IllegalArgumentException()) shouldBeCausedBy IllegalStateException::class
         }.message shouldStartWith "Expected 'RuntimeException' to be caused by IllegalStateException"

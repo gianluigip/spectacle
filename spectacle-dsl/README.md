@@ -9,7 +9,7 @@ repository `Spectacle Central`.
 Platforms supported:
 
 * `Java`
-* `JS` coming soon.
+* `JS` - Limited, it can not publish specs yet.
 
 ## Getting Started
 

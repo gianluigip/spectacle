@@ -22,6 +22,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
+    js(BOTH) { browser() }
 
     sourceSets {
         val commonMain by getting {
@@ -53,5 +54,7 @@ kotlin {
                 implementation("com.github.tomakehurst:wiremock-jre8:2.29.0")
             }
         }
+        val jsMain by getting {}
+        val jsTest by getting {}
     }
 }

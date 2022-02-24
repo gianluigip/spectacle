@@ -33,4 +33,4 @@ fun Any?.shouldBeNotNull() =
 
 @AssertionDslMarker
 infix fun Any.shouldBeInstanceOf(klass: KClass<*>) =
-    assertTrue(klass.isInstance(this), "$expectedToBe instance of ${klass.qualifiedName}")
+    assertTrue(klass.isInstance(this), "$expectedToBe instance of $klass")

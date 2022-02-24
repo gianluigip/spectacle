@@ -117,6 +117,7 @@ kotlin {
         }
         val jsTest by getting {
             dependencies {
+                implementation(project(":spectacle-dsl"))
                 implementation(kotlin("test-js"))
             }
         }

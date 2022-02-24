@@ -1,7 +1,7 @@
 @file:JsModule("rehype-highlight")
 @file:JsNonModule
 
-package io.gianluigip.spectacle.wiki.markdown_plugins
+package io.gianluigip.spectacle.wiki.component.markdown_plugins
 
 import io.gianluigip.spectacle.wiki.component.RehypePlugin
 

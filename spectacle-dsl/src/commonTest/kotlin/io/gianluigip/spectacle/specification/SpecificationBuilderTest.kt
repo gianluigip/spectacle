@@ -17,7 +17,7 @@ import kotlin.test.Test
 class SpecificationBuilderTest {
 
     @Test
-    fun `Should build a specification`() {
+    fun `Should_build_a_specification`() {
         val specBuilder = SpecificationBuilder().apply {
             specName = "Spec 1"
             featureName = "Feature 1"
@@ -55,7 +55,7 @@ class SpecificationBuilderTest {
     }
 
     @Test
-    fun `Should work properly with only default values`() {
+    fun `Should_work_properly_with_only_default_values`() {
         SpecificationBuilder().build() assertThat {
             name shouldBe "Unknown"
             metadata assertThat {
