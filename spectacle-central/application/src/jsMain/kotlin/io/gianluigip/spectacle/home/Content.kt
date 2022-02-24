@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.home
 
 import csstype.GridArea
+import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.diagram.components.SystemDiagramPage
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
@@ -31,6 +32,7 @@ val Content = FC<Props> {
             element = Box.create {
                 component = ReactHTML.main
                 sx = jso {
+                    height = 100.pct
                     gridArea = GridArea(GridAreas.Content)
                     padding = DEFAULT_PADDING
                 }
@@ -38,6 +40,7 @@ val Content = FC<Props> {
                 Paper {
                     sx = jso {
                         padding = DEFAULT_PADDING
+                        height = 100.pct
                     }
                     variant = PaperVariant.elevation
                     elevation = 0

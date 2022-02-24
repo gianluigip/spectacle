@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.wiki
 
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
+import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 
 data class ComponentWiki(
     val component: String,
@@ -9,18 +10,21 @@ data class ComponentWiki(
 
 data class WikiDirectory(
     val path: String,
+    val name: String,
     val directories: List<WikiDirectory>,
     val pages: List<WikiPageMetadataResponse>,
 )
 
 private data class MutableWikiDirectory(
     val path: String,
+    val name: String,
     val directories: MutableList<MutableWikiDirectory> = mutableListOf(),
     val pages: MutableList<WikiPageMetadataResponse> = mutableListOf(),
 ) {
     fun toImmutable(): WikiDirectory = WikiDirectory(
         path = path,
-        directories = directories.map { it.toImmutable() }.sortedBy { it.path },
+        name = name,
+        directories = directories.map { it.toImmutable() }.sortedBy { it.name },
         pages = pages.sortedBy { it.fileName }
     )
 }
@@ -32,12 +36,12 @@ object TreeGenerator {
         pages.groupBy { it.component }.forEach { (component, componentPages) ->
             componentWikis += generateComponentWiki(component, componentPages)
         }
-        return componentWikis
+        return componentWikis.sortedBy { it.component }
     }
 
     private fun generateComponentWiki(component: String, pages: List<WikiPageMetadataResponse>): ComponentWiki {
         val directories = mutableMapOf<String, MutableWikiDirectory>()
-        directories["/$component"] = MutableWikiDirectory(path = "/$component")
+        directories["/$component"] = MutableWikiDirectory(path = "/$component", name = component)
 
         pages.forEach { page ->
             val wikiPath = page.wikiPath.replace("/${page.fileName}", "")
@@ -51,7 +55,7 @@ object TreeGenerator {
                 val currentDir = if (directories.containsKey(currentPath)) {
                     directories[currentPath]!!
                 } else {
-                    val dir = MutableWikiDirectory(currentPath)
+                    val dir = MutableWikiDirectory(currentPath, segment)
                     directories[previousPath]!!.directories += dir
                     directories[currentPath] = dir
                     dir
@@ -66,6 +70,11 @@ object TreeGenerator {
     }
 
 }
+
+val WikiPageResponse.fullPath: String
+    get() = "${if (path.startsWith("/")) "" else "/"}$path/$fileName"
+
+val WikiPageResponse.wikiPath: String get() = "/$component$fullPath"
 
 val WikiPageMetadataResponse.fullPath: String
     get() = "${if (path.startsWith("/")) "" else "/"}$path/$fileName"

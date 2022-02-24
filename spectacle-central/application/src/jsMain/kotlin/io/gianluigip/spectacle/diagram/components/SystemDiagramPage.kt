@@ -82,6 +82,7 @@ val SystemDiagramPage = FC<Props> {
             Spacer { height = 10.px }
             LoadingBar { isLoading = currentFilters != queryFilters }
             interactions?.let {
+                if (it.isEmpty()) return@let
                 SystemDiagram {
                     this.interactions = it
                     this.components = filters?.components ?: emptySet()

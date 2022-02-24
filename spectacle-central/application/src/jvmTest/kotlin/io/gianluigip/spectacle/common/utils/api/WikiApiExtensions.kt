@@ -37,7 +37,7 @@ fun BaseIntegrationTest.getWiki(
 fun BaseIntegrationTest.getWikiPage(wikiId: String): WikiPageResponse? = runBlocking {
     receivesRequestFromDSL()
     try {
-        httpClient.get("$httpHost/api/wiki//${wikiId}").body()
+        httpClient.get("$httpHost/api/wiki/${wikiId}").body()
     } catch (ex: ClientRequestException) {
         null
     }
