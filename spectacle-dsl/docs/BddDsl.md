@@ -1,3 +1,7 @@
+[//]: # ( {{ title: BDD DSL }} {{ tags: DSL, BDD }} {{ features: Specifications  }} )
+
+[//]: # ( {{ team: Spectacle Docs Writers }} )
+
 # BDD DSL
 
 The simpler use case is to use the DSL to make your tests more readable, it's particularly useful

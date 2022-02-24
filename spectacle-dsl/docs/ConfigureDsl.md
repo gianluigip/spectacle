@@ -1,3 +1,5 @@
+[//]: # ( {{ title: Configure DSL }} {{ tags: DSL, Config }} {{ features: Specifications }} )
+
 # Configure DSL
 
 To change the default behaviour when publishing you need to add `spectacle.properties` to your

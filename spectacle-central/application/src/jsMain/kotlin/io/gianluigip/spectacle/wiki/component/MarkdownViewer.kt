@@ -9,7 +9,7 @@ import io.gianluigip.spectacle.wiki.component.markdown_plugins.remarkGfm
 import kotlinx.browser.document
 import kotlinx.dom.createElement
 import kotlinx.js.jso
-import mui.material.Paper
+import mui.material.Box
 import mui.material.styles.Theme
 import org.w3c.dom.Element
 import org.w3c.dom.get
@@ -30,11 +30,14 @@ val MarkdownViewer = FC<MarkdownProps> {
         renderMermaidDiagrams(theme)
     }
 
-    ReactMarkdown {
-        className = "markdown-body"
-        remarkPlugins = arrayOf(remarkGfm)
-        rehypePlugins = arrayOf(arrayOf(rehypeHighlight, jso<dynamic> { ignoreMissing = true }))
-        +content
+    Box {
+        sx = jso { marginBottom = 20.px }
+        ReactMarkdown {
+            className = "markdown-body"
+            remarkPlugins = arrayOf(remarkGfm)
+            rehypePlugins = arrayOf(arrayOf(rehypeHighlight, jso<dynamic> { ignoreMissing = true }))
+            +content
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.wiki.component
 
 import csstype.Color
+import csstype.px
 import io.gianluigip.spectacle.common.component.LoadingBar
 import io.gianluigip.spectacle.common.component.TreeViewSingleSelect
 import io.gianluigip.spectacle.common.utils.toNode
@@ -18,6 +19,7 @@ import kotlinx.js.jso
 import mui.icons.material.ChevronRight
 import mui.icons.material.ExpandMore
 import mui.lab.TreeItem
+import mui.material.Box
 import mui.material.styles.Theme
 import react.FC
 import react.Props
@@ -60,17 +62,20 @@ val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
     LoadingBar { isLoading = componentWikis == null }
 
     componentWikis?.let { compWikis ->
-        TreeViewSingleSelect {
-            defaultCollapseIcon = ExpandMore.create()
-            defaultExpandIcon = ChevronRight.create()
-            multiSelect = false
-            expanded = directoriesExpanded
-            selected = pageSelected
-            onNodeSelect = { _, node -> navigateToPage(node) }
-            onNodeToggle = { _, nodes -> directoriesExpanded = nodes }
+        Box {
+            sx = jso { marginBottom = 20.px }
+            TreeViewSingleSelect {
+                defaultCollapseIcon = ExpandMore.create()
+                defaultExpandIcon = ChevronRight.create()
+                multiSelect = false
+                expanded = directoriesExpanded
+                selected = pageSelected
+                onNodeSelect = { _, node -> navigateToPage(node) }
+                onNodeToggle = { _, nodes -> directoriesExpanded = nodes }
 
-            compWikis.forEach { componentWiki ->
-                +directorySection(componentWiki.rootDir, isTopFolder = true, theme = theme)
+                compWikis.forEach { componentWiki ->
+                    +directorySection(componentWiki.rootDir, isTopFolder = true, theme = theme)
+                }
             }
         }
     }

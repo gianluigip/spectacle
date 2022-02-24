@@ -44,14 +44,14 @@ private fun File.toWikiPage(baseFolder: File, config: ReportConfiguration): Wiki
     val content = String(Files.readAllBytes(toPath()))
     val checksum = getSHA256Hash(content)
     return WikiPageRequest(
-        title = name,
+        title = content.extractTitleFromWikiPage() ?: name,
         fileName = name,
         path = path,
         content = content,
         checksum = checksum,
-        team = config.team,
-        tags = emptyList(),
-        features = emptyList(),
+        team = content.extractTeamFromWikiPage() ?: config.team,
+        tags = content.extractTagsFromWikiPage(),
+        features = content.extractFeaturesFromWikiPage(),
         source = config.source,
         component = config.component,
     )

@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.dsl.interactions
 
+import io.gianluigip.spectacle.common.Features
 import io.gianluigip.spectacle.common.Tags.SYSTEM_DIAGRAM
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
@@ -20,7 +21,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 
 @Feature(
-    name = "Register Spec Interactions",
+    name = Features.SYSTEM_DIAGRAM,
     description = """
         While writing your specs you can register the interactions it has, like what events, requests or database your test is mocking or simulating.
         So Central can use that data to generate a diagram of all the interactions in the system.

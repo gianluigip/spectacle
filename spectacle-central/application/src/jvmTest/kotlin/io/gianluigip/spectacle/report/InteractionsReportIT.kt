@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
-import io.gianluigip.spectacle.common.Features.GENERATE_SYSTEM_DIAGRAM
+import io.gianluigip.spectacle.common.Features.SYSTEM_DIAGRAM
 import io.gianluigip.spectacle.common.Tags
 import io.gianluigip.spectacle.common.utils.api.getInteractionReport
 import io.gianluigip.spectacle.common.utils.api.putSpecs
@@ -41,7 +41,7 @@ private const val TAG_1 = "Tag1"
 private const val TAG_2 = "Tag2"
 
 @Feature(
-    name = GENERATE_SYSTEM_DIAGRAM, description = """
+    name = SYSTEM_DIAGRAM, description = """
    Generate a diagram of the system including all the interaction registered in the specs. 
 """
 )

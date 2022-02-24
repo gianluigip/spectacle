@@ -1,3 +1,5 @@
+[//]: # ( {{ title: System Diagram }} {{ features: System Diagram }} )
+
 ## System Diagram
 
 Visualize all the interactions registered in the specs.

@@ -1,8 +1,8 @@
 package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
-import io.gianluigip.spectacle.common.Features.SPECIFICATIONS_REPORT
-import io.gianluigip.spectacle.common.Tags.SPECIFICATIONS
+import io.gianluigip.spectacle.common.Features
+import io.gianluigip.spectacle.common.Tags
 import io.gianluigip.spectacle.common.utils.CLOCK
 import io.gianluigip.spectacle.common.utils.api.getSpecReport
 import io.gianluigip.spectacle.common.utils.api.putSpecs
@@ -35,8 +35,8 @@ private const val COMPONENT_2 = "Component2"
 private const val TAG_1 = "Tag1"
 private const val TAG_2 = "Tag2"
 
-@Feature(name = SPECIFICATIONS_REPORT, description = "Search and aggregate all the specs")
-@SpecTags(SPECIFICATIONS)
+@Feature(name = Features.SPECIFICATIONS, description = "Search and aggregate all the specs")
+@SpecTags(Tags.SPECIFICATIONS)
 class SpecReportIT : BaseIntegrationTest() {
 
     @Test

@@ -64,4 +64,4 @@ fun BaseIntegrationTest.deleteWikiPage(wikiId: String) = runBlocking {
     httpClient.delete("$httpHost/api/wiki/${wikiId}")
 }
 
-fun receivesRequestFromDSL() = receivesRequestFrom("Spectacle Central")
+fun receivesRequestFromDSL() = receivesRequestFrom("Spectacle DSL")
