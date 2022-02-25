@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.diagram.components
 
+import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.component.LoadingBar
 import io.gianluigip.spectacle.common.component.Spacer
@@ -12,13 +13,14 @@ import io.gianluigip.spectacle.specification.component.FiltersSelected
 import io.gianluigip.spectacle.specification.component.ReportFilters
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.js.jso
 import mui.material.Grid
 import mui.material.GridDirection
+import mui.material.Paper
 import mui.material.Typography
 import mui.system.ResponsiveStyleValue
 import react.FC
 import react.Props
-import react.css.css
 import react.router.useLocation
 import react.router.useNavigate
 import react.useEffect
@@ -57,35 +59,49 @@ val SystemDiagramPage = FC<Props> {
 
     Grid {
         container = true
+        sx = jso { height = 100.pct; width = 100.pct }
         spacing = ResponsiveStyleValue(20.px)
         direction = ResponsiveStyleValue(GridDirection.row)
         Grid {
             item = true
-            css { maxWidth = 300.px }
+            sx = jso { maxWidth = 300.px; height = 100.pct }
             xs = 4; md = 3; xl = 2
-            Typography { variant = "h5"; +"Filters" }
-            Spacer { height = 10.px }
-            LoadingBar { isLoading = currentFilters != queryFilters }
-            filters?.let {
-                ReportFilters {
-                    filtersSelected = currentFilters ?: FiltersSelected()
-                    this.filters = it
-                    onFilterChanged = { filters -> refreshSearch(filters) }
-                    hideStatusFilter = true
+
+            Paper {
+                sx = jso { padding = 20.px; height = 100.pct }
+                elevation = 2
+
+                Typography { variant = "h5"; +"Filters" }
+                Spacer { height = 10.px }
+                LoadingBar { isLoading = currentFilters != queryFilters }
+                filters?.let {
+                    ReportFilters {
+                        filtersSelected = currentFilters ?: FiltersSelected()
+                        this.filters = it
+                        onFilterChanged = { filters -> refreshSearch(filters) }
+                        hideStatusFilter = true
+                    }
                 }
             }
         }
         Grid {
             item = true
             xs = 8; md = 9; xl = 10
-            Typography { variant = "h5"; +"System Diagram" }
-            Spacer { height = 10.px }
-            LoadingBar { isLoading = currentFilters != queryFilters }
-            interactions?.let {
-                if (it.isEmpty()) return@let
-                SystemDiagram {
-                    this.interactions = it
-                    this.components = filters?.components ?: emptySet()
+            sx = jso { height = 100.pct; width = 100.pct }
+
+            Paper {
+                sx = jso { padding = 20.px; height = 100.pct }
+                elevation = 2
+
+                Typography { variant = "h5"; +"System Diagram" }
+                Spacer { height = 10.px }
+                LoadingBar { isLoading = currentFilters != queryFilters }
+                interactions?.let {
+                    if (it.isEmpty()) return@let
+                    SystemDiagram {
+                        this.interactions = it
+                        this.components = filters?.components ?: emptySet()
+                    }
                 }
             }
         }
