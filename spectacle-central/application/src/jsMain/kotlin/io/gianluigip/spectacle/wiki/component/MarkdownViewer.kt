@@ -42,20 +42,19 @@ val MarkdownViewer = FC<MarkdownProps> {
 }
 
 private fun renderMermaidDiagrams(theme: Theme) {
+    removeAllDiagrams()
     val diagramsCode = document.getElementsByClassName("language-mermaid")
-    val diagramsCodeParents = mutableSetOf<Element>()
 
     for (i in 0 until diagramsCode.length) {
         val diagramCode = diagramsCode[i]
         diagramCode?.parentElement?.let {
             val codeParent = it
             codeParent.after(generateMermaidDiv(diagramCode.innerHTML, theme))
-            diagramsCodeParents += codeParent
+            codeParent.setAttribute("style", "display: none;")
         }
     }
     try {
         mermaidInit()
-        diagramsCodeParents.forEach { it.remove() }
     } catch (ex: dynamic) {
         println("The Mermaid Diagrams in the Wiki are invalid.")
     }
@@ -69,3 +68,10 @@ private fun generateMermaidDiv(diagramCode: String, theme: Theme): Element =
             $diagramCode
         """.trimIndent()
     }
+
+private fun removeAllDiagrams() {
+    val diagramsDivs = document.getElementsByClassName("mermaid")
+    for (i in 0 until diagramsDivs.length) {
+        diagramsDivs[i]?.remove()
+    }
+}
