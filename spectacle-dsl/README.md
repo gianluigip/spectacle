@@ -1,6 +1,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.gianluigip/spectacle-dsl?label=Maven%20Central)](https://search.maven.org/artifact/io.github.gianluigip/spectacle-dsl)
 
-# Spectacle DSL
+# [Spectacle DSL](./docs/Overview.md)
 
 A Kotlin multiplatform library for writing readable tests as specifications, it includes an
 Assertion DSL and a BDD DSL, optionally you can publish your specs into the specs
@@ -19,7 +19,7 @@ Add dependency:
 testImplementation("io.github.gianluigip:spectacle-dsl:VERSION")
 ```
 
-### [BDD DSL](./docs/BddDsl.md)
+### [BDD DSL](docs/Features/BddDsl.md)
 
 The simpler use case is to use the DSL to make your tests more readable, it's particularly useful
 for writing Integration Tests because it usually validates complex behaviour and requires more setup
@@ -38,7 +38,7 @@ Now you created a test that is easy to read and other devs can rely on it for un
 software, but we can do it better, we can extract all the BDD steps along with some extra metadata
 to build a specification that can be shared outside the codebase.
 
-You can read more about how to publish your specs in the [BDD DSL Page](./docs/BddDsl.md).
+You can read more about how to publish your specs in the [BDD DSL Page](docs/Features/BddDsl.md).
 
 ## [Configure DSL](./docs/ConfigureDsl.md)
 
@@ -74,7 +74,7 @@ reuse the same `source` for multiple tests executions like different services or
 the same repo, you will overwrite the specs, each `spectacle.properties` should have a different
 source.
 
-## [Assertion DSL](./docs/AssertionDsl.md)
+## [Assertion DSL](docs/Features/AssertionDsl.md)
 
 To improve even further the readability Spectacle also include an Assertion DSL that can be used to
 validate your tests more easily.
@@ -105,4 +105,24 @@ It relies on extension functions and infix to provide a clear syntax that reduce
 boilerplate in your tests.
 
 The Assertion DSL can be use independently although is intended to be use along the BDD DSL to
-maximize the readability of your specifications.   
+maximize the readability of your specifications.
+
+## [Interaction DSL](./docs/Features/InteractionsDsl.md)
+
+When writing your specs with the `BDD DSL` you can optionally also use the `Interactions DSL` to
+register what dependencies you are setting up or what is the output of your component.
+
+If you add interactions to your specs then it will be published to `Central` along with he specs and
+the tool will be able to generate a system diagram that shows the interactions between all the
+components and teams.
+
+For more information you can visit the [Interaction DSL Page](./docs/Features/InteractionsDsl.md)
+
+# [Wiki](./docs/Features/Wiki.md)
+
+Additionally to the writing and publishing of specs, `Spectacle DSL` can find all the Markdown files
+in a given folder and sync it then in `Spectacke Central`, the idea is that you can write your tech
+docs close to your code but search it in a central place that any team member or stakeholder can
+quickle reference.
+
+For more information you can visit the [Wiki Page](./docs/Features/Wiki.md)
