@@ -6,7 +6,7 @@ import io.gianluigip.spectacle.common.component.LoadingBar
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
-import io.gianluigip.spectacle.home.Themes
+import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.api.getSpecReport
@@ -59,6 +59,7 @@ val SpecificationsReport = FC<Props> {
     Grid {
         container = true
         direction = ResponsiveStyleValue(row)
+        columnSpacing = ResponsiveStyleValue(SPACE_PADDING)
         sx = jso { height = 100.pct }
 
         Grid {
@@ -66,7 +67,7 @@ val SpecificationsReport = FC<Props> {
             xs = 4; md = 3; xl = 2
 
             Paper {
-                sx = jso { padding = Themes.SPACE_PADDING; height = 100.pct }
+                sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
 
                 Typography { variant = "h5"; +"Filters" }
@@ -83,12 +84,11 @@ val SpecificationsReport = FC<Props> {
         }
 
         Grid {
-            item = true;
+            item = true
             xs = 8; md = 9; xl = 10
-            sx = jso { paddingLeft = Themes.SPACE_PADDING; }
 
             Paper {
-                sx = jso { padding = Themes.SPACE_PADDING; height = 100.pct }
+                sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
                 Typography { variant = "h5"; +"List of Specs by Feature" }
                 Spacer { height = 10.px }

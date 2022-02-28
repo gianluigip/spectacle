@@ -47,6 +47,7 @@ val WikiBrowser = FC<Props> {
     Grid {
         container = true
         direction = ResponsiveStyleValue(GridDirection.row)
+        columnSpacing = ResponsiveStyleValue(SPACE_PADDING)
         sx = jso { height = 100.pct }
 
         Grid {
@@ -66,7 +67,6 @@ val WikiBrowser = FC<Props> {
         Grid {
             item = true
             xs = 12 - EXPLORER_SIZE
-            sx = jso { paddingLeft = SPACE_PADDING; }
 
             Paper {
                 sx = jso { padding = SPACE_PADDING; height = 100.pct }

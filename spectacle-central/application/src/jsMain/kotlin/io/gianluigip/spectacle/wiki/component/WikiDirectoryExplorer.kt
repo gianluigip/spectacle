@@ -32,6 +32,7 @@ import react.useState
 
 external interface WikiDirectoryExplorerProps : Props {
     var selectedPagePath: String?
+    var expandAll: Boolean?
 }
 
 val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
@@ -40,7 +41,7 @@ val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
 
     var componentWikis by useState<List<ComponentWiki>>()
     var pagesMap by useState<Map<String, WikiPageMetadataResponse>>()
-    var pageSelected by useState(it.selectedPagePath)
+    var pageSelected by useState(it.selectedPagePath ?: "")
     var directoriesExpanded by useState<ReadonlyArray<String>>(emptyArray())
 
     useEffectOnce {
@@ -49,7 +50,9 @@ val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
             val wikis = TreeGenerator.generateWikiTree(pages)
             componentWikis = wikis
             pagesMap = pages.associateBy { it.wikiPath }
-            directoriesExpanded = wikis.map { it.rootDir.path }.toTypedArray()
+            directoriesExpanded = if (it.expandAll == true) {
+                findAllDirPaths(wikis)
+            } else wikis.map { it.rootDir.path }.toTypedArray()
         }
     }
     fun navigateToPage(pagePath: String) {
