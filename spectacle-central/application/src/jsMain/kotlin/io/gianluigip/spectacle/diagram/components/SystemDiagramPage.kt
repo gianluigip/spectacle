@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.diagram.components
 
 import csstype.Auto
+import csstype.Display
 import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.component.LoadingBar
@@ -16,11 +17,9 @@ import io.gianluigip.spectacle.specification.component.ReportFilters
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.js.jso
-import mui.material.Grid
-import mui.material.GridDirection
+import mui.material.Box
 import mui.material.Paper
 import mui.material.Typography
-import mui.system.ResponsiveStyleValue
 import react.FC
 import react.Props
 import react.router.useLocation
@@ -54,26 +53,19 @@ val SystemDiagramPage = FC<Props> {
     fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportUrlWithParameters(systemDiagramPath, filters))
 
     useEffect {
-        if (currentFilters != queryFilters) {
-            loadInteractionsReport(queryFilters)
-        }
+        if (currentFilters != queryFilters) loadInteractionsReport(queryFilters)
     }
 
-    Grid {
-        container = true
-        sx = jso { height = 100.pct }
-        direction = ResponsiveStyleValue(GridDirection.row)
+    Box {
+        sx = jso { display = Display.flex; height = 100.pct; width = 100.pct }
 
-        Grid {
-            item = true
-            sx = jso { maxWidth = 300.px; }
-            xs = 4; md = 3; xl = 2
-
+        Box {
+            sx = jso { height = 100.pct; }
             Paper {
-                sx = jso { padding = SPACE_PADDING; height = 100.pct }
+                sx = jso { padding = SPACE_PADDING; height = 100.pct; width = 100.pct }
                 elevation = 2
 
-                Typography { variant = "h5"; +"Filters" }
+                Typography { sx = jso { width = 280.px; }; variant = "h5"; +"Filters" }
                 Spacer { height = 10.px }
                 LoadingBar { isLoading = currentFilters != queryFilters }
                 filters?.let {
@@ -86,11 +78,9 @@ val SystemDiagramPage = FC<Props> {
                 }
             }
         }
-        Grid {
-            item = true
-            sx = jso { paddingLeft = SPACE_PADDING; }
-            xs = 8; md = 9; xl = 10
 
+        Box {
+            sx = jso { width = 100.pct; height = 100.pct; paddingLeft = SPACE_PADDING; }
 
             Paper {
                 sx = jso { padding = SPACE_PADDING; height = 100.pct; width = 100.pct; overflow = Auto.auto }
