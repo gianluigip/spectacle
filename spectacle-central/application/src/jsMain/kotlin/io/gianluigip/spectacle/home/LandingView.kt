@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.home
 import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.components.Spacer
+import io.gianluigip.spectacle.component.components.ComponentList
 import io.gianluigip.spectacle.feature.components.FeaturesList
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.wiki.components.WikiDirectoryExplorer
@@ -57,6 +58,7 @@ val LandingView = FC<Props> {
 
                 Typography { variant = "h5"; +"Components" }
                 Spacer { height = 10.px }
+                ComponentList { }
             }
         }
     }
