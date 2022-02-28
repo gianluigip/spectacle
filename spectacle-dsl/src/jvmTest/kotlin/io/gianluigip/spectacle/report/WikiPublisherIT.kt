@@ -47,7 +47,7 @@ class WikiPublisherIT : BaseIntegrationTest() {
 
     @Test
     @Specification
-    fun `Can publish local wiki pages into Spectacle Central`() =
+    fun `Publish local wiki pages into Spectacle Central`() =
         given("a local docs folder with several markdowns files") {
             docsFolder = createFolder("docs", baseFolder)
             createFile("doc1.md", "# Doc 1", docsFolder)
