@@ -1,5 +1,8 @@
-package io.gianluigip.spectacle.specification.model
+package io.gianluigip.spectacle.feature.model
 
+import io.gianluigip.spectacle.specification.model.Component
+import io.gianluigip.spectacle.specification.model.FeatureName
+import io.gianluigip.spectacle.specification.model.Source
 import java.time.ZonedDateTime
 
 data class Feature(

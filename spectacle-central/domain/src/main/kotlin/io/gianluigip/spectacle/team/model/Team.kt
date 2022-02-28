@@ -1,5 +1,8 @@
-package io.gianluigip.spectacle.specification.model
+package io.gianluigip.spectacle.team.model
 
+import io.gianluigip.spectacle.specification.model.Component
+import io.gianluigip.spectacle.specification.model.Source
+import io.gianluigip.spectacle.specification.model.TeamName
 import java.time.ZonedDateTime
 
 data class Team(

@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.common.fixtures
 
 import io.gianluigip.spectacle.specification.model.Component
-import io.gianluigip.spectacle.specification.model.Feature
+import io.gianluigip.spectacle.feature.model.Feature
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import java.time.ZonedDateTime

@@ -2,7 +2,7 @@ package io.gianluigip.spectacle.common.fixtures
 
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.Source
-import io.gianluigip.spectacle.specification.model.Team
+import io.gianluigip.spectacle.team.model.Team
 import io.gianluigip.spectacle.specification.model.TeamName
 import java.time.ZonedDateTime
 

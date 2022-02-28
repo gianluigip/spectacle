@@ -3,7 +3,7 @@ package io.gianluigip.spectacle.specification.repository
 import io.gianluigip.spectacle.common.utils.fromUtc
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.Source
-import io.gianluigip.spectacle.specification.model.Team
+import io.gianluigip.spectacle.team.model.Team
 import io.gianluigip.spectacle.specification.model.TeamName
 import io.gianluigip.spectacle.specification.repository.tables.Teams.component
 import io.gianluigip.spectacle.specification.repository.tables.Teams.creationTime

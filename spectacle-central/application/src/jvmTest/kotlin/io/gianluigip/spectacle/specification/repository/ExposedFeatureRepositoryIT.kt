@@ -9,10 +9,10 @@ import io.gianluigip.spectacle.dsl.assertions.shouldBeCloseTo
 import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
 import io.gianluigip.spectacle.dsl.bdd.whenever
 import io.gianluigip.spectacle.specification.model.Component
-import io.gianluigip.spectacle.specification.model.Feature
+import io.gianluigip.spectacle.feature.model.Feature
 import io.gianluigip.spectacle.specification.model.FeatureName
-import io.gianluigip.spectacle.specification.model.FeatureToDelete
-import io.gianluigip.spectacle.specification.model.FeatureToUpsert
+import io.gianluigip.spectacle.feature.model.FeatureToDelete
+import io.gianluigip.spectacle.feature.model.FeatureToUpsert
 import io.gianluigip.spectacle.specification.model.Source
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.Test

@@ -2,7 +2,7 @@ package io.gianluigip.spectacle.specification.repository
 
 import io.gianluigip.spectacle.common.utils.fromUtc
 import io.gianluigip.spectacle.specification.model.Component
-import io.gianluigip.spectacle.specification.model.Feature
+import io.gianluigip.spectacle.feature.model.Feature
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.repository.tables.Features.component

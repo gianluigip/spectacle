@@ -3,9 +3,11 @@ package io.gianluigip.spectacle
 import io.gianluigip.spectacle.common.beans.productionDependencies
 import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
+import io.gianluigip.spectacle.feature.api.featuresRoutes
 import io.gianluigip.spectacle.report.api.interactionReportRoutes
 import io.gianluigip.spectacle.report.api.specReportRoutes
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
+import io.gianluigip.spectacle.team.api.teamRoutes
 import io.gianluigip.spectacle.wiki.api.wikiRoutes
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
@@ -60,6 +62,8 @@ fun Application.module() {
             specReportRoutes()
             interactionReportRoutes()
             wikiRoutes()
+            featuresRoutes()
+            teamRoutes()
         }
     }
 }
