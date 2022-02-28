@@ -29,6 +29,7 @@ kotlin {
             dependencies {
                 implementation(project(":common"))
                 implementation(kotlin("test"))
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
                 // HTTP CLIENT
                 implementation("io.ktor:ktor-client-core:$ktorVersion")

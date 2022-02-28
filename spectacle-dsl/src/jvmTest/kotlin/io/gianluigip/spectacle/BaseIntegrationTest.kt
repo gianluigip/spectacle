@@ -32,7 +32,7 @@ abstract class BaseIntegrationTest {
     }
 
     fun reportConfiguration(
-        team: String = "Matching",
+        team: String = "SpectacleTeam",
         source: String = "spectacle-test",
         component: String = "Spectacle Test",
         publishers: List<SpecificationPublisher> = listOf(TerminalPublisher, CentralPublisher),

@@ -38,7 +38,7 @@ private fun findAllFiles(file: File, files: MutableList<File>): List<File> {
 private fun File.toWikiPage(baseFolder: File, config: ReportConfiguration): WikiPageRequest {
     val path = absolutePath.replace(baseFolder.absolutePath, "").replace(name, "").run {
         if (length > 1 && endsWith("/")) {
-            substring(0, length - 2)
+            substring(0, length - 1)
         } else this
     }
     val content = String(Files.readAllBytes(toPath()))
@@ -57,7 +57,7 @@ private fun File.toWikiPage(baseFolder: File, config: ReportConfiguration): Wiki
     )
 }
 
-private fun getSHA256Hash(data: String): String {
+internal fun getSHA256Hash(data: String): String {
     val digest = MessageDigest.getInstance("SHA-256")
     val hash = digest.digest(data.toByteArray(charset("UTF-8")))
     return bytesToHex(hash)
