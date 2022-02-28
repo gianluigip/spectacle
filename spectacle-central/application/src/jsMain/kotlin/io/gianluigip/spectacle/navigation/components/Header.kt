@@ -1,18 +1,18 @@
-package io.gianluigip.spectacle.navigation.component
+package io.gianluigip.spectacle.navigation.components
 
 import csstype.FlexGrow
 import csstype.GridArea
 import csstype.None
 import csstype.ZIndex
 import csstype.px
-import io.gianluigip.spectacle.common.component.Spacer
+import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
 import io.gianluigip.spectacle.home.GridAreas
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
-import io.gianluigip.spectacle.specification.component.specificationsReportPath
-import io.gianluigip.spectacle.wiki.component.wikiPath
+import io.gianluigip.spectacle.specification.components.specificationsReportPath
+import io.gianluigip.spectacle.wiki.components.wikiPath
 import kotlinx.browser.window
 import kotlinx.js.jso
 import mui.icons.material.Brightness4

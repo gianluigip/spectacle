@@ -1,9 +1,8 @@
-package io.gianluigip.spectacle.specification.component
+package io.gianluigip.spectacle.specification.components
 
 import csstype.Color
 import csstype.px
-import io.gianluigip.spectacle.common.component.Spacer
-import io.gianluigip.spectacle.common.utils.lighter
+import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
 import kotlinx.js.jso

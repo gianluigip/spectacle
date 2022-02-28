@@ -3,7 +3,7 @@ package io.gianluigip.spectacle.diagram.components
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.navigation.generateSpecificationReportExternalLink
 import io.gianluigip.spectacle.report.api.model.SystemInteractionResponse
-import io.gianluigip.spectacle.specification.component.FiltersSelected
+import io.gianluigip.spectacle.specification.components.FiltersSelected
 import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
 import io.gianluigip.spectacle.specification.model.InteractionDirection.OUTBOUND
 import io.gianluigip.spectacle.specification.model.InteractionType

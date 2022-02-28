@@ -1,10 +1,10 @@
-package io.gianluigip.spectacle.specification.component
+package io.gianluigip.spectacle.specification.components
 
 import csstype.Color
 import csstype.FlexGrow
 import csstype.px
-import io.gianluigip.spectacle.common.component.MetaDataChip
-import io.gianluigip.spectacle.common.component.Spacer
+import io.gianluigip.spectacle.common.components.MetaDataChip
+import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toDisplay
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.SpecReportResponse

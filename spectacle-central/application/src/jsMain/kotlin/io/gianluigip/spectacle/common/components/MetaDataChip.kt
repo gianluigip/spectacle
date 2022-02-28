@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.common.component
+package io.gianluigip.spectacle.common.components
 
 import io.gianluigip.spectacle.common.utils.toNode
 import mui.material.Chip

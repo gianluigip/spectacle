@@ -1,7 +1,7 @@
 @file:JsModule("mermaid")
 @file:JsNonModule
 
-package io.gianluigip.spectacle.common.component
+package io.gianluigip.spectacle.common.components
 
 @JsName("mermaidAPI")
 external val mermaidAPI: dynamic

@@ -1,6 +1,6 @@
 package io.gianluigip.spectacle.common.utils
 
-import io.gianluigip.spectacle.specification.component.FiltersSelected
+import io.gianluigip.spectacle.specification.components.FiltersSelected
 
 fun buildReportUrlWithParameters(reportPath: String, filters: FiltersSelected): String {
     val params = mutableListOf<String>()

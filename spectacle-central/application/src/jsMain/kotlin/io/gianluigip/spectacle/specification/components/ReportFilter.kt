@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.specification.component
+package io.gianluigip.spectacle.specification.components
 
 import io.gianluigip.spectacle.common.utils.toNode
 import kotlinx.js.jso

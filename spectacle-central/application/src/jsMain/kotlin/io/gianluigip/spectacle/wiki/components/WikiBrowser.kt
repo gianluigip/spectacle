@@ -1,9 +1,9 @@
-package io.gianluigip.spectacle.wiki.component
+package io.gianluigip.spectacle.wiki.components
 
 import csstype.pct
 import csstype.px
-import io.gianluigip.spectacle.common.component.LoadingBar
-import io.gianluigip.spectacle.common.component.Spacer
+import io.gianluigip.spectacle.common.components.LoadingBar
+import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.wiki.api.getWikiPage

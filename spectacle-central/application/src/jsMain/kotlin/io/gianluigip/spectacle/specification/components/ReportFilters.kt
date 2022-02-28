@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.specification.component
+package io.gianluigip.spectacle.specification.components
 
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.model.SpecStatus

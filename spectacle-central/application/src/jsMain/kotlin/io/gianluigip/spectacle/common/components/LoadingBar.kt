@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.common.component
+package io.gianluigip.spectacle.common.components
 
 import csstype.FlexGrow
 import kotlinx.js.jso

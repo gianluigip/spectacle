@@ -1,9 +1,9 @@
-package io.gianluigip.spectacle.wiki.component
+package io.gianluigip.spectacle.wiki.components
 
 import csstype.px
-import io.gianluigip.spectacle.common.component.Spacer
+import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toDisplay
-import io.gianluigip.spectacle.common.component.MetaDataChip
+import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 import mui.material.Grid
 import mui.material.GridDirection

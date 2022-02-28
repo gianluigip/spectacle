@@ -1,7 +1,7 @@
 @file:JsModule("@mui/lab/TreeView")
 @file:JsNonModule
 
-package io.gianluigip.spectacle.common.component
+package io.gianluigip.spectacle.common.components
 
 import mui.lab.SingleSelectTreeViewProps
 

@@ -1,9 +1,9 @@
-package io.gianluigip.spectacle.wiki.component
+package io.gianluigip.spectacle.wiki.components
 
 import csstype.Color
 import csstype.px
-import io.gianluigip.spectacle.common.component.LoadingBar
-import io.gianluigip.spectacle.common.component.TreeViewSingleSelect
+import io.gianluigip.spectacle.common.components.LoadingBar
+import io.gianluigip.spectacle.common.components.TreeViewSingleSelect
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.wiki.ComponentWiki

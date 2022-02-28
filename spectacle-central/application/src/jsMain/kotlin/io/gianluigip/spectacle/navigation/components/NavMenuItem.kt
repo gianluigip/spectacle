@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.navigation.component
+package io.gianluigip.spectacle.navigation.components
 
 import csstype.Color
 import csstype.None

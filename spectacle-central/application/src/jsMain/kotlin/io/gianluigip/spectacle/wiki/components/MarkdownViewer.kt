@@ -1,11 +1,11 @@
-package io.gianluigip.spectacle.wiki.component
+package io.gianluigip.spectacle.wiki.components
 
 import csstype.px
-import io.gianluigip.spectacle.common.component.mermaidInit
+import io.gianluigip.spectacle.common.components.mermaidInit
 import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
-import io.gianluigip.spectacle.wiki.component.markdown_plugins.rehypeHighlight
-import io.gianluigip.spectacle.wiki.component.markdown_plugins.remarkGfm
+import io.gianluigip.spectacle.wiki.components.markdown_plugins.rehypeHighlight
+import io.gianluigip.spectacle.wiki.components.markdown_plugins.remarkGfm
 import kotlinx.browser.document
 import kotlinx.dom.createElement
 import kotlinx.js.jso

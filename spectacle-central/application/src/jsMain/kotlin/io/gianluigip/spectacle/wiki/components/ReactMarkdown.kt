@@ -1,7 +1,7 @@
 @file:JsModule("react-markdown")
 @file:JsNonModule
 
-package io.gianluigip.spectacle.wiki.component
+package io.gianluigip.spectacle.wiki.components
 
 import react.Props
 
