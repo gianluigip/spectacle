@@ -5,10 +5,10 @@ import io.gianluigip.spectacle.report.model.FeatureReport
 import io.gianluigip.spectacle.report.model.ReportFilters
 import io.gianluigip.spectacle.report.model.SpecReport
 import io.gianluigip.spectacle.report.model.SpecsReport
-import io.gianluigip.spectacle.specification.FeatureRepository
+import io.gianluigip.spectacle.feature.FeatureRepository
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.model.Component
-import io.gianluigip.spectacle.specification.model.Feature
+import io.gianluigip.spectacle.feature.model.Feature
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecStatus

@@ -5,10 +5,10 @@ import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.diagram.components.SystemDiagramPage
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
-import io.gianluigip.spectacle.specification.component.SpecificationsReport
-import io.gianluigip.spectacle.specification.component.specificationsReportPath
-import io.gianluigip.spectacle.wiki.component.WikiBrowser
-import io.gianluigip.spectacle.wiki.component.wikiPath
+import io.gianluigip.spectacle.specification.components.SpecificationsReport
+import io.gianluigip.spectacle.specification.components.specificationsReportPath
+import io.gianluigip.spectacle.wiki.components.WikiBrowser
+import io.gianluigip.spectacle.wiki.components.wikiPath
 import kotlinx.js.jso
 import mui.material.Paper
 import mui.material.PaperVariant

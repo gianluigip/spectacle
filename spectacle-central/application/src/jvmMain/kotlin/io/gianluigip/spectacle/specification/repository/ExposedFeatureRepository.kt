@@ -1,11 +1,11 @@
 package io.gianluigip.spectacle.specification.repository
 
 import io.gianluigip.spectacle.common.utils.toUtcLocalDateTime
-import io.gianluigip.spectacle.specification.FeatureRepository
-import io.gianluigip.spectacle.specification.model.Feature
+import io.gianluigip.spectacle.feature.FeatureRepository
+import io.gianluigip.spectacle.feature.model.Feature
 import io.gianluigip.spectacle.specification.model.FeatureName
-import io.gianluigip.spectacle.specification.model.FeatureToDelete
-import io.gianluigip.spectacle.specification.model.FeatureToUpsert
+import io.gianluigip.spectacle.feature.model.FeatureToDelete
+import io.gianluigip.spectacle.feature.model.FeatureToUpsert
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.repository.tables.Features
 import io.gianluigip.spectacle.specification.repository.tables.Features.featureSource

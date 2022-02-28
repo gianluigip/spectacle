@@ -8,3 +8,5 @@ documentation for other teams or non-technical team members.
 
 The Central Wiki provide a middle ground that allow developers to write tech docs in a convenient
 and lightweight format while still provide a better experience for reading and referencing it.
+
+![Wiki Browser](https://github.com/gianluigip/spectacle/raw/master/spectacle-central/docs/images/WikiPage.png)

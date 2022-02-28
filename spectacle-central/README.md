@@ -9,6 +9,8 @@ increase the value for the organization as a whole.
 
 ![Specifications Page](./docs/images/SpecificationsPage.png)
 
+## [Live Demo](https://spectacle-central.herokuapp.com/)
+
 ## Features
 
 * [Specifications Report](./docs/SpecificationsReport.md): Search and bookmark any specification

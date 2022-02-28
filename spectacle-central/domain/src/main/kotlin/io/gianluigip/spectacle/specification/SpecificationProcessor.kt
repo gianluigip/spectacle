@@ -1,19 +1,21 @@
 package io.gianluigip.spectacle.specification
 
 import io.gianluigip.spectacle.common.TransactionExecutor
-import io.gianluigip.spectacle.specification.model.Feature
+import io.gianluigip.spectacle.feature.FeatureRepository
+import io.gianluigip.spectacle.feature.model.Feature
 import io.gianluigip.spectacle.specification.model.FeatureName
-import io.gianluigip.spectacle.specification.model.FeatureToDelete
-import io.gianluigip.spectacle.specification.model.FeatureToUpsert
+import io.gianluigip.spectacle.feature.model.FeatureToDelete
+import io.gianluigip.spectacle.feature.model.FeatureToUpsert
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.SpecToUpsert
 import io.gianluigip.spectacle.specification.model.Specification
 import io.gianluigip.spectacle.specification.model.SpecificationsToUpdate
-import io.gianluigip.spectacle.specification.model.Team
+import io.gianluigip.spectacle.team.model.Team
 import io.gianluigip.spectacle.specification.model.TeamName
-import io.gianluigip.spectacle.specification.model.TeamToDelete
-import io.gianluigip.spectacle.specification.model.TeamToUpsert
+import io.gianluigip.spectacle.team.model.TeamToDelete
+import io.gianluigip.spectacle.team.model.TeamToUpsert
+import io.gianluigip.spectacle.team.TeamRepository
 
 class SpecificationProcessor(
     private val specRepo: SpecificationRepository,

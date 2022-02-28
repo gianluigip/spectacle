@@ -1,6 +1,6 @@
 package io.gianluigip.spectacle.diagram.components
 
-import io.gianluigip.spectacle.common.component.mermaidInit
+import io.gianluigip.spectacle.common.components.mermaidInit
 import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
 import kotlinx.browser.document

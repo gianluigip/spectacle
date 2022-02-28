@@ -2,13 +2,15 @@ package io.gianluigip.spectacle.common.beans
 
 import io.gianluigip.spectacle.common.ExposedTransactionExecutor
 import io.gianluigip.spectacle.common.TransactionExecutor
-import io.gianluigip.spectacle.report.SpecReportGenerator
+import io.gianluigip.spectacle.feature.FeatureFinder
 import io.gianluigip.spectacle.report.InteractionsReportGenerator
+import io.gianluigip.spectacle.report.SpecReportGenerator
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.SpecificationProcessor
 import io.gianluigip.spectacle.specification.repository.ExposedFeatureRepository
 import io.gianluigip.spectacle.specification.repository.ExposedSpecificationRepository
 import io.gianluigip.spectacle.specification.repository.ExposedTeamRepository
+import io.gianluigip.spectacle.team.TeamFinder
 import io.gianluigip.spectacle.wiki.WikiFinder
 import io.gianluigip.spectacle.wiki.WikiProcessor
 import io.gianluigip.spectacle.wiki.repository.ExposedWikiPageRepository
@@ -32,6 +34,8 @@ fun productionDependencies() = DI.Module("ProductionDependencies") {
     bindSingleton { InteractionsReportGenerator(instance(), instance()) }
     bindSingleton { WikiProcessor(instance(), instance()) }
     bindSingleton { WikiFinder(instance(), instance()) }
+    bindSingleton { FeatureFinder(instance(), instance()) }
+    bindSingleton { TeamFinder(instance(), instance()) }
 }
 
 var testDependencies = DI.Module("TestDependencies") {

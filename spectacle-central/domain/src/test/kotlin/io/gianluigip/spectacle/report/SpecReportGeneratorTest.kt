@@ -14,7 +14,7 @@ import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.report.model.SpecsReport
-import io.gianluigip.spectacle.specification.FeatureRepository
+import io.gianluigip.spectacle.feature.FeatureRepository
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName

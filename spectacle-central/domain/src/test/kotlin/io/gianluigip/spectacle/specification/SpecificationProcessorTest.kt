@@ -11,11 +11,12 @@ import io.gianluigip.spectacle.common.fixtures.aTeam
 import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
+import io.gianluigip.spectacle.feature.FeatureRepository
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.specification.model.FeatureName
-import io.gianluigip.spectacle.specification.model.FeatureToDelete
+import io.gianluigip.spectacle.feature.model.FeatureToDelete
 import io.gianluigip.spectacle.specification.model.FeatureToUpdate
-import io.gianluigip.spectacle.specification.model.FeatureToUpsert
+import io.gianluigip.spectacle.feature.model.FeatureToUpsert
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.SpecStatus.IMPLEMENTED
 import io.gianluigip.spectacle.specification.model.SpecStatus.PARTIALLY_IMPLEMENTED
@@ -24,9 +25,10 @@ import io.gianluigip.spectacle.specification.model.SpecificationToUpdate
 import io.gianluigip.spectacle.specification.model.SpecificationsToUpdate
 import io.gianluigip.spectacle.specification.model.StepType.GIVEN
 import io.gianluigip.spectacle.specification.model.TeamName
-import io.gianluigip.spectacle.specification.model.TeamToDelete
-import io.gianluigip.spectacle.specification.model.TeamToUpsert
+import io.gianluigip.spectacle.team.model.TeamToDelete
+import io.gianluigip.spectacle.team.model.TeamToUpsert
 import io.gianluigip.spectacle.specification.model.toTag
+import io.gianluigip.spectacle.team.TeamRepository
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

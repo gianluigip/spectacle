@@ -10,10 +10,10 @@ import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
 import io.gianluigip.spectacle.dsl.bdd.whenever
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.Source
-import io.gianluigip.spectacle.specification.model.Team
+import io.gianluigip.spectacle.team.model.Team
 import io.gianluigip.spectacle.specification.model.TeamName
-import io.gianluigip.spectacle.specification.model.TeamToDelete
-import io.gianluigip.spectacle.specification.model.TeamToUpsert
+import io.gianluigip.spectacle.team.model.TeamToDelete
+import io.gianluigip.spectacle.team.model.TeamToUpsert
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.Test
 import java.time.ZonedDateTime

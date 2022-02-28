@@ -1,11 +1,11 @@
 package io.gianluigip.spectacle.specification.repository
 
 import io.gianluigip.spectacle.common.utils.toUtcLocalDateTime
-import io.gianluigip.spectacle.specification.TeamRepository
+import io.gianluigip.spectacle.team.TeamRepository
 import io.gianluigip.spectacle.specification.model.Source
-import io.gianluigip.spectacle.specification.model.Team
-import io.gianluigip.spectacle.specification.model.TeamToDelete
-import io.gianluigip.spectacle.specification.model.TeamToUpsert
+import io.gianluigip.spectacle.team.model.Team
+import io.gianluigip.spectacle.team.model.TeamToDelete
+import io.gianluigip.spectacle.team.model.TeamToUpsert
 import io.gianluigip.spectacle.specification.repository.tables.Teams
 import io.gianluigip.spectacle.specification.repository.tables.Teams.id
 import io.gianluigip.spectacle.specification.repository.tables.Teams.name

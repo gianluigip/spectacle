@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.specification.repository.tables
 
 import io.gianluigip.spectacle.common.repository.StringIdTable
-import io.gianluigip.spectacle.specification.model.FeatureToDelete
+import io.gianluigip.spectacle.feature.model.FeatureToDelete
 import org.jetbrains.exposed.sql.Op
 import org.jetbrains.exposed.sql.and
 import org.jetbrains.exposed.sql.javatime.datetime
