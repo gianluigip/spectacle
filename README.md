@@ -66,6 +66,8 @@ increase the value for the organization as a whole.
 
 ![Specifications Page](./spectacle-central/docs/images/SpecificationsPage.png)
 
+### [Live Demo](https://spectacle-central.herokuapp.com/)
+
 Review [Spectacle Central README](./spectacle-central/README.md) for more details.
 
 ## Future Improvements
