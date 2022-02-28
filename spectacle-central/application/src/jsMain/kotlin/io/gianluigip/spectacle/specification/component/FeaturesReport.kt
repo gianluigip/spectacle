@@ -6,7 +6,7 @@ import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.lighter
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
-import kotlinext.js.jso
+import kotlinx.js.jso
 import mui.icons.material.ExpandMore
 import mui.material.Accordion
 import mui.material.AccordionDetails

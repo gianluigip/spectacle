@@ -3,13 +3,13 @@ package io.gianluigip.spectacle.specification.component
 import csstype.Color
 import csstype.FlexGrow
 import csstype.px
+import io.gianluigip.spectacle.common.component.MetaDataChip
 import io.gianluigip.spectacle.common.component.Spacer
-import io.gianluigip.spectacle.common.utils.lighter
 import io.gianluigip.spectacle.common.utils.toDisplay
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.SpecReportResponse
 import io.gianluigip.spectacle.specification.toDisplay
-import kotlinext.js.jso
+import kotlinx.js.jso
 import mui.material.Accordion
 import mui.material.AccordionDetails
 import mui.material.AccordionSummary
@@ -46,14 +46,14 @@ val SpecCard = FC<SpecCardProps> {
                 direction = ResponsiveStyleValue(row)
 
                 if (spec.tags.isNotEmpty()) {
-                    Grid { item = true; SpecMetaDataChip { label = "Tags: ${spec.tags.sorted().joinToString(",")}" } }
+                    Grid { item = true; MetaDataChip { label = "Tags: ${spec.tags.sorted().joinToString(",")}" } }
                 }
-                Grid { item = true; SpecMetaDataChip { label = "Status: ${spec.status.display}" } }
-                Grid { item = true; SpecMetaDataChip { label = "Team: ${spec.team}" } }
-                Grid { item = true; SpecMetaDataChip { label = "Component: ${spec.component}" } }
-                Grid { item = true; SpecMetaDataChip { label = "Created: ${spec.creationTime.toDisplay()}" } }
-                Grid { item = true; SpecMetaDataChip { label = "Updated: ${spec.updateTime.toDisplay()}" } }
-                Grid { item = true; SpecMetaDataChip { label = "Source: ${spec.source}" } }
+                Grid { item = true; MetaDataChip { label = "Status: ${spec.status.display}" } }
+                Grid { item = true; MetaDataChip { label = "Team: ${spec.team}" } }
+                Grid { item = true; MetaDataChip { label = "Component: ${spec.component}" } }
+                Grid { item = true; MetaDataChip { label = "Created: ${spec.creationTime.toDisplay()}" } }
+                Grid { item = true; MetaDataChip { label = "Updated: ${spec.updateTime.toDisplay()}" } }
+                Grid { item = true; MetaDataChip { label = "Source: ${spec.source}" } }
             }
             Spacer { height = 5.px }
             spec.steps.sortedBy { step -> step.index }.forEach { step ->

@@ -1,4 +1,6 @@
-## Specifications Report
+[//]: # ( {{ title: Specifications Report }} {{ features: Specifications }} )
+
+# Specifications Report
 
 You can search and bookmark any specification published, this allows you to easily share the
 behavior of the product with your stakeholder, and to consolidate the documentation of features that

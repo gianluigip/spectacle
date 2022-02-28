@@ -15,6 +15,6 @@ object Features : StringIdTable(name = "features") {
     val updateTime = datetime("update_time")
     val name = varchar("name", 1000)
     val description = text("description")
-    val featureSource = varchar("source", 255)
-    val component = varchar("component", 255)
+    val featureSource = varchar("source", 500)
+    val component = varchar("component", 500)
 }

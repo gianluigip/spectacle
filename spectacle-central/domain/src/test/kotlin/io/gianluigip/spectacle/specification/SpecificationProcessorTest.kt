@@ -47,7 +47,7 @@ private val SPEC_4 = SpecName("SPEC4")
 
 private val INTERACTIONS = aSpec().interactions
 
-@Feature(name = Features.CENTRAL_REPOSITORY)
+@Feature(name = Features.SPECIFICATIONS)
 @ExtendWith(JUnitSpecificationReporter::class)
 class SpecificationProcessorTest {
 

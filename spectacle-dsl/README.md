@@ -1,6 +1,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.gianluigip/spectacle-dsl?label=Maven%20Central)](https://search.maven.org/artifact/io.github.gianluigip/spectacle-dsl)
 
-# Spectacle DSL
+# [Spectacle DSL](./docs/Overview.md)
 
 A Kotlin multiplatform library for writing readable tests as specifications, it includes an
 Assertion DSL and a BDD DSL, optionally you can publish your specs into the specs
@@ -9,7 +9,7 @@ repository `Spectacle Central`.
 Platforms supported:
 
 * `Java`
-* `JS` coming soon.
+* `JS` - Limited, it can not publish specs yet.
 
 ## Getting Started
 
@@ -19,7 +19,7 @@ Add dependency:
 testImplementation("io.github.gianluigip:spectacle-dsl:VERSION")
 ```
 
-### BDD DSL
+### [BDD DSL](docs/Features/BddDsl.md)
 
 The simpler use case is to use the DSL to make your tests more readable, it's particularly useful
 for writing Integration Tests because it usually validates complex behaviour and requires more setup
@@ -38,52 +38,9 @@ Now you created a test that is easy to read and other devs can rely on it for un
 software, but we can do it better, we can extract all the BDD steps along with some extra metadata
 to build a specification that can be shared outside the codebase.
 
-For this purpose Spectacle include a Junit plugin `JUnitSpecificationReporter` that allows to
-publish your specifications, so we can generate living documentation from our tests.
+You can read more about how to publish your specs in the [BDD DSL Page](docs/Features/BddDsl.md).
 
-```kotlin
-import io.gianluigip.spectacle.dsl.bdd.annotations.*
-import io.gianluigip.spectacle.dsl.bdd.*
-import org.junit.jupiter.api.*
-import org.junit.jupiter.api.extension.ExtendWith
-
-@Team("Spectacle Team") //It can be set globally using a config file
-@Feature("Publisher Plugin", description = "Description defining the feature.")
-@Tags(Tag("Tag1")) // It supports Junit tags, beware Junit tags doesn't support whitespaces
-@SpecTags("Tag2") // It supports whitespaces in the tag name 
-@ExtendWith(JUnitSpecificationReporter::class) // It registers your specifications for publishing 
-class JunitExampleTest {
-
-    @Test
-    @Specification // Only tests annotated as @Specification will be published
-    @Tags(Tag("Tag3")) // You can mix functions and class tags
-    @SpecTags("Tag4") // All tags annotations are optional
-    fun `DSL allow to write specs with minimum overhead`() =
-        // The name of the spec is the name of the function
-        given("a test with multiple steps") {
-        } whenever "it executes" run {
-        } then "it should register all the BDD steps" runAndFinish {
-        }
-}
-```
-
-If you are testing Spectacle with the default publisher `terminal` when your tests are executed you
-will see:
-
-```
-Publishing Specifications:
-Feature: Publisher Plugin
-	DSL allow to write specs with minimum overhead
-		Given a test with multiple steps
-		Whenever it executes
-		Then it should register all the BDD steps
-```
-
-`terminal` is just a basic publisher for testing before deciding to publish your specs
-to `Spectacle Central`, you can use the config in the next section to enable the `central` publisher
-and store your specs.
-
-#### Configure DSL
+## [Configure DSL](./docs/ConfigureDsl.md)
 
 To change the default behaviour when publishing you need to add `spectacle.properties` to your
 test `resources` folder with the following content:
@@ -106,6 +63,10 @@ specification.publisher=terminal,central
 specification.publisher.central.enabled=false
 # Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_HOST
 specification.publisher.central.host=https://central.spectacle.com
+# You can publish your Markdown files to Spectacle Central
+specification.publisher.central.wiki.enabled=true
+# If you are publishing your Markdown docs you need to define which folder will be published
+specification.publisher.central.wiki.localFolderLocation=docs
 ```
 
 Spectacle use the `source` to identify what specs are new and what specs were removed, so if you
@@ -113,7 +74,7 @@ reuse the same `source` for multiple tests executions like different services or
 the same repo, you will overwrite the specs, each `spectacle.properties` should have a different
 source.
 
-## Assertion DSL
+## [Assertion DSL](docs/Features/AssertionDsl.md)
 
 To improve even further the readability Spectacle also include an Assertion DSL that can be used to
 validate your tests more easily.
@@ -144,4 +105,24 @@ It relies on extension functions and infix to provide a clear syntax that reduce
 boilerplate in your tests.
 
 The Assertion DSL can be use independently although is intended to be use along the BDD DSL to
-maximize the readability of your specifications.   
+maximize the readability of your specifications.
+
+## [Interaction DSL](./docs/Features/InteractionsDsl.md)
+
+When writing your specs with the `BDD DSL` you can optionally also use the `Interactions DSL` to
+register what dependencies you are setting up or what is the output of your component.
+
+If you add interactions to your specs then it will be published to `Central` along with he specs and
+the tool will be able to generate a system diagram that shows the interactions between all the
+components and teams.
+
+For more information you can visit the [Interaction DSL Page](./docs/Features/InteractionsDsl.md)
+
+# [Wiki](./docs/Features/Wiki.md)
+
+Additionally to the writing and publishing of specs, `Spectacle DSL` can find all the Markdown files
+in a given folder and sync it then in `Spectacke Central`, the idea is that you can write your tech
+docs close to your code but search it in a central place that any team member or stakeholder can
+quickle reference.
+
+For more information you can visit the [Wiki Page](./docs/Features/Wiki.md)

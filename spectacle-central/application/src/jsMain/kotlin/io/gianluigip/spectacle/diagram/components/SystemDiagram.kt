@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.diagram.components
 
-import io.gianluigip.spectacle.common.component.Diagram
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.navigation.generateSpecificationReportExternalLink
 import io.gianluigip.spectacle.report.api.model.SystemInteractionResponse

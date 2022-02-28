@@ -8,7 +8,7 @@ import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.navigation.component.GITHUB_URL
 import io.gianluigip.spectacle.specification.component.specificationsReportPath
-import kotlinext.js.jso
+import kotlinx.js.jso
 import mui.material.Box
 import mui.material.Link
 import mui.material.Paper

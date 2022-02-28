@@ -1,24 +1,27 @@
 package io.gianluigip.spectacle.diagram.components
 
+import csstype.Auto
+import csstype.Display
+import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.component.LoadingBar
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.diagram.api.getInteractionsReport
+import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.report.api.model.SystemInteractionResponse
 import io.gianluigip.spectacle.specification.component.FiltersSelected
 import io.gianluigip.spectacle.specification.component.ReportFilters
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import mui.material.Grid
-import mui.material.GridDirection
+import kotlinx.js.jso
+import mui.material.Box
+import mui.material.Paper
 import mui.material.Typography
-import mui.system.ResponsiveStyleValue
 import react.FC
 import react.Props
-import react.css.css
 import react.router.useLocation
 import react.router.useNavigate
 import react.useEffect
@@ -50,41 +53,48 @@ val SystemDiagramPage = FC<Props> {
     fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportUrlWithParameters(systemDiagramPath, filters))
 
     useEffect {
-        if (currentFilters != queryFilters) {
-            loadInteractionsReport(queryFilters)
-        }
+        if (currentFilters != queryFilters) loadInteractionsReport(queryFilters)
     }
 
-    Grid {
-        container = true
-        spacing = ResponsiveStyleValue(20.px)
-        direction = ResponsiveStyleValue(GridDirection.row)
-        Grid {
-            item = true
-            css { maxWidth = 300.px }
-            xs = 4; md = 3; xl = 2
-            Typography { variant = "h5"; +"Filters" }
-            Spacer { height = 10.px }
-            LoadingBar { isLoading = currentFilters != queryFilters }
-            filters?.let {
-                ReportFilters {
-                    filtersSelected = currentFilters ?: FiltersSelected()
-                    this.filters = it
-                    onFilterChanged = { filters -> refreshSearch(filters) }
-                    hideStatusFilter = true
+    Box {
+        sx = jso { display = Display.flex; height = 100.pct; width = 100.pct }
+
+        Box {
+            sx = jso { height = 100.pct; }
+            Paper {
+                sx = jso { padding = SPACE_PADDING; height = 100.pct; width = 100.pct }
+                elevation = 2
+
+                Typography { sx = jso { width = 280.px; }; variant = "h5"; +"Filters" }
+                Spacer { height = 10.px }
+                LoadingBar { isLoading = currentFilters != queryFilters }
+                filters?.let {
+                    ReportFilters {
+                        filtersSelected = currentFilters ?: FiltersSelected()
+                        this.filters = it
+                        onFilterChanged = { filters -> refreshSearch(filters) }
+                        hideStatusFilter = true
+                    }
                 }
             }
         }
-        Grid {
-            item = true
-            xs = 8; md = 9; xl = 10
-            Typography { variant = "h5"; +"System Diagram" }
-            Spacer { height = 10.px }
-            LoadingBar { isLoading = currentFilters != queryFilters }
-            interactions?.let {
-                SystemDiagram {
-                    this.interactions = it
-                    this.components = filters?.components ?: emptySet()
+
+        Box {
+            sx = jso { width = 100.pct; height = 100.pct; paddingLeft = SPACE_PADDING; }
+
+            Paper {
+                sx = jso { padding = SPACE_PADDING; height = 100.pct; width = 100.pct; overflow = Auto.auto }
+                elevation = 2
+
+                Typography { variant = "h5"; +"System Diagram" }
+                Spacer { height = 10.px }
+                LoadingBar { isLoading = currentFilters != queryFilters }
+                interactions?.let {
+                    if (it.isEmpty()) return@let
+                    SystemDiagram {
+                        this.interactions = it
+                        this.components = filters?.components ?: emptySet()
+                    }
                 }
             }
         }

@@ -7,7 +7,7 @@ import kotlin.test.Test
 class BddDslTest {
 
     @Test
-    fun `Simplest example`() =
+    fun `Simplest_example`() =
         given("a first number") {
             2
         } and "a second number" run {
@@ -19,7 +19,7 @@ class BddDslTest {
         }
 
     @Test
-    fun `Full programmatic example`() = aSpec(
+    fun `Full_programmatic_example`() = aSpec(
         specName = "A spec should support metadata info",
         featureName = "BDD DSL",
         featureDescription = "The DSL allow to write complex tests in a readable way",

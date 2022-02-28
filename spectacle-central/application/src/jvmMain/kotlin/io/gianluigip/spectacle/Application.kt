@@ -6,6 +6,7 @@ import io.gianluigip.spectacle.common.repository.initDb
 import io.gianluigip.spectacle.report.api.interactionReportRoutes
 import io.gianluigip.spectacle.report.api.specReportRoutes
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
+import io.gianluigip.spectacle.wiki.api.wikiRoutes
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
@@ -58,6 +59,7 @@ fun Application.module() {
             specificationsRoutes()
             specReportRoutes()
             interactionReportRoutes()
+            wikiRoutes()
         }
     }
 }

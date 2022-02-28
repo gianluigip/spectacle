@@ -13,7 +13,7 @@ fun TeamToDelete.searchExpression(): Op<Boolean> = Op.build {
 object Teams : StringIdTable(name = "teams") {
     val creationTime = datetime("creation_time")
     val updateTime = datetime("update_time")
-    val name = varchar("name", 255)
-    val teamSource = varchar("source", 255)
-    val component = varchar("component", 255)
+    val name = varchar("name", 500)
+    val teamSource = varchar("source", 500)
+    val component = varchar("component", 500)
 }

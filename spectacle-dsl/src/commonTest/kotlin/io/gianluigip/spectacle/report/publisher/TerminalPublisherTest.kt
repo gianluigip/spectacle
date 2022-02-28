@@ -13,7 +13,7 @@ import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
 class TerminalPublisherTest {
 
     @Test
-    fun `should generate the report content`() {
+    fun `should_generate_the_report_content`() {
         val spec1 = Specification(
             name = "Spec1",
             metadata = SpecificationMetadata(

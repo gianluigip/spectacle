@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.specification.component
+package io.gianluigip.spectacle.common.component
 
 import io.gianluigip.spectacle.common.utils.toNode
 import mui.material.Chip
@@ -11,6 +11,6 @@ external interface SpecMetaDataChipProps : Props {
     var label: String
 }
 
-val SpecMetaDataChip = FC<SpecMetaDataChipProps> {
+val MetaDataChip = FC<SpecMetaDataChipProps> {
     Chip { variant = ChipVariant.outlined; color = ChipColor.info; label = it.label.toNode() }
 }

@@ -25,6 +25,8 @@ actual object ConfigLoader {
                 publishers = properties.getPublishers(),
                 centralEnabled = properties.getCentralEnabled(),
                 centralHost = properties.getCentralHost(),
+                centralWikiEnabled = properties.getCentralWikiEnabled(),
+                localWikiLocation = properties.getLocalWikiLocation()
             )
         } else {
             CONFIG = ReportConfiguration(
@@ -34,6 +36,8 @@ actual object ConfigLoader {
                 publishers = listOf(TerminalPublisher),
                 centralEnabled = false,
                 centralHost = null,
+                centralWikiEnabled = false,
+                localWikiLocation = null,
             )
             println("If you want to customize the behavior of Spectacle Reports create a file $PROPERTIES_FILE_NAME in the test resource folder")
         }
@@ -76,5 +80,8 @@ actual object ConfigLoader {
         }
         return getProperty("specification.publisher.central.host")?.let { Url(it) }
     }
+
+    private fun Properties.getCentralWikiEnabled(): Boolean = getProperty("specification.publisher.central.wiki.enabled")?.toBoolean() ?: false
+    private fun Properties.getLocalWikiLocation(): String? = getProperty("specification.publisher.central.wiki.localFolderLocation")
 
 }

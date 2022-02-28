@@ -1,10 +1,10 @@
-package io.gianluigip.spectacle.common.component
+package io.gianluigip.spectacle.diagram.components
 
-import io.gianluigip.spectacle.common.utils.lighter
+import io.gianluigip.spectacle.common.component.mermaidInit
+import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
 import kotlinx.browser.document
 import mui.material.Box
-import mui.material.styles.Theme
 import react.FC
 import react.Props
 import react.useContext
@@ -34,23 +34,8 @@ val Diagram = FC<DiagramProps> {
         id = diagramId
         className = "mermaid"
         +"""
-            ${generateMermaidConfig(theme, it.expandDiagram ?: false)}
+            ${generateMermaidConfigHeader(theme, it.expandDiagram ?: false)}
             ${it.content}
         """.trimIndent()
     }
 }
-
-private fun generateMermaidConfig(theme: Theme, expandDiagram: Boolean): String = """
-    %%{init: {
-        'theme': 'base',
-        'themeVariables': {
-            'darkMode': ${theme.palette.mode == "dark"},
-            'primaryColor': '${theme.palette.info.main.lighter(80)}',
-            'fontFamily': 'Roboto'
-            },
-        'flowchart': {
-            'useMaxWidth': ${!expandDiagram}
-            }            
-        }
-    }%%
-""".trimIndent()

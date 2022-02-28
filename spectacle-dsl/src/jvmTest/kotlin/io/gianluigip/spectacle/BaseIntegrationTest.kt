@@ -32,13 +32,22 @@ abstract class BaseIntegrationTest {
     }
 
     fun reportConfiguration(
-        team: String = "Matching",
+        team: String = "SpectacleTeam",
         source: String = "spectacle-test",
         component: String = "Spectacle Test",
         publishers: List<SpecificationPublisher> = listOf(TerminalPublisher, CentralPublisher),
         centralEnabled: Boolean = true,
+        centralWikiEnabled: Boolean = false,
+        localWikiLocation: String? = null,
     ) = ReportConfiguration(
-        team, source, component, publishers, centralEnabled, centralHost = Url("http://localhost:$centralPort"),
+        team,
+        source,
+        component,
+        publishers,
+        centralEnabled,
+        centralHost = Url("http://localhost:$centralPort"),
+        centralWikiEnabled,
+        localWikiLocation,
     )
 
     private fun findRandomPort(): Int {

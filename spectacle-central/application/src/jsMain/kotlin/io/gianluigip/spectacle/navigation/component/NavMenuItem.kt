@@ -1,8 +1,9 @@
 package io.gianluigip.spectacle.navigation.component
 
 import csstype.Color
+import csstype.None
 import csstype.TextDecoration
-import kotlinext.js.jso
+import kotlinx.js.jso
 import mui.material.Typography
 import react.FC
 import react.Props
@@ -25,7 +26,7 @@ val NavMenuItem = FC<NavMenuItemProps> {
     NavLink {
         to = it.toPath
         css {
-            textDecoration = TextDecoration.none
+            textDecoration = None.none
             color = Color.currentcolor
         }
 

@@ -1,8 +1,8 @@
 package io.gianluigip.spectacle.report
 
 import io.gianluigip.spectacle.common.DummyTransactionExecutor
-import io.gianluigip.spectacle.common.Features.SPECIFICATIONS_REPORT
-import io.gianluigip.spectacle.common.Tags.SPECIFICATIONS
+import io.gianluigip.spectacle.common.Features
+import io.gianluigip.spectacle.common.Tags
 import io.gianluigip.spectacle.common.fixtures.aFeature
 import io.gianluigip.spectacle.common.fixtures.aSpec
 import io.gianluigip.spectacle.dsl.assertions.assertThat
@@ -42,8 +42,8 @@ private val COMPONENT_2 = Component("Component2")
 private val TAG_1 = TagName("Tag1")
 private val TAG_2 = TagName("Tag2")
 
-@Feature(name = SPECIFICATIONS_REPORT)
-@SpecTags(SPECIFICATIONS)
+@Feature(name = Features.SPECIFICATIONS)
+@SpecTags(Tags.SPECIFICATIONS)
 @ExtendWith(JUnitSpecificationReporter::class)
 class SpecReportGeneratorTest {
 

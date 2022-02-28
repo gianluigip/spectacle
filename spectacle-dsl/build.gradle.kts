@@ -22,12 +22,14 @@ kotlin {
             useJUnitPlatform()
         }
     }
+    js(BOTH) { browser() }
 
     sourceSets {
         val commonMain by getting {
             dependencies {
                 implementation(project(":common"))
                 implementation(kotlin("test"))
+                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
                 // HTTP CLIENT
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
@@ -53,5 +55,7 @@ kotlin {
                 implementation("com.github.tomakehurst:wiremock-jre8:2.29.0")
             }
         }
+        val jsMain by getting {}
+        val jsTest by getting {}
     }
 }

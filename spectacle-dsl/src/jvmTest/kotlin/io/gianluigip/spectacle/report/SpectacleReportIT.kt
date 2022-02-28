@@ -6,6 +6,7 @@ import com.github.tomakehurst.wiremock.client.WireMock.putRequestedFor
 import com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo
 import com.github.tomakehurst.wiremock.client.WireMock.verify
 import io.gianluigip.spectacle.BaseIntegrationTest
+import io.gianluigip.spectacle.common.Features
 import io.gianluigip.spectacle.common.Tags.SPECIFICATIONS
 import io.gianluigip.spectacle.common.utils.api.stubPutSpecs
 import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
@@ -28,7 +29,7 @@ import io.gianluigip.spectacle.specification.Specification as Spec
 import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
 
 @Feature(
-    "Publish Specifications",
+    Features.SPECIFICATIONS,
     description = "Spectacle can publish the specs into a central repository so it can be review it by any stakeholder."
 )
 @SpecTags(SPECIFICATIONS)

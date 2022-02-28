@@ -1,7 +1,6 @@
 package io.gianluigip.spectacle.specification
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
-import io.gianluigip.spectacle.common.Features.CENTRAL_REPOSITORY
 import io.gianluigip.spectacle.common.Tags.SPECIFICATIONS
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.COMPONENT
 import io.gianluigip.spectacle.common.fixtures.FixtureConstants.COMPONENTS
@@ -40,7 +39,7 @@ import io.gianluigip.spectacle.specification.model.TeamName
 import org.junit.jupiter.api.Test
 
 @Feature(
-    name = CENTRAL_REPOSITORY, description = """
+    name = SPECIFICATIONS, description = """
     Store and retrieve the documentation distributed across many services and teams, so it is accessible for the organization as a whole rather than 
     hidden inside individual teams. 
 """
