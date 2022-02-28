@@ -1,11 +1,9 @@
 package io.gianluigip.spectacle.diagram.components
 
-import csstype.Auto
 import io.gianluigip.spectacle.common.component.mermaidInit
 import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
 import kotlinx.browser.document
-import kotlinx.js.jso
 import mui.material.Box
 import react.FC
 import react.Props
@@ -34,7 +32,6 @@ val Diagram = FC<DiagramProps> {
 
     Box {
         id = diagramId
-        sx = jso { overflow = Auto.auto }
         className = "mermaid"
         +"""
             ${generateMermaidConfigHeader(theme, it.expandDiagram ?: false)}

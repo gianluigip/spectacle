@@ -49,7 +49,7 @@ val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
             val wikis = TreeGenerator.generateWikiTree(pages)
             componentWikis = wikis
             pagesMap = pages.associateBy { it.wikiPath }
-            directoriesExpanded = findAllDirPaths(wikis)
+            directoriesExpanded = wikis.map { it.rootDir.path }.toTypedArray()
         }
     }
     fun navigateToPage(pagePath: String) {

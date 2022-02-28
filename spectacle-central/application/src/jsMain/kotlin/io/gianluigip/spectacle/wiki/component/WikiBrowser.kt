@@ -5,6 +5,7 @@ import csstype.px
 import io.gianluigip.spectacle.common.component.LoadingBar
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.parseParams
+import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.wiki.api.getWikiPage
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 import io.gianluigip.spectacle.wiki.wikiPath
@@ -45,17 +46,15 @@ val WikiBrowser = FC<Props> {
 
     Grid {
         container = true
-        spacing = ResponsiveStyleValue(20.px)
         direction = ResponsiveStyleValue(GridDirection.row)
         sx = jso { height = 100.pct }
 
         Grid {
             item = true
             xs = EXPLORER_SIZE
-            sx = jso { height = 100.pct }
 
             Paper {
-                sx = jso { padding = 20.px; height = 100.pct; height = 100.pct }
+                sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
 
                 Typography { variant = "h5"; +"Explorer" }
@@ -67,9 +66,10 @@ val WikiBrowser = FC<Props> {
         Grid {
             item = true
             xs = 12 - EXPLORER_SIZE
-            sx = jso { height = 100.pct }
+            sx = jso { paddingLeft = SPACE_PADDING; }
+
             Paper {
-                sx = jso { padding = 20.px; height = 100.pct }
+                sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
 
                 LoadingBar { this.isLoading = isLoading }

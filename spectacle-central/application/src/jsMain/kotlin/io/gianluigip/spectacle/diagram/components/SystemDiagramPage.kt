@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.diagram.components
 
+import csstype.Auto
 import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.component.LoadingBar
@@ -7,6 +8,7 @@ import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.diagram.api.getInteractionsReport
+import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.report.api.model.SystemInteractionResponse
 import io.gianluigip.spectacle.specification.component.FiltersSelected
@@ -59,16 +61,16 @@ val SystemDiagramPage = FC<Props> {
 
     Grid {
         container = true
-        sx = jso { height = 100.pct; width = 100.pct }
-        spacing = ResponsiveStyleValue(20.px)
+        sx = jso { height = 100.pct }
         direction = ResponsiveStyleValue(GridDirection.row)
+
         Grid {
             item = true
-            sx = jso { maxWidth = 300.px; height = 100.pct }
+            sx = jso { maxWidth = 300.px; }
             xs = 4; md = 3; xl = 2
 
             Paper {
-                sx = jso { padding = 20.px; height = 100.pct }
+                sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
 
                 Typography { variant = "h5"; +"Filters" }
@@ -86,11 +88,12 @@ val SystemDiagramPage = FC<Props> {
         }
         Grid {
             item = true
+            sx = jso { paddingLeft = SPACE_PADDING; }
             xs = 8; md = 9; xl = 10
-            sx = jso { height = 100.pct; width = 100.pct }
+
 
             Paper {
-                sx = jso { padding = 20.px; height = 100.pct }
+                sx = jso { padding = SPACE_PADDING; height = 100.pct; width = 100.pct; overflow = Auto.auto }
                 elevation = 2
 
                 Typography { variant = "h5"; +"System Diagram" }

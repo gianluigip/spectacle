@@ -1,18 +1,22 @@
 package io.gianluigip.spectacle.specification.component
 
+import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.component.LoadingBar
 import io.gianluigip.spectacle.common.component.Spacer
 import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
+import io.gianluigip.spectacle.home.Themes
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.api.getSpecReport
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.js.jso
 import mui.material.Grid
 import mui.material.GridDirection.row
+import mui.material.Paper
 import mui.material.Typography
 import mui.system.ResponsiveStyleValue
 import react.FC
@@ -54,30 +58,43 @@ val SpecificationsReport = FC<Props> {
 
     Grid {
         container = true
-        spacing = ResponsiveStyleValue(20.px)
         direction = ResponsiveStyleValue(row)
+        sx = jso { height = 100.pct }
+
         Grid {
             item = true
             xs = 4; md = 3; xl = 2
-            Typography { variant = "h5"; +"Filters" }
-            Spacer { height = 10.px }
 
-            LoadingBar { isLoading = currentFilters != queryFilters }
-            filtersResponse?.let {
-                ReportFilters {
-                    filtersSelected = currentFilters ?: FiltersSelected()
-                    filters = it
-                    onFilterChanged = { filters -> refreshSearch(filters) }
+            Paper {
+                sx = jso { padding = Themes.SPACE_PADDING; height = 100.pct }
+                elevation = 2
+
+                Typography { variant = "h5"; +"Filters" }
+                Spacer { height = 10.px }
+                LoadingBar { isLoading = currentFilters != queryFilters }
+                filtersResponse?.let {
+                    ReportFilters {
+                        filtersSelected = currentFilters ?: FiltersSelected()
+                        filters = it
+                        onFilterChanged = { filters -> refreshSearch(filters) }
+                    }
                 }
             }
         }
+
         Grid {
             item = true;
             xs = 8; md = 9; xl = 10
-            Typography { variant = "h5"; +"List of Features" }
-            Spacer { height = 10.px }
-            LoadingBar { isLoading = currentFilters != queryFilters }
-            featuresResponse?.let { FeaturesReport { features = it } }
+            sx = jso { paddingLeft = Themes.SPACE_PADDING; }
+
+            Paper {
+                sx = jso { padding = Themes.SPACE_PADDING; height = 100.pct }
+                elevation = 2
+                Typography { variant = "h5"; +"List of Specs by Feature" }
+                Spacer { height = 10.px }
+                LoadingBar { isLoading = currentFilters != queryFilters }
+                featuresResponse?.let { FeaturesReport { features = it } }
+            }
         }
     }
 
