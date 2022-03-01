@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle
 
+import io.gianluigip.spectacle.common.auth.AuthProvider
 import io.gianluigip.spectacle.common.beans.productionDependencies
 import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
@@ -14,6 +15,8 @@ import io.ktor.http.HttpMethod
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
+import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.basic
 import io.ktor.server.http.content.resource
 import io.ktor.server.http.content.resources
 import io.ktor.server.http.content.static
@@ -25,6 +28,7 @@ import io.ktor.server.plugins.gzip
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 import org.kodein.di.DI
+import org.kodein.di.instance
 import org.slf4j.event.Level
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -48,6 +52,13 @@ fun Application.module() {
     _di = DI {
         import(productionDependencies())
         import(testDependencies, allowOverride = true)
+    }
+    install(Authentication) {
+        val authProvider by di.instance<AuthProvider>()
+        basic {
+            realm = "Access to Spectacle API"
+            validate { authProvider.findUserByCredentials(it) }
+        }
     }
     routing {
         static("/") {

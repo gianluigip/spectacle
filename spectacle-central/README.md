@@ -25,6 +25,11 @@ setup the schema and update it when upgrading to a newer version.
 
 Environment Variables:
 
+* `ADMIN_USERNAME`: Username of the admin user, it's the main user of the service, it can be used to
+  authenticate both in the API and in the Web App.
+* `ADMIN_PASSWORD`
+* `GUEST_USERNAME`: Readonly user that can be used to authenticate in the Web App.
+* `GUEST_PASSWORD`
 * `DATABASE_URL`: one variable holding all the connection detail using the
   format `USERNAME:PASSWORD@HOST:PORT/DATABASE`, additionally you can use the below `DATABASE_XXX`
   variables, if booth options are present the more specific variable take precedence.

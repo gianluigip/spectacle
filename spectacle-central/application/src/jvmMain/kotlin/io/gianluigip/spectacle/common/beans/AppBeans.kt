@@ -2,6 +2,9 @@ package io.gianluigip.spectacle.common.beans
 
 import io.gianluigip.spectacle.common.ExposedTransactionExecutor
 import io.gianluigip.spectacle.common.TransactionExecutor
+import io.gianluigip.spectacle.common.auth.AuthProvider
+import io.gianluigip.spectacle.common.auth.EnvVarsUserFinder
+import io.gianluigip.spectacle.common.auth.UserFinder
 import io.gianluigip.spectacle.feature.FeatureFinder
 import io.gianluigip.spectacle.report.InteractionsReportGenerator
 import io.gianluigip.spectacle.report.SpecReportGenerator
@@ -22,6 +25,8 @@ import java.time.Clock
 fun productionDependencies() = DI.Module("ProductionDependencies") {
     bindSingleton<Clock> { Clock.systemDefaultZone() }
     bindSingleton<TransactionExecutor> { ExposedTransactionExecutor() }
+    bindSingleton<UserFinder> { EnvVarsUserFinder() }
+    bindSingleton { AuthProvider(instance()) }
 
     bindSingleton { ExposedSpecificationRepository(instance()) }
     bindSingleton { ExposedFeatureRepository(instance()) }
