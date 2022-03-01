@@ -10,6 +10,9 @@ import io.gianluigip.spectacle.wiki.repository.ExposedWikiPageRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.plugins.ContentNegotiation
+import io.ktor.client.plugins.auth.Auth
+import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
+import io.ktor.client.plugins.auth.providers.basic
 import io.ktor.serialization.kotlinx.json.json
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.BeforeEach
@@ -32,6 +35,13 @@ abstract class BaseIntegrationTest {
     val httpHost = "http://localhost:$port"
     val httpClient = HttpClient(CIO) {
         install(ContentNegotiation) { json() }
+        install(Auth) {
+            basic {
+                credentials {
+                    BasicAuthCredentials(username = "AdminUser", password = "AdminPassword")
+                }
+            }
+        }
     }
 
     val specRepo by lazy { val instance by di.instance<ExposedSpecificationRepository>(); instance }
@@ -43,7 +53,7 @@ abstract class BaseIntegrationTest {
     fun initEnv() {
         EmbeddedEnvironments.start {
             postgres.start()
-            setupDataBaseEnvVars()
+            setupEnvVars()
         }
         cleanDb()
     }
@@ -55,13 +65,15 @@ abstract class BaseIntegrationTest {
         wikiPageRepo.deleteAll()
     }
 
-    private fun setupDataBaseEnvVars() {
+    private fun setupEnvVars() {
         val jdbcUrl = postgres.jdbcUrl.substring(0, postgres.jdbcUrl.indexOf("?"))
         setEnv(
             mapOf(
                 "DATABASE_URL" to jdbcUrl,
                 "DATABASE_USERNAME" to "spectacle",
                 "DATABASE_PASSWORD" to "spectacle",
+                "ADMIN_USERNAME" to "AdminUser",
+                "ADMIN_PASSWORD" to "AdminPassword",
             )
         )
     }

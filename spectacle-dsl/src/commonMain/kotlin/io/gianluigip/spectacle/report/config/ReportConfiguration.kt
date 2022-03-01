@@ -8,8 +8,14 @@ data class ReportConfiguration(
     val source: String,
     val component: String,
     val publishers: List<SpecificationPublisher>,
-    val centralEnabled: Boolean,
-    val centralHost: Url?,
-    val centralWikiEnabled: Boolean,
+    val centralConfig: CentralPublisherConfig,
+)
+
+data class CentralPublisherConfig(
+    val enabled: Boolean,
+    val host: Url?,
+    val username: String,
+    val password: String,
+    val wikiEnabled: Boolean,
     val localWikiLocation: String?,
 )

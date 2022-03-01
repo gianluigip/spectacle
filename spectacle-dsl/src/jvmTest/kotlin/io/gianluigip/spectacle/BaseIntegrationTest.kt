@@ -3,6 +3,9 @@ package io.gianluigip.spectacle
 import com.github.tomakehurst.wiremock.WireMockServer
 import com.github.tomakehurst.wiremock.client.WireMock.configureFor
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration.options
+import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_PASSWORD
+import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_USERNAME
+import io.gianluigip.spectacle.report.config.CentralPublisherConfig
 import io.gianluigip.spectacle.report.config.ReportConfiguration
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.report.publisher.SpecificationPublisher
@@ -39,15 +42,21 @@ abstract class BaseIntegrationTest {
         centralEnabled: Boolean = true,
         centralWikiEnabled: Boolean = false,
         localWikiLocation: String? = null,
+        centralUsername: String = CENTRAL_USERNAME,
+        centralPassword: String = CENTRAL_PASSWORD,
     ) = ReportConfiguration(
         team,
         source,
         component,
         publishers,
-        centralEnabled,
-        centralHost = Url("http://localhost:$centralPort"),
-        centralWikiEnabled,
-        localWikiLocation,
+        centralConfig = CentralPublisherConfig(
+            enabled = centralEnabled,
+            host = Url("http://localhost:$centralPort"),
+            wikiEnabled = centralWikiEnabled,
+            localWikiLocation = localWikiLocation,
+            username = centralUsername,
+            password = centralPassword,
+        )
     )
 
     private fun findRandomPort(): Int {

@@ -10,7 +10,7 @@ import java.security.MessageDigest
 actual object WikiFilesLoader {
 
     actual fun loadWikiPages(config: ReportConfiguration): List<WikiPageRequest> {
-        val baseFolder = File(config.localWikiLocation!!)
+        val baseFolder = File(config.centralConfig.localWikiLocation!!)
         if (!baseFolder.exists()) {
             println("The wiki folder doesn't exist ${baseFolder.absolutePath}")
         }

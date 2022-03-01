@@ -7,6 +7,8 @@ import com.github.tomakehurst.wiremock.client.WireMock.noContent
 import com.github.tomakehurst.wiremock.client.WireMock.post
 import com.github.tomakehurst.wiremock.client.WireMock.put
 import com.github.tomakehurst.wiremock.client.WireMock.stubFor
+import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_PASSWORD
+import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_USERNAME
 import io.gianluigip.spectacle.dsl.interactions.sendsRequestTo
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import kotlinx.serialization.encodeToString
@@ -14,8 +16,15 @@ import kotlinx.serialization.json.Json
 
 fun stubPutSpecs() {
     sendsRequestToCentral()
+    // First request without auth
     stubFor(
-        put("/api/specification").willReturn(noContent())
+        put("/api/specification").willReturn(
+            aResponse().withStatus(401).withHeader("WWW-Authenticate", """Basic realm="Access", charset=UTF-8""")
+        )
+    )
+    // Second request should include auth
+    stubFor(
+        put("/api/specification").withBasicAuth(CENTRAL_USERNAME, CENTRAL_PASSWORD).willReturn(noContent())
     )
 }
 

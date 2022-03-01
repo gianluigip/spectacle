@@ -12,10 +12,14 @@ actual object ConfigLoader {
                 source = "Other",
                 component = "Other",
                 publishers = listOf(TerminalPublisher),
-                centralEnabled = false,
-                centralHost = null,
-                centralWikiEnabled = false,
-                localWikiLocation = null,
+                centralConfig = CentralPublisherConfig(
+                    enabled = false,
+                    host = null,
+                    username = "",
+                    password = "",
+                    wikiEnabled = false,
+                    localWikiLocation = null,
+                ),
             )
         }
 
