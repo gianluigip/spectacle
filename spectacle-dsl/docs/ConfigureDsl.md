@@ -23,6 +23,11 @@ specification.publisher=terminal,central
 specification.publisher.central.enabled=false
 # Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_HOST
 specification.publisher.central.host=https://central.spectacle.com
+# If this property is not set the central publisher will fail because it won't have the credentials to publish changes.
+# Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_USERNAME
+specification.publisher.central.username=admin
+# Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_PASSWORD
+specification.publisher.central.password=admin
 # You can publish your Markdown files to Spectacle Central
 specification.publisher.central.wiki.enabled=true
 # If you are publishing your Markdown docs you need to define which folder will be published

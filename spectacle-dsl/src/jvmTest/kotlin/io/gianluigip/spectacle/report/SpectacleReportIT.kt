@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.report
 
+import com.github.tomakehurst.wiremock.client.BasicCredentials
 import com.github.tomakehurst.wiremock.client.WireMock.equalToJson
 import com.github.tomakehurst.wiremock.client.WireMock.exactly
 import com.github.tomakehurst.wiremock.client.WireMock.putRequestedFor
@@ -8,6 +9,8 @@ import com.github.tomakehurst.wiremock.client.WireMock.verify
 import io.gianluigip.spectacle.BaseIntegrationTest
 import io.gianluigip.spectacle.common.Features
 import io.gianluigip.spectacle.common.Tags.SPECIFICATIONS
+import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_PASSWORD
+import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_USERNAME
 import io.gianluigip.spectacle.common.utils.api.stubPutSpecs
 import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
 import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
@@ -68,6 +71,7 @@ class SpectacleReportIT : BaseIntegrationTest() {
             verify(
                 exactly(1),
                 putRequestedFor(urlEqualTo("/api/specification"))
+                    .withBasicAuth(BasicCredentials(CENTRAL_USERNAME, CENTRAL_PASSWORD))
                     .withRequestBody(
                         equalToJson(
                             """

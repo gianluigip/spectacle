@@ -23,10 +23,14 @@ actual object ConfigLoader {
                 source = properties.getSource(),
                 component = properties.getComponent(),
                 publishers = properties.getPublishers(),
-                centralEnabled = properties.getCentralEnabled(),
-                centralHost = properties.getCentralHost(),
-                centralWikiEnabled = properties.getCentralWikiEnabled(),
-                localWikiLocation = properties.getLocalWikiLocation()
+                centralConfig = CentralPublisherConfig(
+                    enabled = properties.getCentralEnabled(),
+                    host = properties.getCentralHost(),
+                    username = properties.getCentralUsername(),
+                    password = properties.getCentralPassword(),
+                    wikiEnabled = properties.getCentralWikiEnabled(),
+                    localWikiLocation = properties.getLocalWikiLocation(),
+                ),
             )
         } else {
             CONFIG = ReportConfiguration(
@@ -34,10 +38,14 @@ actual object ConfigLoader {
                 source = "Other",
                 component = "Other",
                 publishers = listOf(TerminalPublisher),
-                centralEnabled = false,
-                centralHost = null,
-                centralWikiEnabled = false,
-                localWikiLocation = null,
+                centralConfig = CentralPublisherConfig(
+                    enabled = false,
+                    host = null,
+                    username = "",
+                    password = "",
+                    wikiEnabled = false,
+                    localWikiLocation = null,
+                )
             )
             println("If you want to customize the behavior of Spectacle Reports create a file $PROPERTIES_FILE_NAME in the test resource folder")
         }
@@ -79,6 +87,22 @@ actual object ConfigLoader {
             return Url(envValue)
         }
         return getProperty("specification.publisher.central.host")?.let { Url(it) }
+    }
+
+    private fun Properties.getCentralUsername(): String {
+        val envValue: String? = System.getenv(CENTRAL_USERNAME_ENV_VARIABLE)
+        if (envValue != null) {
+            return envValue
+        }
+        return getProperty("specification.publisher.central.username") ?: ""
+    }
+
+    private fun Properties.getCentralPassword(): String {
+        val envValue: String? = System.getenv(CENTRAL_PASSWORD_ENV_VARIABLE)
+        if (envValue != null) {
+            return envValue
+        }
+        return getProperty("specification.publisher.central.password") ?: ""
     }
 
     private fun Properties.getCentralWikiEnabled(): Boolean = getProperty("specification.publisher.central.wiki.enabled")?.toBoolean() ?: false

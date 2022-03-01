@@ -6,41 +6,41 @@ import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 
 object CentralWikiPublisher {
 
-    suspend fun publishWiki(config: ReportConfiguration) {
-        if (!config.centralWikiEnabled || config.localWikiLocation == null) {
+    suspend fun publishWiki(centralClient: CentralClient, config: ReportConfiguration) {
+        if (!config.centralConfig.wikiEnabled || config.centralConfig.localWikiLocation == null) {
             println("Skipping Central Wiki publisher because it is disable.")
             return
         }
         val localPages = WikiFilesLoader.loadWikiPages(config)
-        val centralPages = CentralClient.getWikiPages(config.source, config)
-        syncLocalPages(localPages, centralPages, config)
+        val centralPages = centralClient.getWikiPages(config.source)
+        syncLocalPages(localPages, centralPages, centralClient, config)
     }
 }
 
 private suspend fun syncLocalPages(
-    localPages: List<WikiPageRequest>, centralPages: List<WikiPageMetadataResponse>, config: ReportConfiguration
+    localPages: List<WikiPageRequest>, centralPages: List<WikiPageMetadataResponse>, centralClient: CentralClient, config: ReportConfiguration
 ) {
     val localMap = localPages.associateBy { it.fullPath() }
     val centralMap = centralPages.associateBy { it.fullPath() }
 
-    deleteCentralPagesThatDoesntExistInLocal(localMap, centralPages, config)
-    upsertLocalPages(localPages, centralMap, config)
+    deleteCentralPagesThatDoesntExistInLocal(localMap, centralPages, centralClient, config)
+    upsertLocalPages(localPages, centralMap, centralClient, config)
 }
 
 private suspend fun deleteCentralPagesThatDoesntExistInLocal(
-    localMap: Map<String, WikiPageRequest>, centralPages: List<WikiPageMetadataResponse>, config: ReportConfiguration
+    localMap: Map<String, WikiPageRequest>, centralPages: List<WikiPageMetadataResponse>, centralClient: CentralClient, config: ReportConfiguration
 ) {
     centralPages.forEach { centralPage ->
         val centralPagePath = centralPage.fullPath()
         if (!localMap.containsKey(centralPage.fullPath())) {
             println("Deleting the central wiki page $centralPagePath")
-            CentralClient.deleteWikiPage(centralPage.id, config)
+            centralClient.deleteWikiPage(centralPage.id)
         }
     }
 }
 
 private suspend fun upsertLocalPages(
-    localPages: List<WikiPageRequest>, centralMap: Map<String, WikiPageMetadataResponse>, config: ReportConfiguration
+    localPages: List<WikiPageRequest>, centralMap: Map<String, WikiPageMetadataResponse>, centralClient: CentralClient, config: ReportConfiguration
 ) {
     localPages.forEach { localPage ->
         val localPagePath = localPage.fullPath()
@@ -50,11 +50,11 @@ private suspend fun upsertLocalPages(
                 println("Skipping wiki page because is the same $localPagePath")
             } else {
                 println("Updating the wiki page $localPagePath")
-                CentralClient.putWikiPage(localPage, centralPage.id, config)
+                centralClient.putWikiPage(localPage, centralPage.id)
             }
         } else {
             println("Storing the new wiki page $localPagePath")
-            CentralClient.postWikiPage(localPage, config)
+            centralClient.postWikiPage(localPage)
         }
     }
 }

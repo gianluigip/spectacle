@@ -23,11 +23,12 @@ object CentralPublisher : SpecificationPublisher {
     }
 
     override suspend fun publishReport(specifications: List<Specification>, config: ReportConfiguration) {
-        if (!config.centralEnabled) {
+        if (!config.centralConfig.enabled) {
             println("Skipping Central publisher because it is disable.")
             return
         }
-        CentralSpecPublisher.publishSpecs(specifications, config)
-        CentralWikiPublisher.publishWiki(config)
+        val centralClient = CentralClient(config.centralConfig)
+        CentralSpecPublisher.publishSpecs(specifications, centralClient, config)
+        CentralWikiPublisher.publishWiki(centralClient, config)
     }
 }
