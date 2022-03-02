@@ -49,7 +49,7 @@ val LoginPage = FC<Props> {
     var password by useState("")
     var isLoginFailed by useState(false)
 
-    val from: String = location.state.asDynamic()?.from?.pathname as? String ?: "/"
+    val from: String = (location.state as? NavigationState)?.fromFullPath ?: "/"
 
     fun onLogin(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
