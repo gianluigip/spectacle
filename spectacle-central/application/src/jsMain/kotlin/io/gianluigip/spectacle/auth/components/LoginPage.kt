@@ -22,10 +22,12 @@ import mui.material.Stack
 import mui.material.TextField
 import mui.material.Typography
 import mui.system.ResponsiveStyleValue
-import org.w3c.dom.HTMLButtonElement
+import org.w3c.dom.HTMLFormElement
 import react.FC
 import react.Props
-import react.dom.events.MouseEvent
+import react.dom.events.FormEvent
+import react.dom.html.ButtonType
+import react.dom.html.ReactHTML
 import react.dom.onChange
 import react.router.useLocation
 import react.router.useNavigate
@@ -45,7 +47,8 @@ val LoginPage = FC<Props> {
 
     val from: String = location.state.asDynamic()?.from?.pathname as? String ?: "/"
 
-    fun onLogin(event: MouseEvent<HTMLButtonElement, *>) {
+    fun onLogin(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault()
         val authenticatedUser = findUserFromCredentials(username, password)
         if (authenticatedUser == null) {
             isLoginFailed = true
@@ -61,37 +64,40 @@ val LoginPage = FC<Props> {
             display = Display.flex; justifyContent = JustifyContent.center
         }
 
-        Paper {
-            sx = jso { width = 400.px; padding = SPACE_PADDING; }
-            elevation = 2
+        ReactHTML.form {
+            onSubmit = { onLogin(it) }
+            Paper {
+                sx = jso { width = 400.px; padding = SPACE_PADDING; }
+                elevation = 2
 
-            Typography {
-                sx = jso { textAlign = TextAlign.center; color = Color(theme.palette.info.main) }
-                variant = "h5"; +"Welcome to Spectacle Central";
-            }
-            Spacer { height = 10.px }
-
-            Stack {
-                spacing = ResponsiveStyleValue(2)
-
-                if (isLoginFailed) Alert { severity = error; +"The credentials are invalid" }
-
-                TextField {
-                    id = "username"
-                    label = "Username".toNode()
-                    value = username
-                    onChange = { newValue -> username = newValue.target.asDynamic().value as String }
+                Typography {
+                    sx = jso { textAlign = TextAlign.center; color = Color(theme.palette.info.main) }
+                    variant = "h5"; +"Welcome to Spectacle Central";
                 }
-                TextField {
-                    id = "password"
-                    label = "Password".toNode()
-                    value = password
-                    onChange = { newValue -> password = newValue.target.asDynamic().value as String }
-                }
-                Button {
-                    onClick = { onLogin(it) }
-                    variant = ButtonVariant.contained
-                    +"Login"
+                Spacer { height = 10.px }
+
+                Stack {
+                    spacing = ResponsiveStyleValue(2)
+
+                    if (isLoginFailed) Alert { severity = error; +"The credentials are invalid" }
+
+                    TextField {
+                        id = "username"
+                        label = "Username".toNode()
+                        value = username
+                        onChange = { newValue -> username = newValue.target.asDynamic().value as String }
+                    }
+                    TextField {
+                        id = "password"
+                        label = "Password".toNode()
+                        value = password
+                        onChange = { newValue -> password = newValue.target.asDynamic().value as String }
+                    }
+                    Button {
+                        type = ButtonType.submit
+                        variant = ButtonVariant.contained
+                        +"Login"
+                    }
                 }
             }
         }

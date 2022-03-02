@@ -16,6 +16,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.basic
 import io.ktor.server.http.content.resource
 import io.ktor.server.http.content.resources
@@ -44,6 +45,7 @@ fun Application.module() {
         method(HttpMethod.Post)
         method(HttpMethod.Delete)
         header(HttpHeaders.ContentType)
+        header(HttpHeaders.Authorization)
         anyHost()
     }
     install(Compression) { gzip() }
@@ -69,12 +71,14 @@ fun Application.module() {
             resources("web")
         }
         route("/api") {
-            specificationsRoutes()
-            specReportRoutes()
-            interactionReportRoutes()
-            wikiRoutes()
-            featuresRoutes()
-            teamRoutes()
+            authenticate {
+                specificationsRoutes()
+                specReportRoutes()
+                interactionReportRoutes()
+                wikiRoutes()
+                featuresRoutes()
+                teamRoutes()
+            }
         }
     }
 }
