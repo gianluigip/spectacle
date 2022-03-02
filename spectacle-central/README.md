@@ -11,6 +11,9 @@ increase the value for the organization as a whole.
 
 ## [Live Demo](https://spectacle-central.herokuapp.com/)
 
+* Username: `guest`
+* Password: `guest`
+
 ## Features
 
 * [Specifications Report](./docs/SpecificationsReport.md): Search and bookmark any specification

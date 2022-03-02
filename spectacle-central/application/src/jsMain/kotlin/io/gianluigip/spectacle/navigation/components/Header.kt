@@ -3,8 +3,8 @@ package io.gianluigip.spectacle.navigation.components
 import csstype.FlexGrow
 import csstype.GridArea
 import csstype.None
-import csstype.ZIndex
 import csstype.px
+import io.gianluigip.spectacle.auth.components.AuthMenu
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
@@ -45,7 +45,6 @@ val Header = FC<Props> {
         position = AppBarPosition.fixed
         sx = jso {
             gridArea = GridArea(GridAreas.Header)
-            zIndex = ZIndex(1_500)
         }
 
         Toolbar {
@@ -103,6 +102,7 @@ val Header = FC<Props> {
                     GitHub()
                 }
             }
+            AuthMenu { }
         }
     }
 }

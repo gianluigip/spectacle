@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle
 
-import io.gianluigip.spectacle.common.auth.AuthProvider
+import io.gianluigip.spectacle.auth.api.AuthProvider
+import io.gianluigip.spectacle.auth.api.loginRoutes
 import io.gianluigip.spectacle.common.beans.productionDependencies
 import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
@@ -16,6 +17,7 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
 import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.authenticate
 import io.ktor.server.auth.basic
 import io.ktor.server.http.content.resource
 import io.ktor.server.http.content.resources
@@ -44,6 +46,7 @@ fun Application.module() {
         method(HttpMethod.Post)
         method(HttpMethod.Delete)
         header(HttpHeaders.ContentType)
+        header(HttpHeaders.Authorization)
         anyHost()
     }
     install(Compression) { gzip() }
@@ -69,12 +72,15 @@ fun Application.module() {
             resources("web")
         }
         route("/api") {
-            specificationsRoutes()
-            specReportRoutes()
-            interactionReportRoutes()
-            wikiRoutes()
-            featuresRoutes()
-            teamRoutes()
+            loginRoutes()
+            authenticate {
+                specificationsRoutes()
+                specReportRoutes()
+                interactionReportRoutes()
+                wikiRoutes()
+                featuresRoutes()
+                teamRoutes()
+            }
         }
     }
 }
