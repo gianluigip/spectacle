@@ -6,6 +6,7 @@ import csstype.GridArea
 import csstype.GridTemplateAreas
 import csstype.GridTemplateRows
 import csstype.pct
+import io.gianluigip.spectacle.auth.AuthModule
 import io.gianluigip.spectacle.home.Content
 import io.gianluigip.spectacle.home.GridAreas
 import io.gianluigip.spectacle.home.Sizes
@@ -25,27 +26,30 @@ fun main() {
         element = App.create(),
         container = document.createElement("div").also {
             it.className = "root-app"
-            document.body!!.appendChild(it)                                                        },
+            document.body!!.appendChild(it)
+        },
     )
 }
 
 private val App = FC<Props> {
     HashRouter {
-        ThemeModule {
-            Box {
-                sx = jso {
-                    display = Display.grid
-                    height = 100.pct
-                    gridTemplateRows = "${Sizes.Header.Height} ${Auto.auto}".unsafeCast<GridTemplateRows>()
-                    gridTemplateColumns = Auto.auto
-                    gridTemplateAreas = GridTemplateAreas(
-                        GridArea(GridAreas.Header),
-                        GridArea(GridAreas.Content),
-                    )
-                }
+        AuthModule {
+            ThemeModule {
+                Box {
+                    sx = jso {
+                        display = Display.grid
+                        height = 100.pct
+                        gridTemplateRows = "${Sizes.Header.Height} ${Auto.auto}".unsafeCast<GridTemplateRows>()
+                        gridTemplateColumns = Auto.auto
+                        gridTemplateAreas = GridTemplateAreas(
+                            GridArea(GridAreas.Header),
+                            GridArea(GridAreas.Content),
+                        )
+                    }
 
-                Header()
-                Content()
+                    Header()
+                    Content()
+                }
             }
         }
     }

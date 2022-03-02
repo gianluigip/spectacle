@@ -3,6 +3,9 @@ package io.gianluigip.spectacle.home
 import csstype.GridArea
 import csstype.pct
 import csstype.px
+import io.gianluigip.spectacle.auth.components.LoginPage
+import io.gianluigip.spectacle.auth.components.RequireAuth
+import io.gianluigip.spectacle.auth.components.loginPath
 import io.gianluigip.spectacle.diagram.components.SystemDiagramPage
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
 import io.gianluigip.spectacle.specification.components.SpecificationsReport
@@ -50,20 +53,19 @@ val Content = FC<Props> {
             }
 
             Route {
-                index = true
-                element = LandingView.create()
+                path = loginPath; element = LoginPage.create()
             }
             Route {
-                path = specificationsReportPath
-                element = SpecificationsReport.create()
+                index = true; element = RequireAuth.create { LandingView { } }
             }
             Route {
-                path = systemDiagramPath
-                element = SystemDiagramPage.create()
+                path = specificationsReportPath; element = RequireAuth.create { SpecificationsReport { } }
             }
             Route {
-                path = wikiPath
-                element = WikiBrowser.create()
+                path = systemDiagramPath; element = RequireAuth.create { SystemDiagramPage { } }
+            }
+            Route {
+                path = wikiPath; element = RequireAuth.create { WikiBrowser { } }
             }
 
             Route {
