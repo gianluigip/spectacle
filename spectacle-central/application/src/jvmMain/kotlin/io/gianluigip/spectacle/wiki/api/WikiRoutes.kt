@@ -1,11 +1,11 @@
 package io.gianluigip.spectacle.wiki.api
 
-import io.gianluigip.spectacle.common.auth.UserRole.READ
-import io.gianluigip.spectacle.common.auth.UserRole.WRITE
-import io.gianluigip.spectacle.common.auth.deleteForRole
-import io.gianluigip.spectacle.common.auth.getForRole
-import io.gianluigip.spectacle.common.auth.postForRole
-import io.gianluigip.spectacle.common.auth.putForRole
+import io.gianluigip.spectacle.auth.model.UserRole.READ
+import io.gianluigip.spectacle.auth.model.UserRole.WRITE
+import io.gianluigip.spectacle.auth.api.deleteForRole
+import io.gianluigip.spectacle.auth.api.getForRole
+import io.gianluigip.spectacle.auth.api.postForRole
+import io.gianluigip.spectacle.auth.api.putForRole
 import io.gianluigip.spectacle.di
 import io.gianluigip.spectacle.report.api.splitAndMap
 import io.gianluigip.spectacle.specification.model.toComponent

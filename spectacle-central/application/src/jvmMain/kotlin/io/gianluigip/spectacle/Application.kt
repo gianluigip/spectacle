@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle
 
-import io.gianluigip.spectacle.common.auth.AuthProvider
+import io.gianluigip.spectacle.auth.api.AuthProvider
+import io.gianluigip.spectacle.auth.api.loginRoutes
 import io.gianluigip.spectacle.common.beans.productionDependencies
 import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
@@ -71,6 +72,7 @@ fun Application.module() {
             resources("web")
         }
         route("/api") {
+            loginRoutes()
             authenticate {
                 specificationsRoutes()
                 specReportRoutes()

@@ -1,5 +1,7 @@
-package io.gianluigip.spectacle.common.auth
+package io.gianluigip.spectacle.auth.api
 
+import io.gianluigip.spectacle.auth.model.UserPrincipal
+import io.gianluigip.spectacle.auth.model.UserRole
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.call

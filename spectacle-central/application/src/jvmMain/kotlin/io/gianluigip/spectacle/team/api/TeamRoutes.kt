@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.team.api
 
-import io.gianluigip.spectacle.common.auth.UserRole.READ
-import io.gianluigip.spectacle.common.auth.getForRole
+import io.gianluigip.spectacle.auth.model.UserRole.READ
+import io.gianluigip.spectacle.auth.api.getForRole
 import io.gianluigip.spectacle.di
 import io.gianluigip.spectacle.team.TeamFinder
 import io.ktor.server.application.call

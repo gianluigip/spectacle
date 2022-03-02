@@ -1,9 +1,9 @@
 package io.gianluigip.spectacle.specification.api
 
-import io.gianluigip.spectacle.common.auth.UserRole.READ
-import io.gianluigip.spectacle.common.auth.UserRole.WRITE
-import io.gianluigip.spectacle.common.auth.getForRole
-import io.gianluigip.spectacle.common.auth.putForRole
+import io.gianluigip.spectacle.auth.model.UserRole.READ
+import io.gianluigip.spectacle.auth.model.UserRole.WRITE
+import io.gianluigip.spectacle.auth.api.getForRole
+import io.gianluigip.spectacle.auth.api.putForRole
 import io.gianluigip.spectacle.di
 import io.gianluigip.spectacle.specification.SpecificationFinder
 import io.gianluigip.spectacle.specification.SpecificationProcessor

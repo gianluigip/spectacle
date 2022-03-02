@@ -68,6 +68,9 @@ increase the value for the organization as a whole.
 
 ### [Live Demo](https://spectacle-central.herokuapp.com/)
 
+* Username: `guest`
+* Password: `guest`
+
 Review [Spectacle Central README](./spectacle-central/README.md) for more details.
 
 ## Future Improvements

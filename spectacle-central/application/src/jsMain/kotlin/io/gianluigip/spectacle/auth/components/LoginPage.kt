@@ -7,10 +7,13 @@ import csstype.TextAlign
 import csstype.px
 import io.gianluigip.spectacle.auth.AuthContext
 import io.gianluigip.spectacle.auth.AuthenticatedUser
+import io.gianluigip.spectacle.auth.api.postLogin
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import kotlinx.js.jso
 import mui.material.Alert
 import mui.material.AlertColor.error
@@ -27,6 +30,7 @@ import react.FC
 import react.Props
 import react.dom.events.FormEvent
 import react.dom.html.ButtonType
+import react.dom.html.InputType
 import react.dom.html.ReactHTML
 import react.dom.onChange
 import react.router.useLocation
@@ -49,14 +53,16 @@ val LoginPage = FC<Props> {
 
     fun onLogin(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        val authenticatedUser = findUserFromCredentials(username, password)
-        if (authenticatedUser == null) {
-            isLoginFailed = true
-            return
+        MainScope().launch {
+            val authenticatedUser = findUserFromCredentials(username, password)
+            if (authenticatedUser == null) {
+                isLoginFailed = true
+                return@launch
+            }
+            isLoginFailed = false
+            user = authenticatedUser
+            navigate.invoke(to = from, options = jso { replace = true })
         }
-        isLoginFailed = false
-        user = authenticatedUser
-        navigate.invoke(to = from, options = jso { replace = true })
     }
 
     Box {
@@ -89,6 +95,7 @@ val LoginPage = FC<Props> {
                     }
                     TextField {
                         id = "password"
+                        type = InputType.password
                         label = "Password".toNode()
                         value = password
                         onChange = { newValue -> password = newValue.target.asDynamic().value as String }
@@ -104,8 +111,9 @@ val LoginPage = FC<Props> {
     }
 }
 
-private fun findUserFromCredentials(username: String, password: String): AuthenticatedUser? {
-    return if (username == password) {
-        AuthenticatedUser("Guest", username, password)
+suspend fun findUserFromCredentials(username: String, password: String): AuthenticatedUser? {
+    val loginResult = postLogin(username, password)
+    return if (loginResult != null) {
+        AuthenticatedUser(loginResult.name, username, password)
     } else null
 }

@@ -1,10 +1,10 @@
 package io.gianluigip.spectacle.common.beans
 
+import io.gianluigip.spectacle.auth.EnvVarsUserFinder
+import io.gianluigip.spectacle.auth.UserFinder
+import io.gianluigip.spectacle.auth.api.AuthProvider
 import io.gianluigip.spectacle.common.ExposedTransactionExecutor
 import io.gianluigip.spectacle.common.TransactionExecutor
-import io.gianluigip.spectacle.common.auth.AuthProvider
-import io.gianluigip.spectacle.common.auth.EnvVarsUserFinder
-import io.gianluigip.spectacle.common.auth.UserFinder
 import io.gianluigip.spectacle.feature.FeatureFinder
 import io.gianluigip.spectacle.report.InteractionsReportGenerator
 import io.gianluigip.spectacle.report.SpecReportGenerator
