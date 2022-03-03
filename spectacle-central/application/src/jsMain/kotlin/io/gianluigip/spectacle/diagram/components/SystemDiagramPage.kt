@@ -43,11 +43,13 @@ val SystemDiagramPage = FC<Props> {
         team = queryParams["team"],
     )
 
-    fun loadInteractionsReport(filtersSelected: FiltersSelected) = MainScope().launch {
-        val response = filtersSelected.run { getInteractionsReport(feature, source, component, tag, team) }
-        interactions = response.interactions
-        filters = response.filters
+    fun loadInteractionsReport(filtersSelected: FiltersSelected) {
         currentFilters = queryFilters
+        MainScope().launch {
+            val response = filtersSelected.run { getInteractionsReport(feature, source, component, tag, team) }
+            interactions = response.interactions
+            filters = response.filters
+        }
     }
 
     fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(systemDiagramPath, filters))

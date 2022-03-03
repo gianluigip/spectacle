@@ -43,11 +43,13 @@ val SpecificationsReport = FC<Props> {
         status = queryParams["status"]?.let { status -> SpecStatus.values().firstOrNull { it.name == status } },
     )
 
-    fun loadSpecReport(filters: FiltersSelected) = MainScope().launch {
-        val response = getSpecReport(filters.feature, filters.source, filters.component, filters.tag, filters.team, filters.status)
-        featuresResponse = response.features
-        filtersResponse = response.filters
+    fun loadSpecReport(filters: FiltersSelected) {
         currentFilters = queryFilters
+        MainScope().launch {
+            val response = getSpecReport(filters.feature, filters.source, filters.component, filters.tag, filters.team, filters.status)
+            featuresResponse = response.features
+            filtersResponse = response.filters
+        }
     }
 
     fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(specificationsReportPath, filters))
