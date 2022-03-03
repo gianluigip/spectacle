@@ -50,13 +50,13 @@ val FeaturesPage = FC<Props> { _ ->
         specs = null
         interactions = null
         wikiPages = null
+        currentFeatureName = featureName
         MainScope().launch {
             selectedFeature?.let {
                 specs = getSpecReport(feature = it.name)
                 interactions = getInteractionsReport(feature = it.name)
                 wikiPages = getAllPages(feature = it.name)
             }
-            currentFeatureName = featureName
         }
     }
 

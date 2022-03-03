@@ -35,9 +35,9 @@ val WikiBrowser = FC<Props> {
 
     fun loadPage(wikiId: String) {
         isLoading = true
+        currentWikiId = wikiId
         MainScope().launch {
             wikiPage = getWikiPage(wikiId)
-            currentWikiId = wikiId
             isLoading = false
         }
     }

@@ -43,11 +43,14 @@ val SpecificationsReport = FC<Props> {
         status = queryParams["status"]?.let { status -> SpecStatus.values().firstOrNull { it.name == status } },
     )
 
-    fun loadSpecReport(filters: FiltersSelected) = MainScope().launch {
-        val response = getSpecReport(filters.feature, filters.source, filters.component, filters.tag, filters.team, filters.status)
-        featuresResponse = response.features
-        filtersResponse = response.filters
+    fun loadSpecReport(filters: FiltersSelected) {
+        featuresResponse = null
         currentFilters = queryFilters
+        MainScope().launch {
+            val response = getSpecReport(filters.feature, filters.source, filters.component, filters.tag, filters.team, filters.status)
+            featuresResponse = response.features
+            filtersResponse = response.filters
+        }
     }
 
     fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(specificationsReportPath, filters))
@@ -72,7 +75,7 @@ val SpecificationsReport = FC<Props> {
 
                 Typography { variant = "h5"; +"Filters" }
                 Spacer { height = 10.px }
-                LoadingBar { isLoading = currentFilters != queryFilters }
+                LoadingBar { isLoading = filtersResponse == null }
                 filtersResponse?.let {
                     ReportFilters {
                         filtersSelected = currentFilters ?: FiltersSelected()
@@ -92,7 +95,7 @@ val SpecificationsReport = FC<Props> {
                 elevation = 2
                 Typography { variant = "h5"; +"List of Specs by Feature" }
                 Spacer { height = 10.px }
-                LoadingBar { isLoading = currentFilters != queryFilters }
+                LoadingBar { isLoading = featuresResponse == null }
                 featuresResponse?.let { FeaturesReport { features = it } }
             }
         }
