@@ -2,7 +2,7 @@ package io.gianluigip.spectacle.common.utils
 
 import io.gianluigip.spectacle.specification.components.FiltersSelected
 
-fun buildReportUrlWithParameters(reportPath: String, filters: FiltersSelected): String {
+fun buildUrlWithParameters(reportPath: String, filters: FiltersSelected): String {
     val params = mutableListOf<String>()
     if (filters.feature != null) params.add("feature=${filters.feature.escapeSpaces()}")
     if (filters.tag != null) params.add("tag=${filters.tag.escapeSpaces()}")

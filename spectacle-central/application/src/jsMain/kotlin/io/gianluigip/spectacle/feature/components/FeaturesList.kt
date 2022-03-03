@@ -6,7 +6,7 @@ import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
+import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.toDisplay
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.feature.api.getFeatures
@@ -79,7 +79,7 @@ private fun generateFeatureComponent(feature: FeatureResponse, isFirstFeature: B
     Box.create {
         if (!isFirstFeature) Spacer { height = 10.px }
         NavLink {
-            to = buildReportUrlWithParameters(specificationsReportPath, FiltersSelected(feature = feature.name))
+            to = buildUrlWithParameters(specificationsReportPath, FiltersSelected(feature = feature.name))
             css { textDecoration = None.none; color = Color.currentcolor }
             Tooltip {
                 title = "Go to Feature Specs".toNode()

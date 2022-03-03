@@ -6,7 +6,7 @@ import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
+import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.diagram.api.getInteractionsReport
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
@@ -50,7 +50,7 @@ val SystemDiagramPage = FC<Props> {
         currentFilters = queryFilters
     }
 
-    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportUrlWithParameters(systemDiagramPath, filters))
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(systemDiagramPath, filters))
 
     useEffect {
         if (currentFilters != queryFilters) loadInteractionsReport(queryFilters)
