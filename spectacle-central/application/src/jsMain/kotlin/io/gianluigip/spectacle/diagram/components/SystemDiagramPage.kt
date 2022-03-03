@@ -45,6 +45,7 @@ val SystemDiagramPage = FC<Props> {
 
     fun loadInteractionsReport(filtersSelected: FiltersSelected) {
         currentFilters = queryFilters
+        interactions = null
         MainScope().launch {
             val response = filtersSelected.run { getInteractionsReport(feature, source, component, tag, team) }
             interactions = response.interactions
@@ -69,7 +70,7 @@ val SystemDiagramPage = FC<Props> {
 
                 Typography { sx = jso { width = 280.px; }; variant = "h5"; +"Filters" }
                 Spacer { height = 10.px }
-                LoadingBar { isLoading = currentFilters != queryFilters }
+                LoadingBar { isLoading = filters == null }
                 filters?.let {
                     ReportFilters {
                         filtersSelected = currentFilters ?: FiltersSelected()
@@ -90,7 +91,7 @@ val SystemDiagramPage = FC<Props> {
 
                 Typography { variant = "h5"; +"System Diagram" }
                 Spacer { height = 10.px }
-                LoadingBar { isLoading = currentFilters != queryFilters }
+                LoadingBar { isLoading = interactions == null }
                 interactions?.let {
                     if (it.isEmpty()) return@let
                     SystemDiagram {
