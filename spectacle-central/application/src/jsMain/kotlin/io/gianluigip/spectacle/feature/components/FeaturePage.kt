@@ -38,22 +38,19 @@ val FeaturesPage = FC<Props> { _ ->
     val queryParams = useLocation().search.parseParams()
 
     var features by useState<List<FeatureResponse>>()
-    var selectedFeature by useState<FeatureResponse>()
-
     var currentFeatureName by useState("")
     val featureName = queryParams["name"]
+    val selectedFeature = features?.firstOrNull { it.name == featureName }
 
     var specs by useState<SpecsReportResponse>()
     var interactions by useState<InteractionsReportResponse>()
     var wikiPages by useState<List<WikiPageMetadataResponse>>()
 
     fun loadFeature(featureName: String) {
-        selectedFeature = null
         specs = null
         interactions = null
         wikiPages = null
         MainScope().launch {
-            selectedFeature = features?.first { it.name == featureName }
             selectedFeature?.let {
                 specs = getSpecReport(feature = it.name)
                 interactions = getInteractionsReport(feature = it.name)
@@ -86,7 +83,7 @@ val FeaturesPage = FC<Props> { _ ->
         Spacer { height = 10.px }
         if (featureName != null && selectedFeature != null && specs != null && interactions != null && wikiPages != null) {
             FeatureViewer {
-                this.feature = selectedFeature!!
+                this.feature = selectedFeature
                 this.specs = specs!!
                 this.interactions = interactions!!
                 this.wikiPages = wikiPages!!
