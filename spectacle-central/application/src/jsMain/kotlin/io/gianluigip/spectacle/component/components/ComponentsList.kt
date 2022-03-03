@@ -6,7 +6,7 @@ import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
+import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.component.api.Component
 import io.gianluigip.spectacle.component.api.getComponents
@@ -60,7 +60,7 @@ private fun generateComponentsBox(component: Component, isFirstFeature: Boolean,
     Box.create {
         if (!isFirstFeature) Spacer { height = 10.px }
         NavLink {
-            to = buildReportUrlWithParameters(systemDiagramPath, FiltersSelected(component = component.name))
+            to = buildUrlWithParameters(systemDiagramPath, FiltersSelected(component = component.name))
             css { textDecoration = None.none; color = Color.currentcolor }
             Tooltip {
                 title = "Go to Component Diagram".toNode()

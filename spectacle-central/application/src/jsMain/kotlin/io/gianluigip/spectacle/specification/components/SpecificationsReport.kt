@@ -4,7 +4,7 @@ import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.utils.buildReportUrlWithParameters
+import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
@@ -50,7 +50,7 @@ val SpecificationsReport = FC<Props> {
         currentFilters = queryFilters
     }
 
-    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildReportUrlWithParameters(specificationsReportPath, filters))
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(specificationsReportPath, filters))
 
     useEffect {
         if (currentFilters != queryFilters) loadSpecReport(queryFilters)

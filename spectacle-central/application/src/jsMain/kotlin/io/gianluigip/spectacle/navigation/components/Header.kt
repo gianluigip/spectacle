@@ -8,6 +8,7 @@ import io.gianluigip.spectacle.auth.components.AuthMenu
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
+import io.gianluigip.spectacle.feature.components.featuresPath
 import io.gianluigip.spectacle.home.GridAreas
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
@@ -53,6 +54,12 @@ val Header = FC<Props> {
                 toPath = "/"
                 label = "Spectacle Central"
                 textVariant = "h6"
+            }
+
+            Spacer { width = 10.px }
+            NavMenuItem {
+                toPath = featuresPath
+                label = "Features"
             }
 
             Spacer { width = 10.px }
