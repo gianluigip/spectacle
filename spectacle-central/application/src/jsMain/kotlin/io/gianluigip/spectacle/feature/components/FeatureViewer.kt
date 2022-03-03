@@ -14,9 +14,9 @@ import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
 import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
-import io.gianluigip.spectacle.specification.components.FeaturesReport
 import io.gianluigip.spectacle.specification.components.SpecCard
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
+import io.gianluigip.spectacle.wiki.components.WikiListBrowser
 import kotlinx.js.jso
 import mui.lab.TabContext
 import mui.lab.TabPanel
@@ -25,7 +25,6 @@ import mui.material.Grid
 import mui.material.GridDirection
 import mui.material.Stack
 import mui.material.Tab
-import mui.material.Tabs
 import mui.material.Typography
 import mui.material.styles.Theme
 import mui.system.ResponsiveStyleValue
@@ -33,7 +32,6 @@ import react.FC
 import react.Props
 import react.ReactElement
 import react.create
-import react.dom.aria.ariaControls
 import react.dom.onChange
 import react.useContext
 import react.useState
@@ -109,7 +107,7 @@ val FeatureViewer = FC<FeatureViewerProps> { props ->
                     TabPanel {
                         sx = jso { padding = 0.px; width = 100.pct; height = 100.pct }
                         value = "Wiki"
-                        Typography { variant = "h5"; +"Wiki" }
+                        WikiListBrowser { this.wikiPages = wikiPages }
                     }
                 }
             }

@@ -79,10 +79,10 @@ private fun generateFeatureComponent(feature: FeatureResponse, isFirstFeature: B
     Box.create {
         if (!isFirstFeature) Spacer { height = 10.px }
         NavLink {
-            to = buildUrlWithParameters(specificationsReportPath, FiltersSelected(feature = feature.name))
+            to = buildFeatureUrl(feature.name)
             css { textDecoration = None.none; color = Color.currentcolor }
             Tooltip {
-                title = "Go to Feature Specs".toNode()
+                title = "Go to Feature".toNode()
                 followCursor = true
                 Typography { sx = jso { color = Color(theme.palette.info.main) }; variant = "h6"; +feature.name }
             }

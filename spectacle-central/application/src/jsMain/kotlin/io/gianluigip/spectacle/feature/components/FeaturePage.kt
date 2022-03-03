@@ -95,6 +95,6 @@ val FeaturesPage = FC<Props> { _ ->
 
 }
 
-private fun buildFeatureUrl(featureName: String?): String = if (featureName != null) {
+fun buildFeatureUrl(featureName: String?): String = if (featureName != null) {
     "$featuresPath?name=${featureName.escapeSpaces()}"
 } else featuresPath
