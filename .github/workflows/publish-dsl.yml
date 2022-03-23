@@ -1,6 +1,9 @@
 name: Publish DSL to Maven Central
 
-on: push
+on:
+  release:
+    # We'll run this workflow when a new GitHub release is created
+    types: [released]
 
 jobs:
   publish:
