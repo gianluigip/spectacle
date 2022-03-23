@@ -1,7 +1,11 @@
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
+    id("convention.publication")
 }
+
+group = "io.github.gianluigip"
+version = rootProject.version
 
 repositories {
     mavenCentral()
