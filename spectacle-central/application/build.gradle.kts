@@ -41,7 +41,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(project(":common"))
+                implementation(project(":spectacle-common"))
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
                 // KTOR
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
