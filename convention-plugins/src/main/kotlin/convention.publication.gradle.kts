@@ -69,8 +69,8 @@ publishing {
 
             licenses {
                 license {
-                    name.set("GNU Affero General Public License v3.0")
-                    url.set("https://opensource.org/licenses/AGPL-3.0")
+                    name.set("GNU Lesser General Public License v3.0")
+                    url.set("https://opensource.org/licenses/LGPL-3.0")
                 }
             }
             developers {
