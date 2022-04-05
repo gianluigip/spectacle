@@ -30,7 +30,7 @@ kotlin {
                 implementation(project(":spectacle-common"))
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
                 // HTTP CLIENT
                 implementation("io.ktor:ktor-client-core:$ktorVersion")
                 implementation("io.ktor:ktor-client-auth:$ktorVersion")
@@ -46,14 +46,14 @@ kotlin {
         val jvmMain by getting {
             dependencies {
                 implementation("io.ktor:ktor-client-cio:$ktorVersion")
-                implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+                implementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
-                implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
-                implementation("com.github.tomakehurst:wiremock-jre8:2.29.0")
+                implementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+                implementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
+                implementation("com.github.tomakehurst:wiremock-jre8:2.32.0")
             }
         }
         val jsMain by getting {}
