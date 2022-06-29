@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.dsl.assertions
 
+import io.gianluigip.spectacle.dsl.bdd.suspendingInTest
 import kotlin.reflect.KClass
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -13,7 +14,7 @@ private val Any?.expectedToBe get() = "Expected '$this' to be"
  * Convenient method to define a block inside the object to assert.
  */
 @AssertionDslMarker
-infix fun <T> T.assertThat(block: T.() -> Unit) = block.invoke(this)
+infix fun <T> T.assertThat(block: suspend T.() -> Unit) = suspendingInTest { block.invoke(this) }
 
 @AssertionDslMarker
 infix fun <T> T.shouldBe(value: T) =

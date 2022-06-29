@@ -65,7 +65,7 @@ class SpectacleReportIT : BaseIntegrationTest() {
         } whenever "the tests finished to execute" run {
             stubPutSpecs()
             val config = reportConfiguration()
-            runBlocking { CentralPublisher.publishReport(specs, config) }
+            CentralPublisher.publishReport(specs, config)
 
         } then "it should publish Spec1 and Spec2 in Spectacle Central" runAndFinish {
             verify(
