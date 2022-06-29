@@ -71,11 +71,11 @@ class WikiPublisherIT : BaseIntegrationTest() {
             stubPostAnyWiki()
             stubPutAnyWiki("3")
             stubDeleteAnyWiki("9")
-            runBlocking {
-                val config = reportConfiguration(centralWikiEnabled = true, localWikiLocation = docsFolder.absolutePath)
-                val client = CentralClient(config.centralConfig)
-                CentralWikiPublisher.publishWiki(client, config)
-            }
+
+            val config = reportConfiguration(centralWikiEnabled = true, localWikiLocation = docsFolder.absolutePath)
+            val client = CentralClient(config.centralConfig)
+            CentralWikiPublisher.publishWiki(client, config)
+
         } then "it should create, update or delete wiki pages as expected" runAndFinish {
             verifyWikiNotUpdated(
                 aWikiRequest(title = "doc1.md", fileName = "doc1.md", path = "/", content = "# Doc 1"), wikiId = "1"

@@ -26,7 +26,7 @@ abstract class BaseIntegrationTest {
     @BeforeEach
     fun initWiremock() {
         wireMockServer.start()
-        configureFor("localhost", centralPort);
+        configureMockServerClient()
     }
 
     @AfterEach
@@ -63,4 +63,7 @@ abstract class BaseIntegrationTest {
         ServerSocket(0).use { socket -> return socket.localPort }
     }
 
+    fun configureMockServerClient() {
+        configureFor("localhost", centralPort)
+    }
 }

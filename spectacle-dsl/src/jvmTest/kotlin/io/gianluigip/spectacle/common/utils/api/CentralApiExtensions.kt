@@ -7,6 +7,7 @@ import com.github.tomakehurst.wiremock.client.WireMock.noContent
 import com.github.tomakehurst.wiremock.client.WireMock.post
 import com.github.tomakehurst.wiremock.client.WireMock.put
 import com.github.tomakehurst.wiremock.client.WireMock.stubFor
+import io.gianluigip.spectacle.BaseIntegrationTest
 import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_PASSWORD
 import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_USERNAME
 import io.gianluigip.spectacle.dsl.interactions.sendsRequestTo
@@ -14,7 +15,8 @@ import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-fun stubPutSpecs() {
+fun BaseIntegrationTest.stubPutSpecs() {
+    configureMockServerClient()
     sendsRequestToCentral()
     // First request without auth
     stubFor(
@@ -28,7 +30,8 @@ fun stubPutSpecs() {
     )
 }
 
-fun stubGetWiki(response: List<WikiPageMetadataResponse>, source: String = "spectacle-test") {
+fun BaseIntegrationTest.stubGetWiki(response: List<WikiPageMetadataResponse>, source: String = "spectacle-test") {
+    configureMockServerClient()
     sendsRequestToCentral()
     stubFor(
         get("/api/wiki?sources=$source").willReturn(
@@ -39,21 +42,24 @@ fun stubGetWiki(response: List<WikiPageMetadataResponse>, source: String = "spec
     )
 }
 
-fun stubPostAnyWiki() {
+fun BaseIntegrationTest.stubPostAnyWiki() {
+    configureMockServerClient()
     sendsRequestToCentral()
     stubFor(
         post("/api/wiki").willReturn(noContent())
     )
 }
 
-fun stubPutAnyWiki(wikiId: String) {
+fun BaseIntegrationTest.stubPutAnyWiki(wikiId: String) {
+    configureMockServerClient()
     sendsRequestToCentral()
     stubFor(
         put("/api/wiki/$wikiId").willReturn(noContent())
     )
 }
 
-fun stubDeleteAnyWiki(wikiId: String) {
+fun BaseIntegrationTest.stubDeleteAnyWiki(wikiId: String) {
+    configureMockServerClient()
     sendsRequestToCentral()
     stubFor(
         delete("/api/wiki/$wikiId").willReturn(noContent())

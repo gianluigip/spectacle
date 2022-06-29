@@ -38,8 +38,8 @@ class SpecificationBddWriter<T>(
     }
 
     @BddDslMarker
-    infix fun <R> run(block: (T) -> R): SpecificationBddWriter<R> {
-        return SpecificationBddWriter(
+    infix fun <R> run(block: suspend (T) -> R): SpecificationBddWriter<R> = suspendingInTest {
+        return@suspendingInTest SpecificationBddWriter(
             specBuilder = specBuilder,
             stepLastValue = block.invoke(stepLastValue)
         )
@@ -49,7 +49,7 @@ class SpecificationBddWriter<T>(
      * Finish operation that returns Unit so test libs like Junit can work as expected.
      */
     @BddDslMarker
-    infix fun runAndFinish(block: (T) -> Unit) {
-        block.invoke(stepLastValue)
+    infix fun runAndFinish(block: suspend (T) -> Unit): Unit = suspendingInTest {
+        return@suspendingInTest block.invoke(stepLastValue)
     }
 }

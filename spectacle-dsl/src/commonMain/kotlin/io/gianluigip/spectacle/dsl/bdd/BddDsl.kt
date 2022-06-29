@@ -29,7 +29,7 @@ fun aSpec(
  * Quick way to start writing a spec, works better when using annotations and the Junit plugin to collect the metadata.
  */
 @BddDslMarker
-fun <R> given(description: String, block: (Unit) -> R): SpecificationBddWriter<R> {
+fun <R> given(description: String, block: suspend (Unit) -> R): SpecificationBddWriter<R> {
     return aSpec().given(description).run(block)
 }
 
@@ -37,6 +37,6 @@ fun <R> given(description: String, block: (Unit) -> R): SpecificationBddWriter<R
  * Quick way to start writing a spec, works better when using annotations and the Junit plugin to collect the metadata.
  */
 @BddDslMarker
-fun <R> whenever(description: String, block: (Unit) -> R): SpecificationBddWriter<R> {
+fun <R> whenever(description: String, block: suspend (Unit) -> R): SpecificationBddWriter<R> {
     return aSpec().whenever(description).run(block)
 }
