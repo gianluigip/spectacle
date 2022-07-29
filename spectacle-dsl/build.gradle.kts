@@ -1,4 +1,4 @@
-val ktorVersion = "2.0.0-beta-1"
+val ktorVersion = "2.0.3"
 
 plugins {
     kotlin("multiplatform")
@@ -58,5 +58,11 @@ kotlin {
         }
         val jsMain by getting {}
         val jsTest by getting {}
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        languageVersion = "1.4"
     }
 }

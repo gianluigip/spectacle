@@ -30,7 +30,7 @@ import kotlinx.serialization.json.Json
 import org.junit.jupiter.api.Test
 import java.io.File
 import java.nio.file.Files
-import kotlin.io.path.Path
+import java.nio.file.Path
 
 private val COMPLEX_CONTENT = """
     [//]: # ( {{ title: Wiki Publisher }} {{ features: Wiki, DSL }} )
@@ -100,10 +100,10 @@ class WikiPublisherIT : BaseIntegrationTest() {
 }
 
 private fun createFolder(name: String, parent: File): File =
-    Files.createDirectories(Path("${parent.absolutePath}/$name")).toFile()
+    Files.createDirectories(Path.of("${parent.absolutePath}/$name")).toFile()
 
 private fun createFile(fileName: String, content: String, folder: File): File =
-    Files.createFile(Path("${folder.absolutePath}/${fileName}")).toFile().apply {
+    Files.createFile(Path.of("${folder.absolutePath}/${fileName}")).toFile().apply {
         Files.writeString(toPath(), content)
     }
 

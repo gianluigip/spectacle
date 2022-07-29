@@ -6,10 +6,10 @@ import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
-import io.ktor.client.plugins.ContentNegotiation
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
 import io.ktor.client.plugins.auth.providers.basic
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -25,7 +25,13 @@ class CentralClient(
     private val config: CentralPublisherConfig
 ) {
 
-    private val host = config.host
+    private val host = config.host?.toString().let {
+        when {
+            it == null -> ""
+            it.endsWith("/") -> it
+            else -> "$it/"
+        }
+    }
 
     private val httpClient = HttpClient {
         install(ContentNegotiation) { json() }

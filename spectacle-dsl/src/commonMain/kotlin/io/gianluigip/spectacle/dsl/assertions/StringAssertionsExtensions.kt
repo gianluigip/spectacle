@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.dsl.assertions
 
-import kotlin.test.assertContains
 import kotlin.test.assertTrue
 
 private val Any?.expectedTo get() = "Expected '$this' to"
@@ -15,7 +14,7 @@ infix fun String?.shouldEndWith(value: String?) =
 
 @AssertionDslMarker
 infix fun String?.shouldContains(value: String) =
-    assertContains(this ?: "", value, ignoreCase = false, "$expectedTo contains '$value'")
+    assertTrue((this ?: "").contains(value), "$expectedTo contains '$value'")
 
 @AssertionDslMarker
 fun String?.shouldNotBeEmpty() =
