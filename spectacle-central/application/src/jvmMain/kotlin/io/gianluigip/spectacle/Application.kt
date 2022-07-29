@@ -22,11 +22,11 @@ import io.ktor.server.auth.basic
 import io.ktor.server.http.content.resource
 import io.ktor.server.http.content.resources
 import io.ktor.server.http.content.static
-import io.ktor.server.plugins.CORS
-import io.ktor.server.plugins.CallLogging
-import io.ktor.server.plugins.Compression
-import io.ktor.server.plugins.ContentNegotiation
-import io.ktor.server.plugins.gzip
+import io.ktor.server.plugins.cors.routing.CORS
+import io.ktor.server.plugins.callloging.CallLogging
+import io.ktor.server.plugins.compression.Compression
+import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.server.plugins.compression.gzip
 import io.ktor.server.routing.route
 import io.ktor.server.routing.routing
 import org.kodein.di.DI
@@ -41,12 +41,12 @@ val di: DI by lazy { _di }
 fun Application.module() {
     install(ContentNegotiation) { json() }
     install(CORS) {
-        method(HttpMethod.Get)
-        method(HttpMethod.Put)
-        method(HttpMethod.Post)
-        method(HttpMethod.Delete)
-        header(HttpHeaders.ContentType)
-        header(HttpHeaders.Authorization)
+        allowMethod(HttpMethod.Get)
+        allowMethod(HttpMethod.Put)
+        allowMethod(HttpMethod.Post)
+        allowMethod(HttpMethod.Delete)
+        allowHeader(HttpHeaders.ContentType)
+        allowHeader(HttpHeaders.Authorization)
         anyHost()
     }
     install(Compression) { gzip() }

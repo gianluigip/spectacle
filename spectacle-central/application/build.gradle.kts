@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
 val jsWrapperVersion = "pre.304-kotlin-1.6.10"
 val serializationVersion = "1.3.1"
-val ktorVersion = "2.0.0-beta-1"
+val ktorVersion = "2.0.3"
 val logbackVersion = "1.2.3"
 
 plugins {
