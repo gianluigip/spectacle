@@ -9,9 +9,9 @@ interface SpecificationPublisher {
 
     companion object {
         fun registerPublisher(name: String, publisher: SpecificationPublisher) =
-            publishers.put(name.uppercase(), publisher)
+            publishers.put(name.toUpperCase(), publisher)
 
-        fun findPublisher(name: String) = publishers[name.uppercase()]
+        fun findPublisher(name: String) = publishers[name.toUpperCase()]
     }
 
     suspend fun publishReport(specifications: List<Specification>, config: ReportConfiguration)

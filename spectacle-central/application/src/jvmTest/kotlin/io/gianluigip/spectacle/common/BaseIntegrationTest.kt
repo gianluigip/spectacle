@@ -9,7 +9,7 @@ import io.gianluigip.spectacle.specification.repository.ExposedTeamRepository
 import io.gianluigip.spectacle.wiki.repository.ExposedWikiPageRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
-import io.ktor.client.plugins.ContentNegotiation
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
 import io.ktor.client.plugins.auth.providers.basic

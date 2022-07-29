@@ -6,7 +6,7 @@ import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 import io.ktor.client.call.body
-import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -38,7 +38,7 @@ fun BaseIntegrationTest.getWikiPage(wikiId: String): WikiPageResponse? = runBloc
     receivesRequestFromDSL()
     try {
         httpClient.get("$httpHost/api/wiki/${wikiId}").body()
-    } catch (ex: ClientRequestException) {
+    } catch (ex: NoTransformationFoundException) {
         null
     }
 }
