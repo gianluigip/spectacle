@@ -15,7 +15,7 @@ object CentralPublisher : SpecificationPublisher {
             println("Skipping Central publisher because it is disable.")
             return
         }
-        val centralClient = CentralClient(config.centralConfig)
+        val centralClient = CentralClientFactory.buildClient(config.centralConfig)
         CentralSpecPublisher.publishSpecs(specifications, centralClient, config)
         CentralWikiPublisher.publishWiki(centralClient, config)
     }

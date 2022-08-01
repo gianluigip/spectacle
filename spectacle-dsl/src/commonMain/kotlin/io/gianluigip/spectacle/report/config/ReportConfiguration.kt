@@ -1,7 +1,6 @@
 package io.gianluigip.spectacle.report.config
 
 import io.gianluigip.spectacle.report.publisher.SpecificationPublisher
-import io.ktor.http.Url
 
 data class ReportConfiguration(
     val team: String,
@@ -10,6 +9,8 @@ data class ReportConfiguration(
     val publishers: List<SpecificationPublisher>,
     val centralConfig: CentralPublisherConfig,
 )
+
+data class Url(val value: String)
 
 data class CentralPublisherConfig(
     val enabled: Boolean,

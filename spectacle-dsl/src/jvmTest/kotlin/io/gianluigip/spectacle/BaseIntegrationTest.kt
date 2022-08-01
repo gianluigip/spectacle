@@ -7,11 +7,11 @@ import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_PASSWORD
 import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_USERNAME
 import io.gianluigip.spectacle.report.config.CentralPublisherConfig
 import io.gianluigip.spectacle.report.config.ReportConfiguration
+import io.gianluigip.spectacle.report.config.Url
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.report.publisher.SpecificationPublisher
 import io.gianluigip.spectacle.report.publisher.TerminalPublisher
 import io.gianluigip.spectacle.report.publisher.central.CentralPublisher
-import io.ktor.http.Url
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith

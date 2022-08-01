@@ -3,7 +3,6 @@ package io.gianluigip.spectacle.report.config
 import io.gianluigip.spectacle.report.publisher.Publishers
 import io.gianluigip.spectacle.report.publisher.SpecificationPublisher
 import io.gianluigip.spectacle.report.publisher.TerminalPublisher
-import io.ktor.http.Url
 import java.io.FileInputStream
 import java.net.URL
 import java.util.Properties

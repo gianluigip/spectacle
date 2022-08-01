@@ -20,7 +20,7 @@ import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
 import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
-import io.gianluigip.spectacle.report.publisher.central.CentralClient
+import io.gianluigip.spectacle.report.publisher.central.CentralClientFactory
 import io.gianluigip.spectacle.report.publisher.central.CentralWikiPublisher
 import io.gianluigip.spectacle.report.publisher.central.getSHA256Hash
 import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
@@ -73,7 +73,7 @@ class WikiPublisherIT : BaseIntegrationTest() {
             stubDeleteAnyWiki("9")
             runBlocking {
                 val config = reportConfiguration(centralWikiEnabled = true, localWikiLocation = docsFolder.absolutePath)
-                val client = CentralClient(config.centralConfig)
+                val client = CentralClientFactory.buildClient(config.centralConfig)
                 CentralWikiPublisher.publishWiki(client, config)
             }
         } then "it should create, update or delete wiki pages as expected" runAndFinish {

@@ -4,7 +4,6 @@ import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.report.publisher.TerminalPublisher
 import io.gianluigip.spectacle.report.publisher.central.CentralPublisher
-import io.ktor.http.Url
 import kotlin.test.Ignore
 import kotlin.test.Test
 

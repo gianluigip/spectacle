@@ -11,7 +11,7 @@ object CentralSpecPublisher {
 
     suspend fun publishSpecs(specifications: List<Specification>, centralClient: CentralClient, config: ReportConfiguration) {
         val requestBody = generateRequestBody(specifications, config)
-        centralClient.postSpecs(requestBody)
+        centralClient.putSpecs(requestBody)
     }
 
     private fun generateRequestBody(specifications: List<Specification>, config: ReportConfiguration): SpecificationsToUpdateRequest {

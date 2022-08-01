@@ -31,11 +31,8 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.3.2")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
-                // HTTP CLIENT
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-auth:$ktorVersion")
-                implementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
-                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.3.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
             }
         }
         val commonTest by getting {
@@ -45,7 +42,6 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-cio:$ktorVersion")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
             }
         }
@@ -56,7 +52,15 @@ kotlin {
                 implementation("com.github.tomakehurst:wiremock-jre8:2.32.0")
             }
         }
-        val jsMain by getting {}
+        val jsMain by getting {
+            dependencies {
+                // HTTP CLIENT
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-auth:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
+            }
+        }
         val jsTest by getting {}
     }
 }
