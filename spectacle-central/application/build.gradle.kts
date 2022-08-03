@@ -8,7 +8,7 @@ val logbackVersion = "1.2.3"
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    id("io.github.turansky.kfc.webpack") version "5.0.0"
+    id("io.github.turansky.kfc.webpack") version "5.56.0"
     application
 }
 
