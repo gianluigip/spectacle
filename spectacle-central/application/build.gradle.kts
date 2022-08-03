@@ -98,7 +98,7 @@ kotlin {
         val jsMain by getting {
             dependencies {
                 // KTOR
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.6.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.6.4")
                 implementation("io.ktor:ktor-client-js:$ktorVersion")
                 // REACT
                 implementation(kotlinw("react:17.0.2"))
