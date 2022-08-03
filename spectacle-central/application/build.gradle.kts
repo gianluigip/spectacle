@@ -86,7 +86,7 @@ kotlin {
             dependencies {
                 implementation(project(":spectacle-dsl"))
                 implementation(project(":spectacle-central:domain", "testClasses"))
-                implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+                implementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
                 implementation("io.ktor:ktor-server-test-host:${ktorVersion}")
                 implementation("org.testcontainers:testcontainers:1.16.3")
