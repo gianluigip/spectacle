@@ -71,7 +71,7 @@ kotlin {
                 implementation("ch.qos.logback:logback-classic:$logbackVersion")
                 implementation("io.ktor:ktor-server-call-logging:$ktorVersion")
                 // DI
-                implementation("org.kodein.di:kodein-di:7.10.0")
+                implementation("org.kodein.di:kodein-di:7.14.0")
                 // DATA
                 implementation("org.jetbrains.exposed:exposed-core:0.39.1")
                 implementation("org.jetbrains.exposed:exposed-jdbc:0.39.2")
