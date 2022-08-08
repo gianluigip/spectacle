@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
+
 val ktorVersion = "2.0.3"
 val logbackVersion = "1.2.11"
 
@@ -74,20 +76,20 @@ application {
     mainClass.set("io.gianluigip.spectacle.ApplicationKt")
 }
 
-//// include JS artifacts in any JAR we generate
-//tasks.getByName<Jar>("jar") {
-//    val taskName = if (project.hasProperty("isProduction")
-//        || project.gradle.startParameter.taskNames.contains("installDist")
-//        || project.gradle.startParameter.taskNames.contains("stage")
-//    ) {
-//        "spectacle-central:webapp:browserProductionWebpack"
-//    } else {
-//        "spectacle-central:webapp:browserDevelopmentWebpack"
-//    }
-//    val webpackTask = tasks.getByName<KotlinWebpack>(taskName)
-//    dependsOn(webpackTask) // make sure JS gets compiled first
-//    from(File(webpackTask.destinationDirectory, webpackTask.outputFileName)) // bring output file along into the JAR
-//}
+// include JS artifacts in any JAR we generate
+tasks.getByName<Jar>("jar") {
+    val taskName = if (project.hasProperty("isProduction")
+        || project.gradle.startParameter.taskNames.contains("installDist")
+        || project.gradle.startParameter.taskNames.contains("stage")
+    ) {
+        ":spectacle-central:webapp:browserProductionWebpack"
+    } else {
+        ":spectacle-central:webapp:browserDevelopmentWebpack"
+    }
+    val webpackTask = tasks.getByPath(taskName) as KotlinWebpack
+    dependsOn(webpackTask) // make sure JS gets compiled first
+    from(File(webpackTask.destinationDirectory, webpackTask.outputFileName)) // bring output file along into the JAR
+}
 
 tasks.withType<Tar> {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
