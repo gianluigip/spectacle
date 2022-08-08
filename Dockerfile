@@ -9,7 +9,7 @@ RUN mkdir -p $APP_HOME/spectacle-central/application/src/commonMain/kotlin
 RUN mkdir -p $APP_HOME/spectacle-central/domain/src/main/kotlin
 RUN mkdir -p $APP_HOME/spectacle-dsl/src/commonMain/kotlin
 # COPY GRADLE FILES
-COPY build.gradle.kts settings.gradle.kts gradlew gradlew.bat $APP_HOME
+COPY build.gradle.kts settings.gradle.kts gradlew gradlew.bat $APP_HOME/
 COPY gradle $APP_HOME/gradle
 COPY spectacle-common/build.gradle.kts $APP_HOME/spectacle-common/build.gradle.kts
 COPY convention-plugins/build.gradle.kts $APP_HOME/convention-plugins/build.gradle.kts
