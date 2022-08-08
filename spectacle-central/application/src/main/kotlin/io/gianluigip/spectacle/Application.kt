@@ -68,7 +68,7 @@ fun Application.module() {
             resource("/", "index.html")
             resource("/index.css", "index.css")
             resource("/favicon.ico", "favicon.ico")
-            resource("/application.js", "application.js")
+            resource("/webapp.js", "webapp.js")
             resources("web")
         }
         route("/api") {
