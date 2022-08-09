@@ -39,6 +39,7 @@ fun Route.wikiRoutes() {
         getForRole(READ) {
             val parameters: Parameters = call.request.queryParameters
             val wikiPages = wikiFinder.findBy(
+                searchText = parameters["searchText"],
                 features = parameters["features"].splitAndMap { it.toFeature() },
                 sources = parameters["sources"].splitAndMap { it.toSource() },
                 components = parameters["components"].splitAndMap { it.toComponent() },

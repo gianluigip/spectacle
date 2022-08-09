@@ -19,13 +19,14 @@ class WikiFinder(
     }
 
     fun findBy(
+        searchText: String? = null,
         features: Set<FeatureName>? = null,
         sources: Set<Source>? = null,
         components: Set<Component>? = null,
         tags: Set<TagName>? = null,
         teams: Set<TeamName>? = null,
     ): List<WikiPageMetadata> = transaction.execute {
-        wikiRepo.findBy(features, sources, components, tags, teams)
+        wikiRepo.findBy(searchText, features, sources, components, tags, teams)
     }
 
 }
