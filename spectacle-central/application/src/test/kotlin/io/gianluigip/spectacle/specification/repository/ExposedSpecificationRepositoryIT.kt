@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.specification.repository
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
+import io.gianluigip.spectacle.common.utils.CLOCK
 import io.gianluigip.spectacle.common.utils.now
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
@@ -8,6 +9,7 @@ import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
 import io.gianluigip.spectacle.dsl.assertions.shouldNotBe
 import io.gianluigip.spectacle.dsl.bdd.given
 import io.gianluigip.spectacle.dsl.bdd.whenever
+import io.gianluigip.spectacle.feature.model.FeatureToUpsert
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
@@ -28,6 +30,7 @@ import io.gianluigip.spectacle.specification.model.StepType.WHENEVER
 import io.gianluigip.spectacle.specification.model.TagName
 import io.gianluigip.spectacle.specification.model.TeamName
 import io.gianluigip.spectacle.specification.repository.tables.Specifications
+import kotlinx.datetime.Instant
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.Test
@@ -184,11 +187,22 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                         SpecName("Spec2"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(GIVEN, "Desc2", 0)),
                         interactions = emptyList()
                     ),
-                    SpecToUpsert(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_1), listOf(), emptyList()),
+                )
+            )
+            featureRepo.upsert(
+                listOf(
+                    FeatureToUpsert(name = FEATURE_1, description = "Feature 1 Desc", source = SOURCE_1, component = COMPONENT_1),
+                    FeatureToUpsert(name = FEATURE_2, description = "Feature 2 Desc", source = SOURCE_1, component = COMPONENT_1),
+                )
+            )
+            CLOCK.forwardMinutes(5)
+            specRepo.upsert(
+                listOf(
+                    SpecToUpsert(SpecName("Spec3"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_1), listOf(), emptyList())
                 )
             )
         } whenever "search by feature 1" run {
-            specRepo.findBy(setOf(FEATURE_2))
+            specRepo.findBy(features = setOf(FEATURE_2))
         } then "it should return spec 2 and 3" run { specs ->
             specs assertThat {
                 shouldHasSize(2)
@@ -226,12 +240,49 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
             }
         } andWhenever "search by tag 2" run {
             specRepo.findBy(tags = setOf(TAG_2))
-        } then "it should return spec 2" runAndFinish { specs ->
+        } then "it should return spec 2" run { specs ->
             specs assertThat {
                 shouldHasSize(1)
                 get("Spec2", SOURCE_2) shouldNotBe null
             }
+        } andWhenever "search by text using feature name 'Feature2'" run {
+            specRepo.findBy(searchText = "Feature2")
+        } then "it should return spec 2 and 3" run { specs ->
+            specs assertThat {
+                shouldHasSize(2)
+                get("Spec2", SOURCE_2) shouldNotBe null
+                get("Spec3", SOURCE_2) shouldNotBe null
+            }
+        } andWhenever "search by text with spec name 'ec1'" run {
+            specRepo.findBy(searchText = "ec1")
+        } then "it should return spec 1" run { specs ->
+            specs assertThat {
+                shouldHasSize(1)
+                get("Spec1", SOURCE_1) shouldNotBe null
+            }
+        } andWhenever "search by text with description 'desc2'" run {
+            specRepo.findBy(searchText = "desc2")
+        } then "it should return spec 2" run { specs ->
+            specs assertThat {
+                shouldHasSize(1)
+                get("Spec2", SOURCE_2) shouldNotBe null
+            }
+        } andWhenever "search by text with feature description 'Feature 1 Desc'" run {
+            specRepo.findBy(searchText = "Feature 1 Desc")
+        } then "it should return spec 2" run { specs ->
+            specs assertThat {
+                shouldHasSize(1)
+                get("Spec1", SOURCE_1) shouldNotBe null
+            }
+        } andWhenever "search by updatedTimeAfter" run {
+            specRepo.findBy(updatedTimeAfter = Instant.fromEpochMilliseconds(CLOCK.millis()))
+        } then "it should return only the latest updated specs" runAndFinish { specs ->
+            specs assertThat {
+                shouldHasSize(1)
+                get("Spec3", SOURCE_2) shouldNotBe null
+            }
         }
+
     }
 
     @Test

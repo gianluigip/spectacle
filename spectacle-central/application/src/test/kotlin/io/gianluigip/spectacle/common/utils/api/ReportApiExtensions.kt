@@ -9,23 +9,28 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import kotlinx.coroutines.runBlocking
+import kotlinx.datetime.Instant
 
 fun BaseIntegrationTest.getSpecReport(
+    searchText: String? = null,
     feature: String? = null,
     source: String? = null,
     component: String? = null,
     tag: String? = null,
     team: String? = null,
     status: SpecStatus? = null,
+    updatedTimeAfter: Instant? = null,
 ): SpecsReportResponse = runBlocking {
     receivesRequestFromUI()
     httpClient.get("$httpHost/api/report/specs") {
+        searchText?.let { parameter("searchText", searchText) }
         feature?.let { parameter("features", feature) }
         source?.let { parameter("sources", source) }
         component?.let { parameter("components", component) }
         tag?.let { parameter("tags", tag) }
         team?.let { parameter("teams", team) }
         status?.let { parameter("statuses", status) }
+        updatedTimeAfter?.let { parameter("updatedTimeAfter", updatedTimeAfter.toString()) }
     }.body()
 }
 

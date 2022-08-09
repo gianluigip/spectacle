@@ -13,6 +13,7 @@ dependencies {
     implementation(project(":spectacle-common"))
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
     testImplementation(project(":spectacle-dsl"))
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")

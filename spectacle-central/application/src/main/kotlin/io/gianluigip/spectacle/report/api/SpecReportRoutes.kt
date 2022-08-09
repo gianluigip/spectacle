@@ -24,12 +24,14 @@ fun Route.specReportRoutes() {
         getForRole(READ) {
             val parameters: Parameters = call.request.queryParameters
             val report = reportGenerator.generateReport(
+                searchText = parameters["searchText"],
                 features = parameters["features"].splitAndMap { it.toFeature() },
                 sources = parameters["sources"].splitAndMap { it.toSource() },
                 components = parameters["components"].splitAndMap { it.toComponent() },
                 tags = parameters["tags"].splitAndMap { it.toTag() },
                 teams = parameters["teams"].splitAndMap { it.toTeam() },
                 statuses = parameters["statuses"].splitAndMap { it.toSpecStatus() },
+                updatedTimeAfter = parameters["updatedTimeAfter"].fromIsoInstant(),
             ).toResponse()
             call.respond(report)
         }
