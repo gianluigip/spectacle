@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.component.components
 import csstype.Color
 import csstype.None
 import csstype.px
+import emotion.react.css
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.common.components.Spacer
@@ -18,16 +19,17 @@ import kotlinx.coroutines.launch
 import kotlinx.js.jso
 import mui.material.Box
 import mui.material.Grid
-import mui.material.GridDirection
+import mui.material.GridDirection.column
+import mui.material.GridDirection.row
 import mui.material.Tooltip
 import mui.material.Typography
 import mui.material.styles.Theme
-import mui.system.ResponsiveStyleValue
+import mui.material.styles.TypographyVariant.h6
+import mui.system.responsive
 import react.FC
 import react.Props
-import react.ReactElement
+import react.ReactNode
 import react.create
-import react.css.css
 import react.router.dom.NavLink
 import react.useContext
 import react.useEffectOnce
@@ -48,7 +50,7 @@ val ComponentList = FC<Props> {
 
         Grid {
             container = true
-            direction = ResponsiveStyleValue(GridDirection.column)
+            direction = responsive(column)
             components!!.forEachIndexed { i, feature ->
                 +generateComponentsBox(feature, isFirstFeature = i == 0, theme)
             }
@@ -56,7 +58,7 @@ val ComponentList = FC<Props> {
     }
 }
 
-private fun generateComponentsBox(component: Component, isFirstFeature: Boolean, theme: Theme): ReactElement =
+private fun generateComponentsBox(component: Component, isFirstFeature: Boolean, theme: Theme): ReactNode =
     Box.create {
         if (!isFirstFeature) Spacer { height = 10.px }
         NavLink {
@@ -65,13 +67,13 @@ private fun generateComponentsBox(component: Component, isFirstFeature: Boolean,
             Tooltip {
                 title = "Go to Component Diagram".toNode()
                 followCursor = true
-                Typography { sx = jso { color = Color(theme.palette.info.main) }; variant = "h6"; +component.name }
+                Typography { sx = jso { color = theme.palette.info.main }; variant = h6; +component.name }
             }
         }
         Grid {
             container = true
-            spacing = ResponsiveStyleValue(1)
-            direction = ResponsiveStyleValue(GridDirection.row)
+            spacing = responsive(1)
+            direction = responsive(row)
 
             Grid { item = true; MetaDataChip { label = "Teams: ${component.teams.sorted().joinToString(", ")}" } }
         }

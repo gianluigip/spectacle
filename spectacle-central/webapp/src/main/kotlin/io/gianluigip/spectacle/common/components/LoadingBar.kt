@@ -1,6 +1,6 @@
 package io.gianluigip.spectacle.common.components
 
-import csstype.FlexGrow
+import csstype.number
 import kotlinx.js.jso
 import mui.material.LinearProgress
 import react.FC
@@ -12,6 +12,6 @@ external interface LoadingBarProps : Props {
 
 val LoadingBar = FC<LoadingBarProps> {
     if (it.isLoading == true) {
-        LinearProgress { sx = jso { FlexGrow(1.0) } }
+        LinearProgress { sx = jso { number(1.0) } }
     }
 }

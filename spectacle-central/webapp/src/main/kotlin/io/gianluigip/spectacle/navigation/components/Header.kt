@@ -1,8 +1,7 @@
 package io.gianluigip.spectacle.navigation.components
 
-import csstype.FlexGrow
-import csstype.GridArea
 import csstype.None
+import csstype.number
 import csstype.px
 import io.gianluigip.spectacle.auth.components.AuthMenu
 import io.gianluigip.spectacle.common.components.Spacer
@@ -28,6 +27,7 @@ import mui.material.Size
 import mui.material.Switch
 import mui.material.Toolbar
 import mui.material.Tooltip
+import mui.material.styles.TypographyVariant.h6
 import react.FC
 import react.Props
 import react.ReactNode
@@ -45,7 +45,7 @@ val Header = FC<Props> {
     AppBar {
         position = AppBarPosition.fixed
         sx = jso {
-            gridArea = GridArea(GridAreas.Header)
+            gridArea = GridAreas.Header
         }
 
         Toolbar {
@@ -53,7 +53,7 @@ val Header = FC<Props> {
             NavMenuItem {
                 toPath = "/"
                 label = "Spectacle Central"
-                textVariant = "h6"
+                textVariant = h6
             }
 
             Spacer { width = 10.px }
@@ -80,7 +80,7 @@ val Header = FC<Props> {
                 label = "Wiki"
             }
 
-            Box { sx = jso { flexGrow = FlexGrow(1.0) } }
+            Box { sx = jso { flexGrow = number(1.0) } }
 
             Tooltip {
                 title = ReactNode("Theme")

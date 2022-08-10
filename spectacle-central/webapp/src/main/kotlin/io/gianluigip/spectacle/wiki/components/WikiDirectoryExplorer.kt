@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.wiki.components
 
-import csstype.Color
 import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.TreeViewSingleSelect
@@ -93,10 +92,10 @@ private fun directorySection(dir: WikiDirectory, isTopFolder: Boolean = false, t
         ContentProps = jso {
             style = jso {
                 if (isTopFolder) {
-                    color = Color(theme.palette.info.contrastText)
-                    backgroundColor = Color(theme.palette.info.main)
+                    color = theme.palette.info.contrastText
+                    backgroundColor = theme.palette.info.main
                 } else {
-                    color = Color(theme.palette.info.main)
+                    color = theme.palette.info.main
                 }
             }
         }

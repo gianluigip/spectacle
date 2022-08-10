@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.auth.components
 
-import csstype.Color
 import csstype.Display
 import csstype.JustifyContent
 import csstype.TextAlign
@@ -24,7 +23,8 @@ import mui.material.Paper
 import mui.material.Stack
 import mui.material.TextField
 import mui.material.Typography
-import mui.system.ResponsiveStyleValue
+import mui.material.styles.TypographyVariant.h5
+import mui.system.responsive
 import org.w3c.dom.HTMLFormElement
 import react.FC
 import react.Props
@@ -39,6 +39,7 @@ import react.useContext
 import react.useState
 
 const val loginPath = "/login"
+@Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
 val LoginPage = FC<Props> {
     val theme by useContext(ThemeContext)
     val navigate = useNavigate()
@@ -77,13 +78,13 @@ val LoginPage = FC<Props> {
                 elevation = 2
 
                 Typography {
-                    sx = jso { textAlign = TextAlign.center; color = Color(theme.palette.info.main) }
-                    variant = "h5"; +"Welcome to Spectacle Central";
+                    sx = jso { textAlign = TextAlign.center; color = theme.palette.info.main }
+                    variant = h5; +"Welcome to Spectacle Central";
                 }
                 Spacer { height = 10.px }
 
                 Stack {
-                    spacing = ResponsiveStyleValue(2)
+                    spacing = responsive(2)
 
                     if (isLoginFailed) Alert { severity = error; +"The credentials are invalid" }
 

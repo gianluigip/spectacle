@@ -20,7 +20,7 @@ val ThemeModule = FC<PropsWithChildren> { props ->
         ThemeProvider {
             this.theme = theme
 
-            props.children()
+            +props.children
         }
     }
 }

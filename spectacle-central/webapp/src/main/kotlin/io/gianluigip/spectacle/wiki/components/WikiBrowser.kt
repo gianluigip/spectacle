@@ -4,6 +4,7 @@ import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.Spacer
+import io.gianluigip.spectacle.common.components.xs
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
 import io.gianluigip.spectacle.wiki.api.getWikiPage
@@ -16,7 +17,8 @@ import mui.material.Grid
 import mui.material.GridDirection
 import mui.material.Paper
 import mui.material.Typography
-import mui.system.ResponsiveStyleValue
+import mui.material.styles.TypographyVariant.h5
+import mui.system.responsive
 import react.FC
 import react.Props
 import react.router.useLocation
@@ -46,8 +48,8 @@ val WikiBrowser = FC<Props> {
 
     Grid {
         container = true
-        direction = ResponsiveStyleValue(GridDirection.row)
-        columnSpacing = ResponsiveStyleValue(SPACE_PADDING)
+        direction = responsive(GridDirection.row)
+        columnSpacing = responsive(SPACE_PADDING)
         sx = jso { height = 100.pct }
 
         Grid {
@@ -58,7 +60,7 @@ val WikiBrowser = FC<Props> {
                 sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
 
-                Typography { variant = "h5"; +"Explorer" }
+                Typography { variant = h5; +"Explorer" }
                 Spacer { height = 10.px }
                 WikiDirectoryExplorer { selectedPagePath = wikiPage?.wikiPath ?: "" }
             }

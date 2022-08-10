@@ -1,4 +1,4 @@
-val jsWrapperVersion = "pre.304-kotlin-1.6.10"
+val jsWrapperVersion = "pre.365"
 val serializationVersion = "1.3.1"
 val ktorVersion = "2.0.3"
 
@@ -39,14 +39,17 @@ dependencies {
     implementation("io.ktor:ktor-client-js:$ktorVersion")
 
     // REACT
-    implementation(kotlinw("react:17.0.2"))
-    implementation(kotlinw("react-dom:17.0.2"))
-    implementation(kotlinw("react-css:17.0.2"))
-    implementation(kotlinw("react-router-dom:6.2.1"))
-    implementation(kotlinw("mui:5.4.3"))
-    implementation(kotlinw("mui-icons:5.4.2"))
+    implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:1.0.0-pre.365"))
+    implementation(kotlinw("emotion"))
+    implementation(kotlinw("react"))
+    implementation(kotlinw("react-dom"))
+    implementation(kotlinw("react-router-dom"))
+    implementation(kotlinw("mui"))
+    implementation(kotlinw("mui-icons"))
     implementation(npm("@emotion/react", "11.7.1"))
     implementation(npm("@emotion/styled", "11.6.0"))
+    implementation(npm("date-fns", "2.28.0"))
+    implementation(npm("@date-io/date-fns", "2.14.0"))
 
     // Mermaid Diagrams
     implementation(npm("mermaid", "8.14.0"))
@@ -61,7 +64,4 @@ dependencies {
     testImplementation(kotlin("test-js"))
 }
 
-/**
- * Kotlin JS Wrappers
- */
-fun kotlinw(target: String): String = "org.jetbrains.kotlin-wrappers:kotlin-$target-$jsWrapperVersion"
+fun kotlinw(target: String): String = "org.jetbrains.kotlin-wrappers:kotlin-$target"

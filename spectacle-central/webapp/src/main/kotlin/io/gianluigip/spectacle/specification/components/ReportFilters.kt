@@ -2,23 +2,28 @@ package io.gianluigip.spectacle.specification.components
 
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.model.SpecStatus
+import kotlinx.datetime.Instant
 import mui.material.Stack
-import mui.system.ResponsiveStyleValue
+import mui.system.responsive
 import react.FC
 import react.Props
 
 data class FiltersSelected(
+    val searchText: String? = null,
     val feature: String? = null,
     val source: String? = null,
     val component: String? = null,
     val tag: String? = null,
     val team: String? = null,
     val status: SpecStatus? = null,
+    val updatedTimeAfter: Instant? = null,
 )
 
 external interface ReportFilersProps : Props {
     var filters: ReportFiltersResponse
     var filtersSelected: FiltersSelected
+    var hideSearchTextFilter: Boolean?
+    var hideUpdatedTimeAfter: Boolean?
     var hideStatusFilter: Boolean?
     var onFilterChanged: (FiltersSelected) -> Unit
 }
@@ -28,7 +33,7 @@ val ReportFilters = FC<ReportFilersProps> {
     val selected = it.filtersSelected
 
     Stack {
-        spacing = ResponsiveStyleValue(2)
+        spacing = responsive(2)
         ReportFilter {
             label = "Features"
             value = selected.feature

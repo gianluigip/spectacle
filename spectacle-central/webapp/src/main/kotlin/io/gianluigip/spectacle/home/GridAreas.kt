@@ -1,6 +1,8 @@
 package io.gianluigip.spectacle.home
 
+import csstype.ident
+
 object GridAreas {
-    val Header = "header"
-    val Content = "content"
+    val Header = ident("header")
+    val Content = ident("content")
 }

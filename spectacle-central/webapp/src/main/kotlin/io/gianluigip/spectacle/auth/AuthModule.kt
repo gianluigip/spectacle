@@ -23,6 +23,6 @@ val AuthModule = FC<PropsWithChildren> { props ->
     user.component1()?.let { updateApiClientWithCredentials(it) }
 
     AuthContext.Provider(user) {
-        props.children()
+        +props.children
     }
 }

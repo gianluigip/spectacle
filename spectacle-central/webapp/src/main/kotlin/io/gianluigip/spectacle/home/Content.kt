@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.home
 
-import csstype.GridArea
 import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.auth.components.LoginPage
@@ -18,6 +17,7 @@ import kotlinx.js.jso
 import mui.material.Paper
 import mui.material.PaperVariant
 import mui.material.Typography
+import mui.material.styles.TypographyVariant.h3
 import mui.system.Box
 import react.FC
 import react.Props
@@ -38,7 +38,7 @@ val Content = FC<Props> {
                 component = ReactHTML.main
                 sx = jso {
                     height = 100.pct
-                    gridArea = GridArea(GridAreas.Content)
+                    gridArea = GridAreas.Content
                     padding = DEFAULT_PADDING
                 }
 
@@ -76,7 +76,7 @@ val Content = FC<Props> {
             Route {
                 path = "*"
                 element = Typography.create {
-                    variant = "h3"
+                    variant = h3
                     +"404 Page Not Found"
                 }
             }

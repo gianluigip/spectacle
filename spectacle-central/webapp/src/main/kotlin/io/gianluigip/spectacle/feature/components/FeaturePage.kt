@@ -21,6 +21,7 @@ import kotlinx.coroutines.launch
 import kotlinx.js.jso
 import mui.material.Paper
 import mui.material.Typography
+import mui.material.styles.TypographyVariant.h6
 import react.FC
 import react.Props
 import react.router.useLocation
@@ -69,7 +70,7 @@ val FeaturesPage = FC<Props> { _ ->
 
         LoadingBar { isLoading = features == null }
         features?.let { features ->
-            Typography { variant = "h6"; +"Select a Feature" }
+            Typography { variant = h6; +"Select a Feature" }
             Spacer { height = 10.px }
             FeaturesSelector {
                 this.features = features

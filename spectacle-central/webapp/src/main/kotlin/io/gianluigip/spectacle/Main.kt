@@ -42,8 +42,8 @@ private val App = FC<Props> {
                         gridTemplateRows = "${Sizes.Header.Height} ${Auto.auto}".unsafeCast<GridTemplateRows>()
                         gridTemplateColumns = Auto.auto
                         gridTemplateAreas = GridTemplateAreas(
-                            GridArea(GridAreas.Header),
-                            GridArea(GridAreas.Content),
+                            GridAreas.Header,
+                            GridAreas.Content,
                         )
                     }
 

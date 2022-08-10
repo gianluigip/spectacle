@@ -4,6 +4,9 @@ import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.Spacer
+import io.gianluigip.spectacle.common.components.md
+import io.gianluigip.spectacle.common.components.xl
+import io.gianluigip.spectacle.common.components.xs
 import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
@@ -18,7 +21,8 @@ import mui.material.Grid
 import mui.material.GridDirection.row
 import mui.material.Paper
 import mui.material.Typography
-import mui.system.ResponsiveStyleValue
+import mui.material.styles.TypographyVariant.h5
+import mui.system.responsive
 import react.FC
 import react.Props
 import react.router.useLocation
@@ -61,8 +65,8 @@ val SpecificationsReport = FC<Props> {
 
     Grid {
         container = true
-        direction = ResponsiveStyleValue(row)
-        columnSpacing = ResponsiveStyleValue(SPACE_PADDING)
+        direction = responsive(row)
+        columnSpacing = responsive(SPACE_PADDING)
         sx = jso { height = 100.pct }
 
         Grid {
@@ -73,7 +77,7 @@ val SpecificationsReport = FC<Props> {
                 sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
 
-                Typography { variant = "h5"; +"Filters" }
+                Typography { variant = h5; +"Filters" }
                 Spacer { height = 10.px }
                 LoadingBar { isLoading = filtersResponse == null }
                 filtersResponse?.let {
@@ -93,7 +97,7 @@ val SpecificationsReport = FC<Props> {
             Paper {
                 sx = jso { padding = SPACE_PADDING; height = 100.pct }
                 elevation = 2
-                Typography { variant = "h5"; +"List of Specs by Feature" }
+                Typography { variant = h5; +"List of Specs by Feature" }
                 Spacer { height = 10.px }
                 LoadingBar { isLoading = featuresResponse == null }
                 featuresResponse?.let { FeaturesReport { features = it } }
