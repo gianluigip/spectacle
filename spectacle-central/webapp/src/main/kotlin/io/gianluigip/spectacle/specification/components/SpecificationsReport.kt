@@ -16,6 +16,7 @@ import io.gianluigip.spectacle.specification.api.getSpecReport
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.datetime.Instant
 import kotlinx.js.jso
 import mui.material.Grid
 import mui.material.GridDirection.row
@@ -39,19 +40,30 @@ val SpecificationsReport = FC<Props> {
     var currentFilters by useState<FiltersSelected>()
     val queryParams = useLocation().search.parseParams()
     val queryFilters = FiltersSelected(
+        searchText = queryParams["searchText"],
         feature = queryParams["feature"],
         source = queryParams["source"],
         component = queryParams["component"],
         tag = queryParams["tag"],
         team = queryParams["team"],
         status = queryParams["status"]?.let { status -> SpecStatus.values().firstOrNull { it.name == status } },
+        updatedTimeAfter = queryParams["updatedTimeAfter"]?.let { updatedTime -> Instant.parse(updatedTime) }
     )
 
     fun loadSpecReport(filters: FiltersSelected) {
         featuresResponse = null
         currentFilters = queryFilters
         MainScope().launch {
-            val response = getSpecReport(filters.feature, filters.source, filters.component, filters.tag, filters.team, filters.status)
+            val response = getSpecReport(
+                filters.searchText,
+                filters.feature,
+                filters.source,
+                filters.component,
+                filters.tag,
+                filters.team,
+                filters.status,
+                filters.updatedTimeAfter
+            )
             featuresResponse = response.features
             filtersResponse = response.filters
         }
