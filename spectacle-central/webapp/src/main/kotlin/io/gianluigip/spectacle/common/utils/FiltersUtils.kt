@@ -4,7 +4,7 @@ import io.gianluigip.spectacle.specification.components.FiltersSelected
 
 fun buildUrlWithParameters(reportPath: String, filters: FiltersSelected): String {
     val params = mutableListOf<String>()
-    if (filters.searchText != null) params.add("searchText=${filters.searchText.escapeSpaces()}")
+    if (filters.searchText != null && filters.searchText.isNotEmpty()) params.add("searchText=${filters.searchText.escapeSpaces()}")
     if (filters.feature != null) params.add("feature=${filters.feature.escapeSpaces()}")
     if (filters.tag != null) params.add("tag=${filters.tag.escapeSpaces()}")
     if (filters.source != null) params.add("source=${filters.source.escapeSpaces()}")

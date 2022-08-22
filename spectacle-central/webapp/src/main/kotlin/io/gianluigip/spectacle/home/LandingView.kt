@@ -74,7 +74,3 @@ val LandingView = FC<Props> {
         }
     }
 }
-
-external interface ParagraphProps : Props {
-    var text: String
-}
