@@ -69,7 +69,9 @@ class ExposedWikiPageRepository(
         if (tags?.isNotEmpty() == true) query.andWhere { WikiPageTags.name inList tags.map { it.value } }
         if (searchText?.isNotEmpty() == true) {
             query.andWhere {
-                (title ilike "%$searchText%") or (content ilike "%$searchText%")
+                (title ilike "%$searchText%") or (content ilike "%$searchText%") or
+                        (WikiPages.team ilike "%$searchText%") or (WikiPageFeatures.name ilike "%$searchText%") or
+                        (WikiPageTags.name ilike "%$searchText%")
             }
         }
         return query.toPagesMetadataWithRelations()

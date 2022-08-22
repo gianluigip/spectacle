@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.wiki.components
 
 import csstype.px
 import io.gianluigip.spectacle.common.components.LoadingBar
+import io.gianluigip.spectacle.common.components.SearchTextField
 import io.gianluigip.spectacle.common.components.TreeViewSingleSelect
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.home.ThemeContext
@@ -18,61 +19,87 @@ import kotlinx.js.jso
 import mui.icons.material.ChevronRight
 import mui.icons.material.ExpandMore
 import mui.lab.TreeItem
-import mui.material.Box
+import mui.material.Stack
 import mui.material.styles.Theme
+import mui.system.responsive
 import react.FC
 import react.Props
 import react.ReactNode
 import react.create
-import react.router.useNavigate
 import react.useContext
-import react.useEffectOnce
+import react.useEffect
 import react.useState
+
+data class WikiBrowserFilters(
+    val searchText: String? = null
+)
 
 external interface WikiDirectoryExplorerProps : Props {
     var selectedPagePath: String?
     var expandAll: Boolean?
+    var hideSearchBar: Boolean?
+    var wikiFilters: WikiBrowserFilters?
+    var onFiltersChanged: ((WikiBrowserFilters) -> Unit)?
+    var onPageSelected: (WikiPageMetadataResponse) -> Unit
 }
 
-val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> {
+val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> { props ->
     val theme by useContext(ThemeContext)
-    val navigate = useNavigate()
 
+    var currentWikiFilters by useState<WikiBrowserFilters>()
+    var wikiFilters = props.wikiFilters ?: WikiBrowserFilters()
     var componentWikis by useState<List<ComponentWiki>>()
     var pagesMap by useState<Map<String, WikiPageMetadataResponse>>()
-    var pageSelected by useState(it.selectedPagePath ?: "")
+    var pageSelected by useState(props.selectedPagePath ?: "")
     var directoriesExpanded by useState<ReadonlyArray<String>>(emptyArray())
 
-    useEffectOnce {
+    fun loadWikis(wikiFilters: WikiBrowserFilters) {
+        componentWikis = null
+        currentWikiFilters = wikiFilters
         MainScope().launch {
-            val pages = getAllPages()
+            val pages = getAllPages(filters = wikiFilters)
             val wikis = TreeGenerator.generateWikiTree(pages)
             componentWikis = wikis
             pagesMap = pages.associateBy { it.wikiPath }
-            directoriesExpanded = if (it.expandAll == true) {
+            directoriesExpanded = if (props.expandAll == true) {
                 findAllDirPaths(wikis)
             } else wikis.map { it.rootDir.path }.toTypedArray()
         }
     }
-    fun navigateToPage(pagePath: String) {
+
+    useEffect {
+        if (currentWikiFilters != wikiFilters) loadWikis(wikiFilters)
+    }
+
+    fun onPageSelected(pagePath: String) {
         pageSelected = pagePath
         pagesMap?.get(pagePath)?.let {
-            navigate.invoke("$wikiPath?id=${it.id}")
+            props.onPageSelected(it)
         }
     }
 
-    LoadingBar { isLoading = componentWikis == null }
+    Stack {
+        sx = jso { marginBottom = 20.px }
+        spacing = responsive(1)
 
-    componentWikis?.let { compWikis ->
-        Box {
-            sx = jso { marginBottom = 20.px }
+        if (props.hideSearchBar != true) {
+            SearchTextField {
+                label = "Search Bar"
+                value = wikiFilters.searchText ?: ""
+                onChange = { props.onFiltersChanged?.invoke(wikiFilters.copy(searchText = it)) }
+            }
+        }
+
+        LoadingBar { isLoading = componentWikis == null }
+
+        componentWikis?.let { compWikis ->
             TreeViewSingleSelect {
                 defaultCollapseIcon = ExpandMore.create()
                 defaultExpandIcon = ChevronRight.create()
                 multiSelect = false
                 expanded = directoriesExpanded
                 selected = pageSelected
-                onNodeSelect = { _, node -> navigateToPage(node) }
+                onNodeSelect = { _, node -> onPageSelected(node) }
                 onNodeToggle = { _, nodes -> directoriesExpanded = nodes }
 
                 compWikis.forEach { componentWiki ->

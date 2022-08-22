@@ -1,16 +1,13 @@
 package io.gianluigip.spectacle.specification.components
 
-import io.gianluigip.spectacle.common.utils.toNode
+import io.gianluigip.spectacle.common.components.SearchTextField
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import kotlinx.datetime.Instant
 import mui.material.Stack
-import mui.material.TextField
 import mui.system.responsive
 import react.FC
 import react.Props
-import react.dom.html.InputType
-import react.dom.onChange
 
 data class FiltersSelected(
     val searchText: String? = null,
@@ -37,12 +34,13 @@ val ReportFilters = FC<ReportFilersProps> { props ->
     val selected = props.filtersSelected
 
     Stack {
-        spacing = responsive(2)
-        TextField {
-            label = "Keywords".toNode()
-            value = selected.searchText
-            type = InputType.search
-            onChange = { newValue -> props.onFilterChanged.invoke(selected.copy(searchText = newValue.target.asDynamic().value as String)) }
+        spacing = responsive(1.5)
+        if (props.hideSearchTextFilter != true) {
+            SearchTextField {
+                label = "Keywords"
+                value = selected.searchText ?: ""
+                onChange = { newValue -> props.onFilterChanged.invoke(selected.copy(searchText = newValue)) }
+            }
         }
         ReportFilter {
             label = "Features"
@@ -84,10 +82,12 @@ val ReportFilters = FC<ReportFilersProps> { props ->
             options = filters.sources
             onFilterChanged = { newValue -> props.onFilterChanged.invoke(selected.copy(source = newValue)) }
         }
-        ReportTimeFilter {
-            label = "Updated After"
-            value = selected.updatedTimeAfter
-            onFilterChanged = { newValue -> props.onFilterChanged.invoke(selected.copy(updatedTimeAfter = newValue)) }
+        if (props.hideUpdatedTimeAfter != true) {
+            ReportTimeFilter {
+                label = "Updated After"
+                value = selected.updatedTimeAfter
+                onFilterChanged = { newValue -> props.onFilterChanged.invoke(selected.copy(updatedTimeAfter = newValue)) }
+            }
         }
     }
 }

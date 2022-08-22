@@ -7,7 +7,9 @@ import io.gianluigip.spectacle.common.components.xs
 import io.gianluigip.spectacle.component.components.ComponentList
 import io.gianluigip.spectacle.feature.components.FeaturesList
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.components.WikiDirectoryExplorer
+import io.gianluigip.spectacle.wiki.components.wikiPath
 import kotlinx.js.jso
 import mui.material.Grid
 import mui.material.GridDirection
@@ -17,10 +19,14 @@ import mui.material.styles.TypographyVariant.h5
 import mui.system.responsive
 import react.FC
 import react.Props
-import react.useContext
+import react.router.useNavigate
 
 val LandingView = FC<Props> {
-    val theme by useContext(ThemeContext)
+    val navigate = useNavigate()
+
+    fun navigateToWikiPage(page: WikiPageMetadataResponse) {
+        navigate.invoke("$wikiPath?id=${page.id}")
+    }
 
     Grid {
         container = true
@@ -36,7 +42,10 @@ val LandingView = FC<Props> {
 
                 Typography { variant = h5; +"Wiki Explorer" }
                 Spacer { height = 10.px }
-                WikiDirectoryExplorer { }
+                WikiDirectoryExplorer {
+                    hideSearchBar = true
+                    onPageSelected = { navigateToWikiPage(it) }
+                }
             }
         }
 
