@@ -5,8 +5,8 @@ import io.gianluigip.spectacle.dsl.interactions.receivesRequestFrom
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
-import io.ktor.client.call.body
 import io.ktor.client.call.NoTransformationFoundException
+import io.ktor.client.call.body
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -18,6 +18,7 @@ import io.ktor.http.contentType
 import kotlinx.coroutines.runBlocking
 
 fun BaseIntegrationTest.getWiki(
+    searchText: String? = null,
     feature: String? = null,
     source: String? = null,
     component: String? = null,
@@ -31,6 +32,7 @@ fun BaseIntegrationTest.getWiki(
         component?.let { parameter("components", component) }
         tag?.let { parameter("tags", tag) }
         team?.let { parameter("teams", team) }
+        searchText?.let { parameter("searchText", searchText) }
     }.body()
 }
 

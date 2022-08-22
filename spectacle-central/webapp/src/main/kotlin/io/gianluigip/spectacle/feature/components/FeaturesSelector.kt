@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.feature.components
 import csstype.Color
 import csstype.Display
 import csstype.FlexShrink
+import csstype.number
 import csstype.px
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
@@ -16,6 +17,7 @@ import mui.material.Box
 import mui.material.TextField
 import mui.material.Typography
 import react.FC
+import react.IntrinsicType
 import react.Props
 import react.create
 import react.useContext
@@ -40,19 +42,19 @@ val FeaturesSelector = FC<FeaturesSelectorProps> { props ->
         renderOption = { props, option, state ->
             Box.create {
                 +props
-                sx = jso { component = "li".asDynamic() }
+                sx = jso { display = "li".asDynamic() }
 
                 Box {
                     sx = jso { display = Display.flex }
 
                     Typography {
-                        sx = jso { flexShrink = FlexShrink(0.0) }
+                        sx = jso { flexShrink = number(0.0) }
                         +option.name
                     }
                     if (option.description.isNotEmpty()) {
                         Spacer { width = 5.px }
                         Typography {
-                            sx = jso { color = Color(theme.palette.text.secondary) }
+                            sx = jso { color = theme.palette.text.secondary }
                             noWrap = true
                             +"- ${option.description}"
                         }

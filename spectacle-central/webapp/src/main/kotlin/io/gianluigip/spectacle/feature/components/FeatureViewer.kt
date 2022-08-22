@@ -5,6 +5,9 @@ import csstype.pct
 import csstype.px
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.components.TabList
+import io.gianluigip.spectacle.common.components.md
+import io.gianluigip.spectacle.common.components.xl
+import io.gianluigip.spectacle.common.components.xs
 import io.gianluigip.spectacle.common.utils.infoMain
 import io.gianluigip.spectacle.common.utils.toDisplay
 import io.gianluigip.spectacle.common.utils.toNode
@@ -27,10 +30,12 @@ import mui.material.Stack
 import mui.material.Tab
 import mui.material.Typography
 import mui.material.styles.Theme
-import mui.system.ResponsiveStyleValue
+import mui.material.styles.TypographyVariant.h5
+import mui.material.styles.TypographyVariant.h6
+import mui.system.responsive
 import react.FC
 import react.Props
-import react.ReactElement
+import react.ReactNode
 import react.create
 import react.dom.onChange
 import react.useContext
@@ -51,14 +56,14 @@ val FeatureViewer = FC<FeatureViewerProps> { props ->
     val interactions = props.interactions
     val wikiPages = props.wikiPages
 
-    Typography { sx = jso { color = theme.infoMain }; variant = "h5"; +feature.name }
+    Typography { sx = jso { color = theme.infoMain }; variant = h5; +feature.name }
     Typography { +feature.description }
     Spacer { height = 10.px }
 
     Grid {
         container = true
-        direction = ResponsiveStyleValue(GridDirection.row)
-        columnSpacing = ResponsiveStyleValue(Themes.SPACE_PADDING)
+        direction = responsive(GridDirection.row)
+        columnSpacing = responsive(Themes.SPACE_PADDING)
 
         Grid {
             item = true
@@ -116,8 +121,8 @@ val FeatureViewer = FC<FeatureViewerProps> { props ->
 
 }
 
-private fun generateMetadataSection(specs: SpecsReportResponse, theme: Theme): ReactElement = Stack.create {
-    spacing = ResponsiveStyleValue(1)
+private fun generateMetadataSection(specs: SpecsReportResponse, theme: Theme): ReactNode = Stack.create {
+    spacing = responsive(1)
 
     +generateMetadataBox(
         title = "Tags", content = specs.filters.tags.sorted(), theme
@@ -140,10 +145,10 @@ private fun generateMetadataSection(specs: SpecsReportResponse, theme: Theme): R
 }
 
 
-private fun generateMetadataBox(title: String, content: List<String>, theme: Theme): ReactElement =
+private fun generateMetadataBox(title: String, content: List<String>, theme: Theme): ReactNode =
     Stack.create {
-        spacing = ResponsiveStyleValue(1)
-        Typography { sx = jso { color = theme.infoMain }; variant = "h6"; +title }
+        spacing = responsive(1)
+        Typography { sx = jso { color = theme.infoMain }; variant = h6; +title }
         content.forEach {
             Typography { +it }
         }

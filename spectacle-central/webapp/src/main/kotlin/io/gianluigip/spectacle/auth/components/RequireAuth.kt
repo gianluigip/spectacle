@@ -1,6 +1,7 @@
 package io.gianluigip.spectacle.auth.components
 
 import history.Location
+import history.LocationState
 import io.gianluigip.spectacle.auth.AuthContext
 import kotlinx.js.jso
 import react.FC
@@ -23,9 +24,9 @@ val RequireAuth = FC<PropsWithChildren> { props ->
         Navigate {
             to = loginPath
             replace = true
-            state = jso<NavigationState> { from = location }
+            state = jso<NavigationState> { from = location }.unsafeCast<LocationState>()
         }
         return@FC
     }
-    props.children()
+    +props.children
 }

@@ -1,5 +1,7 @@
 package io.gianluigip.spectacle.specification.repository
 
+import io.gianluigip.spectacle.common.repository.ilike
+import io.gianluigip.spectacle.common.utils.toLocalDateTime
 import io.gianluigip.spectacle.common.utils.toUtcLocalDateTime
 import io.gianluigip.spectacle.specification.SpecificationRepository
 import io.gianluigip.spectacle.specification.model.Component
@@ -11,10 +13,12 @@ import io.gianluigip.spectacle.specification.model.Specification
 import io.gianluigip.spectacle.specification.model.SpecificationStep
 import io.gianluigip.spectacle.specification.model.TagName
 import io.gianluigip.spectacle.specification.model.TeamName
+import io.gianluigip.spectacle.specification.repository.tables.Features
 import io.gianluigip.spectacle.specification.repository.tables.Specifications.name
 import io.gianluigip.spectacle.specification.repository.tables.Specifications.specSource
 import io.gianluigip.spectacle.specification.repository.tables.Tags
 import io.gianluigip.spectacle.specification.repository.tables.searchExpression
+import kotlinx.datetime.Instant
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.jetbrains.exposed.sql.JoinType
@@ -26,14 +30,15 @@ import org.jetbrains.exposed.sql.compoundOr
 import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.or
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
 import java.time.Clock
 import java.util.UUID
+import io.gianluigip.spectacle.specification.repository.tables.SpecificationInteractions as Interactions
 import io.gianluigip.spectacle.specification.repository.tables.SpecificationSteps as Steps
 import io.gianluigip.spectacle.specification.repository.tables.Specifications as Specs
-import io.gianluigip.spectacle.specification.repository.tables.SpecificationInteractions as Interactions
 
 class ExposedSpecificationRepository(
     private val clock: Clock,
@@ -42,17 +47,20 @@ class ExposedSpecificationRepository(
     override fun findAll(): List<Specification> = findBy(null)
 
     override fun findBy(
+        searchText: String?,
         features: Set<FeatureName>?,
         sources: Set<Source>?,
         components: Set<Component>?,
         tags: Set<TagName>?,
         teams: Set<TeamName>?,
         statuses: Set<SpecStatus>?,
+        updatedTimeAfter: Instant?,
     ): List<Specification> {
         val query = Specs
             .join(Steps, JoinType.LEFT, additionalConstraint = { Specs.id eq Steps.specId })
             .join(Tags, JoinType.LEFT, additionalConstraint = { Specs.id eq Tags.specId })
             .join(Interactions, JoinType.LEFT, additionalConstraint = { Specs.id eq Interactions.specId })
+            .join(Features, JoinType.LEFT, additionalConstraint = { Specs.feature eq Features.name })
             .selectAll()
         if (features?.isNotEmpty() == true) query.andWhere { Specs.feature inList features.map { it.value } }
         if (sources?.isNotEmpty() == true) query.andWhere { specSource inList sources.map { it.value } }
@@ -60,6 +68,15 @@ class ExposedSpecificationRepository(
         if (teams?.isNotEmpty() == true) query.andWhere { Specs.team inList teams.map { it.value } }
         if (statuses?.isNotEmpty() == true) query.andWhere { Specs.status inList statuses.map { it.name } }
         if (tags?.isNotEmpty() == true) query.andWhere { Tags.name inList tags.map { it.value } }
+        if (updatedTimeAfter != null) query.andWhere {
+            Specs.updateTime greaterEq updatedTimeAfter.toLocalDateTime()
+        }
+        if (searchText?.isNotEmpty() == true) {
+            query.andWhere {
+                (Specs.feature ilike "%$searchText%") or (Specs.name ilike "%$searchText%") or
+                        (Steps.description ilike "%$searchText%") or (Features.description ilike "%$searchText%")
+            }
+        }
         return query.toSpecsWithRelations()
     }
 

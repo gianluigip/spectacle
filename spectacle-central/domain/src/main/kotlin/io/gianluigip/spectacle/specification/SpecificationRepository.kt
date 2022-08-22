@@ -8,18 +8,21 @@ import io.gianluigip.spectacle.specification.model.SpecToUpsert
 import io.gianluigip.spectacle.specification.model.Specification
 import io.gianluigip.spectacle.specification.model.TagName
 import io.gianluigip.spectacle.specification.model.TeamName
+import kotlinx.datetime.Instant
 
 interface SpecificationRepository {
 
     fun findAll(): List<Specification>
 
     fun findBy(
+        searchText: String? = null,
         features: Set<FeatureName>? = null,
         sources: Set<Source>? = null,
         components: Set<Component>? = null,
         tags: Set<TagName>? = null,
         teams: Set<TeamName>? = null,
         statuses: Set<SpecStatus>? = null,
+        updatedTimeAfter: Instant? = null,
     ): List<Specification>
 
     fun findBySource(source: Source): List<Specification>

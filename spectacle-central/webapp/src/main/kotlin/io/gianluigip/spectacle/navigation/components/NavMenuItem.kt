@@ -3,11 +3,12 @@ package io.gianluigip.spectacle.navigation.components
 import csstype.Color
 import csstype.None
 import csstype.TextDecoration
+import emotion.react.css
 import kotlinx.js.jso
 import mui.material.Typography
+import mui.material.styles.TypographyVariant
 import react.FC
 import react.Props
-import react.css.css
 import react.dom.html.ReactHTML
 import react.router.dom.NavLink
 import react.router.useLocation
@@ -15,7 +16,7 @@ import react.router.useLocation
 external interface NavMenuItemProps : Props {
     var toPath: String
     var label: String
-    var textVariant: String?
+    var textVariant: TypographyVariant?
 }
 
 val NavMenuItem = FC<NavMenuItemProps> {

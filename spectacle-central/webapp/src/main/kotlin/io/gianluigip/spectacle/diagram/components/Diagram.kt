@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.diagram.components
 
+import csstype.ClassName
 import io.gianluigip.spectacle.common.components.mermaidInit
 import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
@@ -32,7 +33,7 @@ val Diagram = FC<DiagramProps> {
 
     Box {
         id = diagramId
-        className = "mermaid"
+        className = ClassName("mermaid")
         +"""
             ${generateMermaidConfigHeader(theme, it.expandDiagram ?: false)}
             ${it.content}

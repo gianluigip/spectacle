@@ -1,7 +1,6 @@
 package io.gianluigip.spectacle.specification.components
 
-import csstype.Color
-import csstype.FlexGrow
+import csstype.number
 import csstype.px
 import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.common.components.Spacer
@@ -16,7 +15,7 @@ import mui.material.AccordionSummary
 import mui.material.Grid
 import mui.material.GridDirection.row
 import mui.material.Typography
-import mui.system.ResponsiveStyleValue
+import mui.system.responsive
 import react.FC
 import react.Props
 import react.useContext
@@ -30,20 +29,20 @@ val SpecCard = FC<SpecCardProps> {
     val spec = it.spec
 
     Accordion {
-        sx = jso { flexGrow = FlexGrow(1.0) }
+        sx = jso { flexGrow = number(1.0) }
         AccordionSummary {
             sx = jso {
-                sx = jso { flexGrow = FlexGrow(1.0) }
-                color = Color(theme.palette.info.contrastText)
-                backgroundColor = Color(theme.palette.info.main)
+                flexGrow = number(1.0)
+                color = theme.palette.info.contrastText
+                backgroundColor = theme.palette.info.main
             }
             Typography { +spec.name }
         }
         AccordionDetails {
             Grid {
                 container = true
-                spacing = ResponsiveStyleValue(1)
-                direction = ResponsiveStyleValue(row)
+                spacing = responsive(1)
+                direction = responsive(row)
 
                 if (spec.tags.isNotEmpty()) {
                     Grid { item = true; MetaDataChip { label = "Tags: ${spec.tags.sorted().joinToString(",")}" } }
@@ -59,13 +58,13 @@ val SpecCard = FC<SpecCardProps> {
             spec.steps.sortedBy { step -> step.index }.forEach { step ->
                 Grid {
                     container = true
-                    spacing = ResponsiveStyleValue(0.5)
-                    direction = ResponsiveStyleValue(row)
+                    spacing = responsive(0.5)
+                    direction = responsive(row)
 
                     Grid {
                         item = true
                         Typography {
-                            sx = jso { color = Color(theme.palette.info.main) }
+                            sx = jso { color = theme.palette.info.main }
                             +step.type.toDisplay()
                         }
                     }

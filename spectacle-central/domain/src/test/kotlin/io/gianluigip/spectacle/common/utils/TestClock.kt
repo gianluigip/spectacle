@@ -24,7 +24,7 @@ class TestClock : Clock() {
         throw UnsupportedOperationException()
     }
 
-    override fun instant(): Instant? {
+    override fun instant(): Instant {
         return fixedTime
     }
 }

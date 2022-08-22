@@ -15,6 +15,7 @@ interface WikiPageRepository {
     fun findById(id: WikiId): WikiPage?
 
     fun findBy(
+        searchText: String? = null,
         features: Set<FeatureName>? = null,
         sources: Set<Source>? = null,
         components: Set<Component>? = null,

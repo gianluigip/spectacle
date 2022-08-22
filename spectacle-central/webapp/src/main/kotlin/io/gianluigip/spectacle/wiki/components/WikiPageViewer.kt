@@ -1,13 +1,13 @@
 package io.gianluigip.spectacle.wiki.components
 
 import csstype.px
+import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toDisplay
-import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 import mui.material.Grid
 import mui.material.GridDirection
-import mui.system.ResponsiveStyleValue
+import mui.system.responsive
 import react.FC
 import react.Props
 
@@ -20,8 +20,8 @@ val WikiPageViewer = FC<WikiPageProps> {
 
     Grid {
         container = true
-        spacing = ResponsiveStyleValue(1)
-        direction = ResponsiveStyleValue(GridDirection.row)
+        spacing = responsive(1)
+        direction = responsive(GridDirection.row)
 
         if (wiki.features.isNotEmpty()) {
             Grid { item = true; MetaDataChip { label = "Features: ${wiki.features.sorted().joinToString(", ")}" } }

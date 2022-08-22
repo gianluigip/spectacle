@@ -20,6 +20,7 @@ import kotlinx.js.jso
 import mui.material.Box
 import mui.material.Paper
 import mui.material.Typography
+import mui.material.styles.TypographyVariant.h5
 import react.FC
 import react.Props
 import react.router.useLocation
@@ -68,7 +69,7 @@ val SystemDiagramPage = FC<Props> {
                 sx = jso { padding = SPACE_PADDING; height = 100.pct; width = 100.pct }
                 elevation = 2
 
-                Typography { sx = jso { width = 280.px; }; variant = "h5"; +"Filters" }
+                Typography { sx = jso { width = 280.px; }; variant = h5; +"Filters" }
                 Spacer { height = 10.px }
                 LoadingBar { isLoading = filters == null }
                 filters?.let {
@@ -76,7 +77,9 @@ val SystemDiagramPage = FC<Props> {
                         filtersSelected = currentFilters ?: FiltersSelected()
                         this.filters = it
                         onFilterChanged = { filters -> refreshSearch(filters) }
+                        hideSearchTextFilter = true
                         hideStatusFilter = true
+                        hideUpdatedTimeAfter = true
                     }
                 }
             }
@@ -89,7 +92,7 @@ val SystemDiagramPage = FC<Props> {
                 sx = jso { padding = SPACE_PADDING; height = 100.pct; width = 100.pct; overflow = Auto.auto }
                 elevation = 2
 
-                Typography { variant = "h5"; +"System Diagram" }
+                Typography { variant = h5; +"System Diagram" }
                 Spacer { height = 10.px }
                 LoadingBar { isLoading = interactions == null }
                 interactions?.let {

@@ -104,7 +104,8 @@ class WikiIT : BaseIntegrationTest() {
                     source = "S1",
                     component = "C1",
                     tags = listOf("Tag1"),
-                    team = "T1"
+                    team = "T1",
+                    content = "#Wiki 1\n**Content 1**",
                 )
             )
             postWikiPage(
@@ -113,7 +114,8 @@ class WikiIT : BaseIntegrationTest() {
                     source = "S2",
                     component = "C2",
                     tags = listOf("Tag2"),
-                    team = "T2"
+                    team = "T2",
+                    content = "# Wiki 2\n**Content 2**",
                 )
             )
         } whenever "search all the pages" run {
@@ -154,10 +156,17 @@ class WikiIT : BaseIntegrationTest() {
             }
         } andWhenever "search by team" run {
             getWiki(team = "T1")
-        } then "it should only include pages from the expected team" runAndFinish {
+        } then "it should only include pages from the expected team" run {
             it assertThat {
                 shouldHasSize(1)
                 first().title shouldBe "page1"
+            }
+        } andWhenever "search by text" run {
+            getWiki(searchText = "ent 2")
+        } then "it should only include pages that contain the given text" runAndFinish {
+            it assertThat {
+                shouldHasSize(1)
+                first().title shouldBe "page2"
             }
         }
 }

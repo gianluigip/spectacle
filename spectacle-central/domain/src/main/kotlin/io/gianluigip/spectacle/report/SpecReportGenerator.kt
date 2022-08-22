@@ -15,6 +15,7 @@ import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.Specification
 import io.gianluigip.spectacle.specification.model.TagName
 import io.gianluigip.spectacle.specification.model.TeamName
+import kotlinx.datetime.Instant
 
 class SpecReportGenerator(
     private val specFinder: SpecificationFinder,
@@ -23,15 +24,17 @@ class SpecReportGenerator(
 ) {
 
     fun generateReport(
+        searchText: String? = null,
         features: Set<FeatureName>? = null,
         sources: Set<Source>? = null,
         components: Set<Component>? = null,
         tags: Set<TagName>? = null,
         teams: Set<TeamName>? = null,
         statuses: Set<SpecStatus>? = null,
+        updatedTimeAfter: Instant? = null,
     ): SpecsReport = transaction.execute {
 
-        val specs = specFinder.findBy(features, sources, components, tags, teams, statuses)
+        val specs = specFinder.findBy(searchText, features, sources, components, tags, teams, statuses, updatedTimeAfter)
             .sortedWith(compareBy({ it.feature.value }, { it.name.value }))
         val features = findFeatures(specs)
 

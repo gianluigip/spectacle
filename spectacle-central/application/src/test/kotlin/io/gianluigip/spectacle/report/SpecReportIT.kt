@@ -6,6 +6,8 @@ import io.gianluigip.spectacle.common.Tags
 import io.gianluigip.spectacle.common.utils.CLOCK
 import io.gianluigip.spectacle.common.utils.api.getSpecReport
 import io.gianluigip.spectacle.common.utils.api.putSpecs
+import io.gianluigip.spectacle.common.utils.toKotlinInstant
+import io.gianluigip.spectacle.common.utils.toZonedDateTime
 import io.gianluigip.spectacle.dsl.assertions.assertThat
 import io.gianluigip.spectacle.dsl.assertions.shouldBe
 import io.gianluigip.spectacle.dsl.assertions.shouldHasSize
@@ -20,6 +22,7 @@ import io.gianluigip.spectacle.specification.model.SpecStatus.IMPLEMENTED
 import io.gianluigip.spectacle.specification.model.SpecStatus.NOT_IMPLEMENTED
 import io.gianluigip.spectacle.specification.model.StepType.GIVEN
 import org.junit.jupiter.api.Test
+import java.time.Duration
 import io.gianluigip.spectacle.specification.model.SpecificationStep as Step
 
 private const val SPEC_1 = "Spec1"
@@ -38,6 +41,9 @@ private const val TAG_2 = "Tag2"
 @Feature(name = Features.SPECIFICATIONS, description = "Search and aggregate all the specs")
 @SpecTags(Tags.SPECIFICATIONS)
 class SpecReportIT : BaseIntegrationTest() {
+
+    private val source1Time = CLOCK.millis()
+    private val source2Time = CLOCK.instant().plusMillis(Duration.ofMinutes(5).toMillis()).toEpochMilli()
 
     @Test
     @Specification
@@ -66,6 +72,7 @@ class SpecReportIT : BaseIntegrationTest() {
                 )
             )
             putSpecs(source1)
+            CLOCK.forwardMinutes(5)
             putSpecs(source2)
         } whenever "request a report for all specs" run {
             getSpecReport()
@@ -84,8 +91,8 @@ class SpecReportIT : BaseIntegrationTest() {
                             status shouldBe IMPLEMENTED
                             tags shouldBe listOf(TAG_1)
                             steps shouldBe listOf(Step(GIVEN, "Description 1", 0))
-                            creationTime.toEpochMilliseconds() shouldBe CLOCK.millis()
-                            updateTime.toEpochMilliseconds() shouldBe CLOCK.millis()
+                            creationTime.toEpochMilliseconds() shouldBe source1Time
+                            updateTime.toEpochMilliseconds() shouldBe source1Time
                         }
                     }
                     last() assertThat {
@@ -99,8 +106,8 @@ class SpecReportIT : BaseIntegrationTest() {
                             status shouldBe NOT_IMPLEMENTED
                             tags shouldBe listOf(TAG_2)
                             steps shouldBe listOf()
-                            creationTime.toEpochMilliseconds() shouldBe CLOCK.millis()
-                            updateTime.toEpochMilliseconds() shouldBe CLOCK.millis()
+                            creationTime.toEpochMilliseconds() shouldBe source2Time
+                            updateTime.toEpochMilliseconds() shouldBe source2Time
                         }
                     }
                 }
@@ -150,7 +157,21 @@ class SpecReportIT : BaseIntegrationTest() {
             }
         } andWhenever "request a report for a specific status" run {
             getSpecReport(status = NOT_IMPLEMENTED)
-        } then "it should contain only specs with that status" runAndFinish { report ->
+        } then "it should contain only specs with that status" run { report ->
+            report.features assertThat {
+                shouldHasSize(1)
+                first().specs.first().name shouldBe SPEC_2
+            }
+        } andWhenever "request a report using a specific search text" run {
+            getSpecReport(searchText = "Description 1")
+        } then "it should contain only specs with that text" run { report ->
+            report.features assertThat {
+                shouldHasSize(1)
+                first().specs.first().name shouldBe SPEC_1
+            }
+        } andWhenever "request a report for a specific updated time" run {
+            getSpecReport(updatedTimeAfter = CLOCK.toZonedDateTime().toKotlinInstant())
+        } then "it should contain only specs updated after the given time" runAndFinish { report ->
             report.features assertThat {
                 shouldHasSize(1)
                 first().specs.first().name shouldBe SPEC_2

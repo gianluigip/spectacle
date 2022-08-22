@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.wiki.repository
 
+import io.gianluigip.spectacle.common.repository.ilike
 import io.gianluigip.spectacle.common.utils.toUtcLocalDateTime
 import io.gianluigip.spectacle.common.utils.toZonedDateTime
 import io.gianluigip.spectacle.specification.model.Component
@@ -16,6 +17,7 @@ import io.gianluigip.spectacle.wiki.model.toWikiId
 import io.gianluigip.spectacle.wiki.repository.tables.WikiPageFeatures
 import io.gianluigip.spectacle.wiki.repository.tables.WikiPageTags
 import io.gianluigip.spectacle.wiki.repository.tables.WikiPages
+import io.gianluigip.spectacle.wiki.repository.tables.WikiPages.content
 import io.gianluigip.spectacle.wiki.repository.tables.WikiPages.title
 import org.jetbrains.exposed.sql.JoinType
 import org.jetbrains.exposed.sql.Query
@@ -25,6 +27,7 @@ import org.jetbrains.exposed.sql.batchInsert
 import org.jetbrains.exposed.sql.deleteAll
 import org.jetbrains.exposed.sql.deleteWhere
 import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.or
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.update
@@ -44,6 +47,7 @@ class ExposedWikiPageRepository(
             .toList().toWikiPage(clock)
 
     override fun findBy(
+        searchText: String?,
         features: Set<FeatureName>?,
         sources: Set<Source>?,
         components: Set<Component>?,
@@ -63,6 +67,13 @@ class ExposedWikiPageRepository(
         if (teams?.isNotEmpty() == true) query.andWhere { WikiPages.team inList teams.map { it.value } }
         if (features?.isNotEmpty() == true) query.andWhere { WikiPageFeatures.name inList features.map { it.value } }
         if (tags?.isNotEmpty() == true) query.andWhere { WikiPageTags.name inList tags.map { it.value } }
+        if (searchText?.isNotEmpty() == true) {
+            query.andWhere {
+                (title ilike "%$searchText%") or (content ilike "%$searchText%") or
+                        (WikiPages.team ilike "%$searchText%") or (WikiPageFeatures.name ilike "%$searchText%") or
+                        (WikiPageTags.name ilike "%$searchText%")
+            }
+        }
         return query.toPagesMetadataWithRelations()
     }
 
