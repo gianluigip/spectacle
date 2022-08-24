@@ -1,9 +1,23 @@
 package io.gianluigip.spectacle.report.publisher.central
 
-private val TITLE_REGEX = Regex("""\{\{\s*title\s*:\s*([\w\s\d,]*)\s*\}\}""")
-private val TEAM_REGEX = Regex("""\{\{\s*team\s*:\s*([\w\s\d,]*)\s*\}\}""")
-private val FEATURES_REGEX = Regex("""\{\{\s*features\s*:\s*([\w\s\d,]*)\s*\}\}""")
-private val TAGS_REGEX = Regex("""\{\{\s*tags\s*:\s*([\w\s\d,]*)\s*\}\}""")
+/**
+ * Valid Chars:
+ *      * Any word
+ *      * Any number
+ *      * Space
+ *      * ,
+ *      * .
+ *      * -
+ *      * [
+ *      * ]
+ *      * /
+ *      * \
+ */
+private val VALID_CHARS = """[\[\]\w\s\d,\\\/\.-]"""
+private val TITLE_REGEX = Regex("""\{\{\s*title\s*:\s*($VALID_CHARS*)\s*\}\}""")
+private val TEAM_REGEX = Regex("""\{\{\s*team\s*:\s*($VALID_CHARS*)\s*\}\}""")
+private val FEATURES_REGEX = Regex("""\{\{\s*features\s*:\s*($VALID_CHARS*)\s*\}\}""")
+private val TAGS_REGEX = Regex("""\{\{\s*tags\s*:\s*($VALID_CHARS*)\s*\}\}""")
 
 fun String.extractTitleFromWikiPage(): String? {
     return TITLE_REGEX.find(this)?.groupValues?.last()?.trim()

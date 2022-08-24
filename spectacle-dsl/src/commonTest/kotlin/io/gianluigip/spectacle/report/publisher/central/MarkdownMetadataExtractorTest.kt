@@ -19,6 +19,13 @@ class MarkdownMetadataExtractorTest {
     }
 
     @Test
+    fun extractTitleFromWikiPage_should_detect_some_special_chars() {
+        """
+            [//]: # ( {{ title: [Test] Title - Sub,Title/Sub.Header }} )
+        """.trimIndent().extractTitleFromWikiPage() shouldBe "[Test] Title - Sub,Title/Sub.Header"
+    }
+
+    @Test
     fun extractTeamFromWikiPage_should_extract_team() {
         exampleContent.extractTeamFromWikiPage() shouldBe "Spectacle Docs Writers"
     }
