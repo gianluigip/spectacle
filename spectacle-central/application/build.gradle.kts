@@ -55,7 +55,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:0.39.2")
     implementation("org.jetbrains.exposed:exposed-java-time:0.39.2")
     implementation("com.zaxxer:HikariCP:5.0.1")
-    implementation("org.postgresql:postgresql:42.4.2")
+    implementation("org.postgresql:postgresql:42.5.0")
     implementation("org.flywaydb:flyway-core:9.1.6")
 
     // TEST
