@@ -1,6 +1,6 @@
 val jsWrapperVersion = "pre.365"
 val serializationVersion = "1.3.1"
-val ktorVersion = "2.1.0"
+val ktorVersion = "2.1.1"
 
 plugins {
     kotlin("js")
