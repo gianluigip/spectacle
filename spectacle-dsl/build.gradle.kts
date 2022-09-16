@@ -49,7 +49,7 @@ kotlin {
             dependencies {
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
-                implementation("com.github.tomakehurst:wiremock-jre8:2.33.2")
+                implementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
             }
         }
         val jsMain by getting {
