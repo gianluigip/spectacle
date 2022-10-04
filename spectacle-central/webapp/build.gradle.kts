@@ -1,6 +1,6 @@
 val jsWrapperVersion = "pre.365"
 val serializationVersion = "1.3.1"
-val ktorVersion = "2.1.1"
+val ktorVersion = "2.1.2"
 
 plugins {
     kotlin("js")
@@ -39,7 +39,7 @@ dependencies {
     implementation("io.ktor:ktor-client-js:$ktorVersion")
 
     // REACT
-    implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:1.0.0-pre.388"))
+    implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:1.0.0-pre.398"))
     implementation(kotlinw("emotion"))
     implementation(kotlinw("react"))
     implementation(kotlinw("react-dom"))
