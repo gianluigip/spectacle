@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val ktorVersion = "2.1.1"
+val ktorVersion = "2.1.2"
 val logbackVersion = "1.4.1"
 
 plugins {
@@ -65,9 +65,9 @@ dependencies {
     testImplementation("io.ktor:ktor-client-auth:$ktorVersion")
     testImplementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
     testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
-    testImplementation("org.testcontainers:testcontainers:1.17.3")
+    testImplementation("org.testcontainers:testcontainers:1.17.4")
     testImplementation("org.testcontainers:junit-jupiter:1.17.3")
     testImplementation("org.testcontainers:postgresql:1.17.3")
 }
