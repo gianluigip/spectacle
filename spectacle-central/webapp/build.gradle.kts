@@ -4,7 +4,7 @@ val ktorVersion = "2.1.2"
 
 plugins {
     kotlin("js")
-    id("io.github.turansky.kfc.webpack") version "5.63.0"
+    id("io.github.turansky.kfc.webpack") version "5.64.0"
 }
 
 group = "io.github.gianluigip"
