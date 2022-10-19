@@ -36,7 +36,7 @@ class JvmCentralClient(
         println("Publishing the specs to $centralUrl")
 
         try {
-            val content = jsonEncoder.encodeToString(requestBody)
+            val content = requestBody.encodeToJson()
             val httpClient = clientFor("PUT", centralUrl, content)
             val requestStatus = httpClient.responseCode
             val responseBody = httpClient.responseAsText()

@@ -45,7 +45,7 @@ class SpectacleReportIT : BaseIntegrationTest() {
     fun `The specifications should be published on Central`() =
         given("unit tests defining Spec1 and Spec2 for Feature1") {
             val spec1Metadata = SpecificationMetadata(
-                featureName = "Feature1", featureDescription = "\nDescription1\n\t\tMulti line\n", team = "Matching",
+                featureName = "Feature1", featureDescription = "\nDescription1\n\t\tMulti line\nSpecial Chars: \"'\n", team = "Matching",
                 status = SpecStatus.IMPLEMENTED, tags = listOf("Tag1-1", "Tag1-2")
             )
             val spec2Metadata = SpecificationMetadata(
@@ -81,7 +81,7 @@ class SpectacleReportIT : BaseIntegrationTest() {
                             "features": [
                                 {
                                     "name": "Feature1",
-                                    "description": "Description1\nMulti line",
+                                    "description": "Description1\nMulti line\nSpecial Chars: \"'",
                                     "specs": [
                                         {
                                             "team": "Matching",
