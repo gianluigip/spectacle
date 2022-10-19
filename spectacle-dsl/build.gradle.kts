@@ -31,8 +31,6 @@ kotlin {
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
             }
         }
         val commonTest by getting {
@@ -50,6 +48,9 @@ kotlin {
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.9.1")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
                 implementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
+
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
             }
         }
         val jsMain by getting {
