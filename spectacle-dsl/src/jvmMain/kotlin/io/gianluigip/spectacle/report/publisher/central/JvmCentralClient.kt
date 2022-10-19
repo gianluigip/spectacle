@@ -6,9 +6,6 @@ import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import java.io.BufferedReader
 import java.io.DataOutputStream
 import java.io.InputStreamReader
@@ -20,7 +17,6 @@ class JvmCentralClient(
     config: CentralPublisherConfig
 ) : CentralClient {
 
-    private val jsonEncoder = Json { encodeDefaults = true }
     private val host = config.host?.value.let {
         when {
             it == null -> ""
@@ -36,7 +32,7 @@ class JvmCentralClient(
         println("Publishing the specs to $centralUrl")
 
         try {
-            val content = jsonEncoder.encodeToString(requestBody)
+            val content = requestBody.encodeToJson()
             val httpClient = clientFor("PUT", centralUrl, content)
             val requestStatus = httpClient.responseCode
             val responseBody = httpClient.responseAsText()
@@ -50,16 +46,16 @@ class JvmCentralClient(
 
     override suspend fun getWikiPages(source: String): List<WikiPageMetadataResponse> = withContext(Dispatchers.IO) {
         val wikisEncoded = clientFor("GET", "${host}api/wiki?sources=$source").responseAsText()
-        return@withContext jsonEncoder.decodeFromString(wikisEncoded)
+        return@withContext wikisEncoded.decodeToWikiPages()
     }
 
     override suspend fun postWikiPage(wikiPage: WikiPageRequest): Unit = withContext(Dispatchers.IO) {
-        val content = jsonEncoder.encodeToString(wikiPage)
+        val content = wikiPage.encodeToJson()
         clientFor("POST", "${host}api/wiki", content).responseAsText()
     }
 
     override suspend fun putWikiPage(wikiPage: WikiPageRequest, wikiId: String): Unit = withContext(Dispatchers.IO) {
-        val content = jsonEncoder.encodeToString(wikiPage)
+        val content = wikiPage.encodeToJson()
         clientFor("PUT", "${host}api/wiki/${wikiId}", content).responseAsText()
     }
 
