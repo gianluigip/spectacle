@@ -23,6 +23,9 @@ kotlin {
 }
 
 tasks.withType<Test> {
+    inputs.property("Spectacle Enabled") {
+        System.getenv("SPECIFICATION_PUBLISHER_CENTRAL_ENABLED") ?: "false"
+    }
     useJUnitPlatform()
 }
 
