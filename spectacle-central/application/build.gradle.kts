@@ -23,6 +23,9 @@ kotlin {
 }
 
 tasks.withType<Test> {
+    inputs.property("Spectacle Enabled") {
+        System.getenv("SPECIFICATION_PUBLISHER_CENTRAL_ENABLED") ?: "false"
+    }
     useJUnitPlatform()
 }
 
@@ -51,9 +54,9 @@ dependencies {
     implementation("org.kodein.di:kodein-di:7.15.0")
 
     // DATA
-    implementation("org.jetbrains.exposed:exposed-core:0.39.2")
-    implementation("org.jetbrains.exposed:exposed-jdbc:0.39.2")
-    implementation("org.jetbrains.exposed:exposed-java-time:0.39.2")
+    implementation("org.jetbrains.exposed:exposed-core:0.40.1")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.40.1")
+    implementation("org.jetbrains.exposed:exposed-java-time:0.40.1")
     implementation("com.zaxxer:HikariCP:5.0.1")
     implementation("org.postgresql:postgresql:42.5.0")
     implementation("org.flywaydb:flyway-core:9.4.0")
