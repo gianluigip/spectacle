@@ -52,8 +52,8 @@ kotlin {
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
                 implementation("com.github.tomakehurst:wiremock-jre8:2.34.0")
 
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.0")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
             }
         }
         val jsMain by getting {
