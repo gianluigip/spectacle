@@ -25,7 +25,7 @@ RUN ./gradlew build -x test --continue
 COPY . .
 RUN ./gradlew stage
 
-FROM openjdk:11.0-jre
+FROM openjdk:11.0-jre AS RUNTIME_IMAGE
 WORKDIR /root/
 COPY --from=BUILD_IMAGE /root/dev/spectacle/spectacle-central/application/build/install/application .
 EXPOSE 8080:8080

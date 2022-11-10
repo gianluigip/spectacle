@@ -17,6 +17,7 @@ data class CentralPublisherConfig(
     val host: Url?,
     val username: String,
     val password: String,
+    val publishEmptySpecs: Boolean,
     val wikiEnabled: Boolean,
     val localWikiLocation: String?,
 )
