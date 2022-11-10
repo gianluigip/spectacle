@@ -62,7 +62,9 @@ dependencies {
     implementation("org.flywaydb:flyway-core:9.7.0")
 
     // TEST
-    testImplementation(project(":spectacle-dsl"))
+    testImplementation(project(":spectacle-dsl-bdd"))
+    testImplementation(project(":spectacle-dsl-assertions"))
+    testImplementation(project(":spectacle-dsl-publisher"))
     testImplementation(project(":spectacle-central:domain", "testClasses"))
     testImplementation("io.ktor:ktor-client-core:$ktorVersion")
     testImplementation("io.ktor:ktor-client-auth:$ktorVersion")
