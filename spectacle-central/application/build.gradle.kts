@@ -51,7 +51,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
     // DI
-    implementation("org.kodein.di:kodein-di:7.15.0")
+    implementation("org.kodein.di:kodein-di:7.15.1")
 
     // DATA
     implementation("org.jetbrains.exposed:exposed-core:0.40.1")
