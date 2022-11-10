@@ -17,11 +17,11 @@ infix fun <T> T.assertThat(block: T.() -> Unit) = block.invoke(this)
 
 @AssertionDslMarker
 infix fun <T> T.shouldBe(value: T) =
-    assertEquals(this, value, "$expectedToBe equal to '$value'")
+    assertEquals(value, this, "$expectedToBe equal to '$value'")
 
 @AssertionDslMarker
 infix fun <T> T.shouldNotBe(value: T) =
-    assertNotEquals(this, value, "$expectedToBe not equal to '$value'")
+    assertNotEquals(value, this, "$expectedToBe not equal to '$value'")
 
 @AssertionDslMarker
 fun Any?.shouldBeNull() =

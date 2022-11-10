@@ -61,6 +61,7 @@ dependencies {
 
     // Tests
     testImplementation(project(":spectacle-dsl"))
+    testImplementation(project(":spectacle-dsl-assertions"))
     testImplementation(kotlin("test-js"))
 }
 

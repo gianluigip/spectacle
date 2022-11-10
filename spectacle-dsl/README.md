@@ -81,7 +81,7 @@ reuse the same `source` for multiple tests executions like different services or
 the same repo, you will overwrite the specs, each `spectacle.properties` should have a different
 source.
 
-## [Assertion DSL](docs/Features/AssertionDsl.md)
+## [Assertion DSL](./../spectacle-dsl-assertions/docs/AssertionDsl.md)
 
 To improve even further the readability Spectacle also include an Assertion DSL that can be used to
 validate your tests more easily.

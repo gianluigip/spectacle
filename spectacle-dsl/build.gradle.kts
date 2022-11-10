@@ -39,6 +39,7 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+                implementation(project(":spectacle-dsl-assertions"))
             }
         }
         val jvmMain by getting {

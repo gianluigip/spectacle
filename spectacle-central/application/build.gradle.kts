@@ -63,6 +63,7 @@ dependencies {
 
     // TEST
     testImplementation(project(":spectacle-dsl"))
+    testImplementation(project(":spectacle-dsl-assertions"))
     testImplementation(project(":spectacle-central:domain", "testClasses"))
     testImplementation("io.ktor:ktor-client-core:$ktorVersion")
     testImplementation("io.ktor:ktor-client-auth:$ktorVersion")

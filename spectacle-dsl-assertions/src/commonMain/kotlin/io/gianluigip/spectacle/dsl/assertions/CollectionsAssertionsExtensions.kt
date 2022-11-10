@@ -7,7 +7,7 @@ private val Any?.expectedTo get() = "Expected '$this' to"
 
 @AssertionDslMarker
 infix fun Collection<*>?.shouldHasSize(expectedSize: Int) =
-    assertEquals(this?.size, expectedSize, "$expectedTo has size $expectedSize")
+    assertEquals(expectedSize, this?.size, "$expectedTo has size $expectedSize")
 
 @AssertionDslMarker
 fun Collection<*>?.shouldBeEmpty() =

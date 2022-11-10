@@ -36,6 +36,7 @@ Add dependency:
 
 ```
 testImplementation("io.github.gianluigip:spectacle-dsl:VERSION")
+testImplementation("io.github.gianluigip:spectacle-dsl-assertions:VERSION")
 ```
 
 Example of a JVM spec class:
