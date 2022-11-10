@@ -14,7 +14,7 @@ data class User(val name: String, val roles: List<String>)
 fun `validate user`() {
     val user = User(name = "John Doe", roles = listOf("Admin", "Sales"))
     // All assertions are extension functions starting with `should`
-    user.shouldBeNull()
+    user.shouldBeNotNull()
     // assertThat is a convenient method for doing multiple validations on the same instance
     // It works similar to `run` but with infix syntax
     user assertThat {
