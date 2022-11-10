@@ -19,7 +19,7 @@ Add dependency:
 testImplementation("io.github.gianluigip:spectacle-dsl:VERSION")
 ```
 
-### [BDD DSL](docs/Features/BddDsl.md)
+### [BDD DSL](./../spectacle-dsl-bdd/docs/BddDsl.md)
 
 The simpler use case is to use the DSL to make your tests more readable, it's particularly useful
 for writing Integration Tests because it usually validates complex behaviour and requires more setup
@@ -38,7 +38,7 @@ Now you created a test that is easy to read and other devs can rely on it for un
 software, but we can do it better, we can extract all the BDD steps along with some extra metadata
 to build a specification that can be shared outside the codebase.
 
-You can read more about how to publish your specs in the [BDD DSL Page](docs/Features/BddDsl.md).
+You can read more about how to publish your specs in the [BDD DSL Page](./../spectacle-dsl-bdd/docs/BddDsl.md).
 
 ## [Configure DSL](./docs/ConfigureDsl.md)
 

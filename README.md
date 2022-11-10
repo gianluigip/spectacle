@@ -36,6 +36,7 @@ Add dependency:
 
 ```
 testImplementation("io.github.gianluigip:spectacle-dsl:VERSION")
+testImplementation("io.github.gianluigip:spectacle-dsl-bdd:VERSION")
 testImplementation("io.github.gianluigip:spectacle-dsl-assertions:VERSION")
 ```
 

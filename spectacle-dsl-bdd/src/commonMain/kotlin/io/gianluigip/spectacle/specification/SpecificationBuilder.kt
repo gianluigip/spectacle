@@ -25,12 +25,12 @@ class SpecificationBuilder(
         return this
     }
 
-    internal fun addInteraction(interaction: SpecInteraction): SpecificationBuilder {
+    fun addInteraction(interaction: SpecInteraction): SpecificationBuilder {
         interactions += interaction
         return this
     }
 
-    internal fun fillMissingWithExternalMetadata(externalSpecName: String, metadata: SpecificationMetadata): SpecificationBuilder {
+    fun fillMissingWithExternalMetadata(externalSpecName: String, metadata: SpecificationMetadata): SpecificationBuilder {
         specName = specName ?: externalSpecName
         featureName = featureName ?: metadata.featureName
         featureDescription = featureDescription ?: metadata.featureDescription
@@ -40,7 +40,7 @@ class SpecificationBuilder(
         return this
     }
 
-    internal fun build() = Specification(
+    fun build() = Specification(
         metadata = SpecificationMetadata(
             featureName = featureName ?: "Unknown",
             featureDescription = featureDescription ?: "",
