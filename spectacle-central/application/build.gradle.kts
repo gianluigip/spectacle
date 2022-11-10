@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val ktorVersion = "2.1.2"
-val logbackVersion = "1.4.3"
+val ktorVersion = "2.1.3"
+val logbackVersion = "1.4.4"
 
 plugins {
     kotlin("jvm")
@@ -59,7 +59,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-java-time:0.40.1")
     implementation("com.zaxxer:HikariCP:5.0.1")
     implementation("org.postgresql:postgresql:42.5.0")
-    implementation("org.flywaydb:flyway-core:9.4.0")
+    implementation("org.flywaydb:flyway-core:9.7.0")
 
     // TEST
     testImplementation(project(":spectacle-dsl"))
