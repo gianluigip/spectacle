@@ -65,6 +65,7 @@ dependencies {
     testImplementation(project(":spectacle-dsl-bdd"))
     testImplementation(project(":spectacle-dsl-assertions"))
     testImplementation(project(":spectacle-dsl-publisher"))
+    testImplementation(project(":spectacle-dsl-http"))
     testImplementation(project(":spectacle-central:domain", "testClasses"))
     testImplementation("io.ktor:ktor-client-core:$ktorVersion")
     testImplementation("io.ktor:ktor-client-auth:$ktorVersion")

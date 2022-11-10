@@ -55,7 +55,6 @@ fun receivesRequestFrom(componentName: String) {
     )
 }
 
-
 fun sendsRequestTo(componentName: String) {
     TestContext.getCurrentSpec()?.addInteraction(
         SpecInteraction(
