@@ -28,6 +28,7 @@ kotlin {
 
 dependencies {
     // Internal
+    implementation(project(":spectacle-common"))
     implementation(project(":spectacle-central:common"))
 
     // KTOR

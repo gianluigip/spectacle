@@ -10,11 +10,14 @@ import com.github.tomakehurst.wiremock.client.WireMock.stubFor
 import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_PASSWORD
 import io.gianluigip.spectacle.common.fixtures.AuthConstants.CENTRAL_USERNAME
 import io.gianluigip.spectacle.dsl.interactions.sendsRequestTo
+import io.gianluigip.spectacle.dsl.interactions.usesLibrary
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 fun stubPutSpecs() {
+    usesLibrary("Spectacle DSL BDD")
+    usesLibrary("Spectacle DSL Assertions")
     sendsRequestToCentral()
     // First request without auth
     stubFor(

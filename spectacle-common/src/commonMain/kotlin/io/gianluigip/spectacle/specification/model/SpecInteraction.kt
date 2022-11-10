@@ -15,5 +15,5 @@ enum class InteractionDirection {
 }
 
 enum class InteractionType {
-    EVENT, HTTP, PERSISTENCE
+    EVENT, HTTP, PERSISTENCE, LIBRARY
 }
