@@ -26,7 +26,7 @@ Spectacle follows the philosophy that only the code and by extension the tests p
 documentation of the system, so it provides a DSL for writing readable tests that can be published
 into a central repository to allows everyone to review.
 
-## [Spectacle DSL](./spectacle-dsl/README.md)
+## [Spectacle DSL](./spectacle-dsl-publisher/README.md)
 
 A Kotlin multiplatform library for generating documentation from tests and Markdown files, it can be
 used as a standalone tool for improving the readability of tests or in combination
@@ -35,9 +35,9 @@ with `Spectacle Central` to generate living documentation.
 Add dependency:
 
 ```
-testImplementation("io.github.gianluigip:spectacle-dsl:VERSION")
 testImplementation("io.github.gianluigip:spectacle-dsl-bdd:VERSION")
 testImplementation("io.github.gianluigip:spectacle-dsl-assertions:VERSION")
+testImplementation("io.github.gianluigip:spectacle-dsl-publisher:VERSION")
 ```
 
 Example of a JVM spec class:
@@ -57,7 +57,7 @@ class JunitExampleTest {
 }
 ```
 
-Review [Spectacle DSL README](./spectacle-dsl/README.md) for more details.
+Review [Spectacle DSL README](./spectacle-dsl-publisher/README.md) for more details.
 
 ## [Spectacle Central](./spectacle-central/README.md)
 
@@ -74,19 +74,3 @@ increase the value for the organization as a whole.
 * Password: `guest`
 
 Review [Spectacle Central README](./spectacle-central/README.md) for more details.
-
-## Future Improvements
-
-* A DSL for defining all the input and output dependencies that a spec has.
-
-When writing integrations tests we usually mock events, queues and external
-services, `spectacle-dsl` could provide a convenient way to register the mocks during the setup of
-the tests, and later it can publish the dependencies to `spectacle-central` so it can build a graph
-of all the dependencies in the system and how the services/modules interact with each other.
-
-* Publish Markdown files from the repos running the `DSL` in `Central`.
-
-Additionally to publish specs from tests, we can also publish local documents in Markdown, so we can
-write the documentation close to the code and encourage updating in more frequently but at the same
-time we can make it accessible for anyone in `Central`, providing the best balance between easy to
-write and update and easy to review and search.
