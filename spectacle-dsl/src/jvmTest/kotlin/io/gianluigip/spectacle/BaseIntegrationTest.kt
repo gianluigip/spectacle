@@ -52,6 +52,7 @@ abstract class BaseIntegrationTest {
         centralConfig = CentralPublisherConfig(
             enabled = centralEnabled,
             host = Url("http://localhost:$centralPort"),
+            publishEmptySpecs = false,
             wikiEnabled = centralWikiEnabled,
             localWikiLocation = localWikiLocation,
             username = centralUsername,

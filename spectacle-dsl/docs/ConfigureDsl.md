@@ -28,6 +28,8 @@ specification.publisher.central.host=https://central.spectacle.com
 specification.publisher.central.username=admin
 # Can be overwritten with the env var SPECIFICATION_PUBLISHER_CENTRAL_PASSWORD
 specification.publisher.central.password=admin
+# Don't publish to Central if there wasn't any spec registered, publish to Central without specs delete all the existing specs for that source.
+specification.publisher.central.publish-empty-specs=false
 # You can publish your Markdown files to Spectacle Central
 specification.publisher.central.wiki.enabled=true
 # If you are publishing your Markdown docs you need to define which folder will be published

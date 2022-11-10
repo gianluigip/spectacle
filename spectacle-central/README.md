@@ -71,6 +71,10 @@ Build and Run in Docker:
 
 ```
 export DATABASE_URL=[YOUR_URL] 
+export DATABASE_USERNAME=[YOUR_DB_USER] 
+export DATABASE_PASSWORD=[YOUR_DB_PASSWORD]
+export ADMIN_USERNAME=[YOUR_USER] 
+export ADMIN_PASSWORD=[YOUR_PASSWORD]
 docker build -t spectacle-central . 
-docker run -p 8080:8080 -e DATABASE_URL --name spectacle-central spectacle-central
+docker run -p 8080:8080 -e DATABASE_URL -e DATABASE_USERNAME -e DATABASE_PASSWORD -e ADMIN_USERNAME -e ADMIN_PASSWORD --name spectacle-central spectacle-central
 ```

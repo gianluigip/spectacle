@@ -17,6 +17,7 @@ actual object ConfigLoader {
                     host = null,
                     username = "",
                     password = "",
+                    publishEmptySpecs = false,
                     wikiEnabled = false,
                     localWikiLocation = null,
                 ),

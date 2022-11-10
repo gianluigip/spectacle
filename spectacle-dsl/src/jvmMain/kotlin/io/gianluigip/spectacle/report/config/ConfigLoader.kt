@@ -27,6 +27,7 @@ actual object ConfigLoader {
                     host = properties.getCentralHost(),
                     username = properties.getCentralUsername(),
                     password = properties.getCentralPassword(),
+                    publishEmptySpecs = properties.getPublishEmptySpecs(),
                     wikiEnabled = properties.getCentralWikiEnabled(),
                     localWikiLocation = properties.getLocalWikiLocation(),
                 ),
@@ -42,6 +43,7 @@ actual object ConfigLoader {
                     host = null,
                     username = "",
                     password = "",
+                    publishEmptySpecs = false,
                     wikiEnabled = false,
                     localWikiLocation = null,
                 )
@@ -104,6 +106,7 @@ actual object ConfigLoader {
         return getProperty("specification.publisher.central.password") ?: ""
     }
 
+    private fun Properties.getPublishEmptySpecs(): Boolean = getProperty("specification.publisher.central.publish-empty-specs")?.toBoolean() ?: false
     private fun Properties.getCentralWikiEnabled(): Boolean = getProperty("specification.publisher.central.wiki.enabled")?.toBoolean() ?: false
     private fun Properties.getLocalWikiLocation(): String? = getProperty("specification.publisher.central.wiki.localFolderLocation")
 
