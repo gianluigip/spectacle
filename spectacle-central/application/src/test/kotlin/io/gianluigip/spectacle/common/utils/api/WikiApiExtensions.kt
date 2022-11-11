@@ -35,7 +35,7 @@ fun BaseIntegrationTest.getWiki(
 
 fun BaseIntegrationTest.getWikiPage(wikiId: String): WikiPageResponse? = runBlocking {
     try {
-        receivesGetRequest(path = "/api/wiki/${wikiId}").body()
+        receivesGetRequest(path = "/api/wiki/{WIKI_ID}", pathParameters = mapOf("WIKI_ID" to wikiId)).body()
     } catch (ex: NoTransformationFoundException) {
         null
     }
@@ -50,11 +50,12 @@ fun BaseIntegrationTest.postWikiPage(wikiPage: WikiPageRequest): WikiPageMetadat
 
 fun BaseIntegrationTest.putWikiPage(wikiId: String, wikiPage: WikiPageRequest): WikiPageMetadataResponse = runBlocking {
     receivesPutRequest(
-        path = "/api/wiki/${wikiId}",
+        path = "/api/wiki/{WIKI_ID}",
+        pathParameters = mapOf("WIKI_ID" to wikiId),
         body = wikiPage
     ).body()
 }
 
 fun BaseIntegrationTest.deleteWikiPage(wikiId: String) = runBlocking {
-    receivesDeleteRequest(path = "/api/wiki/${wikiId}")
+    receivesDeleteRequest(path = "/api/wiki/{WIKI_ID}", pathParameters = mapOf("WIKI_ID" to wikiId))
 }

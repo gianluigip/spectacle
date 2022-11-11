@@ -107,7 +107,7 @@ class SpectacleInteractionsIT : BaseIntegrationTest() {
                                       "metadata": {
                                         "path": "api/specs",
                                         "method": "GET",
-                                        "queryParameters": " {  \"p1\": \"v1\" ,  \"p2\": \"v2\"  } ",
+                                        "queryParameters": "{  \"p1\": \"v1\" ,  \"p2\": \"v2\"  }",
                                         "requestContentType": "application/json",
                                         "requestBody": "{ \"input\": \"1\" }",
                                         "responseStatus": "200",
@@ -122,7 +122,7 @@ class SpectacleInteractionsIT : BaseIntegrationTest() {
                                       "metadata": {
                                         "path": "api/report/finance",
                                         "method": "POST",
-                                        "queryParameters": " {  } ",
+                                        "queryParameters": "{  }",
                                         "requestContentType": "application/json",
                                         "requestBody": "{ \"input\": \"3\" }",
                                         "responseStatus": "201",
@@ -137,7 +137,7 @@ class SpectacleInteractionsIT : BaseIntegrationTest() {
                                       "metadata": {
                                         "path": "api/specs/1234",
                                         "method": "DELETE",
-                                        "queryParameters": " {  } ",
+                                        "queryParameters": "{  }",
                                         "responseBody": "",
                                         "responseStatus": "404"
                                       }

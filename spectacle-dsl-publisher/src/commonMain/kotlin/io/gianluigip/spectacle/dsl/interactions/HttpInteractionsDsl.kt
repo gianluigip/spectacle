@@ -39,7 +39,7 @@ private fun addInboundHttpInteraction(fromComponent: String, metadata: HttpInter
 internal fun HttpInteractionMetadata.toMap(): Map<String, String> = mapOf(
     "path" to path,
     "method" to method,
-    "queryParameters" to """ { ${queryParameters.map { (key, value) -> """ "${key.escape()}": "${value.escape()}" """ }.joinToString(", ")} } """,
+    "queryParameters" to """{ ${queryParameters.map { (key, value) -> """ "${key.escape()}": "${value.escape()}" """ }.joinToString(", ")} }""",
     "requestContentType" to requestContentType,
     "requestBody" to requestBody,
     "responseContentType" to responseContentType,
