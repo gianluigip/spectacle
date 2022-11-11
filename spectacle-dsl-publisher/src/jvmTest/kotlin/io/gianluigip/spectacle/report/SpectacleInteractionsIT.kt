@@ -18,7 +18,6 @@ import io.gianluigip.spectacle.dsl.bdd.annotations.Feature
 import io.gianluigip.spectacle.dsl.bdd.annotations.SpecTags
 import io.gianluigip.spectacle.dsl.bdd.annotations.Specification
 import io.gianluigip.spectacle.dsl.bdd.given
-import io.gianluigip.spectacle.dsl.interactions.toMap
 import io.gianluigip.spectacle.report.publisher.central.CentralPublisher
 import io.gianluigip.spectacle.specification.model.HttpInteractionMetadata
 import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND

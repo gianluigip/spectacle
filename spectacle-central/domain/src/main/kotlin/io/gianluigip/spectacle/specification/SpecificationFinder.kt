@@ -5,6 +5,7 @@ import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecStatus
+import io.gianluigip.spectacle.specification.model.Specification
 import io.gianluigip.spectacle.specification.model.TagName
 import io.gianluigip.spectacle.specification.model.TeamName
 import kotlinx.datetime.Instant
@@ -16,14 +17,14 @@ class SpecificationFinder(
 
     fun findBy(
         searchText: String? = null,
-        feature: Set<FeatureName>? = null,
-        source: Set<Source>? = null,
-        component: Set<Component>? = null,
-        tag: Set<TagName>? = null,
-        team: Set<TeamName>? = null,
+        features: Set<FeatureName>? = null,
+        sources: Set<Source>? = null,
+        components: Set<Component>? = null,
+        tags: Set<TagName>? = null,
+        teams: Set<TeamName>? = null,
         status: Set<SpecStatus>? = null,
         updatedTimeAfter: Instant? = null,
-    ) = transaction.execute { specRepo.findBy(searchText, feature, source, component, tag, team, status, updatedTimeAfter) }
+    ): List<Specification> = transaction.execute { specRepo.findBy(searchText, features, sources, components, tags, teams, status, updatedTimeAfter) }
 
     fun findAll() = transaction.execute { specRepo.findAll() }
 }

@@ -1,5 +1,7 @@
 package io.gianluigip.spectacle.specification.model
 
+import io.gianluigip.spectacle.common.escape
+
 data class HttpInteractionMetadata(
     val path: String,
     val method: String,
@@ -19,7 +21,18 @@ data class HttpInteractionMetadata(
                     interaction1.metadata["responseStatus"] == interaction2.metadata["responseStatus"] &&
                     interaction1.metadata["responseContentType"] == interaction2.metadata["responseContentType"]
     }
+
+    fun toMap(): Map<String, String> = mapOf(
+        "path" to path,
+        "method" to method,
+        "queryParameters" to """{ ${queryParameters.map { (key, value) -> """ "${key.escape()}": "${value.escape()}" """ }.joinToString(", ")} }""",
+        "requestContentType" to requestContentType,
+        "requestBody" to requestBody,
+        "responseContentType" to responseContentType,
+        "responseBody" to responseBody,
+        "responseStatus" to responseStatus,
+    ).filter { it.value != null }.mapValues { it.value!! }
+
 }
 
 fun SpecInteraction.hasHttpMetadata() = metadata.contains("path") && metadata.contains("method") && metadata.contains("responseStatus")
-
