@@ -14,7 +14,6 @@ internal fun String.escape() =
         .replace("\r", "\\r")
         .replace("\t", "\\t")
 
-
 internal fun SpecificationsToUpdateRequest.encodeToJson(): String = """
         {
             "source": "${source.escape()}",

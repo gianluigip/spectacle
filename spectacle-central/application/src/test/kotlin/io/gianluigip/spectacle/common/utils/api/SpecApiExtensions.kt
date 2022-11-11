@@ -9,11 +9,9 @@ import io.ktor.client.call.body
 import kotlinx.coroutines.runBlocking
 
 fun BaseIntegrationTest.getSpecs(): List<SpecificationResponse> = runBlocking {
-    receivesRequestFromUI()
-    receivesGetRequest("/api/specification").body()
+    receivesGetRequest("/api/specification", fromComponent = "Web UI").body()
 }
 
 fun BaseIntegrationTest.putSpecs(specs: SpecificationsToUpdateRequest) = runBlocking {
-    receivesRequestFromUI()
-    receivesPutRequest(path = "/api/specification", body = specs)
+    receivesPutRequest(path = "/api/specification", body = specs, fromComponent = "Web UI")
 }

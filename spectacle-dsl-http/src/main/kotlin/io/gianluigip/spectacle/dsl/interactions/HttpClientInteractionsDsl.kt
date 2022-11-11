@@ -1,11 +1,8 @@
 package io.gianluigip.spectacle.dsl.interactions
 
-import io.gianluigip.spectacle.dsl.bdd.TestContext
 import io.gianluigip.spectacle.dsl.interactions.HttpInteractionsConfig.host
 import io.gianluigip.spectacle.report.config.ConfigLoader
-import io.gianluigip.spectacle.specification.model.InteractionDirection
-import io.gianluigip.spectacle.specification.model.InteractionType
-import io.gianluigip.spectacle.specification.model.SpecInteraction
+import io.gianluigip.spectacle.specification.model.HttpInteractionMetadata
 import io.ktor.client.HttpClient
 import io.ktor.client.request.parameter
 import io.ktor.client.request.request
@@ -77,34 +74,19 @@ suspend fun receivesRequest(
         path = path,
         method = httpMethod.value,
         queryParameters = queryParameters,
+        requestBody = body?.let { (response.request.content as? TextContent)?.text },
         requestContentType = response.request.contentType()?.toString(),
-        requestBody = (response.request.content as? TextContent)?.text,
+        responseBody = response.bodyAsText(),
+        responseStatus = response.status.toString(),
         responseContentType = response.contentType()?.toString(),
-        responseBody = response.bodyAsText()
     )
     receivesRequestFrom(fromComponent, metadata)
     return response
 }
-
-fun receivesRequestFrom(
-    fromComponent: String = ConfigLoader.CONFIG.component,
-    metadata: HttpInteractionMetadata,
-) = addHttpInteraction(fromComponent, metadata)
 
 private fun generateUrl(path: String) = when {
     host.isEmpty() -> path
     host.endsWith("/") -> "$host$path"
     path.startsWith("/") -> "$host$path"
     else -> "$host/$path"
-}
-
-private fun addHttpInteraction(fromComponent: String, metadata: HttpInteractionMetadata) {
-    TestContext.getCurrentSpec()?.addInteraction(
-        SpecInteraction(
-            direction = InteractionDirection.INBOUND,
-            type = InteractionType.HTTP,
-            name = fromComponent,
-            metadata = metadata.toMap()
-        )
-    )
 }
