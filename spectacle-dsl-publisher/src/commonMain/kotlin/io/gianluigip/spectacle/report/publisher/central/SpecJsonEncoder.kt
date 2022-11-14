@@ -1,19 +1,11 @@
 package io.gianluigip.spectacle.report.publisher.central
 
+import io.gianluigip.spectacle.common.escape
 import io.gianluigip.spectacle.specification.api.model.FeatureToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationToUpdateRequest
 import io.gianluigip.spectacle.specification.api.model.SpecificationsToUpdateRequest
 import io.gianluigip.spectacle.specification.model.SpecInteraction
 import io.gianluigip.spectacle.specification.model.SpecificationStep
-
-internal fun String.escape() =
-    replace("\\", "\\\\")
-        .replace("\"", "\\\"")
-        .replace("\b", "\\b")
-        .replace("\n", "\\n")
-        .replace("\r", "\\r")
-        .replace("\t", "\\t")
-
 
 internal fun SpecificationsToUpdateRequest.encodeToJson(): String = """
         {

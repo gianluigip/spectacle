@@ -6,6 +6,7 @@ import io.gianluigip.spectacle.auth.api.AuthProvider
 import io.gianluigip.spectacle.common.ExposedTransactionExecutor
 import io.gianluigip.spectacle.common.TransactionExecutor
 import io.gianluigip.spectacle.feature.FeatureFinder
+import io.gianluigip.spectacle.report.ApiReportGenerator
 import io.gianluigip.spectacle.report.InteractionsReportGenerator
 import io.gianluigip.spectacle.report.SpecReportGenerator
 import io.gianluigip.spectacle.specification.SpecificationFinder
@@ -37,6 +38,7 @@ fun productionDependencies() = DI.Module("ProductionDependencies") {
     bindSingleton { SpecificationFinder(instance(), instance()) }
     bindSingleton { SpecReportGenerator(instance(), instance(), instance()) }
     bindSingleton { InteractionsReportGenerator(instance(), instance()) }
+    bindSingleton { ApiReportGenerator(instance(), instance()) }
     bindSingleton { WikiProcessor(instance(), instance()) }
     bindSingleton { WikiFinder(instance(), instance()) }
     bindSingleton { FeatureFinder(instance(), instance()) }

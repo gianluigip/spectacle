@@ -125,6 +125,15 @@ components and teams.
 
 For more information you can visit the [Interaction DSL Page](./docs/Features/InteractionsDsl.md)
 
+## [HTTP DSL](./../spectacle-dsl-http/docs/HttpDsl.md)
+
+The HTTP DSL is wrapper for the Ktor client that collects metadata about the calls that you make and is able to register them as spec interactions.
+
+Then all the calls registered during your integration tests can be published to `Spectacle Central` and use a dedicated API page to review all the
+HTTP endpoints in your system.
+
+For more information you can visit the [Http DSL Page](./../spectacle-dsl-http/docs/HttpDsl.md)
+
 # [Wiki](./docs/Features/Wiki.md)
 
 Additionally to the writing and publishing of specs, `Spectacle DSL` can find all the Markdown files

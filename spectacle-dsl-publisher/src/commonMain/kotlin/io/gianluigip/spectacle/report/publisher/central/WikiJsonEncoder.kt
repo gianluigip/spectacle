@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.report.publisher.central
 
+import io.gianluigip.spectacle.common.escape
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 import kotlinx.datetime.Instant

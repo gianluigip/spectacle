@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.common
 
 import io.gianluigip.spectacle.common.utils.setEnv
 import io.gianluigip.spectacle.di
+import io.gianluigip.spectacle.dsl.interactions.httpInteractionsConfig
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
 import io.gianluigip.spectacle.specification.repository.ExposedFeatureRepository
 import io.gianluigip.spectacle.specification.repository.ExposedSpecificationRepository
@@ -9,10 +10,10 @@ import io.gianluigip.spectacle.specification.repository.ExposedTeamRepository
 import io.gianluigip.spectacle.wiki.repository.ExposedWikiPageRepository
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
 import io.ktor.client.plugins.auth.providers.basic
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.BeforeEach
@@ -56,6 +57,7 @@ abstract class BaseIntegrationTest {
             setupEnvVars()
         }
         cleanDb()
+        httpInteractionsConfig(host = httpHost, httpClient = httpClient)
     }
 
     private fun cleanDb() = transaction {

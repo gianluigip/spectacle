@@ -46,13 +46,14 @@ class ExposedSpecificationRepository(
     private val clock: Clock,
 ) : SpecificationRepository {
 
-    override fun findAll(): List<Specification> = findBy(null)
+    override fun findAll(): List<Specification> = findBy()
 
     override fun findBy(
         searchText: String?,
         features: Set<FeatureName>?,
         sources: Set<Source>?,
         components: Set<Component>?,
+        interactionComponents: Set<Component>?,
         tags: Set<TagName>?,
         teams: Set<TeamName>?,
         statuses: Set<SpecStatus>?,
@@ -66,6 +67,9 @@ class ExposedSpecificationRepository(
             .selectAll()
         if (features?.isNotEmpty() == true) query.andWhere { Specs.feature inList features.map { it.value } }
         if (sources?.isNotEmpty() == true) query.andWhere { specSource inList sources.map { it.value } }
+        if (interactionComponents?.isNotEmpty() == true) query.andWhere {
+            (Interactions.component inList interactionComponents.map { it.value }) or (Interactions.name inList interactionComponents.map { it.value })
+        }
         if (components?.isNotEmpty() == true) query.andWhere { Specs.component inList components.map { it.value } }
         if (teams?.isNotEmpty() == true) query.andWhere { Specs.team inList teams.map { it.value } }
         if (statuses?.isNotEmpty() == true) query.andWhere { Specs.status inList statuses.map { it.name } }

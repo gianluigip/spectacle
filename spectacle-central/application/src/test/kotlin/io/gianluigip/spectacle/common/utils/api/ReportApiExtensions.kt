@@ -1,13 +1,12 @@
 package io.gianluigip.spectacle.common.utils.api
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
-import io.gianluigip.spectacle.dsl.interactions.receivesRequestFrom
+import io.gianluigip.spectacle.dsl.interactions.receivesGetRequest
+import io.gianluigip.spectacle.report.api.model.ApiReportResponse
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
 import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.ktor.client.call.body
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.Instant
 
@@ -21,17 +20,20 @@ fun BaseIntegrationTest.getSpecReport(
     status: SpecStatus? = null,
     updatedTimeAfter: Instant? = null,
 ): SpecsReportResponse = runBlocking {
-    receivesRequestFromUI()
-    httpClient.get("$httpHost/api/report/specs") {
-        searchText?.let { parameter("searchText", searchText) }
-        feature?.let { parameter("features", feature) }
-        source?.let { parameter("sources", source) }
-        component?.let { parameter("components", component) }
-        tag?.let { parameter("tags", tag) }
-        team?.let { parameter("teams", team) }
-        status?.let { parameter("statuses", status) }
-        updatedTimeAfter?.let { parameter("updatedTimeAfter", updatedTimeAfter.toString()) }
-    }.body()
+    receivesGetRequest(
+        path = "/api/report/specs",
+        queryParameters = mapOf(
+            "searchText" to searchText,
+            "features" to feature,
+            "sources" to source,
+            "components" to component,
+            "tags" to tag,
+            "teams" to team,
+            "statuses" to status?.name,
+            "updatedTimeAfter" to updatedTimeAfter?.toString(),
+        ).filter { it.value != null }.mapValues { it.value!! },
+        fromComponent = "Web UI",
+    ).body()
 }
 
 fun BaseIntegrationTest.getInteractionReport(
@@ -41,14 +43,37 @@ fun BaseIntegrationTest.getInteractionReport(
     tag: String? = null,
     team: String? = null,
 ): InteractionsReportResponse = runBlocking {
-    receivesRequestFromUI()
-    httpClient.get("$httpHost/api/report/interactions") {
-        feature?.let { parameter("features", feature) }
-        source?.let { parameter("sources", source) }
-        component?.let { parameter("components", component) }
-        tag?.let { parameter("tags", tag) }
-        team?.let { parameter("teams", team) }
-    }.body()
+    receivesGetRequest(
+        path = "/api/report/interactions",
+        queryParameters = mapOf(
+            "features" to feature,
+            "sources" to source,
+            "components" to component,
+            "tags" to tag,
+            "teams" to team,
+        ).filter { it.value != null }.mapValues { it.value!! },
+        fromComponent = "Web UI",
+    ).body()
 }
 
-fun receivesRequestFromUI() = receivesRequestFrom("Web UI")
+fun BaseIntegrationTest.getAPIReport(
+    path: String? = null,
+    feature: String? = null,
+    source: String? = null,
+    component: String? = null,
+    tag: String? = null,
+    team: String? = null,
+): ApiReportResponse = runBlocking {
+    receivesGetRequest(
+        path = "/api/report/api",
+        queryParameters = mapOf(
+            "path" to path,
+            "features" to feature,
+            "sources" to source,
+            "components" to component,
+            "tags" to tag,
+            "teams" to team,
+        ).filter { it.value != null }.mapValues { it.value!! },
+        fromComponent = "Web UI",
+    ).body()
+}

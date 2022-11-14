@@ -9,6 +9,7 @@ import io.gianluigip.spectacle.specification.model.InteractionDirection.OUTBOUND
 import io.gianluigip.spectacle.specification.model.InteractionType
 import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
 import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
+import io.gianluigip.spectacle.specification.model.InteractionType.LIBRARY
 import io.gianluigip.spectacle.specification.model.InteractionType.PERSISTENCE
 import mui.material.FormControlLabel
 import mui.material.FormGroup
@@ -101,13 +102,16 @@ private fun generateDiagramInteractions(interactions: List<SystemInteractionResp
 private fun generateInboundInteractions(componentId: String, interactionId: String, type: InteractionType): String = when (type) {
     EVENT -> "$interactionId -- Consume --> $componentId"
     HTTP -> "$interactionId -- Request --> $componentId"
+    LIBRARY -> "$interactionId -- Use --> $componentId"
     else -> "$interactionId --> $componentId"
 }
 
 private fun generateOutboundInteractions(componentId: String, interactionId: String, type: InteractionType): String = when (type) {
     EVENT -> "$componentId -- Produce --> $interactionId"
     HTTP -> "$componentId -- Request --> $interactionId"
-    else -> "$componentId -- Connect --> $interactionId"
+    PERSISTENCE -> "$componentId -- Connect --> $interactionId"
+    LIBRARY -> "$componentId -- Use --> $interactionId"
+    else -> "$componentId --> $interactionId"
 }
 
 private fun String.toDiagramId() = replace(" ", "")

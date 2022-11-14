@@ -1,20 +1,15 @@
 package io.gianluigip.spectacle.common.utils.api
 
 import io.gianluigip.spectacle.common.BaseIntegrationTest
-import io.gianluigip.spectacle.dsl.interactions.receivesRequestFrom
+import io.gianluigip.spectacle.dsl.interactions.receivesDeleteRequest
+import io.gianluigip.spectacle.dsl.interactions.receivesGetRequest
+import io.gianluigip.spectacle.dsl.interactions.receivesPostRequest
+import io.gianluigip.spectacle.dsl.interactions.receivesPutRequest
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageRequest
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
-import io.ktor.client.request.delete
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.request.post
-import io.ktor.client.request.put
-import io.ktor.client.request.setBody
-import io.ktor.http.ContentType
-import io.ktor.http.contentType
 import kotlinx.coroutines.runBlocking
 
 fun BaseIntegrationTest.getWiki(
@@ -25,45 +20,42 @@ fun BaseIntegrationTest.getWiki(
     tag: String? = null,
     team: String? = null,
 ): List<WikiPageMetadataResponse> = runBlocking {
-    receivesRequestFromDSL()
-    httpClient.get("$httpHost/api/wiki") {
-        feature?.let { parameter("features", feature) }
-        source?.let { parameter("sources", source) }
-        component?.let { parameter("components", component) }
-        tag?.let { parameter("tags", tag) }
-        team?.let { parameter("teams", team) }
-        searchText?.let { parameter("searchText", searchText) }
-    }.body()
+    receivesGetRequest(
+        path = "/api/wiki",
+        queryParameters = mapOf(
+            "searchText" to searchText,
+            "features" to feature,
+            "sources" to source,
+            "components" to component,
+            "tags" to tag,
+            "teams" to team,
+        ).filter { it.value != null }.mapValues { it.value!! }
+    ).body()
 }
 
 fun BaseIntegrationTest.getWikiPage(wikiId: String): WikiPageResponse? = runBlocking {
-    receivesRequestFromDSL()
     try {
-        httpClient.get("$httpHost/api/wiki/${wikiId}").body()
+        receivesGetRequest(path = "/api/wiki/{WIKI_ID}", pathParameters = mapOf("WIKI_ID" to wikiId)).body()
     } catch (ex: NoTransformationFoundException) {
         null
     }
 }
 
 fun BaseIntegrationTest.postWikiPage(wikiPage: WikiPageRequest): WikiPageMetadataResponse = runBlocking {
-    receivesRequestFromDSL()
-    httpClient.post("$httpHost/api/wiki") {
-        contentType(ContentType.Application.Json)
-        setBody(wikiPage)
-    }.body()
+    receivesPostRequest(
+        path = "/api/wiki",
+        body = wikiPage
+    ).body()
 }
 
 fun BaseIntegrationTest.putWikiPage(wikiId: String, wikiPage: WikiPageRequest): WikiPageMetadataResponse = runBlocking {
-    receivesRequestFromDSL()
-    httpClient.put("$httpHost/api/wiki/${wikiId}") {
-        contentType(ContentType.Application.Json)
-        setBody(wikiPage)
-    }.body()
+    receivesPutRequest(
+        path = "/api/wiki/{WIKI_ID}",
+        pathParameters = mapOf("WIKI_ID" to wikiId),
+        body = wikiPage
+    ).body()
 }
 
 fun BaseIntegrationTest.deleteWikiPage(wikiId: String) = runBlocking {
-    receivesRequestFromDSL()
-    httpClient.delete("$httpHost/api/wiki/${wikiId}")
+    receivesDeleteRequest(path = "/api/wiki/{WIKI_ID}", pathParameters = mapOf("WIKI_ID" to wikiId))
 }
-
-fun receivesRequestFromDSL() = receivesRequestFrom("Spectacle DSL")

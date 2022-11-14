@@ -26,7 +26,10 @@ class SpecificationBuilder(
     }
 
     fun addInteraction(interaction: SpecInteraction): SpecificationBuilder {
-        interactions += interaction
+        val interactionAlreadyRegistered = interactions.any { it.isSimilar(interaction) }
+        if (!interactionAlreadyRegistered) {
+            interactions += interaction
+        }
         return this
     }
 

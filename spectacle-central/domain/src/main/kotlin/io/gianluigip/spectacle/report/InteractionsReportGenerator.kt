@@ -26,7 +26,7 @@ class InteractionsReportGenerator(
         teams: Set<TeamName>? = null,
     ): InteractionsReport = transaction.execute {
 
-        val specs = specFinder.findBy(searchText, features, sources, components, tags, teams)
+        val specs = specFinder.findBy(searchText, features, sources, components = components, tags = tags, teams = teams)
         val interactions = mutableMapOf<String, SystemInteraction>()
         specs.forEach { spec ->
             spec.interactions.forEach { interaction ->

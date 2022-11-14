@@ -19,6 +19,7 @@ interface SpecificationRepository {
         features: Set<FeatureName>? = null,
         sources: Set<Source>? = null,
         components: Set<Component>? = null,
+        interactionComponents: Set<Component>? = null,
         tags: Set<TagName>? = null,
         teams: Set<TeamName>? = null,
         statuses: Set<SpecStatus>? = null,
