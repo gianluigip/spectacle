@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "io.github.gianluigip"
-version = "3.0.0"
+version = "2.4.0"
 
 repositories {
     mavenCentral()
