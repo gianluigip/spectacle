@@ -51,7 +51,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
 
     // DI
-    implementation("org.kodein.di:kodein-di:7.15.0")
+    implementation("org.kodein.di:kodein-di:7.15.1")
 
     // DATA
     implementation("org.jetbrains.exposed:exposed-core:0.40.1")
@@ -59,7 +59,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-java-time:0.40.1")
     implementation("com.zaxxer:HikariCP:5.0.1")
     implementation("org.postgresql:postgresql:42.5.0")
-    implementation("org.flywaydb:flyway-core:9.7.0")
+    implementation("org.flywaydb:flyway-core:9.8.1")
 
     // TEST
     testImplementation(project(":spectacle-dsl-bdd"))
