@@ -41,7 +41,7 @@ class ApiReportGenerator(
         teams: Set<TeamName>? = null,
     ): ApiReport = transaction.execute {
 
-        val specs = specFinder.findBy(features = features, sources = sources, components = components, tags = tags, teams = teams)
+        val specs = specFinder.findBy(features = features, sources = sources, interactionComponents = components, tags = tags, teams = teams)
         val httpInteractions = getHttpInteractions(specs, pathToFilter)
 
         ApiReport(

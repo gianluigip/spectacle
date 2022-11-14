@@ -44,7 +44,7 @@ private val TAG_1 = TagName("Tag1")
 private val TAG_2 = TagName("Tag2")
 
 @Feature(name = Features.API)
-@SpecTags(Tags.SYSTEM_DIAGRAM, Tags.INTERACTIONS)
+@SpecTags(Tags.API, Tags.INTERACTIONS)
 @ExtendWith(JUnitSpecificationReporter::class)
 class ApiReportGeneratorTest {
 

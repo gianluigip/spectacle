@@ -20,11 +20,24 @@ class SpecificationFinder(
         features: Set<FeatureName>? = null,
         sources: Set<Source>? = null,
         components: Set<Component>? = null,
+        interactionComponents: Set<Component>? = null,
         tags: Set<TagName>? = null,
         teams: Set<TeamName>? = null,
         status: Set<SpecStatus>? = null,
         updatedTimeAfter: Instant? = null,
-    ): List<Specification> = transaction.execute { specRepo.findBy(searchText, features, sources, components, tags, teams, status, updatedTimeAfter) }
+    ): List<Specification> = transaction.execute {
+        specRepo.findBy(
+            searchText = searchText,
+            features = features,
+            sources = sources,
+            components = components,
+            interactionComponents = interactionComponents,
+            tags = tags,
+            teams = teams,
+            statuses = status,
+            updatedTimeAfter = updatedTimeAfter
+        )
+    }
 
     fun findAll() = transaction.execute { specRepo.findAll() }
 }

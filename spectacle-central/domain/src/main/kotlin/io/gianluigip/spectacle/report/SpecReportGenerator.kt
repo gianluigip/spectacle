@@ -34,8 +34,9 @@ class SpecReportGenerator(
         updatedTimeAfter: Instant? = null,
     ): SpecsReport = transaction.execute {
 
-        val specs = specFinder.findBy(searchText, features, sources, components, tags, teams, statuses, updatedTimeAfter)
-            .sortedWith(compareBy({ it.feature.value }, { it.name.value }))
+        val specs = specFinder.findBy(
+            searchText, features, sources, components, tags = tags, teams = teams, status = statuses, updatedTimeAfter = updatedTimeAfter
+        ).sortedWith(compareBy({ it.feature.value }, { it.name.value }))
         val features = findFeatures(specs)
 
         val featuresReport = mutableListOf<FeatureReport>()

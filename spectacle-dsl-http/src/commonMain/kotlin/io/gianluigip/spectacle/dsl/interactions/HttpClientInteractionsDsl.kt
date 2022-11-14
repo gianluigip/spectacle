@@ -80,7 +80,7 @@ suspend fun receivesRequest(
         method = httpMethod.value.toUpperCase(),
         queryParameters = queryParameters,
         requestBody = body?.let { (response.request.content as? TextContent)?.text?.trim() },
-        requestContentType = response.request.contentType()?.toString(),
+        requestContentType = body?.let { contentType.toString() } ?: response.request.contentType()?.toString(),
         responseBody = response.bodyAsText().trim(),
         responseStatus = response.status.value.toString(),
         responseContentType = response.contentType()?.toString(),
