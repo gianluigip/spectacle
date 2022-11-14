@@ -96,6 +96,7 @@ class HttpClientInteractionsDslIT {
                             "field1": "val1",
                             "field2": "val2"
                         }""".trimIndent(),
+                    "requestContentType" to "application/json",
                     "responseBody" to """{ "field3": "val3", "field4": "val4" }""",
                     "responseStatus" to "200"
                 )
