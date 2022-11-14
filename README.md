@@ -32,12 +32,13 @@ A Kotlin multiplatform library for generating documentation from tests and Markd
 used as a standalone tool for improving the readability of tests or in combination
 with `Spectacle Central` to generate living documentation.
 
-Add dependency:
+Add dependencies:
 
-```
-testImplementation("io.github.gianluigip:spectacle-dsl-bdd:VERSION")
-testImplementation("io.github.gianluigip:spectacle-dsl-assertions:VERSION")
-testImplementation("io.github.gianluigip:spectacle-dsl-publisher:VERSION")
+```kotlin
+  testImplementation("io.github.gianluigip:spectacle-dsl-bdd:VERSION")
+  testImplementation("io.github.gianluigip:spectacle-dsl-assertions:VERSION")
+  testImplementation("io.github.gianluigip:spectacle-dsl-publisher:VERSION")
+  testImplementation("io.github.gianluigip:spectacle-dsl-http:VERSION")
 ```
 
 Example of a JVM spec class:
