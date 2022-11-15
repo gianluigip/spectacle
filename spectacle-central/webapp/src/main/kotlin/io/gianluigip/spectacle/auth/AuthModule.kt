@@ -1,7 +1,6 @@
 package io.gianluigip.spectacle.auth
 
 import io.gianluigip.spectacle.common.api.updateApiClientWithCredentials
-import kotlinx.datetime.internal.JSJoda.use
 import react.FC
 import react.PropsWithChildren
 import react.StateInstance
@@ -19,7 +18,7 @@ typealias AuthState = StateInstance<AuthenticatedUser?>
 val AuthContext = createContext<AuthState>()
 
 val AuthModule = FC<PropsWithChildren> { props ->
-    val user = useState<AuthenticatedUser?>(AuthenticatedUser(name = "Gigi", username = "admin", password = "admin"))
+    val user = useState<AuthenticatedUser>()
 
     user.component1()?.let { updateApiClientWithCredentials(it) }
 
