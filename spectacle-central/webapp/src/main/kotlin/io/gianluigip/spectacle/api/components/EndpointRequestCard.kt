@@ -1,20 +1,16 @@
 package io.gianluigip.spectacle.api.components
 
+import csstype.Color
 import csstype.number
-import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.common.components.SectionTitle
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.EndpointRequestResponse
-import io.gianluigip.spectacle.wiki.components.MarkdownViewer
 import kotlinx.js.jso
-import mui.icons.material.Subtitles
 import mui.material.Accordion
 import mui.material.AccordionDetails
 import mui.material.AccordionSummary
-import mui.material.Grid
-import mui.material.GridDirection
 import mui.material.Stack
-import mui.material.Typography
+import mui.material.styles.Theme
 import mui.system.responsive
 import react.FC
 import react.Props
@@ -35,7 +31,7 @@ val EndpointRequestCard = FC<EndpointRequestCardProps> { props ->
             sx = jso {
                 flexGrow = number(1.0)
             }
-            SectionTitle { text = request.responseStatus; color = theme.palette.text.primary }
+            SectionTitle { text = request.responseStatus; color = getStatusColor(request.responseStatus, theme) }
         }
 
         AccordionDetails {
@@ -59,41 +55,9 @@ val EndpointRequestCard = FC<EndpointRequestCardProps> { props ->
     }
 }
 
-private external interface RequestBodyProps : Props {
-    var label: String
-    var body: String?
-    var contentType: String?
-}
-
-private val RequestBody = FC<RequestBodyProps> { props ->
-    val theme by useContext(ThemeContext)
-
-    props.body?.let { body ->
-        SectionTitle { text = "${props.label}:" }
-        if (props.contentType != null) {
-            Grid {
-                container = true
-                spacing = responsive(1)
-                direction = responsive(GridDirection.row)
-
-                MetaDataChip { label = "Content Type: ${props.contentType}" }
-            }
-        }
-        MarkdownViewer {
-            content = "```json\n${body.toPrettyJson()}\n```"
-        }
-    }
-}
-
-private fun String.toPrettyJson(): String {
-    if (isEmpty()) {
-        return "No Content"
-    }
-    val json = try {
-        JSON.parse(this)
-    } catch (ex: Throwable) {
-        println("Failed to parse json '$this', error: ${ex.message}")
-        "Error parsing"
-    }
-    return JSON.stringify(json, null, 2)
+private fun getStatusColor(status: String, theme: Theme): Color = when (status.firstOrNull()) {
+    '2' -> theme.palette.success.main
+    '4' -> theme.palette.warning.main
+    '5' -> theme.palette.error.main
+    else -> theme.palette.text.primary
 }

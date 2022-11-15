@@ -111,7 +111,7 @@ val ApiReportPage = FC<Props> {
                 Typography { variant = TypographyVariant.h5; +"Services API" }
                 Spacer { height = 10.px }
                 LoadingBar { isLoading = componentsApi == null }
-                componentsApi?.let { ComponentsApiReport { components = it } }
+                componentsApi?.let { ComponentsApiReport { components = it; expanded = currentFilters?.isNotEmpty() } }
             }
         }
     }

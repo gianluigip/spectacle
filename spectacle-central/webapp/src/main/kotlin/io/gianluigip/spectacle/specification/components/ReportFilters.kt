@@ -18,7 +18,11 @@ data class FiltersSelected(
     val team: String? = null,
     val status: SpecStatus? = null,
     val updatedTimeAfter: Instant? = null,
-)
+) {
+    fun isNotEmpty() = !isEmpty()
+    fun isEmpty() = searchText == null && feature == null && source == null && component == null && tag == null
+            && team == null && status == null && updatedTimeAfter == null
+}
 
 external interface ReportFilersProps : Props {
     var filters: ReportFiltersResponse

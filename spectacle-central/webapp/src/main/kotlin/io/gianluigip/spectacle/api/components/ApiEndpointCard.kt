@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.api.components
 
+import csstype.Color
 import csstype.number
 import csstype.px
 import io.gianluigip.spectacle.common.components.MetaDataChip
@@ -14,6 +15,7 @@ import mui.material.AccordionDetails
 import mui.material.AccordionSummary
 import mui.material.Grid
 import mui.material.GridDirection
+import mui.material.styles.Theme
 import mui.system.responsive
 import react.FC
 import react.Props
@@ -38,7 +40,7 @@ val ApiEndpointCard = FC<ApiEndpointCardProps> { props ->
                 spacing = responsive(1)
                 direction = responsive(GridDirection.row)
 
-                Grid { item = true; SectionTitle { text = endpoint.method.uppercase() } }
+                Grid { item = true; SectionTitle { text = endpoint.method.uppercase();color = getMethodColor(endpoint.method, theme) } }
                 Grid { item = true; SectionTitle { text = endpoint.path; color = theme.palette.text.primary } }
             }
         }
@@ -69,4 +71,12 @@ val ApiEndpointCard = FC<ApiEndpointCardProps> { props ->
             endpoint.requests.forEach { EndpointRequestCard { request = it } }
         }
     }
+}
+
+private fun getMethodColor(method: String, theme: Theme): Color = when (method.uppercase()) {
+    "GET" -> theme.palette.info.main
+    "PUT" -> theme.palette.warning.main
+    "POST" -> theme.palette.success.main
+    "DELETE" -> theme.palette.error.main
+    else -> theme.palette.text.primary
 }

@@ -12,17 +12,22 @@ import react.FC
 import react.Props
 import react.create
 import react.useContext
+import react.useState
 
 external interface ComponentsApiReportProps : Props {
     var components: List<ComponentApiResponse>
+    var expanded: Boolean?
 }
 
 val ComponentsApiReport = FC<ComponentsApiReportProps> { props ->
     val theme by useContext(ThemeContext)
     val components = props.components.sortedBy { it.component }
+    var isExpanded by useState(props.expanded ?: false)
 
     components.forEach { component ->
         Accordion {
+            expanded = isExpanded
+            onChange = { _, expanded -> isExpanded = expanded }
             AccordionSummary {
                 sx = jso {
                     color = theme.palette.info.contrastText
