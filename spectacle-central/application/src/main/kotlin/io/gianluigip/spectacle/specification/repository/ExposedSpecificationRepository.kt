@@ -68,7 +68,7 @@ class ExposedSpecificationRepository(
         if (features?.isNotEmpty() == true) query.andWhere { Specs.feature inList features.map { it.value } }
         if (sources?.isNotEmpty() == true) query.andWhere { specSource inList sources.map { it.value } }
         if (interactionComponents?.isNotEmpty() == true) query.andWhere {
-            (Interactions.component inList interactionComponents.map { it.value }) or (Interactions.name inList interactionComponents.map { it.value })
+            (Specs.component inList interactionComponents.map { it.value }) or (Interactions.name inList interactionComponents.map { it.value })
         }
         if (components?.isNotEmpty() == true) query.andWhere { Specs.component inList components.map { it.value } }
         if (teams?.isNotEmpty() == true) query.andWhere { Specs.team inList teams.map { it.value } }

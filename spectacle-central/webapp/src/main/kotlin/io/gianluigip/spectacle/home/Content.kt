@@ -2,6 +2,8 @@ package io.gianluigip.spectacle.home
 
 import csstype.pct
 import csstype.px
+import io.gianluigip.spectacle.api.components.ApiReportPage
+import io.gianluigip.spectacle.api.components.apiReportPath
 import io.gianluigip.spectacle.auth.components.LoginPage
 import io.gianluigip.spectacle.auth.components.RequireAuth
 import io.gianluigip.spectacle.auth.components.loginPath
@@ -65,6 +67,9 @@ val Content = FC<Props> {
             }
             Route {
                 path = specificationsReportPath; element = RequireAuth.create { SpecificationsReport { } }
+            }
+            Route {
+                path = apiReportPath; element = RequireAuth.create { ApiReportPage { } }
             }
             Route {
                 path = systemDiagramPath; element = RequireAuth.create { SystemDiagramPage { } }

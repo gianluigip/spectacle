@@ -18,11 +18,16 @@ data class FiltersSelected(
     val team: String? = null,
     val status: SpecStatus? = null,
     val updatedTimeAfter: Instant? = null,
-)
+) {
+    fun isNotEmpty() = !isEmpty()
+    fun isEmpty() = searchText == null && feature == null && source == null && component == null && tag == null
+            && team == null && status == null && updatedTimeAfter == null
+}
 
 external interface ReportFilersProps : Props {
     var filters: ReportFiltersResponse
     var filtersSelected: FiltersSelected
+    var searchTextFilterLabel: String?
     var hideSearchTextFilter: Boolean?
     var hideUpdatedTimeAfter: Boolean?
     var hideStatusFilter: Boolean?
@@ -37,7 +42,7 @@ val ReportFilters = FC<ReportFilersProps> { props ->
         spacing = responsive(1.5)
         if (props.hideSearchTextFilter != true) {
             SearchTextField {
-                label = "Keywords"
+                label = props.searchTextFilterLabel ?: "Keywords"
                 value = selected.searchText ?: ""
                 onChange = { newValue -> props.onFilterChanged.invoke(selected.copy(searchText = newValue)) }
             }

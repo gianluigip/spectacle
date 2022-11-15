@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.navigation.components
 import csstype.None
 import csstype.number
 import csstype.px
+import io.gianluigip.spectacle.api.components.apiReportPath
 import io.gianluigip.spectacle.auth.components.AuthMenu
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
@@ -66,6 +67,12 @@ val Header = FC<Props> {
             NavMenuItem {
                 toPath = specificationsReportPath
                 label = "Specifications"
+            }
+
+            Spacer { width = 10.px }
+            NavMenuItem {
+                toPath = apiReportPath
+                label = "API"
             }
 
             Spacer { width = 10.px }
