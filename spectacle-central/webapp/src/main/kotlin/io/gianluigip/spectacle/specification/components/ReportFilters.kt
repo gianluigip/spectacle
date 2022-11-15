@@ -23,6 +23,7 @@ data class FiltersSelected(
 external interface ReportFilersProps : Props {
     var filters: ReportFiltersResponse
     var filtersSelected: FiltersSelected
+    var searchTextFilterLabel: String?
     var hideSearchTextFilter: Boolean?
     var hideUpdatedTimeAfter: Boolean?
     var hideStatusFilter: Boolean?
@@ -37,7 +38,7 @@ val ReportFilters = FC<ReportFilersProps> { props ->
         spacing = responsive(1.5)
         if (props.hideSearchTextFilter != true) {
             SearchTextField {
-                label = "Keywords"
+                label = props.searchTextFilterLabel ?: "Keywords"
                 value = selected.searchText ?: ""
                 onChange = { newValue -> props.onFilterChanged.invoke(selected.copy(searchText = newValue)) }
             }
