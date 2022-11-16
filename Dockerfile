@@ -21,6 +21,8 @@ COPY spectacle-central/domain/build.gradle.kts $APP_HOME/spectacle-central/domai
 COPY spectacle-dsl-bdd/build.gradle.kts $APP_HOME/spectacle-dsl-bdd/build.gradle.kts
 COPY spectacle-dsl-assertions/build.gradle.kts $APP_HOME/spectacle-dsl-assertions/build.gradle.kts
 COPY spectacle-dsl-publisher/build.gradle.kts $APP_HOME/spectacle-dsl-publisher/build.gradle.kts
+COPY spectacle-dsl-http/build.gradle.kts $APP_HOME/spectacle-dsl-http/build.gradle.kts
+COPY spectacle-dsl-protobuf/build.gradle.kts $APP_HOME/spectacle-dsl-protobuf/build.gradle.kts
 # DOWNLOAD DEPENDENCIES
 RUN ./gradlew build -x test --continue
 # BUILD PROJECT

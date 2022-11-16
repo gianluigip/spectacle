@@ -1,36 +1,29 @@
 package io.gianluigip.spectacle.dsl.interactions
 
 import io.gianluigip.spectacle.dsl.bdd.TestContext
+import io.gianluigip.spectacle.specification.model.EventInteractionMetadata
 import io.gianluigip.spectacle.specification.model.InteractionDirection
 import io.gianluigip.spectacle.specification.model.InteractionType
 import io.gianluigip.spectacle.specification.model.SpecInteraction
 
-fun libraryIsUsedIn(component: String) {
+fun consumesEvent(eventName: String, metadata: EventInteractionMetadata? = null) {
     TestContext.getCurrentSpec()?.addInteraction(
         SpecInteraction(
             direction = InteractionDirection.INBOUND,
-            type = InteractionType.LIBRARY,
-            name = component,
+            type = InteractionType.EVENT,
+            name = eventName,
+            metadata = metadata?.toMap() ?: emptyMap()
         )
     )
 }
 
-fun usesLibrary(libName: String) {
+fun producesEvent(eventName: String, metadata: EventInteractionMetadata? = null) {
     TestContext.getCurrentSpec()?.addInteraction(
         SpecInteraction(
             direction = InteractionDirection.OUTBOUND,
-            type = InteractionType.LIBRARY,
-            name = libName,
-        )
-    )
-}
-
-fun usesPersistence(databaseName: String) {
-    TestContext.getCurrentSpec()?.addInteraction(
-        SpecInteraction(
-            direction = InteractionDirection.OUTBOUND,
-            type = InteractionType.PERSISTENCE,
-            name = databaseName,
+            type = InteractionType.EVENT,
+            name = eventName,
+            metadata = metadata?.toMap() ?: emptyMap()
         )
     )
 }

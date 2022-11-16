@@ -1,5 +1,6 @@
 package io.gianluigip.spectacle.specification.model
 
+import io.gianluigip.spectacle.specification.model.EventInteractionMetadata.Companion.isEventMetadataSimilar
 import io.gianluigip.spectacle.specification.model.HttpInteractionMetadata.Companion.isHttpMetadataSimilar
 import kotlinx.serialization.Serializable
 
@@ -13,6 +14,7 @@ data class SpecInteraction(
     fun isSimilar(interaction: SpecInteraction) =
         direction == interaction.direction && type == interaction.type && name == interaction.name && when {
             hasHttpMetadata() && interaction.hasHttpMetadata() -> isHttpMetadataSimilar(this, interaction)
+            hasEventMetadata() && interaction.hasEventMetadata() -> isEventMetadataSimilar(this, interaction)
             else -> metadata == interaction.metadata
         }
 

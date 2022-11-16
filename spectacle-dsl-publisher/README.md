@@ -134,6 +134,15 @@ HTTP endpoints in your system.
 
 For more information you can visit the [Http DSL Page](./../spectacle-dsl-http/docs/HttpDsl.md)
 
+## [Protobuf DSL](./../spectacle-dsl-protobuf/docs/ProtobufDsl.md)
+
+The Protobuf DSL allows you to register your proto events as interactions in your tests.
+
+Then all the events registered during your integration tests can be published to `Spectacle Central` and use a dedicated Events page to review all the
+events in your system.
+
+For more information you can visit the [Http DSL Page](./../spectacle-dsl-protobuf/docs/ProtobufDsl.md)
+
 # [Wiki](./docs/Features/Wiki.md)
 
 Additionally to the writing and publishing of specs, `Spectacle DSL` can find all the Markdown files

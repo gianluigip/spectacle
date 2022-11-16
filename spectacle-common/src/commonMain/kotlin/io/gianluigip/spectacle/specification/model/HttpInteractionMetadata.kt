@@ -23,6 +23,7 @@ data class HttpInteractionMetadata(
     }
 
     fun toMap(): Map<String, String> = mapOf(
+        "metadataType" to "HTTP",
         "path" to path,
         "method" to method,
         "queryParameters" to """{ ${queryParameters.map { (key, value) -> """ "${key.escape()}": "${value.escape()}" """ }.joinToString(", ")} }""",
