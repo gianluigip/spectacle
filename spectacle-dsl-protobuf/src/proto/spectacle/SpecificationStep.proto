@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.gianluigip.spectacle.events";
+
+package spectacle.events;
+
+message SpecificationStepProto {
+  StepTypeProto type = 1;
+  string description = 2;
+  int32 index = 3;
+}
+
+enum StepTypeProto {
+  GIVEN = 0;
+  WHENEVER = 1;
+  THEN = 2;
+}

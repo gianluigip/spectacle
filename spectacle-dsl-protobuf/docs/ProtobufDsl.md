@@ -28,6 +28,7 @@ val event = SpecificationUpdatedProto
     .addSteps(SpecificationStepProto.newBuilder().setType(GIVEN).setDescription("step1").setIndex(1))
     .addSteps(SpecificationStepProto.newBuilder().setType(WHENEVER).setDescription("step2").setIndex(2))
     .build()
+
 // It captures the metadata and schema for your event
 consumesProtoEvent(event) {
     // Optional lambda to process your event
