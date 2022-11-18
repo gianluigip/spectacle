@@ -14,7 +14,7 @@ import mui.material.Accordion
 import mui.material.AccordionDetails
 import mui.material.AccordionSummary
 import mui.material.Grid
-import mui.material.GridDirection
+import mui.material.GridDirection.row
 import mui.material.styles.Theme
 import mui.system.responsive
 import react.FC
@@ -38,7 +38,7 @@ val ApiEndpointCard = FC<ApiEndpointCardProps> { props ->
             Grid {
                 container = true
                 spacing = responsive(1)
-                direction = responsive(GridDirection.row)
+                direction = responsive(row)
 
                 Grid { item = true; SectionTitle { text = endpoint.method.uppercase();color = getMethodColor(endpoint.method, theme) } }
                 Grid { item = true; SectionTitle { text = endpoint.path; color = theme.palette.text.primary } }
@@ -49,7 +49,7 @@ val ApiEndpointCard = FC<ApiEndpointCardProps> { props ->
             Grid {
                 container = true
                 spacing = responsive(1)
-                direction = responsive(GridDirection.row)
+                direction = responsive(row)
 
                 if (endpoint.tags.isNotEmpty()) {
                     Grid { item = true; MetaDataChip { label = "Tags: ${endpoint.tags.sorted().joinToString(", ")}" } }

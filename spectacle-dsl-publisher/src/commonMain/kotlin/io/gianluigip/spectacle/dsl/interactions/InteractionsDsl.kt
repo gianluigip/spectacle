@@ -25,28 +25,6 @@ fun usesLibrary(libName: String) {
     )
 }
 
-fun consumesEvent(eventName: String) {
-    TestContext.getCurrentSpec()?.addInteraction(
-        SpecInteraction(
-            direction = InteractionDirection.INBOUND,
-            type = InteractionType.EVENT,
-            name = eventName,
-        )
-    )
-}
-
-fun producesEvent(eventName: String) {
-    TestContext.getCurrentSpec()?.addInteraction(
-        SpecInteraction(
-            direction = InteractionDirection.OUTBOUND,
-            type = InteractionType.EVENT,
-            name = eventName,
-        )
-    )
-}
-
-
-
 fun usesPersistence(databaseName: String) {
     TestContext.getCurrentSpec()?.addInteraction(
         SpecInteraction(

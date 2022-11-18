@@ -88,6 +88,7 @@ class HttpClientInteractionsDslIT {
                 type = InteractionType.HTTP,
                 name = "TestService",
                 metadata = mapOf(
+                    "metadataType" to "HTTP",
                     "path" to "/api/specs/{SPEC_ID}",
                     "method" to "PUT",
                     "queryParameters" to """{  "p1": "v1" ,  "p2": "v2"  }""",

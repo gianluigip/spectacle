@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.gianluigip/spectacle-dsl?label=Maven%20Central)](https://search.maven.org/artifact/io.github.gianluigip/spectacle-dsl)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.gianluigip/spectacle-dsl-bdd?label=Maven%20Central)](https://search.maven.org/artifact/io.github.gianluigip/spectacle-dsl-bdd)
 [![Docker](https://img.shields.io/docker/v/gianluigipp/spectacle-central/latest?label=Docker)](https://hub.docker.com/r/gianluigipp/spectacle-central)
 
 # Spectacle
@@ -39,6 +39,7 @@ Add dependencies:
   testImplementation("io.github.gianluigip:spectacle-dsl-assertions:VERSION")
   testImplementation("io.github.gianluigip:spectacle-dsl-publisher:VERSION")
   testImplementation("io.github.gianluigip:spectacle-dsl-http:VERSION")
+  testImplementation("io.github.gianluigip:spectacle-dsl-protobuf:VERSION")
 ```
 
 Example of a JVM spec class:

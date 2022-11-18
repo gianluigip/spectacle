@@ -6,6 +6,7 @@ import io.gianluigip.spectacle.common.utils.toUtcLocalDateTime
 import io.gianluigip.spectacle.specification.SpecificationRepository
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
+import io.gianluigip.spectacle.specification.model.InteractionType
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.SpecToUpsert
@@ -54,6 +55,8 @@ class ExposedSpecificationRepository(
         sources: Set<Source>?,
         components: Set<Component>?,
         interactionComponents: Set<Component>?,
+        interactionName: String?,
+        interactionType: InteractionType?,
         tags: Set<TagName>?,
         teams: Set<TeamName>?,
         statuses: Set<SpecStatus>?,
@@ -74,6 +77,7 @@ class ExposedSpecificationRepository(
         if (teams?.isNotEmpty() == true) query.andWhere { Specs.team inList teams.map { it.value } }
         if (statuses?.isNotEmpty() == true) query.andWhere { Specs.status inList statuses.map { it.name } }
         if (tags?.isNotEmpty() == true) query.andWhere { Tags.name inList tags.map { it.value } }
+        if (interactionType != null) query.andWhere { Interactions.type eq interactionType.name }
         if (updatedTimeAfter != null) query.andWhere {
             Specs.updateTime greaterEq updatedTimeAfter.toLocalDateTime()
         }
@@ -83,6 +87,7 @@ class ExposedSpecificationRepository(
                         (Steps.description ilike "%$searchText%") or (Features.description ilike "%$searchText%")
             }
         }
+        if (interactionName != null) query.andWhere { Interactions.name ilike "%$interactionName%" }
         return query.toSpecsWithRelations()
     }
 

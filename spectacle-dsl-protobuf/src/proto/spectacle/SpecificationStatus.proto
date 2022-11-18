@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.gianluigip.spectacle.events";
+
+package spectacle.events;
+
+enum SpecStatusProto {
+  IMPLEMENTED = 0;
+  PARTIALLY_IMPLEMENTED = 1;
+  NOT_IMPLEMENTED = 2;
+}

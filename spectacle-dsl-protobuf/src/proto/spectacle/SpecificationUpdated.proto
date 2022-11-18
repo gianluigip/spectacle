@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.gianluigip.spectacle.events";
+
+package spectacle.events;
+
+import "spectacle/SpecificationStatus.proto";
+import "spectacle/SpecificationStep.proto";
+
+message SpecificationUpdatedProto {
+  string name = 1;
+  string component = 2;
+  optional string description = 3;
+  SpecStatusProto status = 4;
+  repeated SpecificationStepProto steps = 5;
+}

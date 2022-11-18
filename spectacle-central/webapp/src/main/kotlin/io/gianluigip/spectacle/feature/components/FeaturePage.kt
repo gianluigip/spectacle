@@ -9,7 +9,6 @@ import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.diagram.api.getInteractionsReport
 import io.gianluigip.spectacle.feature.api.getFeatures
 import io.gianluigip.spectacle.feature.api.model.FeatureResponse
-import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
 import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
@@ -17,6 +16,8 @@ import io.gianluigip.spectacle.specification.api.getSpecReport
 import io.gianluigip.spectacle.wiki.api.getAllPages
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 import kotlinx.js.jso
 import mui.material.Paper
@@ -26,7 +27,6 @@ import react.FC
 import react.Props
 import react.router.useLocation
 import react.router.useNavigate
-import react.useContext
 import react.useEffect
 import react.useEffectOnce
 import react.useState
@@ -34,7 +34,6 @@ import react.useState
 const val featuresPath = "/features"
 
 val FeaturesPage = FC<Props> { _ ->
-    val theme by useContext(ThemeContext)
     val navigate = useNavigate()
     val queryParams = useLocation().search.parseParams()
 
@@ -54,9 +53,11 @@ val FeaturesPage = FC<Props> { _ ->
         currentFeatureName = featureName
         MainScope().launch {
             selectedFeature?.let {
-                specs = getSpecReport(feature = it.name)
-                interactions = getInteractionsReport(feature = it.name)
-                wikiPages = getAllPages(feature = it.name)
+                awaitAll(
+                    async { specs = getSpecReport(feature = it.name) },
+                    async { interactions = getInteractionsReport(feature = it.name) },
+                    async { wikiPages = getAllPages(feature = it.name) },
+                )
             }
         }
     }

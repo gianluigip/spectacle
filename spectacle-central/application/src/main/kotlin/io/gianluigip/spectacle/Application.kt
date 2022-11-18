@@ -7,6 +7,7 @@ import io.gianluigip.spectacle.common.beans.testDependencies
 import io.gianluigip.spectacle.common.repository.initDb
 import io.gianluigip.spectacle.feature.api.featuresRoutes
 import io.gianluigip.spectacle.report.api.apiReportRoutes
+import io.gianluigip.spectacle.report.api.eventsReportRoutes
 import io.gianluigip.spectacle.report.api.interactionReportRoutes
 import io.gianluigip.spectacle.report.api.specReportRoutes
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
@@ -79,6 +80,7 @@ fun Application.module() {
                 specReportRoutes()
                 interactionReportRoutes()
                 apiReportRoutes()
+                eventsReportRoutes()
                 wikiRoutes()
                 featuresRoutes()
                 teamRoutes()

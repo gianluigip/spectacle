@@ -104,6 +104,7 @@ class SpectacleInteractionsIT : BaseIntegrationTest() {
                                       "type": "HTTP",
                                       "name": "Int1",
                                       "metadata": {
+                                        "metadataType": "HTTP",
                                         "path": "api/specs",
                                         "method": "GET",
                                         "queryParameters": "{  \"p1\": \"v1\" ,  \"p2\": \"v2\"  }",
@@ -119,6 +120,7 @@ class SpectacleInteractionsIT : BaseIntegrationTest() {
                                       "type": "HTTP",
                                       "name": "Int2",
                                       "metadata": {
+                                        "metadataType" : "HTTP",
                                         "path": "api/report/finance",
                                         "method": "POST",
                                         "queryParameters": "{  }",
@@ -134,6 +136,7 @@ class SpectacleInteractionsIT : BaseIntegrationTest() {
                                       "type": "HTTP",
                                       "name": "Int3",
                                       "metadata": {
+                                        "metadataType" : "HTTP",
                                         "path": "api/specs/1234",
                                         "method": "DELETE",
                                         "queryParameters": "{  }",

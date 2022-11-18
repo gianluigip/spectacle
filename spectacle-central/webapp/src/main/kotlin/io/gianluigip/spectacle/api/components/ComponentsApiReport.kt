@@ -22,10 +22,10 @@ external interface ComponentsApiReportProps : Props {
 val ComponentsApiReport = FC<ComponentsApiReportProps> { props ->
     val theme by useContext(ThemeContext)
     val components = props.components.sortedBy { it.component }
-    var isExpanded by useState(props.expanded ?: false)
 
     components.forEach { component ->
         Accordion {
+            var isExpanded by useState(props.expanded ?: false)
             expanded = isExpanded
             onChange = { _, expanded -> isExpanded = expanded }
             AccordionSummary {
@@ -37,21 +37,9 @@ val ComponentsApiReport = FC<ComponentsApiReportProps> { props ->
                 SectionTitle { text = component.component; color = theme.palette.info.contrastText }
             }
             AccordionDetails {
-                component.endpoints.sortedBy { "${it.path}-${it.method.toMethodNumber()}" }.forEach {
-                    ApiEndpointCard { endpoint = it }
-                }
+                ComponentApiReport { this.component = component }
             }
         }
     }
 
-}
-
-private fun String.toMethodNumber() = when (uppercase()) {
-    "GET" -> 1
-    "PATCH" -> 2
-    "OPTIONS" -> 3
-    "PUT" -> 4
-    "POST" -> 5
-    "DELETE" -> 6
-    else -> 99
 }

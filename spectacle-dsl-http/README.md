@@ -1,7 +1,3 @@
-[//]: # ( {{ title: HTTP DSL }} {{ tags: DSL, Interactions, API }} {{ features: API, Interactions  }} )
-
-[//]: # ( {{ team: Spectacle Docs Writers }} )
-
 # HTTP DSL
 
 The HTTP DSL is wrapper for the Ktor client that collects metadata about the calls that you make and is able to register them as spec interactions.

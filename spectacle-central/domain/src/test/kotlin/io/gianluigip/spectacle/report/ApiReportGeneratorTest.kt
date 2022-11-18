@@ -22,6 +22,7 @@ import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
 import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
 import io.gianluigip.spectacle.specification.model.InteractionDirection.OUTBOUND
+import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecName
 import io.gianluigip.spectacle.specification.model.TagName
@@ -58,7 +59,7 @@ class ApiReportGeneratorTest {
     fun `Generate an API Report including all the components with multiple features and sources`() =
         given("existing specs with interactions for multiple features from several sources") {
             every {
-                specFinder.findBy()
+                specFinder.findBy(interactionType = HTTP)
             } returns listOf(
                 aSpec(
                     SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, tags = listOf(TAG_1), interactions = listOf(
