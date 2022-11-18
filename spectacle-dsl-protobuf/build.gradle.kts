@@ -1,7 +1,7 @@
 val ktorVersion = "2.1.3"
 
 plugins {
-    kotlin("jvm")
+    kotlin("multiplatform")
     id("convention.publication")
 }
 
@@ -13,28 +13,37 @@ repositories {
 }
 
 kotlin {
-    target.compilations.all {
-        kotlinOptions.jvmTarget = "1.8"
+    jvm {
+        compilations.all {
+            kotlinOptions.jvmTarget = "1.8"
+        }
+        withJava()
+        testRuns["test"].executionTask.configure {
+            inputs.property("Spectacle Enabled") {
+                System.getenv("SPECIFICATION_PUBLISHER_CENTRAL_ENABLED") ?: "false"
+            }
+            useJUnitPlatform()
+        }
     }
-}
 
-tasks.withType<Test> {
-    inputs.property("Spectacle Enabled") {
-        System.getenv("SPECIFICATION_PUBLISHER_CENTRAL_ENABLED") ?: "false"
+    sourceSets {
+        val jvmMain by getting {
+            dependencies {
+                implementation(project(":spectacle-common"))
+                implementation(project(":spectacle-dsl-bdd"))
+                implementation(project(":spectacle-dsl-publisher"))
+
+                implementation("io.grpc:grpc-protobuf:1.47.0")
+            }
+        }
+        val jvmTest by getting {
+            dependencies {
+                implementation(project(":spectacle-dsl-assertions"))
+                implementation("org.junit.jupiter:junit-jupiter-engine:5.9.1")
+                implementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
+            }
+        }
     }
-    useJUnitPlatform()
-}
-
-dependencies {
-    implementation(project(":spectacle-common"))
-    implementation(project(":spectacle-dsl-bdd"))
-    implementation(project(":spectacle-dsl-publisher"))
-
-    implementation("io.grpc:grpc-protobuf:1.47.0")
-
-    testImplementation(project(":spectacle-dsl-assertions"))
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.1")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
 }
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
