@@ -9,6 +9,8 @@ import io.gianluigip.spectacle.auth.components.RequireAuth
 import io.gianluigip.spectacle.auth.components.loginPath
 import io.gianluigip.spectacle.diagram.components.SystemDiagramPage
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
+import io.gianluigip.spectacle.events.components.EventsReportPage
+import io.gianluigip.spectacle.events.components.eventsReportPath
 import io.gianluigip.spectacle.feature.components.FeaturesPage
 import io.gianluigip.spectacle.feature.components.featuresPath
 import io.gianluigip.spectacle.specification.components.SpecificationsReport
@@ -70,6 +72,9 @@ val Content = FC<Props> {
             }
             Route {
                 path = apiReportPath; element = RequireAuth.create { ApiReportPage { } }
+            }
+            Route {
+                path = eventsReportPath; element = RequireAuth.create { EventsReportPage { } }
             }
             Route {
                 path = systemDiagramPath; element = RequireAuth.create { SystemDiagramPage { } }

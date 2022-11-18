@@ -8,6 +8,7 @@ import io.gianluigip.spectacle.auth.components.AuthMenu
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.diagram.components.systemDiagramPath
+import io.gianluigip.spectacle.events.components.eventsReportPath
 import io.gianluigip.spectacle.feature.components.featuresPath
 import io.gianluigip.spectacle.home.GridAreas
 import io.gianluigip.spectacle.home.ThemeContext
@@ -59,14 +60,8 @@ val Header = FC<Props> {
 
             Spacer { width = 10.px }
             NavMenuItem {
-                toPath = featuresPath
-                label = "Features"
-            }
-
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = specificationsReportPath
-                label = "Specifications"
+                toPath = systemDiagramPath
+                label = "System"
             }
 
             Spacer { width = 10.px }
@@ -77,8 +72,20 @@ val Header = FC<Props> {
 
             Spacer { width = 10.px }
             NavMenuItem {
-                toPath = systemDiagramPath
-                label = "System"
+                toPath = eventsReportPath
+                label = "Events"
+            }
+
+            Spacer { width = 10.px }
+            NavMenuItem {
+                toPath = featuresPath
+                label = "Features"
+            }
+
+            Spacer { width = 10.px }
+            NavMenuItem {
+                toPath = specificationsReportPath
+                label = "Specifications"
             }
 
             Spacer { width = 10.px }
