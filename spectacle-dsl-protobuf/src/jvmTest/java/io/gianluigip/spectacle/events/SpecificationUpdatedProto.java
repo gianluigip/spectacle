@@ -319,13 +319,13 @@ private static final long serialVersionUID = 0L;
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (!getNameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      writeString(output, 1, name_);
     }
     if (!getComponentBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, component_);
+      writeString(output, 2, component_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 3, description_);
+      writeString(output, 3, description_);
     }
     if (status_ != SpecStatusProto.IMPLEMENTED.getNumber()) {
       output.writeEnum(4, status_);
@@ -343,13 +343,13 @@ private static final long serialVersionUID = 0L;
 
     size = 0;
     if (!getNameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      size += computeStringSize(1, name_);
     }
     if (!getComponentBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, component_);
+      size += computeStringSize(2, component_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, description_);
+      size += computeStringSize(3, description_);
     }
     if (status_ != SpecStatusProto.IMPLEMENTED.getNumber()) {
       size += com.google.protobuf.CodedOutputStream
@@ -450,40 +450,34 @@ private static final long serialVersionUID = 0L;
   }
   public static SpecificationUpdatedProto parseFrom(java.io.InputStream input)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
+    return parseWithIOException(PARSER, input);
   }
   public static SpecificationUpdatedProto parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
+    return parseWithIOException(PARSER, input, extensionRegistry);
   }
   public static SpecificationUpdatedProto parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input);
+    return parseDelimitedWithIOException(PARSER, input);
   }
   public static SpecificationUpdatedProto parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    return parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
   public static SpecificationUpdatedProto parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
+    return parseWithIOException(PARSER, input);
   }
   public static SpecificationUpdatedProto parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
+    return parseWithIOException(PARSER, input, extensionRegistry);
   }
 
   @Override
@@ -537,8 +531,7 @@ private static final long serialVersionUID = 0L;
       maybeForceBuilderInitialization();
     }
     private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
+      if (alwaysUseFieldBuilders) {
         getStepsFieldBuilder();
       }
     }
@@ -687,7 +680,7 @@ private static final long serialVersionUID = 0L;
             steps_ = other.steps_;
             bitField0_ = (bitField0_ & ~0x00000002);
             stepsBuilder_ = 
-              com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+              alwaysUseFieldBuilders ?
                  getStepsFieldBuilder() : null;
           } else {
             stepsBuilder_.addAllMessages(other.steps_);
@@ -1154,7 +1147,7 @@ private static final long serialVersionUID = 0L;
         Iterable<? extends SpecificationStepProto> values) {
       if (stepsBuilder_ == null) {
         ensureStepsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+        addAll(
             values, steps_);
         onChanged();
       } else {

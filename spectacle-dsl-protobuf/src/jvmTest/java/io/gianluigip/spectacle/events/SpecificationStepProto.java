@@ -185,7 +185,7 @@ private static final long serialVersionUID = 0L;
       output.writeEnum(1, type_);
     }
     if (!getDescriptionBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, description_);
+      writeString(output, 2, description_);
     }
     if (index_ != 0) {
       output.writeInt32(3, index_);
@@ -204,7 +204,7 @@ private static final long serialVersionUID = 0L;
         .computeEnumSize(1, type_);
     }
     if (!getDescriptionBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, description_);
+      size += computeStringSize(2, description_);
     }
     if (index_ != 0) {
       size += com.google.protobuf.CodedOutputStream
@@ -286,40 +286,34 @@ private static final long serialVersionUID = 0L;
   }
   public static SpecificationStepProto parseFrom(java.io.InputStream input)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
+    return parseWithIOException(PARSER, input);
   }
   public static SpecificationStepProto parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
+    return parseWithIOException(PARSER, input, extensionRegistry);
   }
   public static SpecificationStepProto parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input);
+    return parseDelimitedWithIOException(PARSER, input);
   }
   public static SpecificationStepProto parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    return parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
   public static SpecificationStepProto parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input);
+    return parseWithIOException(PARSER, input);
   }
   public static SpecificationStepProto parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
-    return com.google.protobuf.GeneratedMessageV3
-        .parseWithIOException(PARSER, input, extensionRegistry);
+    return parseWithIOException(PARSER, input, extensionRegistry);
   }
 
   @Override
@@ -373,8 +367,7 @@ private static final long serialVersionUID = 0L;
       maybeForceBuilderInitialization();
     }
     private void maybeForceBuilderInitialization() {
-      if (com.google.protobuf.GeneratedMessageV3
-              .alwaysUseFieldBuilders) {
+      if (alwaysUseFieldBuilders) {
       }
     }
     @Override
