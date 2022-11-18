@@ -112,7 +112,7 @@ val SpecificationsReport = FC<Props> {
                 Typography { variant = h5; +"List of Specs by Feature" }
                 Spacer { height = 10.px }
                 LoadingBar { isLoading = featuresResponse == null }
-                featuresResponse?.let { FeaturesReport { features = it } }
+                featuresResponse?.let { FeaturesReport { features = it; expanded = currentFilters?.isNotEmpty() } }
             }
         }
     }

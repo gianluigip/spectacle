@@ -22,10 +22,10 @@ external interface ComponentsApiReportProps : Props {
 val ComponentsApiReport = FC<ComponentsApiReportProps> { props ->
     val theme by useContext(ThemeContext)
     val components = props.components.sortedBy { it.component }
-    var isExpanded by useState(props.expanded ?: false)
 
     components.forEach { component ->
         Accordion {
+            var isExpanded by useState(props.expanded ?: false)
             expanded = isExpanded
             onChange = { _, expanded -> isExpanded = expanded }
             AccordionSummary {

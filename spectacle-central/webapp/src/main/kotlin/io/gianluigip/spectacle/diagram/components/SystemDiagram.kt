@@ -27,6 +27,7 @@ external interface SystemDiagramProps : Props {
 val SystemDiagram = FC<SystemDiagramProps> {
 
     var expandDiagram by useState(false)
+    val interactions = it.interactions.filter { it.interactionName != it.component }
     FormGroup {
         FormControlLabel {
             label = "Expand Diagram".toNode()
@@ -41,9 +42,9 @@ val SystemDiagram = FC<SystemDiagramProps> {
         content = """
             graph LR
             ${generateComponents(it.components)} 
-            ${generateComponents(it.interactions)} 
-            ${generateDiagramInteractions(it.interactions)}
-            ${generateComponentsLink(it.interactions)}
+            ${generateComponents(interactions)} 
+            ${generateDiagramInteractions(interactions)}
+            ${generateComponentsLink(interactions)}
         """.trimIndent()
         this.expandDiagram = expandDiagram
     }

@@ -15,17 +15,23 @@ import react.FC
 import react.Props
 import react.create
 import react.useContext
+import react.useState
 
 external interface FeaturesReportProps : Props {
     var features: List<FeatureReportResponse>
+    var expanded: Boolean?
 }
 
-val FeaturesReport = FC<FeaturesReportProps> {
+val FeaturesReport = FC<FeaturesReportProps> { props ->
     val theme by useContext(ThemeContext)
-    val features = it.features.sortedBy { feature -> feature.name }
+    val features = props.features.sortedBy { feature -> feature.name }
 
     features.forEach { feature ->
         Accordion {
+            var isExpanded by useState(props.expanded ?: false)
+            expanded = isExpanded
+            onChange = { _, expanded -> isExpanded = expanded }
+
             AccordionSummary {
                 sx = jso {
                     color = theme.palette.info.contrastText
