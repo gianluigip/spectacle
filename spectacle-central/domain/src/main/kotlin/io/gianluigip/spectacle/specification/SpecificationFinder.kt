@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.specification
 import io.gianluigip.spectacle.common.TransactionExecutor
 import io.gianluigip.spectacle.specification.model.Component
 import io.gianluigip.spectacle.specification.model.FeatureName
+import io.gianluigip.spectacle.specification.model.InteractionType
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.gianluigip.spectacle.specification.model.Specification
@@ -21,6 +22,8 @@ class SpecificationFinder(
         sources: Set<Source>? = null,
         components: Set<Component>? = null,
         interactionComponents: Set<Component>? = null,
+        interactionName: String? = null,
+        interactionType: InteractionType? = null,
         tags: Set<TagName>? = null,
         teams: Set<TeamName>? = null,
         status: Set<SpecStatus>? = null,
@@ -32,6 +35,8 @@ class SpecificationFinder(
             sources = sources,
             components = components,
             interactionComponents = interactionComponents,
+            interactionName = interactionName,
+            interactionType = interactionType,
             tags = tags,
             teams = teams,
             statuses = status,

@@ -16,6 +16,7 @@ import io.gianluigip.spectacle.specification.model.InteractionDirection.INBOUND
 import io.gianluigip.spectacle.specification.model.InteractionDirection.OUTBOUND
 import io.gianluigip.spectacle.specification.model.InteractionType.EVENT
 import io.gianluigip.spectacle.specification.model.InteractionType.HTTP
+import io.gianluigip.spectacle.specification.model.InteractionType.LIBRARY
 import io.gianluigip.spectacle.specification.model.InteractionType.PERSISTENCE
 import io.gianluigip.spectacle.specification.model.Source
 import io.gianluigip.spectacle.specification.model.SpecName
@@ -181,11 +182,11 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
                 listOf(
                     SpecToUpsert(
                         SpecName("Spec1"), FEATURE_1, TEAM_1, SOURCE_1, COMPONENT_1, NOT_IMPLEMENTED, listOf(TAG_1), listOf(Step(GIVEN, "Desc1", 0)),
-                        interactions = emptyList()
+                        interactions = listOf(Interaction(INBOUND, EVENT, "event1"))
                     ),
                     SpecToUpsert(
                         SpecName("Spec2"), FEATURE_2, TEAM_2, SOURCE_2, COMPONENT_2, IMPLEMENTED, listOf(TAG_2), listOf(Step(GIVEN, "Desc2", 0)),
-                        interactions = emptyList()
+                        interactions = listOf(Interaction(INBOUND, LIBRARY, "lib2"))
                     ),
                 )
             )
@@ -276,10 +277,24 @@ class ExposedSpecificationRepositoryIT : BaseIntegrationTest() {
             }
         } andWhenever "search by updatedTimeAfter" run {
             specRepo.findBy(updatedTimeAfter = Instant.fromEpochMilliseconds(CLOCK.millis()))
-        } then "it should return only the latest updated specs" runAndFinish { specs ->
+        } then "it should return only the latest updated specs" run { specs ->
             specs assertThat {
                 shouldHasSize(1)
                 get("Spec3", SOURCE_2) shouldNotBe null
+            }
+        } andWhenever "search by interaction type" run {
+            specRepo.findBy(interactionType = EVENT)
+        } then "it should return only the specified type" run { specs ->
+            specs assertThat {
+                shouldHasSize(1)
+                get("Spec1", SOURCE_1) shouldNotBe null
+            }
+        } andWhenever "search by interaction name" run {
+            specRepo.findBy(interactionName = "b2")
+        } then "it should return only the latest updated specs" runAndFinish { specs ->
+            specs assertThat {
+                shouldHasSize(1)
+                get("Spec2", SOURCE_2) shouldNotBe null
             }
         }
 

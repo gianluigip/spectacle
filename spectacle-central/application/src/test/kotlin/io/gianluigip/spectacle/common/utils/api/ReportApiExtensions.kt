@@ -3,8 +3,10 @@ package io.gianluigip.spectacle.common.utils.api
 import io.gianluigip.spectacle.common.BaseIntegrationTest
 import io.gianluigip.spectacle.dsl.interactions.receivesGetRequest
 import io.gianluigip.spectacle.report.api.model.ApiReportResponse
+import io.gianluigip.spectacle.report.api.model.EventsReportResponse
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
 import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
+import io.gianluigip.spectacle.report.model.EventsReport
 import io.gianluigip.spectacle.specification.model.SpecStatus
 import io.ktor.client.call.body
 import kotlinx.coroutines.runBlocking
@@ -68,6 +70,28 @@ fun BaseIntegrationTest.getAPIReport(
         path = "/api/report/api",
         queryParameters = mapOf(
             "path" to path,
+            "features" to feature,
+            "sources" to source,
+            "components" to component,
+            "tags" to tag,
+            "teams" to team,
+        ).filter { it.value != null }.mapValues { it.value!! },
+        fromComponent = "Web UI",
+    ).body()
+}
+
+fun BaseIntegrationTest.getEventReport(
+    eventName: String? = null,
+    feature: String? = null,
+    source: String? = null,
+    component: String? = null,
+    tag: String? = null,
+    team: String? = null,
+): EventsReportResponse = runBlocking {
+    receivesGetRequest(
+        path = "/api/report/events",
+        queryParameters = mapOf(
+            "eventName" to eventName,
             "features" to feature,
             "sources" to source,
             "components" to component,
