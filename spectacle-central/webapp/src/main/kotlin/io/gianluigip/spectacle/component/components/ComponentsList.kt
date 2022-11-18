@@ -7,13 +7,11 @@ import emotion.react.css
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.MetaDataChip
 import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
+import io.gianluigip.spectacle.common.utils.escapeSpaces
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.component.api.Component
 import io.gianluigip.spectacle.component.api.getComponents
-import io.gianluigip.spectacle.diagram.components.systemDiagramPath
 import io.gianluigip.spectacle.home.ThemeContext
-import io.gianluigip.spectacle.specification.components.FiltersSelected
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.js.jso
@@ -62,7 +60,7 @@ private fun generateComponentsBox(component: Component, isFirstFeature: Boolean,
     Box.create {
         if (!isFirstFeature) Spacer { height = 10.px }
         NavLink {
-            to = buildUrlWithParameters(systemDiagramPath, FiltersSelected(component = component.name))
+            to = "$componentsPath?name=${component.name.escapeSpaces()}"
             css { textDecoration = None.none; color = Color.currentcolor }
             Tooltip {
                 title = "Go to Component Diagram".toNode()

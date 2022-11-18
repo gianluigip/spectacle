@@ -27,11 +27,13 @@ import react.useContext
 
 external interface EventReportProps : Props {
     var event: EventReportResponse
+    var showConsumeAndProduceBy: Boolean
 }
 
 val EventAccordion = FC<EventReportProps> { props ->
     val theme by useContext(ThemeContext)
     val event = props.event
+    val showConsumeAndProduceBy = props.showConsumeAndProduceBy ?: true
 
     Accordion {
         AccordionSummary {
@@ -63,26 +65,8 @@ val EventAccordion = FC<EventReportProps> { props ->
                     Grid { item = true; MetaDataChip { label = "Source: ${event.components.sorted().joinToString(", ")}" } }
                 }
 
-                Stack {
-                    direction = responsive(StackDirection.row)
-
-                    if (event.producedBy.isNotEmpty()) {
-                        Stack {
-                            SectionTitle { text = "Produced by:" }
-                            MarkdownViewer {
-                                content = event.producedBy.joinToString("\n") { "* `${it}`" }
-                            }
-                        }
-                    }
-
-                    if (event.consumedBy.isNotEmpty()) {
-                        Stack {
-                            SectionTitle { text = "Consumed by:" }
-                            MarkdownViewer {
-                                content = event.consumedBy.joinToString("\n") { "* `${it}`" }
-                            }
-                        }
-                    }
+                if (showConsumeAndProduceBy) {
+                    +consumeAndProduceByStack(event)
                 }
 
                 val eventType = bodyType(event.format)
@@ -92,6 +76,28 @@ val EventAccordion = FC<EventReportProps> { props ->
                     SectionTitle { text = "Dependencies:" }
                     event.dependencies.forEach { RequestBody { body = it; bodyType = eventType } }
                 }
+            }
+        }
+    }
+}
+
+private fun consumeAndProduceByStack(event: EventReportResponse) = Stack.create {
+    direction = responsive(StackDirection.row)
+
+    if (event.producedBy.isNotEmpty()) {
+        Stack {
+            SectionTitle { text = "Produced by:" }
+            MarkdownViewer {
+                content = event.producedBy.joinToString("\n") { "* `${it}`" }
+            }
+        }
+    }
+
+    if (event.consumedBy.isNotEmpty()) {
+        Stack {
+            SectionTitle { text = "Consumed by:" }
+            MarkdownViewer {
+                content = event.consumedBy.joinToString("\n") { "* `${it}`" }
             }
         }
     }
