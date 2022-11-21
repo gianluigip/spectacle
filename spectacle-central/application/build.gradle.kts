@@ -74,7 +74,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
     testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
     testImplementation("org.testcontainers:testcontainers:1.17.6")
-    testImplementation("org.testcontainers:junit-jupiter:1.17.5")
+    testImplementation("org.testcontainers:junit-jupiter:1.17.6")
     testImplementation("org.testcontainers:postgresql:1.17.6")
 }
 
