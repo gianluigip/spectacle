@@ -40,7 +40,7 @@ dependencies {
     implementation("io.ktor:ktor-client-js:$ktorVersion")
 
     // REACT
-    implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:1.0.0-pre.398"))
+    implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:1.0.0-pre.456"))
     implementation(kotlinw("emotion"))
     implementation(kotlinw("react"))
     implementation(kotlinw("react-dom"))
