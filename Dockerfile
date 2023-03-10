@@ -4,7 +4,7 @@ ENV APP_HOME=/root/dev/spectacle
 WORKDIR $APP_HOME
 
 # COPY GRADLE FILES
-COPY build.gradle.kts settings.gradle.kts gradlew gradlew.bat $APP_HOME/
+COPY gradle.properties build.gradle.kts settings.gradle.kts gradlew gradlew.bat $APP_HOME/
 COPY gradle $APP_HOME/gradle
 COPY spectacle-common/build.gradle.kts $APP_HOME/spectacle-common/build.gradle.kts
 COPY convention-plugins/build.gradle.kts $APP_HOME/convention-plugins/build.gradle.kts
