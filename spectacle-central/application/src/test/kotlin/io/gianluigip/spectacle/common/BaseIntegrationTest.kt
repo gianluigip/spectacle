@@ -1,6 +1,5 @@
 package io.gianluigip.spectacle.common
 
-import io.gianluigip.spectacle.common.utils.setEnv
 import io.gianluigip.spectacle.di
 import io.gianluigip.spectacle.dsl.interactions.httpInteractionsConfig
 import io.gianluigip.spectacle.report.junit.JUnitSpecificationReporter
@@ -8,13 +7,12 @@ import io.gianluigip.spectacle.specification.repository.ExposedFeatureRepository
 import io.gianluigip.spectacle.specification.repository.ExposedSpecificationRepository
 import io.gianluigip.spectacle.specification.repository.ExposedTeamRepository
 import io.gianluigip.spectacle.wiki.repository.ExposedWikiPageRepository
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.cio.CIO
-import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
-import io.ktor.client.plugins.auth.providers.basic
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.client.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.plugins.auth.*
+import io.ktor.client.plugins.auth.providers.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
@@ -54,7 +52,7 @@ abstract class BaseIntegrationTest {
     fun initEnv() {
         EmbeddedEnvironments.start {
             postgres.start()
-            setupEnvVars()
+            serverConfig()
         }
         cleanDb()
         httpInteractionsConfig(host = httpHost, httpClient = httpClient)
@@ -67,16 +65,14 @@ abstract class BaseIntegrationTest {
         wikiPageRepo.deleteAll()
     }
 
-    private fun setupEnvVars() {
+    private fun serverConfig(): Map<String, String> {
         val jdbcUrl = postgres.jdbcUrl.substring(0, postgres.jdbcUrl.indexOf("?"))
-        setEnv(
-            mapOf(
-                "DATABASE_URL" to jdbcUrl,
-                "DATABASE_USERNAME" to "spectacle",
-                "DATABASE_PASSWORD" to "spectacle",
-                "ADMIN_USERNAME" to "AdminUser",
-                "ADMIN_PASSWORD" to "AdminPassword",
-            )
+        return mapOf(
+            "database.url" to jdbcUrl,
+            "database.username" to "spectacle",
+            "database.password" to "spectacle",
+            "users.admin.username" to "AdminUser",
+            "users.admin.password" to "AdminPassword",
         )
     }
 }

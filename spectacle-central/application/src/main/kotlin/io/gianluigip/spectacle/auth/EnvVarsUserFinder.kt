@@ -1,14 +1,15 @@
 package io.gianluigip.spectacle.auth
 
 import io.gianluigip.spectacle.auth.model.User
-import io.gianluigip.spectacle.auth.model.UserRole.ADMIN
-import io.gianluigip.spectacle.auth.model.UserRole.READ
-import io.gianluigip.spectacle.auth.model.UserRole.WRITE
+import io.gianluigip.spectacle.auth.model.UserRole.*
+import io.ktor.server.config.*
 import org.slf4j.LoggerFactory
 
 private val LOG = LoggerFactory.getLogger("EnvVarsUserFinder")
 
-class EnvVarsUserFinder : UserFinder {
+class EnvVarsUserFinder(
+    private val config: ApplicationConfig
+) : UserFinder {
 
     private val users: Set<User> = findEnvVarsUsers()
 
@@ -17,24 +18,23 @@ class EnvVarsUserFinder : UserFinder {
 
     private fun findEnvVarsUsers(): Set<User> {
         val users = mutableSetOf<User>()
-        val envs = System.getenv()
-        if (!envs.containsKey("ADMIN_USERNAME")) {
+        if (config.propertyOrNull("users.admin.username") == null) {
             LOG.warn("The env var ADMIN_USERNAME is missing, there isn't an Admin user.")
         } else {
             LOG.info("Registering Admin user from env vars.")
             users += User(
                 name = "Admin",
-                username = envs["ADMIN_USERNAME"]!!,
-                password = envs["ADMIN_PASSWORD"] ?: "",
+                username = config.propertyOrNull("users.admin.username")!!.getString(),
+                password = config.propertyOrNull("users.admin.password")?.getString() ?: "",
                 roles = setOf(READ, WRITE, ADMIN)
             )
         }
-        envs["GUEST_USERNAME"]?.let { questUsername ->
+        config.propertyOrNull("users.guest.username")?.getString()?.let { questUsername ->
             LOG.info("Registering Guest user from env vars.")
             users += User(
                 name = "Guest",
                 username = questUsername,
-                password = envs["GUEST_PASSWORD"] ?: "",
+                password = config.propertyOrNull("users.guest.password")?.getString() ?: "",
                 roles = setOf(READ)
             )
         }

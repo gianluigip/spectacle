@@ -64,7 +64,7 @@ export DATABASE_URL=[YOUR_URL]
 Run Web UI only:
 
 ```
-./gradlew jsBrowserRun --continuous
+./gradlew :spectacle-central:webapp:run --continuous
 ```
 
 Build and Run in Docker:

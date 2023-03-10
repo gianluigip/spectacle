@@ -13,25 +13,18 @@ import io.gianluigip.spectacle.report.api.specReportRoutes
 import io.gianluigip.spectacle.specification.api.specificationsRoutes
 import io.gianluigip.spectacle.team.api.teamRoutes
 import io.gianluigip.spectacle.wiki.api.wikiRoutes
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpMethod
-import io.ktor.serialization.kotlinx.json.json
-import io.ktor.server.application.Application
-import io.ktor.server.application.install
-import io.ktor.server.auth.Authentication
-import io.ktor.server.auth.authenticate
-import io.ktor.server.auth.basic
-import io.ktor.server.http.content.resource
-import io.ktor.server.http.content.resources
-import io.ktor.server.http.content.static
-import io.ktor.server.plugins.cors.routing.CORS
-import io.ktor.server.plugins.callloging.CallLogging
-import io.ktor.server.plugins.compression.Compression
-import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.server.plugins.compression.gzip
-import io.ktor.server.routing.route
-import io.ktor.server.routing.routing
+import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.*
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.http.content.*
+import io.ktor.server.plugins.callloging.*
+import io.ktor.server.plugins.compression.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.routing.*
 import org.kodein.di.DI
+import org.kodein.di.bindSingleton
 import org.kodein.di.instance
 import org.slf4j.event.Level
 
@@ -41,6 +34,7 @@ private lateinit var _di: DI
 val di: DI by lazy { _di }
 
 fun Application.module() {
+    val serverConfig = environment.config
     install(ContentNegotiation) { json() }
     install(CORS) {
         allowMethod(HttpMethod.Get)
@@ -53,8 +47,9 @@ fun Application.module() {
     }
     install(Compression) { gzip() }
     install(CallLogging) { level = Level.INFO }
-    initDb()
+    initDb(serverConfig)
     _di = DI {
+        bindSingleton { serverConfig }
         import(productionDependencies())
         import(testDependencies, allowOverride = true)
     }

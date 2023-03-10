@@ -1,4 +1,4 @@
-val ktorVersion = "2.1.3"
+val ktorVersion = "2.2.3"
 
 plugins {
     kotlin("multiplatform")
@@ -26,7 +26,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(BOTH) { browser() }
+    js { browser() }
 
     sourceSets {
         val commonMain by getting {
