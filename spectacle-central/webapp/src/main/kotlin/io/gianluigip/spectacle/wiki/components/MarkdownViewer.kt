@@ -30,8 +30,6 @@ val MarkdownViewer = FC<MarkdownProps> {
         renderMermaidDiagrams(theme)
     }
 
-    println(content)
-
     Box {
         sx = jso { marginBottom = 20.px }
         ReactMarkdown {

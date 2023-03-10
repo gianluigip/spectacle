@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.api.components
 
 import csstype.pct
 import csstype.px
+import csstype.vw
 import io.gianluigip.spectacle.api.api.getApiReport
 import io.gianluigip.spectacle.common.components.LoadingBar
 import io.gianluigip.spectacle.common.components.Spacer
@@ -106,7 +107,11 @@ val ApiReportPage = FC<Props> {
             xs = 8; md = 9; xl = 10
 
             Paper {
-                sx = jso { padding = Themes.SPACE_PADDING; height = 100.pct }
+                sx = jso {
+                    padding = Themes.SPACE_PADDING
+                    height = 100.pct
+                    maxWidth = 95.vw
+                }
                 elevation = 2
                 Typography { variant = TypographyVariant.h5; +"Services API" }
                 Spacer { height = 10.px }
