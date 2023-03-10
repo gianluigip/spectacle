@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val ktorVersion = "2.1.3"
+val ktorVersion = "2.2.3"
 val logbackVersion = "1.4.5"
 
 plugins {
@@ -18,7 +18,7 @@ repositories {
 
 kotlin {
     target.compilations.all {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "17"
     }
 }
 

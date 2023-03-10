@@ -27,7 +27,7 @@ import java.time.Clock
 fun productionDependencies() = DI.Module("ProductionDependencies") {
     bindSingleton<Clock> { Clock.systemDefaultZone() }
     bindSingleton<TransactionExecutor> { ExposedTransactionExecutor() }
-    bindSingleton<UserFinder> { EnvVarsUserFinder() }
+    bindSingleton<UserFinder> { EnvVarsUserFinder(instance()) }
     bindSingleton { AuthProvider(instance()) }
 
     bindSingleton { ExposedSpecificationRepository(instance()) }

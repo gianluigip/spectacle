@@ -1,5 +1,5 @@
 # BUILD SOURCE
-FROM openjdk:11.0-jdk AS BUILD_IMAGE
+FROM gradle:7.6.0-jdk17 AS BUILD_IMAGE
 ENV APP_HOME=/root/dev/spectacle
 WORKDIR $APP_HOME
 # MAKE PROJECT STRUCTURE
@@ -29,7 +29,7 @@ RUN ./gradlew build -x test --continue
 COPY . .
 RUN ./gradlew stage
 
-FROM openjdk:11.0-jre AS RUNTIME_IMAGE
+FROM eclipse-temurin:17-jre-alpine AS RUNTIME_IMAGE
 WORKDIR /root/
 COPY --from=BUILD_IMAGE /root/dev/spectacle/spectacle-central/application/build/install/application .
 EXPOSE 8080:8080

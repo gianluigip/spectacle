@@ -2,6 +2,7 @@ package io.gianluigip.spectacle.common.repository
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.ktor.server.config.*
 import org.flywaydb.core.Flyway
 import org.jetbrains.exposed.sql.Database
 import org.slf4j.LoggerFactory
@@ -10,23 +11,24 @@ import javax.sql.DataSource
 private val LOG = LoggerFactory.getLogger("DbConfig")
 private lateinit var dataSource: DataSource
 
-fun initDb() {
-    dataSource = buildDataSourceWithEnv()
+fun initDb(config: ApplicationConfig) {
+    dataSource = buildDataSourceWithEnv(config)
     Database.connect(dataSource)
     initFlyway()
 }
 
-private fun buildDataSourceWithEnv(): DataSource {
+private fun buildDataSourceWithEnv(config: ApplicationConfig): DataSource {
 
-    val envs = System.getenv()
     var dbHost = ""
     var port = 0
     var database = ""
     var username: String? = null
     var password: String? = null
 
-    if (envs.containsKey("DATABASE_URL")) {
-        var dbUrl = envs["DATABASE_URL"]!!
+    config.propertyOrNull("database.url")?.let { dbUrlProperty ->
+        var dbUrl = dbUrlProperty.getString()
+        if (dbUrl.isBlank()) return@let
+
         if (dbUrl.contains("://")) {
             dbUrl = dbUrl.substring(dbUrl.indexOf("://") + 3)
         }
@@ -40,12 +42,13 @@ private fun buildDataSourceWithEnv(): DataSource {
         port = hostSegments.first().split(":").last().toInt()
         database = hostSegments.last()
     }
+
     return buildDataSource(
-        dbHost = envs.getEnv("DATABASE_HOST") ?: dbHost,
-        port = envs.getEnv("DATABASE_PORT")?.toInt() ?: port,
-        database = envs.getEnv("DATABASE_NAME") ?: database,
-        username = envs.getEnv("DATABASE_USERNAME") ?: username,
-        password = envs.getEnv("DATABASE_PASSWORD") ?: password
+        dbHost = config.propertyOrNull("database.host")?.getString() ?: dbHost,
+        port = config.propertyOrNull("database.port")?.getString()?.toInt() ?: port,
+        database = config.propertyOrNull("database.dbName")?.getString() ?: database,
+        username = config.propertyOrNull("database.username")?.getString() ?: username,
+        password = config.propertyOrNull("database.password")?.getString() ?: password
     )
 }
 

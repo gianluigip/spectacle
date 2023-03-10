@@ -25,7 +25,7 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js(BOTH) { browser() }
+    js { browser() }
 
     sourceSets {
         val commonMain by getting {
