@@ -3,6 +3,7 @@ package io.gianluigip.spectacle.component.components
 import csstype.Color
 import csstype.pct
 import csstype.px
+import csstype.vw
 import io.gianluigip.spectacle.api.components.ComponentApiReport
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.components.TabList
@@ -119,7 +120,7 @@ val ComponentViewer = FC<ComponentViewerProps> { props ->
                         }
                     }
                     TabPanel {
-                        sx = jso { padding = 0.px; width = 100.pct; height = 100.pct }
+                        sx = jso { padding = 0.px; width = 100.pct; height = 100.pct; maxWidth = 95.vw }
                         value = "API"
                         if (api.components.isEmpty()) {
                             Typography { +"No endpoints found." }
