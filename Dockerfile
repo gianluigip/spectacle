@@ -34,11 +34,4 @@ WORKDIR /root/
 COPY --from=BUILD_IMAGE /root/dev/spectacle/spectacle-central/application/build/install/application .
 EXPOSE 8080:8080
 
-ENV DATABASE_URL=""
-ENV DATABASE_HOST=""
-ENV DATABASE_PORT=""
-ENV ENVDATABASE_NAME=""
-ENV DATABASE_USERNAME=""
-ENV DATABASE_PASSWORD=""
-
 CMD ["./bin/application"]
