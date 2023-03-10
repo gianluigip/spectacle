@@ -4,7 +4,7 @@ ENV APP_HOME=/root/dev/spectacle
 WORKDIR $APP_HOME
 
 # COPY GRADLE FILES
-COPY gradle.properties build.gradle.kts settings.gradle.kts gradlew gradlew.bat $APP_HOME/
+COPY gradle.properties build.gradle.kts settings.gradle.kts $APP_HOME/
 COPY gradle $APP_HOME/gradle
 COPY spectacle-common/build.gradle.kts $APP_HOME/spectacle-common/build.gradle.kts
 COPY convention-plugins/build.gradle.kts $APP_HOME/convention-plugins/build.gradle.kts
@@ -20,11 +20,11 @@ COPY spectacle-dsl-http/build.gradle.kts $APP_HOME/spectacle-dsl-http/build.grad
 COPY spectacle-dsl-protobuf/build.gradle.kts $APP_HOME/spectacle-dsl-protobuf/build.gradle.kts
 
 # DOWNLOAD DEPENDENCIES
-RUN ./gradlew build -x test --continue
+RUN gradle build -x test --continue
 
 # BUILD PROJECT
 COPY . .
-RUN ./gradlew stage
+RUN gradle stage
 
 FROM eclipse-temurin:17-jre-alpine AS RUNTIME_IMAGE
 WORKDIR /root/
