@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val ktorVersion = "2.1.3"
-val logbackVersion = "1.4.4"
+val ktorVersion = "2.2.3"
+val logbackVersion = "1.4.5"
 
 plugins {
     kotlin("jvm")
@@ -18,7 +18,7 @@ repositories {
 
 kotlin {
     target.compilations.all {
-        kotlinOptions.jvmTarget = "11"
+        kotlinOptions.jvmTarget = "17"
     }
 }
 
@@ -84,6 +84,13 @@ application {
 
 // include JS artifacts in any JAR we generate
 tasks.getByName<Jar>("jar") {
+    val startTaskNames = project.gradle.startParameter.taskNames
+    // Don't depend on :web when just compiling JVM
+    when {
+        ":spectacle-central:application:classes" in startTaskNames -> return@getByName
+        ":spectacle-central:application:test" in startTaskNames -> return@getByName
+    }
+
     val taskName = if (project.hasProperty("isProduction")
         || project.gradle.startParameter.taskNames.contains("installDist")
         || project.gradle.startParameter.taskNames.contains("stage")
