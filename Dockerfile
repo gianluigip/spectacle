@@ -2,12 +2,7 @@
 FROM gradle:7.6.0-jdk17 AS BUILD_IMAGE
 ENV APP_HOME=/root/dev/spectacle
 WORKDIR $APP_HOME
-# MAKE PROJECT STRUCTURE
-RUN mkdir -p $APP_HOME/spectacle-common/src/commonMain/kotlin
-RUN mkdir -p $APP_HOME/convention-plugins/src/main/kotlin
-RUN mkdir -p $APP_HOME/spectacle-central/application/src/commonMain/kotlin
-RUN mkdir -p $APP_HOME/spectacle-central/domain/src/main/kotlin
-RUN mkdir -p $APP_HOME/spectacle-dsl/src/commonMain/kotlin
+
 # COPY GRADLE FILES
 COPY build.gradle.kts settings.gradle.kts gradlew gradlew.bat $APP_HOME/
 COPY gradle $APP_HOME/gradle
@@ -23,8 +18,10 @@ COPY spectacle-dsl-assertions/build.gradle.kts $APP_HOME/spectacle-dsl-assertion
 COPY spectacle-dsl-publisher/build.gradle.kts $APP_HOME/spectacle-dsl-publisher/build.gradle.kts
 COPY spectacle-dsl-http/build.gradle.kts $APP_HOME/spectacle-dsl-http/build.gradle.kts
 COPY spectacle-dsl-protobuf/build.gradle.kts $APP_HOME/spectacle-dsl-protobuf/build.gradle.kts
+
 # DOWNLOAD DEPENDENCIES
 RUN ./gradlew build -x test --continue
+
 # BUILD PROJECT
 COPY . .
 RUN ./gradlew stage
