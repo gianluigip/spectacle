@@ -70,7 +70,7 @@ dependencies {
     testImplementation("io.ktor:ktor-client-core:$ktorVersion")
     testImplementation("io.ktor:ktor-client-auth:$ktorVersion")
     testImplementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
     testImplementation("io.ktor:ktor-server-test-host:${ktorVersion}")
     testImplementation("org.testcontainers:testcontainers:1.17.6")
