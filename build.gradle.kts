@@ -2,7 +2,7 @@ plugins {
     kotlin("multiplatform") version "1.8.10" apply false
     kotlin("plugin.serialization") version "1.8.10" apply false
     kotlin("jvm") version "1.8.10" apply false
-    id("io.github.gradle-nexus.publish-plugin") version "1.1.0"
+    id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
 
 group = "io.github.gianluigip"
