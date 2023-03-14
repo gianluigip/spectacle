@@ -55,7 +55,7 @@ kotlin {
                 implementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
 
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
             }
         }
         val jsMain by getting {
