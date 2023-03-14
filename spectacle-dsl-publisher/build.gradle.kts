@@ -53,8 +53,7 @@ kotlin {
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
                 implementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
-
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.4.1")
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
             }
         }
