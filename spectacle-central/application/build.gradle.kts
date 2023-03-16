@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
 val ktorVersion = "2.2.3"
-val logbackVersion = "1.4.5"
+val logbackVersion = "1.4.6"
 
 plugins {
     kotlin("jvm")
