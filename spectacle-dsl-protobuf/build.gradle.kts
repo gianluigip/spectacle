@@ -33,7 +33,7 @@ kotlin {
                 implementation(project(":spectacle-dsl-bdd"))
                 implementation(project(":spectacle-dsl-publisher"))
 
-                implementation("io.grpc:grpc-protobuf:1.53.0")
+                implementation("io.grpc:grpc-protobuf:1.54.0")
             }
         }
         val jvmTest by getting {
