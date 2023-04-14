@@ -12,23 +12,17 @@ import io.gianluigip.spectacle.wiki.WikiDirectory
 import io.gianluigip.spectacle.wiki.api.getAllPages
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.wikiPath
+import js.core.ReadonlyArray
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.js.ReadonlyArray
-import kotlinx.js.jso
 import mui.icons.material.ChevronRight
 import mui.icons.material.ExpandMore
 import mui.lab.TreeItem
 import mui.material.Stack
 import mui.material.styles.Theme
 import mui.system.responsive
-import react.FC
-import react.Props
-import react.ReactNode
-import react.create
-import react.useContext
-import react.useEffect
-import react.useState
+import react.*
 
 data class WikiBrowserFilters(
     val searchText: String? = null
@@ -44,7 +38,7 @@ external interface WikiDirectoryExplorerProps : Props {
 }
 
 val WikiDirectoryExplorer = FC<WikiDirectoryExplorerProps> { props ->
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
 
     var currentWikiFilters by useState<WikiBrowserFilters>()
     var wikiFilters = props.wikiFilters ?: WikiBrowserFilters()

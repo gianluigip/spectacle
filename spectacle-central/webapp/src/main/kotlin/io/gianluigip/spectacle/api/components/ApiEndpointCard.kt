@@ -9,24 +9,24 @@ import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.ComponentEndpointResponse
 import io.gianluigip.spectacle.wiki.components.MarkdownViewer
-import kotlinx.js.jso
+import js.core.jso
 import mui.material.Accordion
 import mui.material.AccordionDetails
 import mui.material.AccordionSummary
 import mui.material.Grid
-import mui.material.GridDirection.row
+import mui.material.GridDirection.Companion.row
 import mui.material.styles.Theme
 import mui.system.responsive
 import react.FC
 import react.Props
-import react.useContext
+import react.useRequiredContext
 
 external interface ApiEndpointCardProps : Props {
     var endpoint: ComponentEndpointResponse
 }
 
 val ApiEndpointCard = FC<ApiEndpointCardProps> { props ->
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val endpoint = props.endpoint
 
     Accordion {

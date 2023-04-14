@@ -6,11 +6,7 @@ import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
 import kotlinx.browser.document
 import mui.material.Box
-import react.FC
-import react.Props
-import react.useContext
-import react.useEffect
-import react.useState
+import react.*
 import kotlin.random.Random
 
 external interface DiagramProps : Props {
@@ -19,7 +15,7 @@ external interface DiagramProps : Props {
 }
 
 val Diagram = FC<DiagramProps> {
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val diagramId by useState("diagram-${Random.nextInt()}")
 
     useEffect {

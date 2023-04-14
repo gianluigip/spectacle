@@ -5,7 +5,7 @@ import csstype.number
 import io.gianluigip.spectacle.common.components.SectionTitle
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.EndpointRequestResponse
-import kotlinx.js.jso
+import js.core.jso
 import mui.material.Accordion
 import mui.material.AccordionDetails
 import mui.material.AccordionSummary
@@ -14,14 +14,14 @@ import mui.material.styles.Theme
 import mui.system.responsive
 import react.FC
 import react.Props
-import react.useContext
+import react.useRequiredContext
 
 external interface EndpointRequestCardProps : Props {
     var request: EndpointRequestResponse
 }
 
 val EndpointRequestCard = FC<EndpointRequestCardProps> { props ->
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val request = props.request
 
     Accordion {

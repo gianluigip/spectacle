@@ -4,18 +4,14 @@ import csstype.px
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
-import kotlinx.js.jso
+import js.core.jso
 import mui.icons.material.ExpandMore
 import mui.material.Accordion
 import mui.material.AccordionDetails
 import mui.material.AccordionSummary
 import mui.material.Typography
-import mui.material.styles.TypographyVariant.subtitle1
-import react.FC
-import react.Props
-import react.create
-import react.useContext
-import react.useState
+import mui.material.styles.TypographyVariant.Companion.subtitle1
+import react.*
 
 external interface FeaturesReportProps : Props {
     var features: List<FeatureReportResponse>
@@ -23,7 +19,7 @@ external interface FeaturesReportProps : Props {
 }
 
 val FeaturesReport = FC<FeaturesReportProps> { props ->
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val features = props.features.sortedBy { feature -> feature.name }
 
     features.forEach { feature ->

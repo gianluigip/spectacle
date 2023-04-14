@@ -3,19 +3,9 @@ package io.gianluigip.spectacle.auth.components
 import csstype.px
 import io.gianluigip.spectacle.auth.AuthContext
 import io.gianluigip.spectacle.common.utils.toNode
-import kotlinx.js.jso
+import js.core.jso
 import mui.icons.material.Logout
-import mui.material.Avatar
-import mui.material.Divider
-import mui.material.IconButton
-import mui.material.ListItemIcon
-import mui.material.Menu
-import mui.material.MenuItem
-import mui.material.Size
-import mui.material.SvgIconSize
-import mui.material.Tooltip
-import org.w3c.dom.Element
-import org.w3c.dom.HTMLButtonElement
+import mui.material.*
 import react.FC
 import react.Props
 import react.dom.aria.AriaHasPopup
@@ -23,11 +13,13 @@ import react.dom.aria.ariaControls
 import react.dom.aria.ariaExpanded
 import react.dom.aria.ariaHasPopup
 import react.dom.events.MouseEvent
-import react.useContext
+import react.useRequiredContext
 import react.useState
+import web.dom.Element
+import web.html.HTMLButtonElement
 
 val AuthMenu = FC<Props> {
-    var authenticatedUser by useContext(AuthContext)
+    var authenticatedUser by useRequiredContext(AuthContext)
     var anchorEl by useState<Element>()
     val isOpen = anchorEl != null
 

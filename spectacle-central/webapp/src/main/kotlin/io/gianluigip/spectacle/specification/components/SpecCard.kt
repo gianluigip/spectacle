@@ -8,24 +8,20 @@ import io.gianluigip.spectacle.common.utils.toDisplay
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.SpecReportResponse
 import io.gianluigip.spectacle.specification.toDisplay
-import kotlinx.js.jso
-import mui.material.Accordion
-import mui.material.AccordionDetails
-import mui.material.AccordionSummary
-import mui.material.Grid
-import mui.material.GridDirection.row
-import mui.material.Typography
+import js.core.jso
+import mui.material.*
+import mui.material.GridDirection.Companion.row
 import mui.system.responsive
 import react.FC
 import react.Props
-import react.useContext
+import react.useRequiredContext
 
 external interface SpecCardProps : Props {
     var spec: SpecReportResponse
 }
 
 val SpecCard = FC<SpecCardProps> {
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val spec = it.spec
 
     Accordion {

@@ -3,11 +3,7 @@ package io.gianluigip.spectacle.feature.components
 import csstype.Color
 import csstype.pct
 import csstype.px
-import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.components.TabList
-import io.gianluigip.spectacle.common.components.md
-import io.gianluigip.spectacle.common.components.xl
-import io.gianluigip.spectacle.common.components.xs
+import io.gianluigip.spectacle.common.components.*
 import io.gianluigip.spectacle.common.utils.infoMain
 import io.gianluigip.spectacle.common.utils.toDisplay
 import io.gianluigip.spectacle.common.utils.toNode
@@ -20,26 +16,16 @@ import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
 import io.gianluigip.spectacle.specification.components.SpecCard
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.components.WikiListBrowser
-import kotlinx.js.jso
+import js.core.jso
 import mui.lab.TabContext
 import mui.lab.TabPanel
-import mui.material.Box
-import mui.material.Grid
-import mui.material.GridDirection
-import mui.material.Stack
-import mui.material.Tab
-import mui.material.Typography
+import mui.material.*
 import mui.material.styles.Theme
-import mui.material.styles.TypographyVariant.h5
-import mui.material.styles.TypographyVariant.h6
+import mui.material.styles.TypographyVariant.Companion.h5
+import mui.material.styles.TypographyVariant.Companion.h6
 import mui.system.responsive
-import react.FC
-import react.Props
-import react.ReactNode
-import react.create
+import react.*
 import react.dom.onChange
-import react.useContext
-import react.useState
 
 external interface FeatureViewerProps : Props {
     var feature: FeatureResponse
@@ -50,7 +36,7 @@ external interface FeatureViewerProps : Props {
 
 val FeatureViewer = FC<FeatureViewerProps> { props ->
     var tabSelected by useState<String>("Specifications")
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val feature = props.feature
     val specs = props.specs
     val interactions = props.interactions

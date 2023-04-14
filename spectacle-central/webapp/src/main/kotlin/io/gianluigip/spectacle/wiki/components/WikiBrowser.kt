@@ -12,14 +12,14 @@ import io.gianluigip.spectacle.wiki.api.getWikiPage
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
 import io.gianluigip.spectacle.wiki.wikiPath
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.js.jso
 import mui.material.Grid
 import mui.material.GridDirection
 import mui.material.Paper
 import mui.material.Typography
-import mui.material.styles.TypographyVariant.h5
+import mui.material.styles.TypographyVariant.Companion.h5
 import mui.system.responsive
 import react.FC
 import react.Props

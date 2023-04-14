@@ -16,34 +16,22 @@ import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
 import io.gianluigip.spectacle.specification.components.specificationsReportPath
 import io.gianluigip.spectacle.wiki.components.wikiPath
+import js.core.jso
 import kotlinx.browser.window
-import kotlinx.js.jso
 import mui.icons.material.Brightness4
 import mui.icons.material.Brightness7
 import mui.icons.material.GitHub
-import mui.material.AppBar
-import mui.material.AppBarPosition
-import mui.material.Box
-import mui.material.IconButton
-import mui.material.IconButtonColor
-import mui.material.Size
-import mui.material.Switch
-import mui.material.Toolbar
-import mui.material.Tooltip
-import mui.material.styles.TypographyVariant.h6
-import react.FC
-import react.Props
-import react.ReactNode
-import react.create
+import mui.material.*
+import mui.material.styles.TypographyVariant.Companion.h6
+import react.*
 import react.dom.aria.AriaHasPopup
 import react.dom.aria.ariaHasPopup
 import react.dom.aria.ariaLabel
-import react.useContext
 
 const val GITHUB_URL = "https://github.com/gianluigip/spectacle"
 
 val Header = FC<Props> {
-    var theme by useContext(ThemeContext)
+    var theme by useRequiredContext(ThemeContext)
 
     AppBar {
         position = AppBarPosition.fixed

@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.common.components
 
 import csstype.number
-import kotlinx.js.jso
+import js.core.jso
 import mui.material.LinearProgress
 import react.FC
 import react.Props

@@ -8,22 +8,16 @@ import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.report.api.model.EventReportResponse
 import io.gianluigip.spectacle.specification.model.EventFormat
 import io.gianluigip.spectacle.wiki.components.MarkdownViewer
-import kotlinx.js.jso
+import js.core.jso
 import mui.icons.material.ExpandMore
-import mui.material.Accordion
-import mui.material.AccordionDetails
-import mui.material.AccordionSummary
-import mui.material.Grid
-import mui.material.GridDirection.row
-import mui.material.Stack
-import mui.material.StackDirection
-import mui.material.Typography
-import mui.material.styles.TypographyVariant.subtitle1
+import mui.material.*
+import mui.material.GridDirection.Companion.row
+import mui.material.styles.TypographyVariant.Companion.subtitle1
 import mui.system.responsive
 import react.FC
 import react.Props
 import react.create
-import react.useContext
+import react.useRequiredContext
 
 external interface EventReportProps : Props {
     var event: EventReportResponse
@@ -31,7 +25,7 @@ external interface EventReportProps : Props {
 }
 
 val EventAccordion = FC<EventReportProps> { props ->
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val event = props.event
     val showConsumeAndProduceBy = props.showConsumeAndProduceBy ?: true
 

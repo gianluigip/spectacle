@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.home
 
 import csstype.px
-import kotlinx.js.jso
+import js.core.jso
 import mui.material.PaletteMode
 import mui.material.styles.createTheme
 
