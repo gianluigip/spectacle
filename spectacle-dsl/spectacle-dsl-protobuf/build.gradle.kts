@@ -1,3 +1,5 @@
+val ktorVersion = "2.2.3"
+
 plugins {
     kotlin("multiplatform")
     id("convention.publication")
@@ -23,28 +25,29 @@ kotlin {
             useJUnitPlatform()
         }
     }
-    js { browser() }
 
     sourceSets {
-        val commonMain by getting {
+        val jvmMain by getting {
             dependencies {
                 implementation(project(":spectacle-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
-            }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-                implementation(project(":spectacle-dsl-assertions"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-bdd"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-publisher"))
+
+                implementation("io.grpc:grpc-protobuf:1.54.0")
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation(project(":spectacle-dsl-assertions"))
-                implementation(project(":spectacle-dsl-publisher"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-assertions"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
             }
         }
+    }
+}
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        languageVersion = "1.4"
     }
 }

@@ -1,6 +1,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.gianluigip/spectacle-dsl?label=Maven%20Central)](https://search.maven.org/artifact/io.github.gianluigip/spectacle-dsl)
 
-# [Spectacle DSL](./docs/Overview.md)
+# [Spectacle DSL](docs/Overview.md)
 
 A Kotlin multiplatform library for writing readable tests as specifications, it includes an
 Assertion DSL and a BDD DSL, optionally you can publish your specs into the specs
@@ -19,7 +19,7 @@ Add dependency:
 testImplementation("io.github.gianluigip:spectacle-dsl:VERSION")
 ```
 
-### [BDD DSL](./../spectacle-dsl-bdd/docs/BddDsl.md)
+### [BDD DSL](../spectacle-dsl-bdd/docs/BddDsl.md)
 
 The simpler use case is to use the DSL to make your tests more readable, it's particularly useful
 for writing Integration Tests because it usually validates complex behaviour and requires more setup
@@ -38,9 +38,9 @@ Now you created a test that is easy to read and other devs can rely on it for un
 software, but we can do it better, we can extract all the BDD steps along with some extra metadata
 to build a specification that can be shared outside the codebase.
 
-You can read more about how to publish your specs in the [BDD DSL Page](./../spectacle-dsl-bdd/docs/BddDsl.md).
+You can read more about how to publish your specs in the [BDD DSL Page](../spectacle-dsl-bdd/docs/BddDsl.md).
 
-## [Configure DSL](./docs/ConfigureDsl.md)
+## [Configure DSL](docs/ConfigureDsl.md)
 
 To change the default behaviour when publishing you need to add `spectacle.properties` to your
 test `resources` folder with the following content:
@@ -81,7 +81,7 @@ reuse the same `source` for multiple tests executions like different services or
 the same repo, you will overwrite the specs, each `spectacle.properties` should have a different
 source.
 
-## [Assertion DSL](./../spectacle-dsl-assertions/docs/AssertionDsl.md)
+## [Assertion DSL](../spectacle-dsl-assertions/docs/AssertionDsl.md)
 
 To improve even further the readability Spectacle also include an Assertion DSL that can be used to
 validate your tests more easily.
@@ -114,7 +114,7 @@ boilerplate in your tests.
 The Assertion DSL can be use independently although is intended to be use along the BDD DSL to
 maximize the readability of your specifications.
 
-## [Interaction DSL](./docs/Features/InteractionsDsl.md)
+## [Interaction DSL](docs/Features/InteractionsDsl.md)
 
 When writing your specs with the `BDD DSL` you can optionally also use the `Interactions DSL` to
 register what dependencies you are setting up or what is the output of your component.
@@ -123,31 +123,31 @@ If you add interactions to your specs then it will be published to `Central` alo
 the tool will be able to generate a system diagram that shows the interactions between all the
 components and teams.
 
-For more information you can visit the [Interaction DSL Page](./docs/Features/InteractionsDsl.md)
+For more information you can visit the [Interaction DSL Page](docs/Features/InteractionsDsl.md)
 
-## [HTTP DSL](./../spectacle-dsl-http/docs/HttpDsl.md)
+## [HTTP DSL](../spectacle-dsl-http/docs/HttpDsl.md)
 
 The HTTP DSL is wrapper for the Ktor client that collects metadata about the calls that you make and is able to register them as spec interactions.
 
 Then all the calls registered during your integration tests can be published to `Spectacle Central` and use a dedicated API page to review all the
 HTTP endpoints in your system.
 
-For more information you can visit the [Http DSL Page](./../spectacle-dsl-http/docs/HttpDsl.md)
+For more information you can visit the [Http DSL Page](../spectacle-dsl-http/docs/HttpDsl.md)
 
-## [Protobuf DSL](./../spectacle-dsl-protobuf/docs/ProtobufDsl.md)
+## [Protobuf DSL](../spectacle-dsl-protobuf/docs/ProtobufDsl.md)
 
 The Protobuf DSL allows you to register your proto events as interactions in your tests.
 
 Then all the events registered during your integration tests can be published to `Spectacle Central` and use a dedicated Events page to review all the
 events in your system.
 
-For more information you can visit the [Http DSL Page](./../spectacle-dsl-protobuf/docs/ProtobufDsl.md)
+For more information you can visit the [Http DSL Page](../spectacle-dsl-protobuf/docs/ProtobufDsl.md)
 
-# [Wiki](./docs/Features/Wiki.md)
+# [Wiki](docs/Features/Wiki.md)
 
 Additionally to the writing and publishing of specs, `Spectacle DSL` can find all the Markdown files
 in a given folder and sync it then in `Spectacke Central`, the idea is that you can write your tech
 docs close to your code but search it in a central place that any team member or stakeholder can
 quickle reference.
 
-For more information you can visit the [Wiki Page](./docs/Features/Wiki.md)
+For more information you can visit the [Wiki Page](docs/Features/Wiki.md)

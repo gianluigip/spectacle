@@ -11,4 +11,4 @@ Add dependency:
   testImplementation("io.github.gianluigip:spectacle-dsl-http:VERSION")
 ```
 
-You can review [how it works here](./docs/ProtobufDsl.md)
+You can review [how it works here](docs/ProtobufDsl.md)
