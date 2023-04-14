@@ -2,7 +2,7 @@ package io.gianluigip.spectacle.common.components
 
 import csstype.Height
 import csstype.Width
-import kotlinx.js.jso
+import js.core.jso
 import mui.material.Box
 import react.FC
 import react.Props

@@ -6,24 +6,24 @@ import io.gianluigip.spectacle.diagram.utils.generateMermaidConfigHeader
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.wiki.components.markdown_plugins.rehypeHighlight
 import io.gianluigip.spectacle.wiki.components.markdown_plugins.remarkGfm
+import js.core.jso
 import kotlinx.browser.document
 import kotlinx.dom.createElement
-import kotlinx.js.jso
 import mui.material.Box
 import mui.material.styles.Theme
 import org.w3c.dom.Element
 import org.w3c.dom.get
 import react.FC
 import react.Props
-import react.useContext
 import react.useEffect
+import react.useRequiredContext
 
 external interface MarkdownProps : Props {
     var content: String
 }
 
 val MarkdownViewer = FC<MarkdownProps> {
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val content = it.content
 
     useEffect {

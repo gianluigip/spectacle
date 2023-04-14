@@ -1,26 +1,19 @@
 package io.gianluigip.spectacle.feature.components
 
-import csstype.Color
 import csstype.Display
-import csstype.FlexShrink
 import csstype.number
 import csstype.px
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.feature.api.model.FeatureResponse
 import io.gianluigip.spectacle.home.ThemeContext
+import js.core.jso
 import kotlinx.datetime.Clock
-import kotlinx.js.jso
-import mui.material.Autocomplete
-import mui.material.AutocompleteProps
-import mui.material.Box
-import mui.material.TextField
-import mui.material.Typography
+import mui.material.*
 import react.FC
-import react.IntrinsicType
 import react.Props
 import react.create
-import react.useContext
+import react.useRequiredContext
 
 external interface FeaturesSelectorProps : Props {
     var features: List<FeatureResponse>
@@ -30,7 +23,7 @@ external interface FeaturesSelectorProps : Props {
 
 @Suppress("UPPER_BOUND_VIOLATED")
 val FeaturesSelector = FC<FeaturesSelectorProps> { props ->
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val features = props.features
 
     Autocomplete<AutocompleteProps<FeatureResponse>> {

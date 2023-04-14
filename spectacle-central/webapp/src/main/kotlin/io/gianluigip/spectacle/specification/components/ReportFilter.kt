@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.specification.components
 
 import io.gianluigip.spectacle.common.utils.toNode
-import kotlinx.js.jso
+import js.core.jso
 import mui.material.Autocomplete
 import mui.material.AutocompleteProps
 import mui.material.TextField

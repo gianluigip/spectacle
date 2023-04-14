@@ -7,10 +7,10 @@ import kotlinx.coroutines.launch
 import mui.material.TextField
 import react.FC
 import react.Props
-import react.dom.html.InputType
 import react.dom.onChange
 import react.useEffectOnce
 import react.useState
+import web.html.InputType
 import kotlin.random.Random
 
 private const val DEFAULT_DELAY = 500L

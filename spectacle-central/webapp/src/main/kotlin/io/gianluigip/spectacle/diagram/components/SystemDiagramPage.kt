@@ -10,17 +10,18 @@ import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.diagram.api.getInteractionsReport
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.navigation.logic.Paths.systemDiagramPath
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.report.api.model.SystemInteractionResponse
 import io.gianluigip.spectacle.specification.components.FiltersSelected
 import io.gianluigip.spectacle.specification.components.ReportFilters
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.js.jso
 import mui.material.Box
 import mui.material.Paper
 import mui.material.Typography
-import mui.material.styles.TypographyVariant.h5
+import mui.material.styles.TypographyVariant.Companion.h5
 import react.FC
 import react.Props
 import react.router.useLocation
@@ -28,7 +29,6 @@ import react.router.useNavigate
 import react.useEffect
 import react.useState
 
-const val systemDiagramPath = "/system_diagram"
 val SystemDiagramPage = FC<Props> {
     val navigate = useNavigate()
 

@@ -14,7 +14,7 @@ import muix.pickers.LocalizationProvider
 import react.FC
 import react.Props
 import react.create
-import react.dom.html.InputType
+import web.html.InputType
 
 external interface ReportTimeFilterProps : Props {
     var label: String

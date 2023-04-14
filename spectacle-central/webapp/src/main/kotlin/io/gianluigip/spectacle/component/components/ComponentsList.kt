@@ -12,29 +12,24 @@ import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.component.api.Component
 import io.gianluigip.spectacle.component.api.getComponents
 import io.gianluigip.spectacle.home.ThemeContext
+import io.gianluigip.spectacle.navigation.logic.Paths.componentsPath
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.js.jso
 import mui.material.Box
 import mui.material.Grid
-import mui.material.GridDirection.column
-import mui.material.GridDirection.row
+import mui.material.GridDirection.Companion.column
+import mui.material.GridDirection.Companion.row
 import mui.material.Tooltip
 import mui.material.Typography
 import mui.material.styles.Theme
-import mui.material.styles.TypographyVariant.h6
+import mui.material.styles.TypographyVariant.Companion.h6
 import mui.system.responsive
-import react.FC
-import react.Props
-import react.ReactNode
-import react.create
+import react.*
 import react.router.dom.NavLink
-import react.useContext
-import react.useEffectOnce
-import react.useState
 
 val ComponentList = FC<Props> {
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
 
     var components by useState<List<Component>>()
     useEffectOnce {

@@ -1,6 +1,6 @@
 package io.gianluigip.spectacle.common.utils
 
-import history.Search
+import react.router.Search
 
 fun Search.parseParams(): Map<String, String> {
     val params = mutableMapOf<String, String>()

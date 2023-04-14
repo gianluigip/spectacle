@@ -1,13 +1,12 @@
 package io.gianluigip.spectacle.common.api
 
 import io.gianluigip.spectacle.auth.AuthenticatedUser
-import io.ktor.client.HttpClient
-import io.ktor.client.engine.js.Js
-import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BasicAuthCredentials
-import io.ktor.client.plugins.auth.providers.basic
-import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.client.*
+import io.ktor.client.engine.js.*
+import io.ktor.client.plugins.auth.*
+import io.ktor.client.plugins.auth.providers.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.browser.window
 
 private val locationOrigin = window.location.origin
@@ -21,14 +20,16 @@ private var _API_CLIENT = HttpClient(Js) {
     install(ContentNegotiation) { json() }
 }
 
-fun updateApiClientWithCredentials(credentials: AuthenticatedUser) {
+fun updateApiClientWithCredentials(credentials: AuthenticatedUser?) {
     _API_CLIENT = HttpClient(Js) {
         install(ContentNegotiation) { json() }
-        install(Auth) {
-            basic {
-                sendWithoutRequest { true }
-                credentials {
-                    BasicAuthCredentials(username = credentials.username, password = credentials.password)
+        credentials?.let {
+            install(Auth) {
+                basic {
+                    sendWithoutRequest { true }
+                    credentials {
+                        BasicAuthCredentials(username = credentials.username, password = credentials.password)
+                    }
                 }
             }
         }

@@ -2,27 +2,24 @@ package io.gianluigip.spectacle.specification.components
 
 import csstype.pct
 import csstype.px
-import io.gianluigip.spectacle.common.components.LoadingBar
-import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.components.md
-import io.gianluigip.spectacle.common.components.xl
-import io.gianluigip.spectacle.common.components.xs
+import io.gianluigip.spectacle.common.components.*
 import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.navigation.logic.Paths.specificationsPath
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.api.getSpecReport
 import io.gianluigip.spectacle.specification.model.SpecStatus
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import kotlinx.datetime.Instant
-import kotlinx.js.jso
 import mui.material.Grid
-import mui.material.GridDirection.row
+import mui.material.GridDirection.Companion.row
 import mui.material.Paper
 import mui.material.Typography
-import mui.material.styles.TypographyVariant.h5
+import mui.material.styles.TypographyVariant.Companion.h5
 import mui.system.responsive
 import react.FC
 import react.Props
@@ -31,7 +28,6 @@ import react.router.useNavigate
 import react.useEffect
 import react.useState
 
-const val specificationsReportPath = "/specifications"
 val SpecificationsReport = FC<Props> {
     val navigate = useNavigate()
 
@@ -69,7 +65,7 @@ val SpecificationsReport = FC<Props> {
         }
     }
 
-    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(specificationsReportPath, filters))
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(specificationsPath, filters))
 
     useEffect {
         if (currentFilters != queryFilters) loadSpecReport(queryFilters)

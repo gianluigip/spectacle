@@ -4,21 +4,18 @@ import csstype.pct
 import csstype.px
 import csstype.vw
 import io.gianluigip.spectacle.api.api.getApiReport
-import io.gianluigip.spectacle.common.components.LoadingBar
-import io.gianluigip.spectacle.common.components.Spacer
-import io.gianluigip.spectacle.common.components.md
-import io.gianluigip.spectacle.common.components.xl
-import io.gianluigip.spectacle.common.components.xs
+import io.gianluigip.spectacle.common.components.*
 import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes
+import io.gianluigip.spectacle.navigation.logic.Paths.apiPath
 import io.gianluigip.spectacle.report.api.model.ComponentApiResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.components.FiltersSelected
 import io.gianluigip.spectacle.specification.components.ReportFilters
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.js.jso
 import mui.material.Grid
 import mui.material.GridDirection
 import mui.material.Paper
@@ -32,7 +29,6 @@ import react.router.useNavigate
 import react.useEffect
 import react.useState
 
-const val apiReportPath = "/api"
 val ApiReportPage = FC<Props> {
     val navigate = useNavigate()
 
@@ -66,7 +62,7 @@ val ApiReportPage = FC<Props> {
         }
     }
 
-    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(apiReportPath, filters))
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(apiPath, filters))
 
     useEffect {
         if (currentFilters != queryFilters) loadApiReport(queryFilters)

@@ -4,13 +4,9 @@ import csstype.Display
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.component.api.Component
 import io.gianluigip.spectacle.feature.api.model.FeatureResponse
+import js.core.jso
 import kotlinx.datetime.Clock
-import kotlinx.js.jso
-import mui.material.Autocomplete
-import mui.material.AutocompleteProps
-import mui.material.Box
-import mui.material.TextField
-import mui.material.Typography
+import mui.material.*
 import react.FC
 import react.Props
 import react.create

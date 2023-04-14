@@ -12,6 +12,7 @@ import io.gianluigip.spectacle.component.api.getComponents
 import io.gianluigip.spectacle.diagram.api.getInteractionsReport
 import io.gianluigip.spectacle.events.api.getEventReport
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.navigation.logic.Paths.componentsPath
 import io.gianluigip.spectacle.report.api.model.ApiReportResponse
 import io.gianluigip.spectacle.report.api.model.EventsReportResponse
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
@@ -19,23 +20,17 @@ import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
 import io.gianluigip.spectacle.specification.api.getSpecReport
 import io.gianluigip.spectacle.wiki.api.getAllPages
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
-import kotlinx.js.jso
 import mui.material.Paper
 import mui.material.Typography
-import mui.material.styles.TypographyVariant.h6
-import react.FC
-import react.Props
+import mui.material.styles.TypographyVariant.Companion.h6
+import react.*
 import react.router.useLocation
 import react.router.useNavigate
-import react.useEffect
-import react.useEffectOnce
-import react.useState
-
-const val componentsPath = "/components"
 
 val ComponentsPage = FC<Props> { _ ->
     val navigate = useNavigate()

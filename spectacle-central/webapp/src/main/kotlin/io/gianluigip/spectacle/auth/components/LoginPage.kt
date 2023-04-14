@@ -4,47 +4,39 @@ import csstype.Display
 import csstype.JustifyContent
 import csstype.TextAlign
 import csstype.px
-import io.gianluigip.spectacle.auth.AuthContext
 import io.gianluigip.spectacle.auth.AuthenticatedUser
 import io.gianluigip.spectacle.auth.api.postLogin
+import io.gianluigip.spectacle.auth.hooks.useAuthManager
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import kotlinx.js.jso
-import mui.material.Alert
-import mui.material.AlertColor.error
-import mui.material.Box
-import mui.material.Button
-import mui.material.ButtonVariant
-import mui.material.Paper
-import mui.material.Stack
-import mui.material.TextField
-import mui.material.Typography
-import mui.material.styles.TypographyVariant.h5
+import mui.material.*
+import mui.material.AlertColor.Companion.error
+import mui.material.styles.TypographyVariant.Companion.h5
 import mui.system.responsive
-import org.w3c.dom.HTMLFormElement
 import react.FC
 import react.Props
 import react.dom.events.FormEvent
-import react.dom.html.ButtonType
-import react.dom.html.InputType
 import react.dom.html.ReactHTML
 import react.dom.onChange
 import react.router.useLocation
 import react.router.useNavigate
-import react.useContext
+import react.useRequiredContext
 import react.useState
+import web.html.ButtonType
+import web.html.HTMLFormElement
+import web.html.InputType
 
-const val loginPath = "/login"
 @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
 val LoginPage = FC<Props> {
-    val theme by useContext(ThemeContext)
+    val theme by useRequiredContext(ThemeContext)
     val navigate = useNavigate()
     val location = useLocation()
-    var user by useContext(AuthContext)
+    val userManager = useAuthManager()
 
     var username by useState("")
     var password by useState("")
@@ -61,7 +53,7 @@ val LoginPage = FC<Props> {
                 return@launch
             }
             isLoginFailed = false
-            user = authenticatedUser
+            userManager.updateAuthUser(authenticatedUser)
             navigate.invoke(to = from, options = jso { replace = true })
         }
     }

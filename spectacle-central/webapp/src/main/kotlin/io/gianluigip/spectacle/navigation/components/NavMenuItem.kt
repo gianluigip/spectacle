@@ -4,7 +4,7 @@ import csstype.Color
 import csstype.None
 import csstype.TextDecoration
 import emotion.react.css
-import kotlinx.js.jso
+import js.core.jso
 import mui.material.Typography
 import mui.material.styles.TypographyVariant
 import react.FC
