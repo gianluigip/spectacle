@@ -12,6 +12,7 @@ import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.component.api.Component
 import io.gianluigip.spectacle.component.api.getComponents
 import io.gianluigip.spectacle.home.ThemeContext
+import io.gianluigip.spectacle.navigation.logic.Paths.componentsPath
 import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch

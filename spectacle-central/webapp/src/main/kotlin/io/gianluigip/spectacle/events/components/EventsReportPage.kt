@@ -7,6 +7,7 @@ import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.events.api.getEventReport
 import io.gianluigip.spectacle.home.Themes
+import io.gianluigip.spectacle.navigation.logic.Paths.eventsPath
 import io.gianluigip.spectacle.report.api.model.EventReportResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.components.FiltersSelected
@@ -27,7 +28,6 @@ import react.router.useNavigate
 import react.useEffect
 import react.useState
 
-const val eventsReportPath = "/events"
 val EventsReportPage = FC<Props> {
     val navigate = useNavigate()
 
@@ -61,7 +61,7 @@ val EventsReportPage = FC<Props> {
         }
     }
 
-    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(eventsReportPath, filters))
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(eventsPath, filters))
 
     useEffect {
         if (currentFilters != queryFilters) loadEventReport(queryFilters)

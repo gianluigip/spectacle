@@ -3,19 +3,13 @@ package io.gianluigip.spectacle.navigation.components
 import csstype.None
 import csstype.number
 import csstype.px
-import io.gianluigip.spectacle.api.components.apiReportPath
 import io.gianluigip.spectacle.auth.components.AuthMenu
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
-import io.gianluigip.spectacle.component.components.componentsPath
-import io.gianluigip.spectacle.diagram.components.systemDiagramPath
-import io.gianluigip.spectacle.events.components.eventsReportPath
-import io.gianluigip.spectacle.feature.components.featuresPath
 import io.gianluigip.spectacle.home.GridAreas
 import io.gianluigip.spectacle.home.ThemeContext
 import io.gianluigip.spectacle.home.Themes
-import io.gianluigip.spectacle.specification.components.specificationsReportPath
-import io.gianluigip.spectacle.wiki.components.wikiPath
+import io.gianluigip.spectacle.navigation.logic.Routes
 import js.core.jso
 import kotlinx.browser.window
 import mui.icons.material.Brightness4
@@ -47,46 +41,12 @@ val Header = FC<Props> {
                 textVariant = h6
             }
 
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = componentsPath
-                label = "Components"
-            }
-
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = systemDiagramPath
-                label = "System"
-            }
-
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = apiReportPath
-                label = "API"
-            }
-
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = eventsReportPath
-                label = "Events"
-            }
-
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = featuresPath
-                label = "Features"
-            }
-
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = specificationsReportPath
-                label = "Specifications"
-            }
-
-            Spacer { width = 10.px }
-            NavMenuItem {
-                toPath = wikiPath
-                label = "Wiki"
+            Routes.MENU.forEach { route ->
+                Spacer { width = 10.px }
+                NavMenuItem {
+                    toPath = route.path
+                    label = route.name
+                }
             }
 
             Box { sx = jso { flexGrow = number(1.0) } }

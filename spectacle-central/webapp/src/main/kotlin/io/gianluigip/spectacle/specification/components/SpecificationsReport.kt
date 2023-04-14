@@ -6,6 +6,7 @@ import io.gianluigip.spectacle.common.components.*
 import io.gianluigip.spectacle.common.utils.buildUrlWithParameters
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.navigation.logic.Paths.specificationsPath
 import io.gianluigip.spectacle.report.api.model.FeatureReportResponse
 import io.gianluigip.spectacle.report.api.model.ReportFiltersResponse
 import io.gianluigip.spectacle.specification.api.getSpecReport
@@ -27,7 +28,6 @@ import react.router.useNavigate
 import react.useEffect
 import react.useState
 
-const val specificationsReportPath = "/specifications"
 val SpecificationsReport = FC<Props> {
     val navigate = useNavigate()
 
@@ -65,7 +65,7 @@ val SpecificationsReport = FC<Props> {
         }
     }
 
-    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(specificationsReportPath, filters))
+    fun refreshSearch(filters: FiltersSelected) = navigate.invoke(buildUrlWithParameters(specificationsPath, filters))
 
     useEffect {
         if (currentFilters != queryFilters) loadSpecReport(queryFilters)

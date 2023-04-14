@@ -1,16 +1,17 @@
 package io.gianluigip.spectacle.auth.components
 
-import history.Location
-import history.LocationState
-import io.gianluigip.spectacle.auth.AuthContext
+import io.gianluigip.spectacle.auth.hooks.useAuthManager
+import io.gianluigip.spectacle.navigation.logic.Paths.loginPath
 import js.core.jso
 import react.FC
 import react.PropsWithChildren
-import react.router.Navigate
 import react.router.useLocation
-import react.useRequiredContext
+import react.router.useNavigate
+import react.useEffect
+import remix.run.router.Location
+import remix.run.router.LocationState
 
-external interface NavigationState {
+external interface NavigationState : LocationState {
     var from: Location?
 }
 
@@ -18,15 +19,20 @@ val NavigationState.fromFullPath: String get() = if (from != null) "${from!!.pat
 
 val RequireAuth = FC<PropsWithChildren> { props ->
     val location = useLocation()
-    val user by useRequiredContext(AuthContext)
+    val navigate = useNavigate()
+    val user = useAuthManager().currentUser()
 
-    if (user == null) {
-        Navigate {
-            to = loginPath
-            replace = true
-            state = jso<NavigationState> { from = location }.unsafeCast<LocationState>()
-        }
-        return@FC
+    useEffect {
+        if (user == null) navigate(
+            to = loginPath,
+            options = jso {
+                replace = true
+                state = jso<NavigationState> { from = location }
+            }
+        )
     }
+
+    if (user == null) return@FC
+
     +props.children
 }

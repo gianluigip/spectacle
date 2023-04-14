@@ -1,4 +1,4 @@
-package io.gianluigip.spectacle.home
+package io.gianluigip.spectacle.home.components
 
 import csstype.pct
 import csstype.px
@@ -7,9 +7,9 @@ import io.gianluigip.spectacle.common.components.xs
 import io.gianluigip.spectacle.component.components.ComponentList
 import io.gianluigip.spectacle.feature.components.FeaturesList
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.navigation.logic.Paths.wikiPath
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.components.WikiDirectoryExplorer
-import io.gianluigip.spectacle.wiki.components.wikiPath
 import js.core.jso
 import mui.material.Grid
 import mui.material.GridDirection

@@ -1,7 +1,7 @@
 package io.gianluigip.spectacle.auth.components
 
 import csstype.px
-import io.gianluigip.spectacle.auth.AuthContext
+import io.gianluigip.spectacle.auth.hooks.useAuthManager
 import io.gianluigip.spectacle.common.utils.toNode
 import js.core.jso
 import mui.icons.material.Logout
@@ -13,13 +13,12 @@ import react.dom.aria.ariaControls
 import react.dom.aria.ariaExpanded
 import react.dom.aria.ariaHasPopup
 import react.dom.events.MouseEvent
-import react.useRequiredContext
 import react.useState
 import web.dom.Element
 import web.html.HTMLButtonElement
 
 val AuthMenu = FC<Props> {
-    var authenticatedUser by useRequiredContext(AuthContext)
+    val userManager = useAuthManager()
     var anchorEl by useState<Element>()
     val isOpen = anchorEl != null
 
@@ -32,10 +31,10 @@ val AuthMenu = FC<Props> {
     }
 
     fun logout() {
-        authenticatedUser = null
+        userManager.removeUser()
     }
 
-    authenticatedUser?.let { user ->
+    userManager.currentUser()?.let { user ->
         Tooltip {
             title = user.name.toNode()
             IconButton {

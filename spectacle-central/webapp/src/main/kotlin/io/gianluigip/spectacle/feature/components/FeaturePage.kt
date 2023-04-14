@@ -10,6 +10,7 @@ import io.gianluigip.spectacle.diagram.api.getInteractionsReport
 import io.gianluigip.spectacle.feature.api.getFeatures
 import io.gianluigip.spectacle.feature.api.model.FeatureResponse
 import io.gianluigip.spectacle.home.Themes
+import io.gianluigip.spectacle.navigation.logic.Paths.featuresPath
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
 import io.gianluigip.spectacle.report.api.model.SpecsReportResponse
 import io.gianluigip.spectacle.specification.api.getSpecReport
@@ -26,8 +27,6 @@ import mui.material.styles.TypographyVariant.Companion.h6
 import react.*
 import react.router.useLocation
 import react.router.useNavigate
-
-const val featuresPath = "/features"
 
 val FeaturesPage = FC<Props> { _ ->
     val navigate = useNavigate()

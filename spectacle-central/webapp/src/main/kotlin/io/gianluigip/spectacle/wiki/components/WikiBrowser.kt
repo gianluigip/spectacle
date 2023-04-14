@@ -8,6 +8,7 @@ import io.gianluigip.spectacle.common.components.xs
 import io.gianluigip.spectacle.common.utils.escapeSpaces
 import io.gianluigip.spectacle.common.utils.parseParams
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.navigation.logic.Paths.wikiPath
 import io.gianluigip.spectacle.wiki.api.getWikiPage
 import io.gianluigip.spectacle.wiki.api.model.WikiPageMetadataResponse
 import io.gianluigip.spectacle.wiki.api.model.WikiPageResponse
@@ -29,7 +30,6 @@ import react.useEffect
 import react.useState
 
 private const val EXPLORER_SIZE = 3
-const val wikiPath = "/wiki"
 val WikiBrowser = FC<Props> {
 
     val navigate = useNavigate()

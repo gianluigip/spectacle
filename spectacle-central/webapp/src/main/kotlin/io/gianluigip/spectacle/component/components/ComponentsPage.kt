@@ -12,6 +12,7 @@ import io.gianluigip.spectacle.component.api.getComponents
 import io.gianluigip.spectacle.diagram.api.getInteractionsReport
 import io.gianluigip.spectacle.events.api.getEventReport
 import io.gianluigip.spectacle.home.Themes.SPACE_PADDING
+import io.gianluigip.spectacle.navigation.logic.Paths.componentsPath
 import io.gianluigip.spectacle.report.api.model.ApiReportResponse
 import io.gianluigip.spectacle.report.api.model.EventsReportResponse
 import io.gianluigip.spectacle.report.api.model.InteractionsReportResponse
@@ -30,8 +31,6 @@ import mui.material.styles.TypographyVariant.Companion.h6
 import react.*
 import react.router.useLocation
 import react.router.useNavigate
-
-const val componentsPath = "/components"
 
 val ComponentsPage = FC<Props> { _ ->
     val navigate = useNavigate()

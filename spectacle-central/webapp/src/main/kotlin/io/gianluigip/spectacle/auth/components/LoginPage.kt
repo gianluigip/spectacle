@@ -4,9 +4,9 @@ import csstype.Display
 import csstype.JustifyContent
 import csstype.TextAlign
 import csstype.px
-import io.gianluigip.spectacle.auth.AuthContext
 import io.gianluigip.spectacle.auth.AuthenticatedUser
 import io.gianluigip.spectacle.auth.api.postLogin
+import io.gianluigip.spectacle.auth.hooks.useAuthManager
 import io.gianluigip.spectacle.common.components.Spacer
 import io.gianluigip.spectacle.common.utils.toNode
 import io.gianluigip.spectacle.home.ThemeContext
@@ -31,14 +31,12 @@ import web.html.ButtonType
 import web.html.HTMLFormElement
 import web.html.InputType
 
-const val loginPath = "/login"
-
 @Suppress("UNCHECKED_CAST_TO_EXTERNAL_INTERFACE")
 val LoginPage = FC<Props> {
     val theme by useRequiredContext(ThemeContext)
     val navigate = useNavigate()
     val location = useLocation()
-    var user by useRequiredContext(AuthContext)
+    val userManager = useAuthManager()
 
     var username by useState("")
     var password by useState("")
@@ -55,7 +53,7 @@ val LoginPage = FC<Props> {
                 return@launch
             }
             isLoginFailed = false
-            user = authenticatedUser
+            userManager.updateAuthUser(authenticatedUser)
             navigate.invoke(to = from, options = jso { replace = true })
         }
     }
