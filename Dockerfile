@@ -13,11 +13,11 @@ COPY spectacle-central/application/build.gradle.kts $APP_HOME/spectacle-central/
 COPY spectacle-central/webapp/build.gradle.kts $APP_HOME/spectacle-central/webapp/build.gradle.kts
 COPY spectacle-central/common/build.gradle.kts $APP_HOME/spectacle-central/common/build.gradle.kts
 COPY spectacle-central/domain/build.gradle.kts $APP_HOME/spectacle-central/domain/build.gradle.kts
-COPY spectacle-dsl-bdd/build.gradle.kts $APP_HOME/spectacle-dsl-bdd/build.gradle.kts
-COPY spectacle-dsl-assertions/build.gradle.kts $APP_HOME/spectacle-dsl-assertions/build.gradle.kts
-COPY spectacle-dsl-publisher/build.gradle.kts $APP_HOME/spectacle-dsl-publisher/build.gradle.kts
-COPY spectacle-dsl-http/build.gradle.kts $APP_HOME/spectacle-dsl-http/build.gradle.kts
-COPY spectacle-dsl-protobuf/build.gradle.kts $APP_HOME/spectacle-dsl-protobuf/build.gradle.kts
+COPY spectacle-dsl/spectacle-dsl-bdd/build.gradle.kts $APP_HOME/spectacle-dsl/spectacle-dsl-bdd/build.gradle.kts
+COPY spectacle-dsl/spectacle-dsl-assertions/build.gradle.kts $APP_HOME/spectacle-dsl/spectacle-dsl-assertions/build.gradle.kts
+COPY spectacle-dsl/spectacle-dsl-publisher/build.gradle.kts $APP_HOME/spectacle-dsl/spectacle-dsl-publisher/build.gradle.kts
+COPY spectacle-dsl/spectacle-dsl-http/build.gradle.kts $APP_HOME/spectacle-dsl/spectacle-dsl-http/build.gradle.kts
+COPY spectacle-dsl/spectacle-dsl-protobuf/build.gradle.kts $APP_HOME/spectacle-dsl/spectacle-dsl-protobuf/build.gradle.kts
 
 # DOWNLOAD DEPENDENCIES
 RUN gradle build -x test --continue

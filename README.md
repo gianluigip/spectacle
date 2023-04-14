@@ -26,7 +26,7 @@ Spectacle follows the philosophy that only the code and by extension the tests p
 documentation of the system, so it provides a DSL for writing readable tests that can be published
 into a central repository to allows everyone to review.
 
-## [Spectacle DSL](./spectacle-dsl-publisher/README.md)
+## [Spectacle DSL](./spectacle-dsl/spectacle-dsl-publisher/README.md)
 
 A Kotlin multiplatform library for generating documentation from tests and Markdown files, it can be
 used as a standalone tool for improving the readability of tests or in combination
@@ -59,7 +59,7 @@ class JunitExampleTest {
 }
 ```
 
-Review [Spectacle DSL README](./spectacle-dsl-publisher/README.md) for more details.
+Review [Spectacle DSL README](./spectacle-dsl/spectacle-dsl-publisher/README.md) for more details.
 
 ## [Spectacle Central](./spectacle-central/README.md)
 

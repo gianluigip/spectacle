@@ -54,9 +54,9 @@ dependencies {
     implementation(npm("rehype-highlight", "5.0.2"))
 
     // Tests
-    testImplementation(project(":spectacle-dsl-bdd"))
-    testImplementation(project(":spectacle-dsl-assertions"))
-    testImplementation(project(":spectacle-dsl-publisher"))
+    testImplementation(project(":spectacle-dsl:spectacle-dsl-bdd"))
+    testImplementation(project(":spectacle-dsl:spectacle-dsl-assertions"))
+    testImplementation(project(":spectacle-dsl:spectacle-dsl-publisher"))
     testImplementation(kotlin("test-js"))
 }
 

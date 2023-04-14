@@ -12,6 +12,7 @@ repositories {
     mavenCentral()
 }
 
+
 kotlin {
     jvm {
         compilations.all {
@@ -31,41 +32,36 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":spectacle-common"))
-                implementation(project(":spectacle-dsl-bdd"))
-                implementation(kotlin("test"))
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation(project(":spectacle-dsl:spectacle-dsl-bdd"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-publisher"))
+
+                // HTTP CLIENT
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(project(":spectacle-dsl-assertions"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-bdd"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-assertions"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-publisher"))
             }
         }
         val jvmMain by getting {
-            dependencies {
-                implementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
-            }
+            dependencies { }
         }
         val jvmTest by getting {
             dependencies {
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
                 implementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
-            }
-        }
-        val jsMain by getting {
-            dependencies {
-                // HTTP CLIENT
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-auth:$ktorVersion")
+
+                implementation("io.ktor:ktor-client-cio:$ktorVersion")
                 implementation("io.ktor:ktor-client-content-negotiation:${ktorVersion}")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
             }
         }
+        val jsMain by getting { }
         val jsTest by getting {}
     }
 }
@@ -75,3 +71,4 @@ tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach 
         languageVersion = "1.4"
     }
 }
+

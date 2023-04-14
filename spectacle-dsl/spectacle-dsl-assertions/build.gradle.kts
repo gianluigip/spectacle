@@ -39,8 +39,8 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(project(":spectacle-common"))
-                implementation(project(":spectacle-dsl-bdd"))
-                implementation(project(":spectacle-dsl-publisher"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-bdd"))
+                implementation(project(":spectacle-dsl:spectacle-dsl-publisher"))
                 implementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
             }

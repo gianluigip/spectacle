@@ -31,7 +31,7 @@ jobs:
 
       # Runs upload, and then closes & releases the repository
       - name: Publish DSL Assertions to MavenCentral
-        run: ./gradlew spectacle-dsl-assertions:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew spectacle-dsl:spectacle-dsl-assertions:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -42,7 +42,7 @@ jobs:
 
       # Runs upload, and then closes & releases the repository
       - name: Publish DSL BDD to MavenCentral
-        run: ./gradlew spectacle-dsl-bdd:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew spectacle-dsl:spectacle-dsl-bdd:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -53,7 +53,7 @@ jobs:
 
       # Runs upload, and then closes & releases the repository
       - name: Publish DSL Publisher to MavenCentral
-        run: ./gradlew spectacle-dsl-publisher:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew spectacle-dsl:spectacle-dsl-publisher:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -64,7 +64,7 @@ jobs:
 
       # Runs upload, and then closes & releases the repository
       - name: Publish DSL HTTP to MavenCentral
-        run: ./gradlew spectacle-dsl-http:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew spectacle-dsl:spectacle-dsl-http:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
@@ -75,7 +75,7 @@ jobs:
 
       # Runs upload, and then closes & releases the repository
       - name: Publish DSL Protobuf to MavenCentral
-        run: ./gradlew spectacle-dsl-protobuf:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
+        run: ./gradlew spectacle-dsl:spectacle-dsl-protobuf:publishAllPublicationsToSonatypeRepository --max-workers 1 closeAndReleaseSonatypeStagingRepository
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}

@@ -16,9 +16,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
-    testImplementation(project(":spectacle-dsl-bdd"))
-    testImplementation(project(":spectacle-dsl-assertions"))
-    testImplementation(project(":spectacle-dsl-publisher"))
+    testImplementation(project(":spectacle-dsl:spectacle-dsl-bdd"))
+    testImplementation(project(":spectacle-dsl:spectacle-dsl-assertions"))
+    testImplementation(project(":spectacle-dsl:spectacle-dsl-publisher"))
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testImplementation("io.mockk:mockk:1.13.4")
