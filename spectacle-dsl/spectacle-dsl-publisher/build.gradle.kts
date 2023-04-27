@@ -50,7 +50,7 @@ kotlin {
         }
         val jvmTest by getting {
             dependencies {
-                implementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
+                implementation("org.junit.jupiter:junit-jupiter-engine:5.9.3")
                 implementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
                 implementation("com.github.tomakehurst:wiremock-jre8:2.35.0")
                 implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:1.5.0")
