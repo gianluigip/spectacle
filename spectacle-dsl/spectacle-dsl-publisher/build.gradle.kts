@@ -34,7 +34,7 @@ kotlin {
                 implementation(project(":spectacle-dsl:spectacle-dsl-bdd"))
                 implementation(kotlin("test"))
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
             }
         }
         val commonTest by getting {
