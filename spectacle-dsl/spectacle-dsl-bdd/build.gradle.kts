@@ -29,7 +29,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(project(":spectacle-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0")
             }
         }
         val commonTest by getting {
