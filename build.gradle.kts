@@ -1,6 +1,6 @@
 plugins {
     kotlin("multiplatform") version "1.8.21" apply false
-    kotlin("plugin.serialization") version "1.8.21" apply false
+    kotlin("plugin.serialization") version "1.8.22" apply false
     kotlin("jvm") version "1.8.21" apply false
     id("io.github.gradle-nexus.publish-plugin") version "1.3.0"
 }
