@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack
 
-val ktorVersion = "2.3.0"
+val ktorVersion = "2.3.2"
 val logbackVersion = "1.4.7"
 
 plugins {
