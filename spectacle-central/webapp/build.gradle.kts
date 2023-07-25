@@ -29,7 +29,7 @@ dependencies {
     implementation("io.ktor:ktor-client-core:$ktorVersion")
     implementation("io.ktor:ktor-client-auth:$ktorVersion")
     implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.7.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-js:1.7.3")
     implementation("io.ktor:ktor-client-js:$ktorVersion")
 
     // REACT
